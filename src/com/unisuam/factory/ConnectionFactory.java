@@ -1,0 +1,42 @@
+package com.unisuam.factory;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+
+public class ConnectionFactory {
+
+	/* Constantes com os parâmetros da conexão */
+	private static final String URL = "jdbc:mysql://localhost:3306/meubanco?useTimezone=true&serverTimezone=UTC";
+	private static final String USERNAME = "root";
+	private static final String PASSWORD = "root";
+
+	public static java.sql.Connection getConnection() {
+
+		Connection conexao = null;
+		try {
+			/* Obtém o driver de conexão com o banco de dados */
+			Class.forName("com.mysql.cj.jdbc.Driver");
+
+			/* Tenta se conectar */
+			conexao = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+			// conexao = DriverManager.getConnection("jdbc:hsqldb:hsql://localhost/WEB2",
+			// "SA", "");
+			/* Configura commit como NÃO Automático */
+			conexao.setAutoCommit(false);
+
+			/* Caso a conexão ocorra com sucesso, a conexão é retornada */
+			return conexao;
+
+		} catch (ClassNotFoundException e) {
+			System.out.println("O driver expecificado nao foi encontrado.");
+			return null;
+		}
+
+		catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println("Nao foi possivel conectar ao banco de dados.");
+			return null;
+		}
+	}
+}

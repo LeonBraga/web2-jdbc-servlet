@@ -1,15 +1,15 @@
-package br.com.alura.gerenciador.modelo;
+package br.com.unisuam.gerenciador.modelo;
 
 public class CartaoDeCredito {
 	
-	private Integer numeroCarto;
+	private Integer numeroCartao;
 	private String dataVencimento;
 	
 	public Integer getNumeroCarto() {
-		return numeroCarto;
+		return numeroCartao;
 	}
 	public void setNumeroCarto(Integer numeroCarto) {
-		this.numeroCarto = numeroCarto;
+		this.numeroCartao = numeroCarto;
 	}
 	public String getDataVencimento() {
 		return dataVencimento;

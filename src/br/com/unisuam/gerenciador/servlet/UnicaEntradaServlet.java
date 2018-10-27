@@ -1,4 +1,4 @@
-package br.com.alura.gerenciador.servlet;
+package br.com.unisuam.gerenciador.servlet;
 
 import java.io.IOException;
 
@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import br.com.alura.gerenciador.acao.Acao;
+import br.com.unisuam.gerenciador.acao.Acao;
 
 /*
  * Nossa abordagem é funcional, mas vários controladores do mercado 

@@ -1,6 +1,8 @@
-package br.com.alura.gerenciador.modelo;
+package br.com.unisuam.gerenciador.modelo;
 
 import java.util.Date;
+
+import sun.security.krb5.internal.ccache.CCacheInputStream;
 
 public class Cliente extends Usuario{
 
@@ -8,6 +10,8 @@ public class Cliente extends Usuario{
 	private String dataVencimento;
 	
 	CartaoDeCredito cc = new CartaoDeCredito();
+	
+	
 
 	
 }
