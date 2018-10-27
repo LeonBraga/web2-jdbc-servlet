@@ -1,6 +1,6 @@
 # Projeto
 
- - Telas obrigatórias do Sistema:
+# Telas obrigatórias do Sistema:
  - a)	Tela de Login, serão 2 perfis, o perfil de cliente e o perfil de administrador do sistema. (cliente e adm)
  - b)	Telas de CRUD Cliente (nome, sobrenome, data de nascimento, Endereço, Cadastro do cartão de crédito, login, senha e confirma senha). (acesso à tela: cliente)
  - c)	Tela de CRUD Administrador do Sistema (Acesso à funcionalidade: adm geral do sistema)
@@ -12,9 +12,8 @@
  - i)	Tela de acompanhamento dos pedidos de vôos (acesso à tela: cliente e adm)
 (Obs: O administrador geral do sistema é cadastrado no próprio banco de dados, somente ele pode cadastrar administradores do sistema)
 
- - Característica obrigatória:
+ # Característica obrigatória:
  - a)	Testar no modo de visualização mobile (deve ser responsivo).
-
  - 2. Fases do Trabalho
  - Fases	Atividades
  - Fase 1	Alunos deverão definir seus grupos, grupo de 2 pessoas
