@@ -1,4 +1,4 @@
-package br.com.unisuam.gerenciador.acao;
+package br.com.unisuam.acao;
 
 import java.io.IOException;
 
@@ -7,8 +7,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import br.com.unisuam.gerenciador.modelo.Banco;
-import br.com.unisuam.gerenciador.modelo.Usuario;
+import br.com.unisuam.modelo.Usuario;
+import br.om.suam.service.Banco;
 
 public class Login implements Acao {
 

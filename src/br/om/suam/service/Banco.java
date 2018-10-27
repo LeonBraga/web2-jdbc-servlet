@@ -1,8 +1,12 @@
-package br.com.unisuam.gerenciador.modelo;
+package br.om.suam.service;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+
+import br.com.unisuam.modelo.Admistrador;
+import br.com.unisuam.modelo.Cliente;
+import br.com.unisuam.modelo.Usuario;
 
 /*
  * Classe Banco
@@ -30,7 +34,7 @@ public class Banco {
 		adm.setConfirmaSenha("adm");
 		adm.setEndereco("adm");
 		adm.setDataNascimento("00/00/0000");
-		adm.isAdm = true;
+		adm.setAdm(true);;
 
 		Cliente client = new Cliente();
 		client.setNome("user");

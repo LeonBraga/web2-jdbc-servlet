@@ -1,4 +1,4 @@
-package com.unisuam.factory;
+package br.com.unisuam.factory;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

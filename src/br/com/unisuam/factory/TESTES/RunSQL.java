@@ -1,4 +1,4 @@
-package com.unisuam.factory.TESTES;
+package br.com.unisuam.factory.TESTES;
 
 import java.sql.*;
 import java.util.ArrayList;

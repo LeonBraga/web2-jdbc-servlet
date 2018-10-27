@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.unisuam.factory.TESTES;
+package br.com.unisuam.factory.TESTES;
 
 
 import java.sql.Connection;

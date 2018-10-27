@@ -1,4 +1,4 @@
-package br.com.unisuam.gerenciador.modelo;
+package br.com.unisuam.modelo;
 
 import java.util.Date;
 

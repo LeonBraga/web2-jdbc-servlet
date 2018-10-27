@@ -1,4 +1,4 @@
-package br.com.unisuam.gerenciador.modelo;
+package br.com.unisuam.modelo;
 
 public abstract class Usuario {
 

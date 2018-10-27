@@ -1,4 +1,4 @@
-package br.com.unisuam.gerenciador.acao;
+package br.com.unisuam.acao;
 
 import java.io.IOException;
 
