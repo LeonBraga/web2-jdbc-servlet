@@ -7,7 +7,7 @@ import java.sql.SQLException;
 public class ConnectionFactory {
 
 	/* Constantes com os parâmetros da conexão */
-	private static final String URL = "jdbc:mysql://localhost:3306/meubanco?useTimezone=true&serverTimezone=UTC";
+	private static final String URL = "jdbc:mysql://localhost:3306/dbweb2?useTimezone=true&serverTimezone=UTC";
 	private static final String USERNAME = "root";
 	private static final String PASSWORD = "root";
 
@@ -20,8 +20,8 @@ public class ConnectionFactory {
 
 			/* Tenta se conectar */
 			conexao = DriverManager.getConnection(URL, USERNAME, PASSWORD);
-			// conexao = DriverManager.getConnection("jdbc:hsqldb:hsql://localhost/WEB2",
-			// "SA", "");
+			System.out.println("String de conexão: "+URL+USERNAME+PASSWORD);
+			
 			/* Configura commit como NÃO Automático */
 			conexao.setAutoCommit(false);
 

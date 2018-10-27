@@ -11,11 +11,12 @@ public class TestaConexao {
 		final String HOST = "jdbc:mysql://localhost:3306/";
 		final String DB = "dbWeb2?useTimezone=true&serverTimezone=UTC";
 		final String URL = HOST+DB;
-		final String username = "root";
-		final String password = "root";
+		final String USERNAME = "root";
+		final String PASSWORD = "root";
 		
-		Connection connection = DriverManager.getConnection(URL,username, password);
-		System.out.println("Abrindo uma conxeÃ§Ã£o");
+		Connection connection = DriverManager.getConnection(URL,USERNAME, PASSWORD);
+		System.out.println("String de conexao: "+URL+USERNAME+PASSWORD);
+		System.out.println("Abrindo uma conxeção");
 		connection.close();
 	}
 
