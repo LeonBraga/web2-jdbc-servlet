@@ -1,14 +1,18 @@
 package br.com.unisuam.acao;
 
 import java.io.IOException;
+import java.sql.SQLException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import br.com.suam.service.Banco;
+import br.com.suam.service.ClienteService;
+import br.com.unisuam.modelo.Cliente;
 import br.com.unisuam.modelo.Usuario;
-import br.om.suam.service.Banco;
 
 public class Login implements Acao {
 
@@ -24,15 +28,14 @@ public class Login implements Acao {
 		Banco banco = new Banco();
 		Usuario usuario = banco.existeUsuario(login, senha);
 
-		// Sem o hhtp session
-		// if(usuario != null) {
-		// System.out.println("Usuario existe");
-		// return "redirect:entrada?acao=ListaEmpresas";
-		// } else {
-		// return "redirect:entrada?acao=LoginForm";
-		// }
+		ClienteService cs = new ClienteService();
+		try {
+			List<Cliente> listaCli = cs.consultar(login, senha);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
-		// Com o hhtp session
 		if (usuario != null){
 			HttpSession sessao = request.getSession();
 			sessao.setAttribute("usuarioLogado", usuario);

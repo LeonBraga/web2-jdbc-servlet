@@ -10,8 +10,15 @@ public class Cliente extends Usuario{
 	private String dataVencimento;
 	
 	CartaoDeCredito cc = new CartaoDeCredito();
-	
-	
+
+	public CartaoDeCredito getCc() {
+		return cc;
+	}
+
+	public void setCc(CartaoDeCredito cc) {
+		this.cc.setNumeroCarto(numeroCartao);
+		this.cc.setDataVencimento(dataVencimento);
+	}
 
 	
 }

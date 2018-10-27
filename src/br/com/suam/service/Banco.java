@@ -1,4 +1,4 @@
-package br.om.suam.service;
+package br.com.suam.service;
 
 import java.util.ArrayList;
 import java.util.Iterator;

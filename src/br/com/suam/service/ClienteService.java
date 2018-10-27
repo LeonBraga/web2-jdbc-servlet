@@ -1,4 +1,4 @@
-package br.om.suam.service;
+package br.com.suam.service;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
