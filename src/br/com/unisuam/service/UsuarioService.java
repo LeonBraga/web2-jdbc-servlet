@@ -1,4 +1,4 @@
-package br.com.suam.service;
+package br.com.unisuam.service;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -8,27 +8,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.com.unisuam.modelo.CartaoDeCredito;
-import br.com.unisuam.modelo.Cliente;
+import br.com.unisuam.modelo.Usuario;
 import br.com.unisuam.factory.ConnectionFactory;
 
-public class ClienteService {
 
-	public static void inserir(Cliente cliente, CartaoDeCredito cc) throws SQLException {
+public class UsuarioService {
+
+	public static void inserir(Usuario usuario) throws SQLException {
 		Connection conexao = ConnectionFactory.getConnection();
-		String sql = "INSERT INTO cliente (nome, sobrenome, login, senha, dataNascimento, endereco (?,?,?,?,?,?)";
 
-		CartaoDeCredito cC = new CartaoDeCredito();
-		cC=cc;
-		
+		String sql = "INSERT INTO usuario (login,senha) VALUES (?,?)";
+
 		try {
 			
 			PreparedStatement ps = conexao.prepareStatement(sql);
-			ps.setString(1, cliente.getNome());
-			ps.setString(2, cliente.getSobrenome());
-			ps.setString(3, cliente.getLogin());
-			ps.setString(3, cliente.getSenha());
-			ps.setString(3, cliente.getDataNascimento());
-			ps.setString(3, cliente.getEndereco());
+			ps.setString(1, usuario.getLogin());
+			ps.setString(2, usuario.getSenha());
 			
 			ps.execute();
 			conexao.commit();
@@ -43,11 +38,11 @@ public class ClienteService {
 		}
 	}
 	
-	public static List<Cliente> consultar(String login, String senha) throws SQLException {
+	public static List<Usuario> consultar(String login, String senha) throws SQLException {
 		Connection conexao = ConnectionFactory.getConnection();
-		List<Cliente> listaCliente = new ArrayList<Cliente>();
+		List<Usuario> listaUsuario = new ArrayList<Usuario>();
 		
-		String sql = "SELECT login,senha FROM cliente where login=? and senha=?";
+		String sql = "SELECT login,senha FROM usuario where login=? and senha=?";
 
 		try {
 			PreparedStatement ps = conexao.prepareStatement(sql);
@@ -58,10 +53,10 @@ public class ClienteService {
 			
 			
 			while(rs.next()){
-				Cliente cliente = new Cliente();
-				cliente.setLogin(rs.getString("login"));
-				cliente.setLogin(rs.getString("senha"));
-				listaCliente.add(cliente);
+				Usuario usuario = new Usuario();
+				usuario.setLogin(rs.getString("login"));
+				usuario.setLogin(rs.getString("senha"));
+				listaUsuario.add(usuario);
 			}
 			
 			conexao.commit();
@@ -73,14 +68,14 @@ public class ClienteService {
 			conexao.close();
 		}
 		
-		return listaCliente;
+		return listaUsuario;
 	}
 	
 	public static boolean autenticar(String login, String senha) throws SQLException {
 		
-		List<Cliente> listacliente = consultar(login, senha);;
+		List<Usuario> listaUsuario = consultar(login, senha);;
 		
-		if(!listacliente.isEmpty()){
+		if(!listaUsuario.isEmpty()){
 			return true;
 		} 
 		

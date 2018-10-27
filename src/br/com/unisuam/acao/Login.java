@@ -9,10 +9,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import br.com.suam.service.Banco;
-import br.com.suam.service.ClienteService;
-import br.com.unisuam.modelo.Cliente;
 import br.com.unisuam.modelo.Usuario;
+import br.com.unisuam.service.Banco;
+import br.com.unisuam.service.UsuarioService;
 
 public class Login implements Acao {
 
@@ -28,9 +27,9 @@ public class Login implements Acao {
 		Banco banco = new Banco();
 		Usuario usuario = banco.existeUsuario(login, senha);
 
-		ClienteService cs = new ClienteService();
+		UsuarioService us = new UsuarioService();
 		try {
-			List<Cliente> listaCli = cs.consultar(login, senha);
+			List<Usuario> listaUser = us.consultar(login, senha);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

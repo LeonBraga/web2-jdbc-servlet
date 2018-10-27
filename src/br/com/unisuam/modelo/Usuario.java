@@ -1,6 +1,6 @@
 package br.com.unisuam.modelo;
 
-public abstract class Usuario {
+public  class Usuario {
 
 	protected  String nome;
 	protected  String sobrenome;
@@ -59,6 +59,17 @@ public abstract class Usuario {
 	}
 	public void setId(Integer id) {//String id) {
 		this.id = id;
+	}
+	
+	
+	private boolean isAdm;
+
+	public boolean isAdm() {
+		return isAdm;
+	}
+
+	public void setAdm(boolean isAdm) {
+		this.isAdm = isAdm;
 	}
 	
 	public boolean ehIgual(String login, String senha) {

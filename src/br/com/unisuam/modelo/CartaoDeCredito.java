@@ -4,7 +4,21 @@ public class CartaoDeCredito {
 	
 	private Integer numeroCartao;
 	private String dataVencimento;
+	private Usuario user;
 	
+//	public CartaoDeCredito(Integer numeroCartao, String dataVencimento, Usuario user) {
+//		super();
+//		this.numeroCartao = numeroCartao;
+//		this.dataVencimento = dataVencimento;
+//		this.user = user;
+//	}
+	
+	public Usuario getUser() {
+		return user;
+	}
+	public void setUser(Usuario user) {
+		this.user = user;
+	}
 	public Integer getNumeroCarto() {
 		return numeroCartao;
 	}
