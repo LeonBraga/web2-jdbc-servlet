@@ -24,21 +24,21 @@ public class Login implements Acao {
 
 		System.out.println("Logando " + login);
 
-		Banco banco = new Banco();
-		Usuario usuario = banco.existeUsuario(login, senha);
-
 		UsuarioService us = new UsuarioService();
+		Usuario usuario;
 		try {
-			List<Usuario> listaUser = us.consultar(login, senha);
+			usuario = us.autenticar(login, senha);
 		} catch (SQLException e) {
+			usuario =null;
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+
 		
 		if (usuario != null){
 			HttpSession sessao = request.getSession();
-			sessao.setAttribute("usuarioLogado", usuario);
-			return "redirect:entrada?acao=ListaEmpresas";
+			sessao.setAttribute("usuarioLogado", usuario.getNome());
+			return "redirect:entrada?acao=ListaUsuario";
 		} else {
 			return "redirect:entrada?acao=LoginForm";
 		}

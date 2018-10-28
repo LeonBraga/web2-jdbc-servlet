@@ -23,7 +23,7 @@ public class ConnectionFactory {
 			System.out.println("String de conexão: "+URL+USERNAME+PASSWORD);
 			
 			/* Configura commit como NÃO Automático */
-			conexao.setAutoCommit(false);
+			//conexao.setAutoCommit(false);
 
 			/* Caso a conexão ocorra com sucesso, a conexão é retornada */
 			return conexao;

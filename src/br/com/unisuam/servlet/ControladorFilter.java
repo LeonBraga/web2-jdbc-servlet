@@ -2,26 +2,39 @@ package br.com.unisuam.servlet;
 
 import java.io.IOException;
 
+import javax.servlet.Filter;
+import javax.servlet.FilterChain;
+import javax.servlet.FilterConfig;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
+import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import br.com.unisuam.acao.Acao;
 
-//@WebServlet("/entrada") 
-public class UnicaEntradaServlet extends HttpServlet {
-	private static final long serialVersionUID = 1L;
+//@WebFilter("/entrada") 
+public class ControladorFilter implements Filter {
 
-	protected void service(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	// Implementado para que funcione no jetty ou em versões mais antigas do tomcat
+	@Override
+	public void init(FilterConfig filterConfig) throws ServletException {}
+
+	@Override
+	public void destroy() {}
+
+	public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain chain)
+			throws IOException, ServletException {
+
+		System.out.println("ControladorFilter");
+		HttpServletRequest request = (HttpServletRequest) servletRequest;
+		HttpServletResponse response = (HttpServletResponse) servletResponse;
 
 		String paramAcao = request.getParameter("acao");
 		String nomeDaClasse = "br.com.unisuam.acao." + paramAcao;
-
-		String url = request.getRequestURI();
-		System.out.println("URL: " + url);
 
 		String nome;
 		try {
@@ -31,7 +44,6 @@ public class UnicaEntradaServlet extends HttpServlet {
 		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException e) {
 			throw new ServletException(e);
 		}
-
 		String[] tipoEEndereco = nome.split(":");
 		if (tipoEEndereco[0].equals("forward")) {
 			RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/view/" + tipoEEndereco[1]);
@@ -39,7 +51,6 @@ public class UnicaEntradaServlet extends HttpServlet {
 		} else {
 			response.sendRedirect(tipoEEndereco[1]);
 		}
-
 	}
 
 }
