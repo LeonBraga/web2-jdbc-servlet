@@ -67,23 +67,14 @@ public class UsuarioService {
 				// usuario.isAdm(rs.getBoolean("isadm"));
 				listaUsuario.add(usuario);
 
-				System.out.println("USUARIO: " + usuario.getNome() + " - " + usuario.getSobrenome() + "" + " - "
-						+ usuario.getLogin() + " - " + usuario.getSenha() + " - " + usuario.getDataNascimento() + " - "
-						+ usuario.isAdm());
+				/*
+				 * System.out.println("USUARIO: " + usuario.getNome() + " - " +
+				 * usuario.getSobrenome() + "" + " - " + usuario.getLogin() + " - " +
+				 * usuario.getSenha() + " - " + usuario.getDataNascimento() + " - " +
+				 * usuario.isAdm());
+				 */
 			}
 
-			/*
-			 * Connection connection = ConnectionFactory.getConnection(); Statement
-			 * statement = connection.createStatement(); boolean resultado =
-			 * statement.execute("SELECT * FROM usuario where login='afc' and senha='123'");
-			 * ResultSet resultSet = statement.getResultSet();
-			 * 
-			 * while (resultSet.next()) { int id = resultSet.getInt("idusuario"); String
-			 * nome = resultSet.getString("nome"); System.out.println("id=" + id + ", nome="
-			 * + nome); }
-			 * 
-			 * resultSet.close(); statement.close(); connection.close();
-			 */
 
 			conexao.commit();
 		} catch (SQLException e) {
@@ -128,24 +119,24 @@ public class UsuarioService {
 			// imprimindo do banco
 			int id = rs.getInt("idusuario");
 			String nome = rs.getString("nome");
-			System.out.println("IMRIMINDO DO BANCO: id=" + id + ", nome=" + nome);
+			// System.out.println("IMRIMINDO DO BANCO: id=" + id + ", nome=" + nome);
 
 			// adicionando na lista
 			Usuario usuario = new Usuario();
 			usuario.setId(rs.getInt("idusuario"));
 			usuario.setNome(rs.getString("nome"));
-			//usuario.setSobrenome(rs.getString("sobrenome"));
-			//usuario.setEndereco(rs.getString("endereco"));
+			// usuario.setSobrenome(rs.getString("sobrenome"));
+			// usuario.setEndereco(rs.getString("endereco"));
 			usuario.setSenha(rs.getString("senha"));
 			usuario.setLogin(rs.getString("login"));
-			//usuario.setDataNascimento(rs.getString("datanascimento"));
+			// usuario.setDataNascimento(rs.getString("datanascimento"));
 			// usuario.isAdm(rs.getBoolean("isadm"));
 			listaUsuario.add(usuario);
 
 			// imprimindo do objeto
-			System.out.println("USUARIO: "+usuario.getId()+ " - "+ usuario.getNome() + " - " + usuario.getSobrenome() + "" + " - "
-					+ usuario.getLogin() + " - " + usuario.getSenha() + " - " + usuario.getDataNascimento() + " - "
-					+ usuario.isAdm());
+			System.out.println("USUARIO lista: " + usuario.getId() + " - " + usuario.getNome() + " - "
+					+ usuario.getSobrenome() + "" + " - " + usuario.getLogin() + " - " + usuario.getSenha() + " - "
+					+ usuario.getDataNascimento() + " - " + usuario.isAdm());
 		}
 
 		rs.close();
@@ -154,7 +145,6 @@ public class UsuarioService {
 		return listaUsuario;
 	}
 
-	
 	public static Usuario buscaUsuarioPelaId(Integer id) throws SQLException {
 		List<Usuario> lista = ListaUsuario();
 		for (Usuario usuario : lista) {
@@ -164,5 +154,5 @@ public class UsuarioService {
 		}
 		return null;
 	}
-	
+
 }
