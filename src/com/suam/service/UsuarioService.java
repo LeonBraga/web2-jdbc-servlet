@@ -82,9 +82,11 @@ public class UsuarioService {
 			conexao.commit();
 		} catch (SQLException e) {
 			// Erro, provoca um Rollback (volta ao estado anterior do banco)
+			System.out.println("ROLLBACK");
 			conexao.rollback();
 		} finally {
 			// fechar a conexão
+			System.out.println("FECHANDO CONEXAO");
 			conexao.close();
 		}
 
