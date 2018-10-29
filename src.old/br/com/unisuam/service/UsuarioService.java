@@ -41,6 +41,11 @@ public class UsuarioService {
 		Connection conexao = ConnectionFactory.getConnection();
 		List<Usuario> listaUsuario = new ArrayList<Usuario>();
 
+		System.out.println("CONEXAO: ");
+		System.out.println(conexao);
+		System.out.println("LOGIN: "+login);
+		System.out.println("SENHA: "+senha);
+
 		String sql = "SELECT login,senha FROM usuario where login=? and senha=?";
 
 		try {
@@ -69,18 +74,19 @@ public class UsuarioService {
 		return listaUsuario;
 	}
 
-	// public static Boolean autenticar(String login, String senha) throws
-	// SQLException {
-	public Usuario autenticar(String login, String senha) throws SQLException {
+	public static Boolean autenticar(String login, String senha) throws SQLException {
+		// public Usuario autenticar(String login, String senha) throws SQLException {
 
-		// List<Usuario> listaUsuario = consultar(login, senha);
-		Usuario user = new Usuario();
-		user = (Usuario) consultar(login, senha);
+		List<Usuario> listaUsuario = consultar(login, senha);
+		// Usuario user = new Usuario();
+		// user = (Usuario) consultar(login, senha);
 
-		/*
-		 * if(!listaUsuario.isEmpty()){ return true; } else{ return false; }
-		 */
-		return user;
+		if (!listaUsuario.isEmpty()) {
+			return true;
+		} else {
+			return false;
+		}
+
 	}
 
 }

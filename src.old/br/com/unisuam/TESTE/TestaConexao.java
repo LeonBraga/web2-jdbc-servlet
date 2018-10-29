@@ -15,9 +15,13 @@ public class TestaConexao {
 		final String PASSWORD = "root";
 		
 		Connection connection = DriverManager.getConnection(URL,USERNAME, PASSWORD);
+		System.out.println("CONEXAO: ");
+		System.out.println(connection);
+		
 		System.out.println("String de conexao: "+URL+USERNAME+PASSWORD);
 		System.out.println("Abrindo uma conxeção");
 		connection.close();
+		System.out.println("Fechando uma conxeção");
 	}
 
 }

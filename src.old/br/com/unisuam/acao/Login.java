@@ -25,19 +25,20 @@ public class Login implements Acao {
 		System.out.println("Logando " + login);
 
 		UsuarioService us = new UsuarioService();
-		Usuario usuario;
-		try {
-			usuario = us.autenticar(login, senha);
-		} catch (SQLException e) {
-			usuario =null;
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		Boolean usuario = false;
+	
+			try {
+				usuario = UsuarioService.autenticar(login, senha);
+			} catch (SQLException e) {
+				System.out.println(e);
+				e.printStackTrace();
+			}
+		
 
 		
-		if (usuario != null){
-			HttpSession sessao = request.getSession();
-			sessao.setAttribute("usuarioLogado", usuario.getNome());
+		if (usuario){
+			//HttpSession sessao = request.getSession();
+			//sessao.setAttribute("usuarioLogado", usuario.getNome());
 			return "redirect:entrada?acao=ListaUsuario";
 		} else {
 			return "redirect:entrada?acao=LoginForm";
