@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-<%@ page import="java.util.List,br.com.alura.gerenciador.modelo.Empresa"%>
+<%@ page import="java.util.List, com.suam.bean.Usuario"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
@@ -26,9 +26,8 @@
 	<br />
 
 	<ul>
-		<c:forEach items="${usuario}" var="usuario">
-
-			<li>${usuario} 
+		<c:forEach items="${usuarios}" var="usuario">
+			<li>${usuario.login} 
 			</li>
 		</c:forEach>
 	</ul>

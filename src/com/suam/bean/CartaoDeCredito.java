@@ -1,4 +1,4 @@
-package com.suam.servlet.bean;
+package com.suam.bean;
 
 public class CartaoDeCredito {
 	

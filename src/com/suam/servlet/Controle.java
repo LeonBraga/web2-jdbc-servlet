@@ -11,8 +11,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.suam.servlet.bean.Usuario;
-import com.suam.servlet.service.UsuarioService;
+import com.suam.bean.Usuario;
+import com.suam.service.UsuarioService;
 
 @WebServlet("/Controle")
 public class Controle extends HttpServlet {

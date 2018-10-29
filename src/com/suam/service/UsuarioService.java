@@ -1,4 +1,4 @@
-package com.suam.servlet.service;
+package com.suam.service;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -8,8 +8,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.suam.servlet.bean.Usuario;
-import com.suam.servlet.factory.ConnectionFactory;
+import com.suam.bean.Usuario;
+import com.suam.factory.ConnectionFactory;
 
 public class UsuarioService {
 
@@ -61,7 +61,9 @@ public class UsuarioService {
 				usuario.setSenha(rs.getString("senha"));
 				listaUsuario.add(usuario);
 
-				System.out.println("USUARIO: " + usuario.getLogin() + usuario.getSenha());
+				System.out.println("USUARIO: " + usuario.getNome() + " - " + usuario.getSobrenome() + "" + " - "
+						+ usuario.getLogin() + " - " + usuario.getSenha() + " - " + usuario.getDataNascimento() + " - "
+						+ usuario.isAdm());
 			}
 
 			/*
@@ -94,10 +96,10 @@ public class UsuarioService {
 		List<Usuario> listaUsuario = consultar(login, senha);
 
 		if (!listaUsuario.isEmpty()) {
+			System.out.println("autenticado true");
 			return true;
-		}
-
-		else {
+		} else {
+			System.out.println("autenticado false");
 			return false;
 		}
 
@@ -138,5 +140,8 @@ public class UsuarioService {
 		return listaUsuario;
 
 	}
+	
+	
+	
 
 }

@@ -1,4 +1,4 @@
-package com.suam.servlet.factory;
+package com.suam.factory;
 
 
 
