@@ -8,16 +8,16 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>TELA DE ALTERAÇÃO DE USUARIO</title>
 </head>
 <body>
 	<c:import url="logout-parcial.jsp"/> 
 	<form action="${linkEntradaServlet }" method="post">
 	
-		Nome: <input type="text" name="nome" value="${empresa.nome }" />
-		Data Abertura: <input type="text" name="data"  value="<fmt:formatDate value="${empresa.dataAbertura }" pattern="dd/MM/yyyy"/>" />
-		<input type="hidden" name="id" value="${empresa.id }">
-		<input type="hidden" name="acao" value="AlteraEmpresa">
+		Nome: <input type="text" name="nome" value="${usuario.nome }" />
+		Data Abertura: <input type="text" name="data"  value="<fmt:formatDate value="${usuario.dataNascimento }" pattern="dd/MM/yyyy"/>" />
+		<input type="hidden" name="id" value="${usuario.id }">
+		<input type="hidden" name="acao" value="Alterausuario">
 		<input type="submit" />
 	</form>
 

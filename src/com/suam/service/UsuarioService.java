@@ -45,7 +45,7 @@ public class UsuarioService {
 		List<Usuario> listaUsuario = new ArrayList<Usuario>();
 
 		System.out.println("CONSULTAR conexao = " + conexao);
-		String sql = "SELECT login,senha FROM usuario where login=? and senha=?";
+		String sql = "SELECT * FROM usuario where login=? and senha=?";
 
 		try {
 			PreparedStatement ps = conexao.prepareStatement(sql);
@@ -57,8 +57,14 @@ public class UsuarioService {
 
 			while (rs.next()) {
 				Usuario usuario = new Usuario();
-				usuario.setLogin(rs.getString("login"));
+				usuario.setId(rs.getInt("idusuario"));
+				usuario.setNome(rs.getString("nome"));
+				usuario.setSobrenome(rs.getString("sobrenome"));
+				usuario.setEndereco(rs.getString("endereco"));
 				usuario.setSenha(rs.getString("senha"));
+				usuario.setLogin(rs.getString("login"));
+				usuario.setDataNascimento(rs.getString("datanascimento"));
+				// usuario.isAdm(rs.getBoolean("isadm"));
 				listaUsuario.add(usuario);
 
 				System.out.println("USUARIO: " + usuario.getNome() + " - " + usuario.getSobrenome() + "" + " - "
@@ -126,12 +132,18 @@ public class UsuarioService {
 
 			// adicionando na lista
 			Usuario usuario = new Usuario();
-			usuario.setLogin(rs.getString("login"));
+			usuario.setId(rs.getInt("idusuario"));
+			usuario.setNome(rs.getString("nome"));
+			//usuario.setSobrenome(rs.getString("sobrenome"));
+			//usuario.setEndereco(rs.getString("endereco"));
 			usuario.setSenha(rs.getString("senha"));
+			usuario.setLogin(rs.getString("login"));
+			//usuario.setDataNascimento(rs.getString("datanascimento"));
+			// usuario.isAdm(rs.getBoolean("isadm"));
 			listaUsuario.add(usuario);
 
 			// imprimindo do objeto
-			System.out.println("USUARIO: " + usuario.getNome() + " - " + usuario.getSobrenome() + "" + " - "
+			System.out.println("USUARIO: "+usuario.getId()+ " - "+ usuario.getNome() + " - " + usuario.getSobrenome() + "" + " - "
 					+ usuario.getLogin() + " - " + usuario.getSenha() + " - " + usuario.getDataNascimento() + " - "
 					+ usuario.isAdm());
 		}
@@ -140,10 +152,17 @@ public class UsuarioService {
 		statement.close();
 		connection.close();
 		return listaUsuario;
+	}
 
+	
+	public static Usuario buscaUsuarioPelaId(Integer id) throws SQLException {
+		List<Usuario> lista = ListaUsuario();
+		for (Usuario usuario : lista) {
+			if (usuario.getId() == id) {
+				return usuario;
+			}
+		}
+		return null;
 	}
 	
-	
-	
-
 }

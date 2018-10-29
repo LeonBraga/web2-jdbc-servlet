@@ -18,16 +18,20 @@
 	<br>
 	<br>
 
-	<c:if test="${not empty empresa}">
+	<!--<c:if test="${not empty empresa}">
 		Empresa ${ empresa } cadastrada com sucesso!
-	</c:if>
+	</c:if>-->
 
 	Lista de usuarios:
 	<br />
 
 	<ul>
 		<c:forEach items="${usuarios}" var="usuario">
-			<li>${usuario.login} 
+			<li>ID:${usuario.id}  -NOME: ${usuario.login}  - 
+			<!--<fmt:formatDate
+					value="${usuario.dataNascimento }" pattern="dd/MM/yyyy" />--> <a
+				href="/gerenciador/entrada?acao=MostraUsuario&id=${usuario.id}">edita</a>
+				<a href="/gerenciador/entrada?acao=RemoveUsuario&id=${usuario.id}">remove</a>
 			</li>
 		</c:forEach>
 	</ul>
