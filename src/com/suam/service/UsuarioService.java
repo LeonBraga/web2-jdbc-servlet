@@ -28,7 +28,7 @@ public class UsuarioService {
 			ps.setString(5, usuario.getLogin());
 			ps.setString(6, usuario.getDataNascimento());
 			ps.setString(7, usuario.getIsAdm());
-			
+
 			ps.execute();
 			conexao.commit();
 		} catch (SQLException e) {
@@ -42,55 +42,6 @@ public class UsuarioService {
 			System.out.println("FECHANDO CONEXAO: ");
 			conexao.close();
 		}
-	}
-
-	public static List<Usuario> consultar(String login, String senha) throws SQLException {
-		System.out.println("CONSULTAR ==> LOGIN: " + login + " SENHA: " + senha);
-		Connection conexao = ConnectionFactory.getConnection();
-		List<Usuario> listaUsuario = new ArrayList<Usuario>();
-
-		System.out.println("CONSULTAR conexao = " + conexao);
-		String sql = "SELECT * FROM usuario where login=? and senha=?";
-		
-		try {
-			PreparedStatement ps = conexao.prepareStatement(sql);
-			ps.setString(1, login);
-			ps.setString(2, senha);
-
-			System.out.println("CONSULTAR SELECT: " + ps);
-			ResultSet rs = ps.executeQuery();
-
-			while (rs.next()) {
-				Usuario usuario = new Usuario();
-				usuario.setId(rs.getInt("idusuario"));
-				usuario.setNome(rs.getString("nome"));
-				usuario.setSobrenome(rs.getString("sobrenome"));
-				usuario.setEndereco(rs.getString("endereco"));
-				usuario.setSenha(rs.getString("senha"));
-				usuario.setLogin(rs.getString("login"));
-				usuario.setDataNascimento(rs.getString("datanascimento"));
-				usuario.setIsAdm(rs.getString("isAdm"));
-				listaUsuario.add(usuario);
-
-				/*
-				 * System.out.println("USUARIO: " + usuario.getNome() + " - " +
-				 * usuario.getSobrenome() + "" + " - " + usuario.getLogin() + " - " +
-				 * usuario.getSenha() + " - " + usuario.getDataNascimento() + " - " +
-				 * usuario.isAdm());
-				 */
-			}
-			conexao.commit();
-		} catch (SQLException e) {
-			// Erro, provoca um Rollback (volta ao estado anterior do banco)
-			System.out.println("ROLLBACK");
-			conexao.rollback();
-		} finally {
-			// fechar a conexão
-			System.out.println("FECHANDO CONEXAO");
-			conexao.close();
-		}
-
-		return listaUsuario;
 	}
 
 	public static void update(Usuario usuario) throws SQLException {
@@ -126,48 +77,6 @@ public class UsuarioService {
 			conexao.close();
 		}
 	}
-	
-	
-	public static void delete(Usuario usuario) throws SQLException {
-		Connection conexao = ConnectionFactory.getConnection();
-
-		String sql = "DELETE FROM usuario WHERE idusuario = ?";
-
-		try {
-			PreparedStatement ps = conexao.prepareStatement(sql);
-			
-			String id = usuario.getId().toString();
-			ps.setString(1, id);
-
-			System.out.println("PS DELETE: " + ps);
-			ps.execute();
-			conexao.commit();
-			System.out.println("DELETE REALIZADO COM SUCESSO!");
-		} catch (SQLException e) {
-			// Erro, provoca um Rollback (volta ao estado anterior do banco)
-
-			conexao.rollback();
-			e.printStackTrace();
-			throw new SQLException();
-		} finally {
-			// fechar a conexão
-			conexao.close();
-		}
-	}
-
-	public static boolean autenticar(String login, String senha) throws SQLException {
-		System.out.println("TENTANDO AUTENTICAR ==> LOGIN: " + login + " SENHA: " + senha);
-		List<Usuario> listaUsuario = consultar(login, senha);
-
-		if (!listaUsuario.isEmpty()) {
-			System.out.println("autenticado true");
-			return true;
-		} else {
-			System.out.println("autenticado false");
-			return false;
-		}
-
-	}
 
 	public static List<Usuario> ListaUsuarios() throws SQLException {
 
@@ -180,7 +89,7 @@ public class UsuarioService {
 		ResultSet rs = statement.getResultSet();
 
 		while (rs.next()) {
-			//valores recebidos diretamente do banco de dados
+			// valores recebidos diretamente do banco de dados
 			int id = rs.getInt("idusuario");
 			String nome = rs.getString("nome");
 			// System.out.println("IMRIMINDO DO BANCO: id=" + id + ", nome=" + nome);
@@ -208,6 +117,96 @@ public class UsuarioService {
 		connection.close();
 		System.out.println("LISTA CRIADA COM SUCESSO!");
 		return listaUsuario;
+	}
+
+	public static void delete(Usuario usuario) throws SQLException {
+		Connection conexao = ConnectionFactory.getConnection();
+
+		String sql = "DELETE FROM usuario WHERE idusuario = ?";
+
+		try {
+			PreparedStatement ps = conexao.prepareStatement(sql);
+
+			String id = usuario.getId().toString();
+			ps.setString(1, id);
+
+			System.out.println("PS DELETE: " + ps);
+			ps.execute();
+			conexao.commit();
+			System.out.println("DELETE REALIZADO COM SUCESSO!");
+		} catch (SQLException e) {
+			// Erro, provoca um Rollback (volta ao estado anterior do banco)
+
+			conexao.rollback();
+			e.printStackTrace();
+			throw new SQLException();
+		} finally {
+			// fechar a conexão
+			conexao.close();
+		}
+	}
+
+	public static List<Usuario> consultar(String login, String senha) throws SQLException {
+		System.out.println("CONSULTAR ==> LOGIN: " + login + " SENHA: " + senha);
+		Connection conexao = ConnectionFactory.getConnection();
+		List<Usuario> listaUsuario = new ArrayList<Usuario>();
+
+		System.out.println("CONSULTAR conexao = " + conexao);
+		String sql = "SELECT * FROM usuario where login=? and senha=?";
+
+		try {
+			PreparedStatement ps = conexao.prepareStatement(sql);
+			ps.setString(1, login);
+			ps.setString(2, senha);
+
+			System.out.println("CONSULTAR SELECT: " + ps);
+			ResultSet rs = ps.executeQuery();
+
+			while (rs.next()) {
+				Usuario usuario = new Usuario();
+				usuario.setId(rs.getInt("idusuario"));
+				usuario.setNome(rs.getString("nome"));
+				usuario.setSobrenome(rs.getString("sobrenome"));
+				usuario.setEndereco(rs.getString("endereco"));
+				usuario.setSenha(rs.getString("senha"));
+				usuario.setLogin(rs.getString("login"));
+				usuario.setDataNascimento(rs.getString("datanascimento"));
+				usuario.setIsAdm(rs.getString("isAdm"));
+				listaUsuario.add(usuario);
+
+				/*
+				 * System.out.println("USUARIO: " + usuario.getNome() + " - " +
+				 * usuario.getSobrenome() + "" + " - " + usuario.getLogin() + " - " +
+				 * usuario.getSenha() + " - " + usuario.getDataNascimento() + " - " +
+				 * usuario.isAdm());
+				 */
+			}
+			//conexao.commit();
+		} catch (SQLException e) {
+			// Erro, provoca um Rollback (volta ao estado anterior do banco)
+			System.out.println("'ROLLBACK' : "+e);
+			//conexao.rollback();
+		} finally {
+			// fechar a conexão
+			//System.out.println("FECHANDO CONEXAO");
+			//conexao.close();
+		}
+
+		return listaUsuario;
+	}
+
+	public static boolean autenticar(String login, String senha) throws SQLException {
+		System.out.println("TENTANDO AUTENTICAR ==> LOGIN: " + login + " SENHA: " + senha);
+		List<Usuario> listaUsuario = consultar(login, senha);
+
+		if (!listaUsuario.isEmpty()) {
+			System.out.println("autenticado true");
+			return true;
+		} else {
+			System.out.println("autenticado false");
+			return false;
+		}
+
 	}
 
 	public static Usuario buscaUsuarioPelaId(Integer id) throws SQLException {
