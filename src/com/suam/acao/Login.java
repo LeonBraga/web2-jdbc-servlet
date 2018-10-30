@@ -20,7 +20,8 @@ public class Login implements Acao {
 
 		String login = request.getParameter("login");
 		String senha = request.getParameter("senha");
-
+		
+		System.out.println("AÇÃO = LOGANDO USUARIO");
 		System.out.println("Logando " + login);
 
 		boolean autenticou = false;
@@ -31,7 +32,7 @@ public class Login implements Acao {
 			e.printStackTrace();
 			System.out.println("NOK");
 		}
-		/*
+		/*//REPASSANDO SEM REDIRECIONAR PARA O SERVLET DE ENTRADA
 		 * if (autenticou) { RequestDispatcher r =
 		 * request.getRequestDispatcher("usuario-autenticado.html"); r.forward(request,
 		 * response); }
@@ -46,21 +47,17 @@ public class Login implements Acao {
 		
 		Usuario user = new Usuario();
 		for (Usuario usuario : listaUsuario) {
-			System.out.println("USUARIO LISTA: "+usuario.getLogin());
 			user = usuario;
 		}
 		
 		if (autenticou) {
 			HttpSession sessao = request.getSession();
 			sessao.setAttribute("usuarioLogado", user);
-			System.out.println("AUTENTICOU EM LOGIN");
+			System.out.println("USUARIO AUTENTICADO COM SUCESSO!");
 			return "redirect:entrada?acao=ListaUsuario";
 			// return "redirect:usuario-autenticado.html";
 		} else {
-			// return "redirect:entrada?acao=ListaUsuario";
 			return "redirect:entrada?acao=LoginForm";
 		}
-
 	}
-
 }

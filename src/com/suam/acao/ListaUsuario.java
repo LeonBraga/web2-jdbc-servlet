@@ -16,7 +16,7 @@ public class ListaUsuario implements Acao {
 	public String executa(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
-		System.out.println("listando USUARIOS");
+		System.out.println("AÇÃO = LISTANDO USUARIOS");
 		
 		List<Usuario> listaUsuario = null;
 		try {
@@ -25,8 +25,6 @@ public class ListaUsuario implements Acao {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		
 		
 		request.setAttribute("usuarios", listaUsuario);
 		return "forward:listaUsuario.jsp";

@@ -16,14 +16,19 @@ public class UsuarioService {
 	public static void inserir(Usuario usuario) throws SQLException {
 		Connection conexao = ConnectionFactory.getConnection();
 
-		String sql = "INSERT INTO usuario (login,senha) VALUES (?,?)";
+		String sql = "INSERT INTO usuario (nome, sobrenome, endereco, senha, login, dataNascimento, isadm ) VALUES (?,?,?,?,?,?,?)";
 
 		try {
 
 			PreparedStatement ps = conexao.prepareStatement(sql);
-			ps.setString(1, usuario.getLogin());
-			ps.setString(2, usuario.getSenha());
-
+			ps.setString(1, usuario.getNome());
+			ps.setString(2, usuario.getSobrenome());
+			ps.setString(3, usuario.getEndereco());
+			ps.setString(4, usuario.getSenha());
+			ps.setString(5, usuario.getLogin());
+			ps.setString(6, usuario.getDataNascimento());
+			ps.setString(7, usuario.getIsAdm());
+			
 			ps.execute();
 			conexao.commit();
 		} catch (SQLException e) {
@@ -46,7 +51,7 @@ public class UsuarioService {
 
 		System.out.println("CONSULTAR conexao = " + conexao);
 		String sql = "SELECT * FROM usuario where login=? and senha=?";
-
+		
 		try {
 			PreparedStatement ps = conexao.prepareStatement(sql);
 			ps.setString(1, login);
@@ -74,7 +79,6 @@ public class UsuarioService {
 				 * usuario.isAdm());
 				 */
 			}
-
 			conexao.commit();
 		} catch (SQLException e) {
 			// Erro, provoca um Rollback (volta ao estado anterior do banco)
@@ -122,9 +126,37 @@ public class UsuarioService {
 			conexao.close();
 		}
 	}
+	
+	
+	public static void delete(Usuario usuario) throws SQLException {
+		Connection conexao = ConnectionFactory.getConnection();
+
+		String sql = "DELETE FROM usuario WHERE idusuario = ?";
+
+		try {
+			PreparedStatement ps = conexao.prepareStatement(sql);
+			
+			String id = usuario.getId().toString();
+			ps.setString(1, id);
+
+			System.out.println("PS DELETE: " + ps);
+			ps.execute();
+			conexao.commit();
+			System.out.println("DELETE REALIZADO COM SUCESSO!");
+		} catch (SQLException e) {
+			// Erro, provoca um Rollback (volta ao estado anterior do banco)
+
+			conexao.rollback();
+			e.printStackTrace();
+			throw new SQLException();
+		} finally {
+			// fechar a conexão
+			conexao.close();
+		}
+	}
 
 	public static boolean autenticar(String login, String senha) throws SQLException {
-		System.out.println("AUTENTICAR ==> LOGIN: " + login + " SENHA: " + senha);
+		System.out.println("TENTANDO AUTENTICAR ==> LOGIN: " + login + " SENHA: " + senha);
 		List<Usuario> listaUsuario = consultar(login, senha);
 
 		if (!listaUsuario.isEmpty()) {
@@ -142,14 +174,13 @@ public class UsuarioService {
 		Connection connection = ConnectionFactory.getConnection();
 		List<Usuario> listaUsuario = new ArrayList<Usuario>();
 
-		System.out.println("LISTAUSUARIO conexao = " + connection);
-
 		Statement statement = connection.createStatement();
 		boolean resultado = statement.execute("select * from usuario");
+
 		ResultSet rs = statement.getResultSet();
 
 		while (rs.next()) {
-			// imprimindo do banco
+			//valores recebidos diretamente do banco de dados
 			int id = rs.getInt("idusuario");
 			String nome = rs.getString("nome");
 			// System.out.println("IMRIMINDO DO BANCO: id=" + id + ", nome=" + nome);
@@ -175,6 +206,7 @@ public class UsuarioService {
 		rs.close();
 		statement.close();
 		connection.close();
+		System.out.println("LISTA CRIADA COM SUCESSO!");
 		return listaUsuario;
 	}
 

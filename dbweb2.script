@@ -46,7 +46,7 @@ SET SCHEMA SYSTEM_LOBS
 INSERT INTO BLOCKS VALUES(0,2147483647,0)
 SET SCHEMA PUBLIC
 INSERT INTO USUARIO VALUES(1,'and','fc','r teste1','adm','adm','15/04/1988',TRUE)
-INSERT INTO USUARIO VALUES(2,'and2','fc2','r teste2','user','user','15/04/1988',FALSE)
-INSERT INTO USUARIO VALUES(4,'and4','fc4','r teste4','user','user','15/04/1988',FALSE)
+INSERT INTO USUARIO VALUES(2,'and2TESTEUpdate','fc2','r teste2','user','user','',FALSE)
+INSERT INTO USUARIO VALUES(4,'anderson','fc4','r teste4','user','user','15/04/1988',FALSE)
 INSERT INTO USUARIO VALUES(5,'And2','F','Rua teste2','123','afc','15/05/2040',TRUE)
 INSERT INTO USUARIO VALUES(6,'And3','F','Rua teste2','123','afc','15/05/2040',FALSE)

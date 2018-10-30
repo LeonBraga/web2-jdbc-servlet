@@ -10,7 +10,7 @@ import com.suam.factory.ConnectionFactory;
 
 public class TestaInsercao {
 
-	public static void main(String[] args) throws SQLException {
+	public static void main(String[] args) throws SQLException, ClassNotFoundException {
 		Connection connection = ConnectionFactory.getConnection();
 		Statement statement = connection.createStatement();
 

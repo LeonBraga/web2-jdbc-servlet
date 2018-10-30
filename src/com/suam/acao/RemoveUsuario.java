@@ -12,10 +12,10 @@ import com.suam.service.UsuarioService;
 
 
 
-public class MostraUsuario  implements Acao{
+public class RemoveUsuario  implements Acao{
 
 	public String executa(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("AÇÃO = MOSTRANDO DADOS DO USUARIO");
+		System.out.println("AÇÃO = REMOVENDO USUARIO");
 		
 		String paramId = request.getParameter("id");
 		Integer id = Integer.valueOf(paramId);
@@ -27,8 +27,14 @@ public class MostraUsuario  implements Acao{
 			e.printStackTrace();
 		}
 
-		request.setAttribute("usuario",usuario);
+		try {
+			UsuarioService.delete(usuario);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
-		return "forward:formAlteraUsuario.jsp";
+		//request.setAttribute("usuario",usuario);
+		return "redirect:usuarioDeletado.html";
 	}
 }

@@ -15,12 +15,12 @@ import com.suam.service.UsuarioService;
 
 
 
-public class AlteraUsuario implements Acao {
+public class NovoUsuario implements Acao {
 
 	public String executa(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
-		System.out.println("AÇÃO = ALTERANDO USUARIO");
+		System.out.println("AÇÃO = INSERINDO USUARIO");
 		
 		String nome = request.getParameter("nome");
 		String sobrenome = request.getParameter("sobrenome");
@@ -28,12 +28,8 @@ public class AlteraUsuario implements Acao {
 		String senha = request.getParameter("senha");
 		String login = request.getParameter("login");
 		String data = request.getParameter("data");
-		String paramId = request.getParameter("id");
 		String ehAdm = request.getParameter("ehAdm");
-		Integer id = Integer.valueOf(paramId);
-
-		System.out.println("acao altera empresa " + id);
-
+		
 		/*Date dataAbertura = null;
 		try {
 			SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
@@ -43,14 +39,8 @@ public class AlteraUsuario implements Acao {
 		}*/
 
 		
-		Usuario usuario = null;
-		try {
-			usuario = UsuarioService.buscaUsuarioPelaId(id);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
+		Usuario usuario = new Usuario();
+				
 		usuario.setNome(nome);
 		usuario.setSobrenome(sobrenome);
 		usuario.setEndereco(endereco);
@@ -62,7 +52,7 @@ public class AlteraUsuario implements Acao {
 		
 		UsuarioService us = new UsuarioService();
 		try {
-			us.update(usuario);
+			us.inserir(usuario);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -36,6 +36,9 @@
 		</c:forEach>
 	</ul>
 
+
+
+<a href="entrada?acao=FormNovoUsuario">NOVO USUARIO</a>
 </body>
 </html>
 

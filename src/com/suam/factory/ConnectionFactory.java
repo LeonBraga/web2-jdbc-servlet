@@ -23,15 +23,35 @@ public class ConnectionFactory {
 
 			/* Tenta se conectar */
 			//conexao = DriverManager.getConnection(STRINGCONEXAO);
-			System.out.println("String de conexão: "+ STRINGCONEXAO);
+			//System.out.println("String de conexão: "+ STRINGCONEXAO);
+			
+			/* Configura commit como NÃO Automático */
+			//conexao.setAutoCommit(false);
+
+			/* Caso a conexão ocorra com sucesso, a conexão é retornada */
+			/* Obtém o driver de conexão com o banco de dados */
+			//Class.forName("com.mysql.cj.jdbc.Driver");
+
+			/* Tenta se conectar */
+			//conexao = DriverManager.getConnection(STRINGCONEXAO);
+			//System.out.println("String de conexão MYSQL: "+ STRINGCONEXAO);
 			
 			/* Configura commit como NÃO Automático */
 			//conexao.setAutoCommit(false);
 
 			/* Caso a conexão ocorra com sucesso, a conexão é retornada */
 			//conexao com HSQLDB
+			//conexao = DriverManager.getConnection("jdbc:hsqldb:hsql://localhost/dbweb2", "SA", "");
+			//System.out.println("CONEXAO FACTORY STRING: "+conexao );
+			
+			
+			//TENTANDO SE CONECTAR A HSQLDB
+			Class.forName("org.hsqldb.jdbcDriver");
+			
+			/* Caso a conexão ocorra com sucesso, a conexão é retornada */
+			//conexao com HSQLDB
 			conexao = DriverManager.getConnection("jdbc:hsqldb:hsql://localhost/dbweb2", "SA", "");
-			System.out.println("CONEXAO: "+conexao );
+			System.out.println("CONEXAO FACTORY STRING: "+conexao );
 			return conexao;
 
 		} catch (ClassNotFoundException e) {

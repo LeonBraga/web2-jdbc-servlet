@@ -15,11 +15,11 @@ import com.suam.bean.Usuario;
 import com.suam.service.UsuarioService;
 
 @WebServlet("/Controle")
-public class Controle extends HttpServlet {
+public class ControleEXEMPLO_REMOVER extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 
-	public Controle() {
+	public ControleEXEMPLO_REMOVER() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
