@@ -5,10 +5,10 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>Tela de Login</title>
 </head>
 <body>
-	<c:import url="logout-parcial.jsp"/>
+	
 	<form action="${linkEntradaServlet}" method="post">
 
 		Login: <input type="text" name="login" /> Senha: <input
@@ -16,5 +16,7 @@
 			value="Login"> <input type="submit" />
 	</form>
 
+
+<c:import url="logout-parcial.jsp"/>
 </body>
 </html>

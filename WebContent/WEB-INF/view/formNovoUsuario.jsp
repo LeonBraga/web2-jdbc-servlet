@@ -12,8 +12,7 @@
 </head>
 <body>
 	<c:import url="logout-parcial.jsp"/> 
-	<form action="${linkEntradaServlet }" method="post">
-	
+	<form action="${linkEntradaServlet}" method="post">
 		Nome: <input type="text" name="nome" value=""/>
 		<br>
 		Sobrenome:<input type="text" name="sobrenome" value="">
@@ -27,7 +26,7 @@
 		É Administrador:<input type="text" name="ehAdm" value="">
 		<br>
 		Data Nascimento: <input type="text" name="data"  value=""/><!--  pattern="dd/MM/yyyy"/> -->
-		<br><!-- "<fmt:formatDate value="${usuario.dataNascimento }" pattern="dd/MM/yyyy"/>" /> -->
+		<br>
 		<br>
 		<input type="hidden" name="acao" value="NovoUsuario">
 		<input type="submit" /> 

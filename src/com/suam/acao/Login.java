@@ -21,8 +21,8 @@ public class Login implements Acao {
 		String login = request.getParameter("login");
 		String senha = request.getParameter("senha");
 
-		System.out.println("AÇÃO = LOGANDO USUARIO");
-		System.out.println("Logando " + login);
+		System.out.println("AÇÃO = LOGANDO USUARIO: "+ login);
+
 
 		boolean autenticou = false;
 		try {
@@ -32,7 +32,7 @@ public class Login implements Acao {
 			e.printStackTrace();
 			System.out.println("NOK");
 		}
-		
+
 		List<Usuario> listaUsuario = null;
 		try {
 			listaUsuario = UsuarioService.consultar(login, senha);
@@ -50,15 +50,21 @@ public class Login implements Acao {
 			if (user.getIsAdm().equalsIgnoreCase("true")) {
 				HttpSession sessao = request.getSession();
 				sessao.setAttribute("usuarioLogado", user);
-				System.out.println("USUARIO AUTENTICADO COM SUCESSO!");
-				return "redirect:entrada?acao=ListaUsuario";
+				System.out.println("USUARIO ADMINISTRADOR AUTENTICADO COM SUCESSO!");
+				// return "redirect:entrada?acao=ListaUsuario";
+				return "redirect:entrada?acao=TelaInicial";
+			} else {
+				// criar paginas e funções para Usuarios não adm
+				HttpSession sessao = request.getSession();
+				sessao.setAttribute("usuarioLogado", user);
+				System.out.println("USUARIO NÃO ADMINISTRADOR AUTENTICADO COM SUCESSO!");
+				return "redirect:entrada?acao=TelaInicial";
+				// return "redirect:usuarioNAOADMINISTRADOR.html";
 			}
-			//criar paginas e funções para Usuarios não adm
-			return "redirect:usuarioNAOADMINISTRADOR.html";
 		} else {
 			return "redirect:entrada?acao=LoginForm";
 		}
-		
+
 		/*
 		 * //REPASSANDO SEM REDIRECIONAR PARA O SERVLET DE ENTRADA if (autenticou) {
 		 * RequestDispatcher r =

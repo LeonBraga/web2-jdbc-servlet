@@ -1,4 +1,4 @@
-package com.suam.servlet;
+/*package com.suam.servlet;
 
 import java.io.IOException;
 
@@ -45,3 +45,4 @@ public class UnicaEntradaServlet extends HttpServlet {
 	}
 
 }
+*/

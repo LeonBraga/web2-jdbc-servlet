@@ -50,7 +50,6 @@ public class UsuarioService {
 		String sql = "UPDATE usuario SET nome = ?, sobrenome = ?, endereco = ?,  senha = ?, login = ?, dataNascimento = ?, isadm = ? WHERE idusuario = ?";
 
 		try {
-
 			PreparedStatement ps = conexao.prepareStatement(sql);
 			ps.setString(1, usuario.getNome());
 			ps.setString(2, usuario.getSobrenome());
@@ -102,7 +101,7 @@ public class UsuarioService {
 			usuario.setEndereco(rs.getString("endereco"));
 			usuario.setSenha(rs.getString("senha"));
 			usuario.setLogin(rs.getString("login"));
-			// usuario.setDataNascimento(rs.getString("datanascimento"));
+			usuario.setDataNascimento(rs.getString("datanascimento"));
 			usuario.setIsAdm(rs.getString("isAdm"));
 			listaUsuario.add(usuario);
 

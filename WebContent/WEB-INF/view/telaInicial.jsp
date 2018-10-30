@@ -8,27 +8,24 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Lista de Usuários</title>
+<title>Inicio</title>
 </head>
 <body>
+	<c:import url="logout-parcial.jsp" />
 
 	Usuario Logado: ${usuarioLogado.login}
-	<br>
-	<br>
-	<br> Lista de usuarios:
-	<br />
-	<ul>
-		<c:forEach items="${usuarios}" var="usuario">
-			<li>ID:${usuario.id} -NOME: ${usuario.nome} - <a
-				href="/Web2Sistema/entrada?acao=MostraUsuario&id=${usuario.id}">edita</a>
-				<a href="/Web2Sistema/entrada?acao=RemoveUsuario&id=${usuario.id}">remove</a>
-			</li>
-		</c:forEach>
-	</ul>
+	<br> Usuario Administrador: ${usuarioLogado.isAdm}
 	<br>
 	<br>
 	<br>
-	<c:import url="logout-parcial.jsp" />
+
+	<c:if test="${usuarioLogado.isAdm ==  'TRUE'}">
+		<a href="entrada?acao=FormNovoUsuario">NOVO USUARIO</a>
+	</c:if>
+	<br>
+	<a href="entrada?acao=ListaUsuario">LISTAR USUÁRIOS</a>
+	<br>
+
 </body>
 </html>
 
