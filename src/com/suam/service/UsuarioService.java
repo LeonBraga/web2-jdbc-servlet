@@ -64,7 +64,7 @@ public class UsuarioService {
 				usuario.setSenha(rs.getString("senha"));
 				usuario.setLogin(rs.getString("login"));
 				usuario.setDataNascimento(rs.getString("datanascimento"));
-				// usuario.isAdm(rs.getBoolean("isadm"));
+				usuario.setIsAdm(rs.getString("isAdm"));
 				listaUsuario.add(usuario);
 
 				/*
@@ -74,7 +74,6 @@ public class UsuarioService {
 				 * usuario.isAdm());
 				 */
 			}
-
 
 			conexao.commit();
 		} catch (SQLException e) {
@@ -88,6 +87,40 @@ public class UsuarioService {
 		}
 
 		return listaUsuario;
+	}
+
+	public static void update(Usuario usuario) throws SQLException {
+		Connection conexao = ConnectionFactory.getConnection();
+
+		String sql = "UPDATE usuario SET nome = ?, sobrenome = ?, endereco = ?,  senha = ?, login = ?, dataNascimento = ?, isadm = ? WHERE idusuario = ?";
+
+		try {
+
+			PreparedStatement ps = conexao.prepareStatement(sql);
+			ps.setString(1, usuario.getNome());
+			ps.setString(2, usuario.getSobrenome());
+			ps.setString(3, usuario.getEndereco());
+			ps.setString(4, usuario.getSenha());
+			ps.setString(5, usuario.getLogin());
+			ps.setString(6, usuario.getDataNascimento());
+			ps.setString(7, usuario.getIsAdm());
+			String id = usuario.getId().toString();
+			ps.setString(8, id);
+
+			System.out.println("PS UPDATE: " + ps);
+			ps.execute();
+			conexao.commit();
+			System.out.println("UPSdAtE REALIZADO COM SUCESSO!");
+		} catch (SQLException e) {
+			// Erro, provoca um Rollback (volta ao estado anterior do banco)
+
+			conexao.rollback();
+			e.printStackTrace();
+			throw new SQLException();
+		} finally {
+			// fechar a conexão
+			conexao.close();
+		}
 	}
 
 	public static boolean autenticar(String login, String senha) throws SQLException {
@@ -104,7 +137,7 @@ public class UsuarioService {
 
 	}
 
-	public static List<Usuario> ListaUsuario() throws SQLException {
+	public static List<Usuario> ListaUsuarios() throws SQLException {
 
 		Connection connection = ConnectionFactory.getConnection();
 		List<Usuario> listaUsuario = new ArrayList<Usuario>();
@@ -125,18 +158,18 @@ public class UsuarioService {
 			Usuario usuario = new Usuario();
 			usuario.setId(rs.getInt("idusuario"));
 			usuario.setNome(rs.getString("nome"));
-			// usuario.setSobrenome(rs.getString("sobrenome"));
-			// usuario.setEndereco(rs.getString("endereco"));
+			usuario.setSobrenome(rs.getString("sobrenome"));
+			usuario.setEndereco(rs.getString("endereco"));
 			usuario.setSenha(rs.getString("senha"));
 			usuario.setLogin(rs.getString("login"));
 			// usuario.setDataNascimento(rs.getString("datanascimento"));
-			// usuario.isAdm(rs.getBoolean("isadm"));
+			usuario.setIsAdm(rs.getString("isAdm"));
 			listaUsuario.add(usuario);
 
 			// imprimindo do objeto
 			System.out.println("USUARIO lista: " + usuario.getId() + " - " + usuario.getNome() + " - "
-					+ usuario.getSobrenome() + "" + " - " + usuario.getLogin() + " - " + usuario.getSenha() + " - "
-					+ usuario.getDataNascimento() + " - " + usuario.isAdm());
+					+ usuario.getEndereco() + " - " + usuario.getSobrenome() + "" + " - " + usuario.getLogin() + " - "
+					+ usuario.getSenha() + " - " + usuario.getDataNascimento() + " - " + usuario.getIsAdm());
 		}
 
 		rs.close();
@@ -146,7 +179,7 @@ public class UsuarioService {
 	}
 
 	public static Usuario buscaUsuarioPelaId(Integer id) throws SQLException {
-		List<Usuario> lista = ListaUsuario();
+		List<Usuario> lista = ListaUsuarios();
 		for (Usuario usuario : lista) {
 			if (usuario.getId() == id) {
 				return usuario;

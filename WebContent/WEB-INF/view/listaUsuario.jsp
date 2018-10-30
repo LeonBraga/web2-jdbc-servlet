@@ -27,11 +27,11 @@
 
 	<ul>
 		<c:forEach items="${usuarios}" var="usuario">
-			<li>ID:${usuario.id}  -NOME: ${usuario.login}  - 
+			<li>ID:${usuario.id}  -NOME: ${usuario.nome}  - 
 			<!--<fmt:formatDate
 					value="${usuario.dataNascimento }" pattern="dd/MM/yyyy" />--> <a
-				href="/gerenciador/entrada?acao=MostraUsuario&id=${usuario.id}">edita</a>
-				<a href="/gerenciador/entrada?acao=RemoveUsuario&id=${usuario.id}">remove</a>
+				href="/Web2Sistema/entrada?acao=MostraUsuario&id=${usuario.id}">edita</a>
+				<a href="/Web2Sistema/entrada?acao=RemoveUsuario&id=${usuario.id}">remove</a>
 			</li>
 		</c:forEach>
 	</ul>

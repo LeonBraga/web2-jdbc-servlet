@@ -10,6 +10,7 @@ public  class Usuario {
 	protected  String senha;
 	protected  String confirmaSenha;
 	protected  Integer id;
+	private String isAdm;
 
 	
 	public String getNome() {
@@ -62,16 +63,28 @@ public  class Usuario {
 	}
 	
 	
-	private boolean isAdm;
-
-	public boolean isAdm() {
+	public String getIsAdm() {
 		return isAdm;
+	}
+	public void setIsAdm(String isAdm) {
+		this.isAdm = isAdm;
+	}
+
+	/*public String isAdm() {
+		String adm;
+		if (isAdm) {
+			adm = "true";
+			return adm;
+		}else {
+			adm = "false";
+		return adm;
+		}
 	}
 
 	public void setAdm(boolean isAdm) {
 		this.isAdm = isAdm;
 	}
-	
+*/	
 	/*public boolean ehIgual(String login, String senha) {
 		if(!this.login.equals(login)) {
 			return false;

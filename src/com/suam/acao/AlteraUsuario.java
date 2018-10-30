@@ -20,9 +20,15 @@ public class AlteraUsuario implements Acao {
 	public String executa(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		String nomeUsuario = request.getParameter("nome");
+		String nome = request.getParameter("nome");
+		String sobrenome = request.getParameter("sobrenome");
+		String endereco = request.getParameter("endereco");
+		String senha = request.getParameter("senha");
+		String login = request.getParameter("login");
+		String data = request.getParameter("data");
 		//String paramDataEmpresa = request.getParameter("data");
 		String paramId = request.getParameter("id");
+		String ehAdm = request.getParameter("ehAdm");
 		Integer id = Integer.valueOf(paramId);
 
 		System.out.println("acao altera empresa " + id);
@@ -35,7 +41,7 @@ public class AlteraUsuario implements Acao {
 			throw new ServletException(e);
 		}*/
 
-		//Banco banco = new Banco();
+		
 		Usuario usuario = null;
 		try {
 			usuario = UsuarioService.buscaUsuarioPelaId(id);
@@ -44,7 +50,22 @@ public class AlteraUsuario implements Acao {
 			e.printStackTrace();
 		}
 		
-		usuario.setNome(nomeUsuario);
+		usuario.setNome(nome);
+		usuario.setSobrenome(sobrenome);
+		usuario.setEndereco(endereco);
+		usuario.setSenha(senha);
+		usuario.setLogin(login);
+		usuario.setDataNascimento(data);
+		usuario.setIsAdm(ehAdm);
+
+		
+		UsuarioService us = new UsuarioService();
+		try {
+			us.update(usuario);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 
 		return "redirect:entrada?acao=ListaUsuario";

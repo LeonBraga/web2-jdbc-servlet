@@ -20,7 +20,7 @@ public class ListaUsuario implements Acao {
 		
 		List<Usuario> listaUsuario = null;
 		try {
-		 listaUsuario = UsuarioService.ListaUsuario();
+		 listaUsuario = UsuarioService.ListaUsuarios();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

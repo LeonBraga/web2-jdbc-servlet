@@ -14,11 +14,24 @@
 	<c:import url="logout-parcial.jsp"/> 
 	<form action="${linkEntradaServlet }" method="post">
 	
-		Nome: <input type="text" name="nome" value="${usuario.nome }" />
-		<!-- Data Abertura: <input type="text" name="data"  value="<fmt:formatDate value="${usuario.dataNascimento }" pattern="dd/MM/yyyy"/>" />
+		Nome: <input type="text" name="nome" value="${usuario.nome}"/>
+		<br>
+		Sobrenome:<input type="text" name="sobrenome" value="${usuario.sobrenome}">
+		<br>
+		Endereço:<input type="text" name="endereco" value="${usuario.endereco}">
+		<br>
+		Login:<input type="text" name="login" value="${usuario.login}">
+		<br>
+		Senha:<input type="text" name="senha" value="${usuario.senha}">
+		<br>
+		É Administrador:<input type="text" name="ehAdm" value="${usuario.isAdm}">
+		<br>
+		Data Nascimento: <input type="text" name="data"  value="${usuario.dataNascimento }" pattern="dd/MM/yyyy"/>
+		<br><!-- "<fmt:formatDate value="${usuario.dataNascimento }" pattern="dd/MM/yyyy"/>" /> -->
+		<br>
 		<input type="hidden" name="id" value="${usuario.id }">
-		<input type="hidden" name="acao" value="Alterausuario">
-		<input type="submit" /> -->
+		<input type="hidden" name="acao" value="AlteraUsuario">
+		<input type="submit" /> 
 	</form>
 
 </body>
