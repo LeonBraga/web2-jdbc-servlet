@@ -34,8 +34,8 @@
 				Dados do cartão de credito
 				<li>
 					Nome titular do cartão: ${cartao.titular} -
-					<a	href="/Web2Sistema/entrada?acao=MostraCartao&id=${cartao.idUser}">edita</a>
-					<a href="/Web2Sistema/entrada?acao=RemoveCartao&id=${cartao.idUser}">remove</a>
+					<a	href="entrada?acao=MostraCartao&id=${cartao.idUser}">edita</a>
+					<a href="entrada?acao=RemoveCartao&id=${cartao.idUser}">remove</a>
 				</li>
 					<li> 
 						Numero do cartao: ${cartao.numeroCartao}
@@ -48,12 +48,12 @@
 		</c:if>
 		<c:if test="${cartao==null}">	
 				Dados do cartão de credito
-				<a href="entrada?acao==">Novo Cartão</a>
+				<a href="entrada?acao=FormNovoCartao&idUser=${usuario.id}">Novo Cartão</a>
 			</c:if>	
 		
 		<br>
 		<br>
-		<input type="hidden" name="id" value="${usuario.id }">
+		<input type="hidden" name="id" value="${usuario.id}">
 		<input type="hidden" name="acao" value="AlteraUsuario">
 		<input type="submit" /> 
 	</form>

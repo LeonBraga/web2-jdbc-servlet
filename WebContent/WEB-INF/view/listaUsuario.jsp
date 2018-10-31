@@ -24,8 +24,8 @@
 			<c:forEach items="${usuarios}" var="usuario">
 				<c:if test="${usuario.isAdm ==  'TRUE'}">
 					<li>ID:${usuario.id} -NOME: ${usuario.nome} - <a
-						href="/Web2Sistema/entrada?acao=MostraUsuario&id=${usuario.id}">edita</a>
-						<a href="/Web2Sistema/entrada?acao=RemoveUsuario&id=${usuario.id}">remove</a>
+						href="entrada?acao=MostraUsuario&id=${usuario.id}">edita</a>
+						<a href="entrada?acao=RemoveUsuario&id=${usuario.id}">remove</a>
 					</li>
 				</c:if>
 			</c:forEach>
@@ -35,8 +35,8 @@
 			<c:forEach items="${usuarios}" var="usuario">
 				<c:if test="${usuario.isAdm ==  'FALSE'}">	
 					<li>ID:${usuario.id} -NOME: ${usuario.nome} - <a
-						href="/Web2Sistema/entrada?acao=MostraUsuario&id=${usuario.id}">edita</a>
-						<a href="/Web2Sistema/entrada?acao=RemoveUsuario&id=${usuario.id}">remove</a>
+						href="entrada?acao=MostraUsuario&id=${usuario.id}">edita</a>
+						<a href="entrada?acao=RemoveUsuario&id=${usuario.id}">remove</a>
 					</li>
 				</c:if>
 			</c:forEach>

@@ -8,7 +8,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>TELA DE CRIAÇÃO DE USUARIO</title>
+<title>Inserir Cartao</title>
 </head>
 <body>
 	<c:import url="logout-parcial.jsp"/> 
@@ -19,7 +19,7 @@
 		<br>
 		Data Vencimento:<input type="text" name="dataVencimento" value=""/>
 		<br>
-		<input type="hidden" name="idUser"  value="${usuario.user}"/>
+		<input type="hidden" name="id"  value="${usuario.id}"/>
 		<input type="hidden" name="acao" value="NovoCartao">
 		<input type="submit" /> 
 	</form>
