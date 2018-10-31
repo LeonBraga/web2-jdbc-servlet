@@ -41,9 +41,8 @@ public class NovoCartao implements Acao {
 				if (validaInsere) {
 					System.out.println("Inserido com sucesso");
 				} else {
-					System.out.println("CORRIGIR LOGIN!!");
 					request.setAttribute("cartao", cartao);
-					return "forward:formNovoUsuario.jsp";
+					return "forward:formNovoCartao.jsp";
 				}
 			} catch (SQLException e) {
 				e.printStackTrace();
