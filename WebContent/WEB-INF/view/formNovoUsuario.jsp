@@ -13,17 +13,19 @@
 <body>
 	<c:import url="logout-parcial.jsp"/> 
 	<form action="${linkEntradaServlet}" method="post">
-		Nome: <input type="text" name="nome" value=""/>
+		Nome: <input type="text" name="nome" value="${usuario.nome}"/>
 		<br>
-		Sobrenome:<input type="text" name="sobrenome" value="">
+		Sobrenome:<input type="text" name="sobrenome" value="${usuario.sobrenome}">
 		<br>
-		Endereço:<input type="text" name="endereco" value="">
+		Endereço:<input type="text" name="endereco" value="${usuario.endereco}">
 		<br>
-		Login:<input type="text" name="login" value="">
+		Login:<input type="text" name="login" value="${usuario.login}">
 		<br>
-		Senha:<input type="text" name="senha" value="">
+		Senha:<input type="text" name="senha" value="${usuario.senha}">
 		<br>
-		É Administrador:<input type="text" name="ehAdm" value="">
+		Confirma Senha:<input type="text" name="confirmaSenha" value="">
+		<br>
+		É Administrador:<input type="text" name="ehAdm" value="${usuario.isAdm}">
 		<br>
 		Data Nascimento: <input type="text" name="data"  value=""/><!--  pattern="dd/MM/yyyy"/> -->
 		<br>

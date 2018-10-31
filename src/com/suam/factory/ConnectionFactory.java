@@ -51,7 +51,7 @@ public class ConnectionFactory {
 			/* Caso a conexão ocorra com sucesso, a conexão é retornada */
 			//conexao com HSQLDB
 			conexao = DriverManager.getConnection("jdbc:hsqldb:hsql://localhost/dbweb2", "SA", "");
-			System.out.println("CONEXAO FACTORY STRING: "+conexao );
+			//System.out.println("CONEXAO FACTORY STRING: "+conexao );
 			return conexao;
 
 		} catch (ClassNotFoundException e) {

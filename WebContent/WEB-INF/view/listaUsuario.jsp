@@ -27,6 +27,13 @@
 	</ul>
 	<br>
 	<br>
+	<c:if test="${usuarioLogado.isAdm ==  'TRUE'}">
+		<a href="entrada?acao=FormNovoUsuario">NOVO USUARIO</a>
+	</c:if>
+	<br>
+	<a href="entrada?acao=ListaUsuario">REFRESH</a>
+	<br>
+	
 	<br>
 	<c:import url="logout-parcial.jsp" />
 </body>

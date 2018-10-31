@@ -46,16 +46,25 @@ public class NovoUsuario implements Acao {
 		usuario.setIsAdm(ehAdm);
 
 		UsuarioService us = new UsuarioService();
-		if (!senha.equals(confirmaSenha)) {
+		Boolean validaInsere;
+		if (senha.equals(confirmaSenha)) {
 			try {
-				us.inserir(usuario);
+				validaInsere = us.inserir(usuario);
+				if (validaInsere) {
+					System.out.println("Inserido com sucesso");
+				} else {
+					System.out.println("CORRIGIR LOGIN!!");
+					request.setAttribute("usuario", usuario);
+					return "forward:formNovoUsuario.jsp";
+				}
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
 			return "redirect:entrada?acao=ListaUsuario";
 		} else {
-			request.setAttribute("usuario",usuario);
-			return "forward:formAlteraUsuario.jsp";
+			System.out.println("AS SENHAS NÃO CONFEREM");
+			request.setAttribute("usuario", usuario);
+			return "forward:formNovoUsuario.jsp";
 		}
 
 	}

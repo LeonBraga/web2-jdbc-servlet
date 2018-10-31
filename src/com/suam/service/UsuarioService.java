@@ -13,8 +13,20 @@ import com.suam.factory.ConnectionFactory;
 
 public class UsuarioService {
 
-	public static void inserir(Usuario usuario) throws SQLException {
+	public static boolean inserir(Usuario usuario) throws SQLException {
 		Connection conexao = ConnectionFactory.getConnection();
+
+		// Trecho de código para Validar se existe usuário com mesmo login no banco.
+		List<Usuario> listaUsuarios = ListaUsuarios();
+		for (Usuario u : listaUsuarios) {
+			if (u.getLogin().equals(usuario.getLogin())) {
+				System.out.println("Usuario com login já cadastrado!");
+				// retornar um redirect para página de edição;
+				return false;
+			}
+			// o else se dá com a execução normal do método de inserção, porem temos que
+			// retornar uma string no final da execução.
+		}
 
 		String sql = "INSERT INTO usuario (nome, sobrenome, endereco, senha, login, dataNascimento, isadm ) VALUES (?,?,?,?,?,?,?)";
 
@@ -31,9 +43,10 @@ public class UsuarioService {
 
 			ps.execute();
 			conexao.commit();
+			System.out.println("INSERT REALIZADO COM SUCESSO!");
 		} catch (SQLException e) {
 			// Erro, provoca um Rollback (volta ao estado anterior do banco)
-			System.out.println("ERRO" + e);
+			System.out.println("ERRO ROLLBACK" + e);
 			conexao.rollback();
 			e.printStackTrace();
 			throw new SQLException();
@@ -42,10 +55,23 @@ public class UsuarioService {
 			System.out.println("FECHANDO CONEXAO: ");
 			conexao.close();
 		}
+		return true;
 	}
 
-	public static void update(Usuario usuario) throws SQLException {
+	public static Boolean update(Usuario usuario) throws SQLException {
 		Connection conexao = ConnectionFactory.getConnection();
+
+		// Trecho de código para Validar se existe usuário com mesmo login no banco.
+		List<Usuario> listaUsuarios = ListaUsuarios();
+		for (Usuario u : listaUsuarios) {
+			if (u.getLogin().equals(usuario.getLogin())) {
+				System.out.println("Usuario com login já cadastrado!");
+				// retornar um redirect para página de edição;
+				return false;
+			}
+			// o else se dá com a execução normal do método de inserção, porem temos que
+			// retornar uma string no final da execução.
+		}
 
 		String sql = "UPDATE usuario SET nome = ?, sobrenome = ?, endereco = ?,  senha = ?, login = ?, dataNascimento = ?, isadm = ? WHERE idusuario = ?";
 
@@ -64,7 +90,7 @@ public class UsuarioService {
 			System.out.println("PS UPDATE: " + ps);
 			ps.execute();
 			conexao.commit();
-			System.out.println("UPSdAtE REALIZADO COM SUCESSO!");
+			System.out.println("UPDATE REALIZADO COM SUCESSO!");
 		} catch (SQLException e) {
 			// Erro, provoca um Rollback (volta ao estado anterior do banco)
 
@@ -75,6 +101,7 @@ public class UsuarioService {
 			// fechar a conexão
 			conexao.close();
 		}
+		return true;
 	}
 
 	public static List<Usuario> ListaUsuarios() throws SQLException {
@@ -106,15 +133,19 @@ public class UsuarioService {
 			listaUsuario.add(usuario);
 
 			// imprimindo do objeto
-			System.out.println("USUARIO lista: " + usuario.getId() + " - " + usuario.getNome() + " - "
-					+ usuario.getEndereco() + " - " + usuario.getSobrenome() + "" + " - " + usuario.getLogin() + " - "
-					+ usuario.getSenha() + " - " + usuario.getDataNascimento() + " - " + usuario.getIsAdm());
+			/*
+			 * System.out.println("USUARIO lista: " + usuario.getId() + " - " +
+			 * usuario.getNome() + " - " + usuario.getEndereco() + " - " +
+			 * usuario.getSobrenome() + "" + " - " + usuario.getLogin() + " - " +
+			 * usuario.getSenha() + " - " + usuario.getDataNascimento() + " - " +
+			 * usuario.getIsAdm());
+			 */
 		}
 
 		rs.close();
 		statement.close();
 		connection.close();
-		System.out.println("LISTA CRIADA COM SUCESSO!");
+		System.out.println("LISTA(SELECT) CRIADA COM SUCESSO!");
 		return listaUsuario;
 	}
 
@@ -150,7 +181,6 @@ public class UsuarioService {
 		Connection conexao = ConnectionFactory.getConnection();
 		List<Usuario> listaUsuario = new ArrayList<Usuario>();
 
-		System.out.println("CONSULTAR conexao = " + conexao);
 		String sql = "SELECT * FROM usuario where login=? and senha=?";
 
 		try {
@@ -180,17 +210,17 @@ public class UsuarioService {
 				 * usuario.isAdm());
 				 */
 			}
-			//conexao.commit();
+			// conexao.commit();
+			System.out.println("SELECT REALIZADO COM SUCESSO!");
 		} catch (SQLException e) {
 			// Erro, provoca um Rollback (volta ao estado anterior do banco)
-			System.out.println("'ROLLBACK' : "+e);
-			//conexao.rollback();
+			System.out.println("ERRO: " + e);
+			// conexao.rollback();
 		} finally {
 			// fechar a conexão
-			//System.out.println("FECHANDO CONEXAO");
-			//conexao.close();
+			// System.out.println("FECHANDO CONEXAO");
+			// conexao.close();
 		}
-
 		return listaUsuario;
 	}
 
@@ -199,10 +229,8 @@ public class UsuarioService {
 		List<Usuario> listaUsuario = consultar(login, senha);
 
 		if (!listaUsuario.isEmpty()) {
-			System.out.println("autenticado true");
 			return true;
 		} else {
-			System.out.println("autenticado false");
 			return false;
 		}
 
