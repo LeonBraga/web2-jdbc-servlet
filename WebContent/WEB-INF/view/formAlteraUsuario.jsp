@@ -26,12 +26,12 @@
 		<br>
 		Data Nascimento: <input type="text" name="data"  value="${usuario.dataNascimento }"/>
 		<br>
-		Dados do cartão de credito
 		<br>
 		<c:if test="${usuarioLogado.isAdm ==  'TRUE'}">
 			É Administrador:<input type="text" name="ehAdm" value="${usuario.isAdm}">
 			<br>
 			<c:if test="${cartao!=null}">	
+				Dados do cartão de credito
 				<li>
 					Nome titular do cartão: ${cartao.titular} -
 					<a	href="/Web2Sistema/entrada?acao=MostraCartao&id=${cartao.idUser}">edita</a>
@@ -46,6 +46,10 @@
 				<br>
 			</c:if>	
 		</c:if>
+		<c:if test="${cartao==null}">	
+				Dados do cartão de credito
+				<a href="entrada?acao==">Novo Cartão</a>
+			</c:if>	
 		
 		<br>
 		<br>

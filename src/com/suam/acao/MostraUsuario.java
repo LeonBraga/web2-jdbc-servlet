@@ -12,34 +12,36 @@ import com.suam.bean.Usuario;
 import com.suam.service.CartaoDeCreditoService;
 import com.suam.service.UsuarioService;
 
+public class MostraUsuario implements Acao {
 
-
-public class MostraUsuario  implements Acao{
-
-	public String executa(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public String executa(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		System.out.println("AÇÃO = MOSTRANDO DADOS DO USUARIO");
-		
+
 		String paramId = request.getParameter("id");
 		Integer id = Integer.valueOf(paramId);
-		
+
 		Usuario usuario = null;
 		try {
 			usuario = UsuarioService.buscaUsuarioPelaId(id);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
+
 		CartaoDeCredito cartao = null;
 		try {
 			cartao = CartaoDeCreditoService.buscaUsuarioPelaId(usuario.getId());
-			cartao.setTitular(usuario.getNome());
+			if (cartao != null) {
+				cartao.setTitular(usuario.getNome());
+				request.setAttribute("cartao", cartao);
+			}
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
-		request.setAttribute("cartao",cartao);
-		request.setAttribute("usuario",usuario);
-		
+
+		request.setAttribute("usuario", usuario);
+
 		return "forward:formAlteraUsuario.jsp";
 	}
 }
