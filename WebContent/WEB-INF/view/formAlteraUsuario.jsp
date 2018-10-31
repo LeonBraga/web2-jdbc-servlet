@@ -24,8 +24,12 @@
 		<br>
 		Senha:<input type="text" name="senha" value="${usuario.senha}">
 		<br>
-		É Administrador:<input type="text" name="ehAdm" value="${usuario.isAdm}">
+		
+		<c:if test="${usuarioLogado.isAdm ==  'TRUE'}">
+			É Administrador:<input type="text" name="ehAdm" value="${usuario.isAdm}">
 		<br>
+		</c:if>
+		
 		Data Nascimento: <input type="text" name="data"  value="${usuario.dataNascimento }"/>
 		<br>
 		<br>
