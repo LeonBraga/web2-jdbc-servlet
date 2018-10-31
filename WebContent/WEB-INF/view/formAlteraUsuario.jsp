@@ -30,20 +30,21 @@
 		<br>
 		<c:if test="${usuarioLogado.isAdm ==  'TRUE'}">
 			É Administrador:<input type="text" name="ehAdm" value="${usuario.isAdm}">
-			
 			<br>
-			<li>
-				Nome titular do cartão: ${cartao.titular} -
-				<a	href="/Web2Sistema/entrada?acao=MostraCartao&id=${cartao.idUser}">edita</a>
-				<a href="/Web2Sistema/entrada?acao=RemoveCartao&id=${cartao.idUser}">remove</a>
-			</li>
-				<ul> 
-					Numero do cartao: ${cartao.numeroCartao}
-				</ul>
-				<ul> 
-					Data de Vencimento: ${cartao.dataVencimento}
-				</ul>
-			<br>
+			<c:if test="${cartao!=null}">	
+				<li>
+					Nome titular do cartão: ${cartao.titular} -
+					<a	href="/Web2Sistema/entrada?acao=MostraCartao&id=${cartao.idUser}">edita</a>
+					<a href="/Web2Sistema/entrada?acao=RemoveCartao&id=${cartao.idUser}">remove</a>
+				</li>
+					<li> 
+						Numero do cartao: ${cartao.numeroCartao}
+					</li>
+					<li> 
+						Data de Vencimento: ${cartao.dataVencimento}
+					</li>
+				<br>
+			</c:if>	
 		</c:if>
 		
 		<br>

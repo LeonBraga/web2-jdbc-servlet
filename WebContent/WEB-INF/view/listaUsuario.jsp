@@ -18,12 +18,30 @@
 	<br> Lista de usuarios:
 	<br />
 	<ul>
-		<c:forEach items="${usuarios}" var="usuario">
-			<li>ID:${usuario.id} -NOME: ${usuario.nome} - <a
-				href="/Web2Sistema/entrada?acao=MostraUsuario&id=${usuario.id}">edita</a>
-				<a href="/Web2Sistema/entrada?acao=RemoveUsuario&id=${usuario.id}">remove</a>
-			</li>
-		</c:forEach>
+		
+			
+			<h3>Administradores</h3>
+			<c:forEach items="${usuarios}" var="usuario">
+				<c:if test="${usuario.isAdm ==  'TRUE'}">
+					<li>ID:${usuario.id} -NOME: ${usuario.nome} - <a
+						href="/Web2Sistema/entrada?acao=MostraUsuario&id=${usuario.id}">edita</a>
+						<a href="/Web2Sistema/entrada?acao=RemoveUsuario&id=${usuario.id}">remove</a>
+					</li>
+				</c:if>
+			</c:forEach>
+			
+		
+			<h3>Clientes</h3>
+			<c:forEach items="${usuarios}" var="usuario">
+				<c:if test="${usuario.isAdm ==  'FALSE'}">	
+					<li>ID:${usuario.id} -NOME: ${usuario.nome} - <a
+						href="/Web2Sistema/entrada?acao=MostraUsuario&id=${usuario.id}">edita</a>
+						<a href="/Web2Sistema/entrada?acao=RemoveUsuario&id=${usuario.id}">remove</a>
+					</li>
+				</c:if>
+			</c:forEach>
+			
+		
 		<li>
 			<c:if test="${usuarioLogado.isAdm ==  'TRUE'}">
 				<a href="entrada?acao=FormNovoUsuario">Novo usuário</a>
