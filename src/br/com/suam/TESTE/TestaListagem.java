@@ -14,13 +14,13 @@ public class TestaListagem {
 	public static void main(String[] args) throws SQLException, ClassNotFoundException {
 		Connection connection = ConnectionFactory.getConnection();
 		Statement statement = connection.createStatement();
-		boolean resultado = statement.execute("select * from usuario");
+		boolean resultado = statement.execute("select * from cartaodecredito");
 		ResultSet resultSet = statement.getResultSet();
 		
 		while (resultSet.next()) {
-			int id = resultSet.getInt("idusuario");
-			String nome = resultSet.getString("nome");
-			System.out.println("id=" + id + ", nome=" + nome);
+			int id = resultSet.getInt("usuario_idusuario");
+			String nome = resultSet.getString("numerocartao");
+			System.out.println("id=" + id + ", numero=" + nome);
 		}
 		
 		resultSet.close();

@@ -28,7 +28,8 @@ Dentro do DatabaseManager execute a query para criar a tabela de usuario:
  	 insert into usuario values (2, 'and2', 'fc2', 'r teste2', 'user', 'user', '15/04/1988', false);
  	 
  
-	CREATE TABLE cartaoCredito(numeroCartao VARCHAR(45) NOT NULL, dataVencimento VARCHAR(45) NOT NULL,
+	CREATE TABLE cartaoDeCredito(numeroCartao VARCHAR(45) NOT NULL, dataVencimento VARCHAR(45) NOT NULL,
 	 usuario_idusuario INT NOT NULL,FOREIGN KEY (usuario_idusuario)  REFERENCES usuario (idusuario))
 	 
+	  insert into cartaoDeCredito values ('1111111111', '15/04/1988', 1);
 	 
