@@ -6,8 +6,6 @@ import java.sql.Statement;
 
 import com.suam.factory.ConnectionFactory;
 
-
-
 public class TestaInsercao {
 
 	public static void main(String[] args) throws SQLException, ClassNotFoundException {
@@ -16,9 +14,7 @@ public class TestaInsercao {
 
 		// int resultado = statement.executeUpdate(
 		boolean resultado = statement.execute(
-				"insert into usuario(nome, sobrenome, endereco, senha, login, dataNascimento, isAdm)"
-						+ "values('And2', 'F','Rua teste2', '123', 'afc', '15/05/2040', true),"
-						+ "('And3', 'F','Rua teste2', '123', 'afc', '15/05/2040', false)",
+				"INSERT INTO cartaodecredito (numeroCartao, dataVencimento, usuario_idusuario) VALUES ('2222222','15/01/2001','4')",
 				Statement.RETURN_GENERATED_KEYS);
 		System.out.println("RESULTADO: " + resultado);
 

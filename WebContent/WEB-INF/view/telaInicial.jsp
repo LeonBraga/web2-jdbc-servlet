@@ -21,6 +21,8 @@
 
 	<c:if test="${usuarioLogado.isAdm ==  'TRUE'}">
 		<a href="entrada?acao=FormNovoUsuario">NOVO USUARIO</a>
+		<br>
+		<a href="entrada?acao=ListaCartaoDeCredito">LISTAR CARTOES</a>
 	</c:if>
 	<br>
 	<a href="entrada?acao=ListaUsuario">LISTAR USUÁRIOS</a>

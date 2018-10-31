@@ -24,13 +24,28 @@
 		<br>
 		Senha:<input type="text" name="senha" value="${usuario.senha}">
 		<br>
-		
+		Data Nascimento: <input type="text" name="data"  value="${usuario.dataNascimento }"/>
+		<br>
+		Dados do cartão de credito
+		<br>
 		<c:if test="${usuarioLogado.isAdm ==  'TRUE'}">
 			É Administrador:<input type="text" name="ehAdm" value="${usuario.isAdm}">
-		<br>
+			
+			<br>
+			<li>
+				Nome titular do cartão: ${cartao.titular} -
+				<a	href="/Web2Sistema/entrada?acao=MostraCartao&id=${cartao.idUser}">edita</a>
+				<a href="/Web2Sistema/entrada?acao=RemoveCartao&id=${cartao.idUser}">remove</a>
+			</li>
+				<ul> 
+					Numero do cartao: ${cartao.numeroCartao}
+				</ul>
+				<ul> 
+					Data de Vencimento: ${cartao.dataVencimento}
+				</ul>
+			<br>
 		</c:if>
 		
-		Data Nascimento: <input type="text" name="data"  value="${usuario.dataNascimento }"/>
 		<br>
 		<br>
 		<input type="hidden" name="id" value="${usuario.id }">

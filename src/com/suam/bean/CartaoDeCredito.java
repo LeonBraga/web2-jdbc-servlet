@@ -2,15 +2,16 @@ package com.suam.bean;
 
 public class CartaoDeCredito {
 
-	private String numeroCartao;
+	private String titular;
+	private Integer numeroCartao;
 	private String dataVencimento;
 	private Integer idUser;
 
 	public CartaoDeCredito() {
 		super();
 	}
-	
-	public CartaoDeCredito(String numeroCartao, String dataVencimento, Integer idUser) {
+
+	public CartaoDeCredito(Integer numeroCartao, String dataVencimento, Integer idUser) {
 		super();
 		this.numeroCartao = numeroCartao;
 		this.dataVencimento = dataVencimento;
@@ -25,11 +26,11 @@ public class CartaoDeCredito {
 		this.idUser = idUser;
 	}
 
-	public String getNumeroCarto() {
+	public Integer getNumeroCartao() {
 		return numeroCartao;
 	}
 
-	public void setNumeroCarto(String numeroCarto) {
+	public void setNumeroCartao(Integer numeroCarto) {
 		this.numeroCartao = numeroCarto;
 	}
 
@@ -41,4 +42,11 @@ public class CartaoDeCredito {
 		this.dataVencimento = dataVencimento;
 	}
 
+	public String getTitular() {
+		return titular;
+	}
+
+	public void setTitular(String titular) {
+		this.titular = titular;
+	}
 }

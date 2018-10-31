@@ -22,7 +22,7 @@ public class CartaoDeCreditoService {
 		try {
 
 			PreparedStatement ps = conexao.prepareStatement(sql);
-			ps.setString(1, cartao.getNumeroCarto());
+			ps.setString(1, cartao.getNumeroCartao().toString());
 			ps.setString(2, cartao.getDataVencimento());
 			ps.setString(3, cartao.getIdUser().toString());
 
@@ -50,7 +50,7 @@ public class CartaoDeCreditoService {
 
 		try {
 			PreparedStatement ps = conexao.prepareStatement(sql);
-			ps.setString(1, cartao.getNumeroCarto());
+			ps.setString(1, cartao.getNumeroCartao().toString());
 			ps.setString(2, cartao.getDataVencimento());
 			ps.setString(3, cartao.getIdUser().toString());
 
@@ -90,8 +90,8 @@ public class CartaoDeCreditoService {
 			// adicionando na lista
 			CartaoDeCredito cartao = new CartaoDeCredito();
 			cartao.setIdUser(rs.getInt("usuario_idusuario"));
-			cartao.setNumeroCarto(rs.getString("numeroCartao"));
-			cartao.setNumeroCarto("numeroCartao");
+			cartao.setNumeroCartao(rs.getInt("numeroCartao"));
+			cartao.setDataVencimento(rs.getString("dataVencimento"));
 			listaCartoes.add(cartao);
 		}
 
@@ -110,7 +110,7 @@ public class CartaoDeCreditoService {
 		try {
 			PreparedStatement ps = conexao.prepareStatement(sql);
 
-			String id = cartao.getNumeroCarto().toString();
+			String id = cartao.getNumeroCartao().toString();
 			ps.setString(1, id);
 
 			System.out.println("PS DELETE: " + ps);
@@ -146,7 +146,7 @@ public class CartaoDeCreditoService {
 
 			while (rs.next()) {
 				CartaoDeCredito cartao = new CartaoDeCredito();
-				ps.setString(1, cartao.getNumeroCarto());
+				ps.setString(1, cartao.getNumeroCartao().toString());
 				ps.setString(2, cartao.getDataVencimento());
 				ps.setString(3, cartao.getIdUser().toString());
 				listaCartoes.add(cartao);

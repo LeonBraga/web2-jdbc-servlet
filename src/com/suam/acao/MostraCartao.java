@@ -14,10 +14,10 @@ import com.suam.service.UsuarioService;
 
 
 
-public class MostraUsuario  implements Acao{
+public class MostraCartao  implements Acao{
 
 	public String executa(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("AÇÃO = MOSTRANDO DADOS DO USUARIO");
+		System.out.println("AÇÃO = MOSTRANDO DADOS DO CARTAO");
 		
 		String paramId = request.getParameter("id");
 		Integer id = Integer.valueOf(paramId);
@@ -38,8 +38,7 @@ public class MostraUsuario  implements Acao{
 		}
 		
 		request.setAttribute("cartao",cartao);
-		request.setAttribute("usuario",usuario);
 		
-		return "forward:formAlteraUsuario.jsp";
+		return "forward:formAlteraCartao.jsp";
 	}
 }
