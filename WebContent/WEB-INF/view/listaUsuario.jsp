@@ -24,12 +24,15 @@
 				<a href="/Web2Sistema/entrada?acao=RemoveUsuario&id=${usuario.id}">remove</a>
 			</li>
 		</c:forEach>
+		<li>
+			<c:if test="${usuarioLogado.isAdm ==  'TRUE'}">
+				<a href="entrada?acao=FormNovoUsuario">Novo usuário</a>
+			</c:if>
+		</li>
 	</ul>
 	<br>
 	<br>
-	<c:if test="${usuarioLogado.isAdm ==  'TRUE'}">
-		<a href="entrada?acao=FormNovoUsuario">NOVO USUARIO</a>
-	</c:if>
+	
 	<br>
 	<a href="entrada?acao=ListaUsuario">REFRESH</a>
 	<br>

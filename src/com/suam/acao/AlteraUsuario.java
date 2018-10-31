@@ -30,7 +30,7 @@ public class AlteraUsuario implements Acao {
 		String ehAdm = request.getParameter("ehAdm");
 		Integer id = Integer.valueOf(paramId);
 
-		System.out.println("acao altera empresa " + id);
+		System.out.println("acao altera usuario " + id);
 
 		/*
 		 * Date dataAbertura = null; try { SimpleDateFormat sdf = new
