@@ -1,12 +1,21 @@
-Vá para o terminal e dentro da pasta do seu projeto rode o banco de dados no modo servidor para um banco chamado loja-virtual:
-
+Vá para o terminal e dentro da pasta do seu projeto rode o banco de dados no modo servidor para um banco chamado dbweb2:
+COMANDO A SER EXECUTADO:
 	java -cp hsqldb.jar org.hsqldb.server.Server --database.0 file:dbweb2 --dbname.0 dbweb2
 
-Abra outro terminal e execute o manager para se conectar ao banco:
 
+Abra outro terminal e execute o manager  NO MODO SERVIDOR para se conectar ao banco:
+COMANDO A SER EXECUTADO:
 	java -cp hsqldb.jar  org.hsqldb.util.DatabaseManager
-	
-Execute no modo SERVIDOR do hsqldb.
+	OU
+	clique no hsqldb.jar na pasta do projeto E
+	em recent: setings selecione o nome do DB:  dbweb2
+	em type: HSQL Database Engine Server
+	em driver: org.hsqldb.jdbcDriver
+	em url: jdbc:hsqldb:hsql://localhost/dbweb2
+	em user: SA ==> ou a senha que vc definir na criação
+	em password: ""(em branco)
+
+OBS: ENFATIZANDO ==>> Execute no modo SERVIDOR do hsqldb.
  
 Dentro do DatabaseManager execute a query para criar a tabela de usuario:
 
