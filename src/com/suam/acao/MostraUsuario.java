@@ -57,23 +57,27 @@ public class MostraUsuario implements Acao {
 				System.out.println("=======================>>3");
 				try {
 					System.out.println("=======================>>4");
-					if (cartaoDeCredito.getIdUser() == usuario.getId()||cartaoDeCredito.getIdUser()!=null) {
+					if (cartaoDeCredito.getIdUser() == usuario.getId()) {
 						System.out.println("=======================>>5");
 						System.out.println("cartaoDeCredito.getIdUser() ::" + cartaoDeCredito.getIdUser());
 						usuario = UsuarioService.buscaUsuarioPelaId(cartaoDeCredito.getIdUser());
 						System.out.println("=======================>>6");
 						cartaoDeCredito.setTitular(usuario.getNome());
 					} else {
-						listaCartao.remove(cartaoDeCredito);
+						System.out.println("\"=======================>>PULA para o proximo");
 					}
 				} catch (SQLException e) {
 					e.printStackTrace();
+					listaCartao.remove(cartaoDeCredito);
 				}
 			}
 		}
+		
+		
 		if (!listaCartao.isEmpty()) {
 			request.setAttribute("cartoes", listaCartao);
 		}
+		
 		request.setAttribute("usuario", usuario);
 
 		return "forward:formAlteraUsuario.jsp";

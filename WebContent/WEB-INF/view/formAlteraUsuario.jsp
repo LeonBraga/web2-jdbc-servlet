@@ -31,7 +31,7 @@
 			<c:if test="${cartoes!=null}">	
 				<h3>Lista de cartões do usuário</h3> 
 				<c:forEach items="${cartoes}" var="cartao">
-						<c:if test="${usuario.id ==  cartao.idUser}">
+					<c:if test="${usuario.id ==  cartao.idUser}">
 						<li>
 							Nome titular: ${cartao.titular} -
 						</li>
@@ -44,12 +44,15 @@
 						<li>
 						    <a href="entrada?acao=MostraCartao&id=${cartao.idUser}">edita</a>
 							<a href="entrada?acao=RemoveCartao&id=${cartao.idUser}">remove</a>
-							<a href="entrada?acao=FormNovoCartao&idUser=${cartao.idUser}">Novo Cartão</a>
 						</li>
 						<br>
 				</c:if>
 			</c:forEach>
+			<li>
+			<a href="entrada?acao=FormNovoCartao&idUser=${usuario.id}">Novo Cartão</a>
+			</li>
 		</c:if>
+		
 		
 		<!--USUARIO COM APENAS UM CARTAO SENDO MOSTRADO -->	
 	<%-- <c:if test="${usuarioLogado.isAdm ==  'TRUE'}">
@@ -78,10 +81,7 @@
 			É Administrador:<input type="text" name="ehAdm" value="${usuario.isAdm}">
 			<br>
 		</c:if>
-		<c:if test="${cartao==null}">	
-				Dados do cartão de credito
-				<a href="entrada?acao=FormNovoCartao&idUser=${usuario.id}">Novo Cartão</a>
-			</c:if>	
+			
 		
 		<br>
 		<br>

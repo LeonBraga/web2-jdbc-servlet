@@ -40,14 +40,13 @@
 					</li>
 				</c:if>
 			</c:forEach>
-			
-		
-		<li>
-			<c:if test="${usuarioLogado.isAdm ==  'TRUE'}">
-				<a href="entrada?acao=FormNovoUsuario">Novo usuário</a>
-			</c:if>
-		</li>
 	</ul>
+	
+	<br><br><br><br>
+	<c:if test="${usuarioLogado.isAdm ==  'TRUE'}">
+		<a href="entrada?acao=FormNovoUsuario">Novo usuário</a>
+	</c:if>
+		
 	<br>
 	<br>
 	

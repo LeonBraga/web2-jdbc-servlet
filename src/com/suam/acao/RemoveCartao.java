@@ -36,6 +36,6 @@ public class RemoveCartao  implements Acao{
 		}
 		
 		//request.setAttribute("usuario",usuario);
-		return "redirect:entrada?acao=ListaUsuario";
+		return "redirect:entrada?acao=MostraUsuario&id="+cartao.getIdUser();
 	}
 }
