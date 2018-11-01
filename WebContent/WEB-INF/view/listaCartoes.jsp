@@ -21,16 +21,18 @@
 		<c:forEach items="${cartoes}" var="cartao">
 			<li>
 				Nome titular: ${cartao.titular} -
+			</li>
+			<li> 
+				Numero do cartao: ${cartao.numeroCartao}
+			</li>
+			<li> 
+				Data de Vencimento: ${cartao.dataVencimento}
+			</li>
+			<li>
 				<a	href="/Web2Sistema/entrada?acao=MostraCatao&id=${cartao.idUser}">edita</a>
 				<a href="/Web2Sistema/entrada?acao=RemoveCartao&id=${cartao.idUser}">remove</a>
 			</li>
-				<ul> 
-					Numero do cartao: ${cartao.numeroCartao}
-				</ul>
-				<ul> 
-					Data de Vencimento: ${cartao.dataVencimento}
-				</ul>
-				<br>
+			<br>
 		</c:forEach>
 	</ul>
 	<br>

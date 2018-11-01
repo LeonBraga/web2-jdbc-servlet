@@ -63,11 +63,14 @@ public class UsuarioService {
 
 		// Trecho de código para Validar se existe usuário com mesmo login no banco.
 		List<Usuario> listaUsuarios = ListaUsuarios();
+
 		for (Usuario u : listaUsuarios) {
-			if (u.getLogin().equals(usuario.getLogin())) {
-				System.out.println("Usuario com login já cadastrado!");
-				// retornar um redirect para página de edição;
-				return false;
+			if (!u.getId().equals(usuario.getId())) {
+				if (u.getLogin().equals(usuario.getLogin())) {
+					System.out.println("Usuario com login já cadastrado!");
+					// retornar um redirect para página de edição;
+					return false;
+				}
 			}
 			// o else se dá com a execução normal do método de inserção, porem temos que
 			// retornar uma string no final da execução.

@@ -63,7 +63,7 @@ public class AlteraUsuario implements Acao {
 		Boolean validaInsere;
 
 		try {
-			validaInsere = us.inserir(usuario);
+			validaInsere = us.update(usuario);
 			if (validaInsere) {
 				System.out.println("ATUALIZADO com sucesso");
 			} else {

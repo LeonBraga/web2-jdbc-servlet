@@ -90,7 +90,7 @@ public class CartaoDeCreditoService {
 			// adicionando na lista
 			CartaoDeCredito cartao = new CartaoDeCredito();
 			cartao.setIdUser(rs.getInt("usuario_idusuario"));
-			cartao.setNumeroCartao(rs.getInt("numeroCartao"));
+			cartao.setNumeroCartao((long)rs.getLong("numeroCartao"));
 			cartao.setDataVencimento(rs.getString("dataVencimento"));
 			listaCartoes.add(cartao);
 		}

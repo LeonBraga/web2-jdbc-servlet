@@ -15,9 +15,9 @@
 	<form action="${linkEntradaServlet }" method="post">
 		
 		<c:if test="${usuarioLogado.isAdm ==  'TRUE'}">
-				Nome titular do cartão: <input type="text" name="nome" value="${cartao.titular}"/>
+				Nome titular do cartão: <input type="text" name="nome" value="${cartao.titular}" readonly="true"/>
 			<br>
-				Numero do cartao: <input type="text" name="numeroCartao" value="${cartao.numeroCartao}"/>
+				Numero do cartao: <input type="text" name="numero" value="${cartao.numeroCartao}"/>
 			<br>
 				Data de Vencimento:<input type="text" name="dataVencimento" value="${cartao.dataVencimento}"/>
 			<br>
@@ -25,7 +25,7 @@
 		
 		<br>
 		<br>
-		<input type="hidden" name="id" value="${cartao.idUser }">
+		<input type="hidden" name="idUser" value="${cartao.idUser }">
 		<input type="hidden" name="acao" value="AlteraCartao">
 		<input type="submit" /> 
 	</form>

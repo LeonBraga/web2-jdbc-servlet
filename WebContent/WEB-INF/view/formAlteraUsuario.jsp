@@ -28,23 +28,27 @@
 		<br>
 		<br>
 		<c:if test="${usuarioLogado.isAdm ==  'TRUE'}">
-			É Administrador:<input type="text" name="ehAdm" value="${usuario.isAdm}">
-			<br>
 			<c:if test="${cartao!=null}">	
-				Dados do cartão de credito
-				<li>
-					Nome titular do cartão: ${cartao.titular} -
-					<a	href="entrada?acao=MostraCartao&id=${cartao.idUser}">edita</a>
-					<a href="entrada?acao=RemoveCartao&id=${cartao.idUser}">remove</a>
-				</li>
+				<ul>
+					Dados do cartão de credito
+					<li>
+						Nome titular do cartão: ${cartao.titular} -
+					</li>
 					<li> 
 						Numero do cartao: ${cartao.numeroCartao}
 					</li>
 					<li> 
 						Data de Vencimento: ${cartao.dataVencimento}
 					</li>
-				<br>
+					<li>
+					    <a href="entrada?acao=MostraCartao&id=${cartao.idUser}">edita</a>
+						<a href="entrada?acao=RemoveCartao&id=${cartao.idUser}">remove</a>
+					</li>
+				</ul>	
+					<br>
 			</c:if>	
+			É Administrador:<input type="text" name="ehAdm" value="${usuario.isAdm}">
+			<br>
 		</c:if>
 		<c:if test="${cartao==null}">	
 				Dados do cartão de credito

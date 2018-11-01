@@ -35,7 +35,6 @@ public class MostraUsuario implements Acao {
 				cartao.setTitular(usuario.getNome());
 				request.setAttribute("cartao", cartao);
 			}
-
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

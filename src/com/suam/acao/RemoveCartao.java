@@ -7,30 +7,31 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.suam.bean.CartaoDeCredito;
 import com.suam.bean.Usuario;
+import com.suam.service.CartaoDeCreditoService;
 import com.suam.service.UsuarioService;
 
 
 
-public class RemoveUsuario  implements Acao{
+public class RemoveCartao  implements Acao{
 
 	public String executa(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("AÇÃO = REMOVENDO USUARIO");
+		System.out.println("AÇÃO = REMOVENDO CARTÃO");
 		
 		String paramId = request.getParameter("id");
 		Integer id = Integer.valueOf(paramId);
 		
-		Usuario usuario = null;
+		CartaoDeCredito cartao = null;
 		try {
-			usuario = UsuarioService.buscaUsuarioPelaId(id);
+			cartao = CartaoDeCreditoService.buscaUsuarioPelaId(id);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 
 		try {
-			UsuarioService.delete(usuario);
+			CartaoDeCreditoService.delete(cartao);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
