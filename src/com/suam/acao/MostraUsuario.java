@@ -73,7 +73,6 @@ public class MostraUsuario implements Acao {
 			}
 		}
 		
-		
 		if (!listaCartao.isEmpty()) {
 			request.setAttribute("cartoes", listaCartao);
 		}
