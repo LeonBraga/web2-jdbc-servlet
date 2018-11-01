@@ -28,7 +28,7 @@ public class AlteraCartao implements Acao {
 		
 		
 		cartao.setTitular(nome);
-		cartao.setNumeroCartao(Long.parseLong(numero.trim()));
+		//cartao.setNumeroCartao(numero);
 		cartao.setDataVencimento(data);
 		System.out.println(idUser);
 		

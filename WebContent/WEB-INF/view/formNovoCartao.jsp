@@ -19,7 +19,7 @@
 		<br>
 		Data Vencimento:<input type="text" name="dataVencimento" value=""/>
 		<br>
-		<input type="hidden" name="id"  value="${usuario.id}"/>
+		<input type="hidden" name="idUser"  value="${usuario.id}"/>
 		<input type="hidden" name="acao" value="NovoCartao">
 		<input type="submit" /> 
 	</form>

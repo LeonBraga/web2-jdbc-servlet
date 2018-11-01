@@ -22,9 +22,9 @@ public class CartaoDeCreditoService {
 		try {
 
 			PreparedStatement ps = conexao.prepareStatement(sql);
-			ps.setString(1, cartao.getNumeroCartao().toString());
-			ps.setString(2, cartao.getDataVencimento());
-			ps.setString(3, cartao.getIdUser().toString());
+			ps.setString(1, cartao.getNumeroCartao().trim());
+			ps.setString(2, cartao.getDataVencimento().trim());
+			ps.setString(3, cartao.getIdUser().toString().trim());
 
 			ps.execute();
 			conexao.commit();
@@ -46,13 +46,13 @@ public class CartaoDeCreditoService {
 	public static Boolean update(CartaoDeCredito cartao) throws SQLException {
 		Connection conexao = ConnectionFactory.getConnection();
 
-		String sql = "UPDATE cartaodecredito SET numeroCartao = ?, dataVencimento= ? WHERE usuario_idusuario = ?";
+		String sql = "UPDATE cartaodecredito SET dataVencimento= ? WHERE usuario_idusuario = ?";
 
 		try {
 			PreparedStatement ps = conexao.prepareStatement(sql);
-			ps.setString(1, cartao.getNumeroCartao().toString());
-			ps.setString(2, cartao.getDataVencimento());
-			ps.setString(3, cartao.getIdUser().toString());
+			//ps.setString(1, cartao.getNumeroCartao());
+			ps.setString(1, cartao.getDataVencimento().trim());
+			ps.setString(2, cartao.getIdUser().toString().trim());
 
 			System.out.println("PS UPDATE: " + ps);
 			ps.execute();
@@ -72,7 +72,7 @@ public class CartaoDeCreditoService {
 	}
 
 	public static List<CartaoDeCredito> ListaCartoes() throws SQLException {
-
+		System.out.println("LISTANDO TODOS!");
 		Connection connection = ConnectionFactory.getConnection();
 		List<CartaoDeCredito> listaCartoes = new ArrayList<CartaoDeCredito>();
 
@@ -90,7 +90,7 @@ public class CartaoDeCreditoService {
 			// adicionando na lista
 			CartaoDeCredito cartao = new CartaoDeCredito();
 			cartao.setIdUser(rs.getInt("usuario_idusuario"));
-			cartao.setNumeroCartao((long)rs.getLong("numeroCartao"));
+			cartao.setNumeroCartao(rs.getString("numeroCartao"));
 			cartao.setDataVencimento(rs.getString("dataVencimento"));
 			listaCartoes.add(cartao);
 		}

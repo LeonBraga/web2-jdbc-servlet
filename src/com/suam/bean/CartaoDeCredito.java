@@ -5,7 +5,7 @@ import java.math.BigInteger;
 public class CartaoDeCredito {
 
 	private String titular;
-	private Long  numeroCartao;
+	private String  numeroCartao;
 	private String dataVencimento;
 	private Integer idUser;
 
@@ -13,7 +13,7 @@ public class CartaoDeCredito {
 		super();
 	}
 
-	public CartaoDeCredito(Long  numeroCartao, String dataVencimento, Integer idUser) {
+	public CartaoDeCredito(String  numeroCartao, String dataVencimento, Integer idUser) {
 		super();
 		this.numeroCartao = numeroCartao;
 		this.dataVencimento = dataVencimento;
@@ -28,11 +28,11 @@ public class CartaoDeCredito {
 		this.idUser = idUser;
 	}
 
-	public Long  getNumeroCartao() {
+	public String getNumeroCartao() {
 		return numeroCartao;
 	}
 
-	public void setNumeroCartao(Long  numeroCarto) {
+	public void setNumeroCartao(String  numeroCarto) {
 		this.numeroCartao = numeroCarto;
 	}
 
