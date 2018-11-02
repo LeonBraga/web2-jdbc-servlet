@@ -30,5 +30,7 @@
 		<input type="submit" /> 
 	</form>
 
+
+<c:import url="menuLinks.jsp"/> 
 </body>
 </html>

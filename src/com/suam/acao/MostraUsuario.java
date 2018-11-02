@@ -49,22 +49,13 @@ public class MostraUsuario implements Acao {
 			e.printStackTrace();
 		}
 
-		System.out.println("=======================>>1");
 		for (CartaoDeCredito cartaoDeCredito : listaCartao) {
-			System.out.println("=======================>>2");
-
 			if (cartaoDeCredito != null) {
-				System.out.println("=======================>>3");
 				try {
-					System.out.println("=======================>>4");
+
 					if (cartaoDeCredito.getIdUser() == usuario.getId()) {
-						System.out.println("=======================>>5");
-						System.out.println("cartaoDeCredito.getIdUser() ::" + cartaoDeCredito.getIdUser());
 						usuario = UsuarioService.buscaUsuarioPelaId(cartaoDeCredito.getIdUser());
-						System.out.println("=======================>>6");
 						cartaoDeCredito.setTitular(usuario.getNome());
-					} else {
-						System.out.println("\"=======================>>PULA para o proximo");
 					}
 				} catch (SQLException e) {
 					e.printStackTrace();
@@ -72,11 +63,11 @@ public class MostraUsuario implements Acao {
 				}
 			}
 		}
-		
+
 		if (!listaCartao.isEmpty()) {
 			request.setAttribute("cartoes", listaCartao);
 		}
-		
+
 		request.setAttribute("usuario", usuario);
 
 		return "forward:formAlteraUsuario.jsp";

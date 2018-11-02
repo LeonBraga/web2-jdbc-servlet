@@ -67,7 +67,6 @@ public class AlteraUsuario implements Acao {
 			if (validaInsere) {
 				System.out.println("ATUALIZADO com sucesso");
 			} else {
-				System.out.println("CORRIGIR LOGIN!!");
 				request.setAttribute("usuario", usuario);
 				return "forward:formAlteraUsuario.jsp";
 			}
@@ -75,6 +74,12 @@ public class AlteraUsuario implements Acao {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return "redirect:entrada?acao=ListaUsuario";
+		
+		if (usuario.getIsAdm().equals("TRUE")) {
+			return "redirect:entrada?acao=ListaUsuario";
+		}else {
+			return "redirect:entrada?acao=MostraUsuario&id="+usuario.getId();
+		}
+		
 	}
 }

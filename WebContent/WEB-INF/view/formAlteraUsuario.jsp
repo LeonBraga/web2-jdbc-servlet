@@ -12,6 +12,7 @@
 </head>
 <body>
 	<c:import url="logout-parcial.jsp"/> 
+	Usuario Logado: ${usuarioLogado.login}
 	<form action="${linkEntradaServlet }" method="post">
 	
 		Nome: <input type="text" name="nome" value="${usuario.nome}"/>
@@ -26,8 +27,16 @@
 		<br>
 		Data Nascimento: <input type="text" name="data"  value="${usuario.dataNascimento }"/>
 		<br>
+		<c:if test="${usuarioLogado.isAdm=='TRUE'}">
+			Usuario possui perfil administrador:<input type="text" name="ehAdm" value="${usuario.isAdm}">
+			<br>
+		</c:if>
+		<c:if test="${usuarioLogado.isAdm=='FALSE'}">
+			Usuario possui perfil administrador:<input type="text" name="ehAdm" value="${usuario.isAdm}" readonly>
+			<br>
+		</c:if>
 		<br>
-		<c:if test="${usuarioLogado.isAdm ==  'TRUE'}">
+		<%-- <c:if test="${usuarioLogado.isAdm ==  'TRUE'}"> --%>
 			<c:if test="${cartoes!=null}">	
 				<h3>Lista de cartões do usuário</h3> 
 				<c:forEach items="${cartoes}" var="cartao">
@@ -47,13 +56,10 @@
 						</li>
 						<br>
 				</c:if>
-			</c:forEach>
-			<li>
-			<a href="entrada?acao=FormNovoCartao&idUser=${usuario.id}">Novo Cartão</a>
-			</li>
+			</c:forEach>	
 		</c:if>
 		
-		
+		<%-- </c:if> --%>
 		<!--USUARIO COM APENAS UM CARTAO SENDO MOSTRADO -->	
 	<%-- <c:if test="${usuarioLogado.isAdm ==  'TRUE'}">
 			<c:if test="${cartao!=null}">
@@ -77,18 +83,15 @@
 					<br>
 			</c:if>	
 	 --%>		
-			
-			É Administrador:<input type="text" name="ehAdm" value="${usuario.isAdm}">
-			<br>
-		</c:if>
-			
-		
+	 	<li>
+			<a href="entrada?acao=FormNovoCartao&idUser=${usuario.id}">Novo Cartão</a>
+		</li>
 		<br>
 		<br>
 		<input type="hidden" name="id" value="${usuario.id}">
 		<input type="hidden" name="acao" value="AlteraUsuario">
 		<input type="submit" /> 
 	</form>
-
+<c:import url="menuLinks.jsp"/> 
 </body>
 </html>

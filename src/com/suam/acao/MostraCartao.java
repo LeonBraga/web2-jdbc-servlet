@@ -31,7 +31,7 @@ public class MostraCartao  implements Acao{
 		
 		CartaoDeCredito cartao = null;
 		try {
-			cartao = CartaoDeCreditoService.buscaUsuarioPelaId(usuario.getId());
+			cartao = CartaoDeCreditoService.buscaCartaoPelaId(usuario.getId());
 			cartao.setTitular(usuario.getNome());
 		} catch (SQLException e) {
 			e.printStackTrace();

@@ -27,12 +27,12 @@
 		<br>
 		É Administrador:<input type="text" name="ehAdm" value="${usuario.isAdm}">
 		<br>
-		Data Nascimento: <input type="text" name="data"  value=""/><!--  pattern="dd/MM/yyyy"/> -->
+		Data Nascimento: <input type="text" name="data"  value="${usuario.dataNascimento}"/><!--  pattern="dd/MM/yyyy"/> -->
 		<br>
 		<br>
 		<input type="hidden" name="acao" value="NovoUsuario">
 		<input type="submit" /> 
 	</form>
-
+<c:import url="menuLinks.jsp"/> 
 </body>
 </html>

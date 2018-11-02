@@ -46,6 +46,7 @@
 	
 	<br>
 	<c:import url="logout-parcial.jsp" />
+	<c:import url="menuLinks.jsp"/> 
 </body>
 </html>
 

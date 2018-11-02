@@ -16,7 +16,5 @@
 			value="Login"> <input type="submit" />
 	</form>
 
-
-<c:import url="logout-parcial.jsp"/>
 </body>
 </html>

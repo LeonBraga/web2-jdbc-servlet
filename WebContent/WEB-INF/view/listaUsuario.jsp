@@ -19,16 +19,17 @@
 	<br />
 	<ul>
 		
-			
+			<c:if test="${usuarioLogado.isAdm ==  'TRUE'}">
 			<h3>Administradores</h3>
-			<c:forEach items="${usuarios}" var="usuario">
-				<c:if test="${usuario.isAdm ==  'TRUE'}">
-					<li>ID:${usuario.id} -NOME: ${usuario.nome} - <a
-						href="entrada?acao=MostraUsuario&id=${usuario.id}">edita</a>
-						<a href="entrada?acao=RemoveUsuario&id=${usuario.id}">remove</a>
-					</li>
-				</c:if>
-			</c:forEach>
+				<c:forEach items="${usuarios}" var="usuario">	
+					<c:if test="${usuario.isAdm ==  'TRUE'}">	
+						<li>ID:${usuario.id} -NOME: ${usuario.nome} - <a
+							href="entrada?acao=MostraUsuario&id=${usuario.id}">edita</a>
+							<a href="entrada?acao=RemoveUsuario&id=${usuario.id}">remove</a>
+						</li>
+					</c:if>
+				</c:forEach>
+			</c:if>
 			
 		
 			<h3>Clientes</h3>

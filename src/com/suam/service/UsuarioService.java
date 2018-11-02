@@ -68,6 +68,7 @@ public class UsuarioService {
 			if (!u.getId().equals(usuario.getId())) {
 				if (u.getLogin().equals(usuario.getLogin())) {
 					System.out.println("Usuario com login já cadastrado!");
+					System.out.println("CORRIGIR LOGIN!!");
 					// retornar um redirect para página de edição;
 					return false;
 				}

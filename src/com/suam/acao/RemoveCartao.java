@@ -24,7 +24,7 @@ public class RemoveCartao  implements Acao{
 		
 		CartaoDeCredito cartao = null;
 		try {
-			cartao = CartaoDeCreditoService.buscaUsuarioPelaId(id);
+			cartao = CartaoDeCreditoService.buscaCartaoPelaId(id);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

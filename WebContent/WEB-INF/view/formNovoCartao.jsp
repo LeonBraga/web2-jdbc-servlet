@@ -13,7 +13,7 @@
 <body>
 	<c:import url="logout-parcial.jsp"/> 
 	<form action="${linkEntradaServlet}" method="post">
-		Nome: <input type="text" name="nome" value="${usuario.nome}"/>
+		Nome: <input type="text" name="nome" value="${usuario.nome}" readonly="true"/>
 		<br>
 		Numero:<input type="text" name="numero" value=""/>
 		<br>
@@ -23,6 +23,6 @@
 		<input type="hidden" name="acao" value="NovoCartao">
 		<input type="submit" /> 
 	</form>
-
+<c:import url="menuLinks.jsp"/> 
 </body>
 </html>

@@ -50,7 +50,7 @@ public class CartaoDeCreditoService {
 
 		try {
 			PreparedStatement ps = conexao.prepareStatement(sql);
-			//ps.setString(1, cartao.getNumeroCartao());
+			// ps.setString(1, cartao.getNumeroCartao());
 			ps.setString(1, cartao.getDataVencimento().trim());
 			ps.setString(2, cartao.getIdUser().toString().trim());
 
@@ -60,10 +60,9 @@ public class CartaoDeCreditoService {
 			System.out.println("UPDATE REALIZADO COM SUCESSO!");
 		} catch (SQLException e) {
 			// Erro, provoca um Rollback (volta ao estado anterior do banco)
-
 			conexao.rollback();
 			e.printStackTrace();
-			throw new SQLException();
+			return false;
 		} finally {
 			// fechar a conexão
 			conexao.close();
@@ -152,23 +151,41 @@ public class CartaoDeCreditoService {
 				listaCartoes.add(cartao);
 
 			}
-			// conexao.commit();
 			System.out.println("SELECT REALIZADO COM SUCESSO!");
 		} catch (SQLException e) {
-			// Erro, provoca um Rollback (volta ao estado anterior do banco)
 			System.out.println("ERRO: " + e);
-			// conexao.rollback();
-		} finally {
-			// fechar a conexão
-			// System.out.println("FECHANDO CONEXAO");
-			// conexao.close();
 		}
 		return listaCartoes;
 	}
 
-	
+	// Listar todos os cartões de um usuário.
+	public static List<CartaoDeCredito> buscaCartoesPeloId(String idUser) throws SQLException {
+		List<CartaoDeCredito> listaCartoes = new ArrayList<CartaoDeCredito>();
+		Connection conexao = ConnectionFactory.getConnection();
 
-	public static CartaoDeCredito buscaUsuarioPelaId(Integer id) throws SQLException {
+		// String para execucao de select no banco de dados
+		String sql = ("select * from cartaodecredito where usuario_idusuario=?");
+
+		try {
+			PreparedStatement ps = conexao.prepareStatement(sql);
+			ps.setString(1, idUser);
+			System.out.println("Deletar SELECT: " + ps);
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				CartaoDeCredito cartao = new CartaoDeCredito();
+				cartao.setIdUser(rs.getInt("usuario_idusuario"));
+				cartao.setNumeroCartao(rs.getString("numeroCartao"));
+				cartao.setDataVencimento(rs.getString("dataVencimento"));
+				listaCartoes.add(cartao);
+			}
+			System.out.println("SELECT REALIZADO COM SUCESSO!");
+		} catch (SQLException e) {
+			System.out.println("ERRO: " + e);
+		}
+		return listaCartoes;
+	}
+	
+	public static CartaoDeCredito buscaCartaoPelaId(Integer id) throws SQLException {
 		List<CartaoDeCredito> lista = ListaCartoes();
 		for (CartaoDeCredito cartao : lista) {
 			if (cartao.getIdUser() == id) {
@@ -177,5 +194,4 @@ public class CartaoDeCreditoService {
 		}
 		return null;
 	}
-
 }
