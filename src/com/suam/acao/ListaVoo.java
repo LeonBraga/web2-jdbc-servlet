@@ -28,9 +28,6 @@ public class ListaVoo implements Acao {
 		}
 		
 		
-		for (Voo voo : listaVoos) {
-			System.out.println("====="+voo.getDestino());
-		}
 		request.setAttribute("voos", listaVoos);
 		return "forward:listaVoos.jsp";
 	}

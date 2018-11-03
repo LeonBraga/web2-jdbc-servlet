@@ -22,7 +22,7 @@ public class VooService {
 
 		List<Voo> listaVoos = ListaVoo();
 
-		String sql = "INSERT INTO voo ( ida, volta, destino, confirmacao, assento ) VALUES (?,?,?,?,?)";
+		String sql = "INSERT INTO voo ( ida, volta, origem, destino, confirmacao, assento ) VALUES (?,?,?,?,?,?)";
 
 		// convertendo data para string
 		SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
@@ -33,9 +33,10 @@ public class VooService {
 			PreparedStatement ps = conexao.prepareStatement(sql);
 			ps.setString(1, formato.format(voo.getIda()));
 			ps.setString(2, formato.format(voo.getVolta()));
-			ps.setString(3, voo.getDestino());
-			ps.setString(4, voo.getConfirmacao().toString());
-			ps.setString(5, voo.getAssento());
+			ps.setString(3, voo.getOrigem());
+			ps.setString(4, voo.getDestino());
+			ps.setString(5, voo.getConfirmacao().toString());
+			ps.setString(6, voo.getAssento());
 
 			ps.execute();
 			conexao.commit();
@@ -60,7 +61,7 @@ public class VooService {
 		// Trecho de código para Validar se existe usuário com mesmo login no banco.
 		List<Voo> listaVoos = ListaVoo();
 
-		String sql = "UPDATE usuario SET  ida = ?, volta = ?, destino = ?, confirmacao = ?, assento = ? WHERE idVoo = ?";
+		String sql = "UPDATE usuario SET  ida = ?, volta = ?,origem = ?,  destino = ?, confirmacao = ?, assento = ? WHERE idVoo = ?";
 
 		// convertendo data para string
 		SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
@@ -72,10 +73,11 @@ public class VooService {
 
 			ps.setString(1, formato.format(voo.getIda()));
 			ps.setString(2, formato.format(voo.getVolta()));
-			ps.setString(3, voo.getDestino());
-			ps.setString(4, voo.getConfirmacao().toString());
-			ps.setString(5, voo.getAssento());
-			ps.setString(6, voo.getIdVoo().toString());
+			ps.setString(3, voo.getOrigem());
+			ps.setString(4, voo.getDestino());
+			ps.setString(5, voo.getConfirmacao().toString());
+			ps.setString(6, voo.getAssento());
+			ps.setString(7, voo.getIdVoo().toString());
 
 			System.out.println("PS UPDATE: " + ps);
 			ps.execute();
@@ -118,15 +120,16 @@ public class VooService {
 			} catch (ParseException e) {
 				e.printStackTrace();
 			}
-			
+
 			try {
 				voo.setVolta(formato.parse(rs.getString("volta")));
 			} catch (ParseException e) {
 				e.printStackTrace();
 			}
-			
+
 			voo.setConfirmacao(rs.getBoolean("confirmacao"));
 			voo.setAssento(rs.getString("assento"));
+			voo.setOrigem(rs.getString("origem"));
 			voo.setDestino(rs.getString("destino"));
 			listaVoos.add(voo);
 		}
@@ -137,11 +140,11 @@ public class VooService {
 		System.out.println("LISTA(SELECT) CRIADA COM SUCESSO!");
 		return listaVoos;
 	}
-	
+
 	public static Voo buscaVooPelaId(Integer id) throws SQLException {
 		List<Voo> lista = ListaVoo();
 		for (Voo voo : lista) {
-			if (voo.getIdVoo()== id) {
+			if (voo.getIdVoo() == id) {
 				return voo;
 			}
 		}

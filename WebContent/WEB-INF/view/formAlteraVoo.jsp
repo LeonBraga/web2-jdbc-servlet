@@ -15,14 +15,23 @@
 	<form action="${linkEntradaServlet }" method="post">
 		
 		<c:if test="${usuarioLogado.isAdm ==  'TRUE'}">
-				Destino:<input type="text" name="nome" value="${voo.destino}"/>
+			Origem:<input type="text" name="origem" value="${voo.origem}" readonly="readonly"/>
+			<br>	
+			Destino:<input type="text" name="destino" value="${voo.destino}" readonly="readonly"/>
 			<br>
-			
+			Ida: <input type="text" name="ida" value="<fmt:formatDate value="${voo.ida}" pattern="dd/MM/yyyy"/>" />
+			<br>
+			Volta:<input type="text" name="volta" value="<fmt:formatDate value="${voo.volta}" pattern="dd/MM/yyyy"/>"/>
+			<br>
+			Assento: <input type="text" name="assento" value="${voo.assento}"/> 
+			<br> 
+			Confirmação:<input type="text" name="confirmacao" value="${voo.confirmacao}"/>
 		</c:if>
 		
+
 		<br>
 		<br>
-		<input type="hidden" name="idUser" value="${cartao.idUser }">
+		<input type="hidden" name="idUser" value="${voo.idVoo }">
 		<input type="hidden" name="acao" value="AlteraCartao">
 		<input type="submit" /> 
 	</form>

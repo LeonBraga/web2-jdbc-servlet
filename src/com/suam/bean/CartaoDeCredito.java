@@ -4,10 +4,10 @@ import java.util.Date;
 
 public class CartaoDeCredito {
 
-	private String titular;
-	private String  numeroCartao;
-	private Date dataVencimento;
-	private Integer idUser;
+	protected String titular;
+	protected String  numeroCartao;
+	protected Date dataVencimento;
+	protected Integer idUser;
 
 	public CartaoDeCredito() {
 		super();

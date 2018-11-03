@@ -58,7 +58,11 @@
 				</c:if>
 			</c:forEach>	
 		</c:if>
-		
+		<c:if test="${usuarioLogado.isAdm=='FALSE'}"> 
+			<li>
+				<a href="entrada?acao=FormNovoCartao&idUser=${usuario.id}">Novo Cartão</a>
+			</li>
+		</c:if>
 		<%-- </c:if> --%>
 		<!--USUARIO COM APENAS UM CARTAO SENDO MOSTRADO -->	
 	<%-- <c:if test="${usuarioLogado.isAdm ==  'TRUE'}">
@@ -83,9 +87,7 @@
 					<br>
 			</c:if>	
 	 --%>		
-	 	<li>
-			<a href="entrada?acao=FormNovoCartao&idUser=${usuario.id}">Novo Cartão</a>
-		</li>
+	 	
 		<br>
 		<br>
 		<input type="hidden" name="id" value="${usuario.id}">

@@ -1,10 +1,10 @@
 package com.suam.bean;
 
 public class CompraVoo {
-	Integer idCompraVoo;
-	Integer idUser;
-	Integer idVoo; 
-	String preco;
+	protected Integer idCompraVoo;
+	protected Integer idUser;
+	protected Integer idVoo; 
+	protected String preco;
 	
 	public Integer getIdCompraVoo() {
 		return idCompraVoo;

@@ -3,12 +3,13 @@ package com.suam.bean;
 import java.util.Date;
 
 public class Voo {
-	Integer idVoo;
-	Date ida;
-	Date volta;
-	String destino;
-	Boolean confirmacao;
-	String assento;
+	protected Integer idVoo;
+	protected Date ida;
+	protected Date volta;
+	protected String destino;
+	protected String origem;
+	protected Boolean confirmacao;
+	protected String assento;
 	
 	public Integer getIdVoo() {
 		return idVoo;
@@ -33,6 +34,13 @@ public class Voo {
 	}
 	public void setDestino(String destino) {
 		this.destino = destino;
+	}
+	
+	public String getOrigem() {
+		return origem;
+	}
+	public void setOrigem(String origem) {
+		this.origem = origem;
 	}
 	public Boolean getConfirmacao() {
 		return confirmacao;

@@ -56,6 +56,7 @@ CREATE TABLE IF NOT EXISTS `web2db`.`voo` (
   `idvoo` INT NOT NULL AUTO_INCREMENT,
   `ida` DATETIME NOT NULL,
   `volta` DATETIME NULL,
+  `origem` VARCHAR(100) NOT NULL,
   `destino` VARCHAR(100) NOT NULL,
   `confirmacao` TINYINT(1) NOT NULL,
   `assento` VARCHAR(3) NULL,

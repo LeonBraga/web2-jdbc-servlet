@@ -20,6 +20,7 @@
 	<ul>
 		<c:forEach items="${voos}" var="voo">
 			<li>
+				Origem: ${voo.origem} -
 				Destino: ${voo.destino} - 
 				Ida: <fmt:formatDate value="${voo.ida}" pattern="dd/MM/yyyy"/> - 
 				Volta: <fmt:formatDate value="${voo.volta}" pattern="dd/MM/yyyy"/> - 
