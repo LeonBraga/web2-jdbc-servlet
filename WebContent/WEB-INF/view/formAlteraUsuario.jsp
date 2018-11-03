@@ -25,7 +25,7 @@
 		<br>
 		Senha:<input type="text" name="senha" value="${usuario.senha}">
 		<br>
-		Data Nascimento: <input type="text" name="data"  value="${usuario.dataNascimento }"/>
+		Data Nascimento: <input type="text" name="data"  value="<fmt:formatDate value="${usuario.dataNascimento }" pattern="dd/MM/yyyy"/>"/>
 		<br>
 		<c:if test="${usuarioLogado.isAdm=='TRUE'}">
 			Usuario possui perfil administrador:<input type="text" name="ehAdm" value="${usuario.isAdm}">

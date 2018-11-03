@@ -1,16 +1,18 @@
 package com.suam.bean;
 
+import java.util.Date;
+
 public  class Usuario {
 
 	protected  String nome;
 	protected  String sobrenome;
-	protected  String dataNascimento;
+	protected  Date dataNascimento;
 	protected  String endereco;
 	protected  String login;
 	protected  String senha;
 	protected  String confirmaSenha;
 	protected  Integer id;
-	private String isAdm;
+	protected Boolean isAdm;
 
 	
 	public String getNome() {
@@ -25,10 +27,10 @@ public  class Usuario {
 	public void setSobrenome(String sobrenome) {
 		this.sobrenome = sobrenome;
 	}
-	public String getDataNascimento() {
-		return dataNascimento;
+	public Date getDataNascimento() {
+		return this.dataNascimento;
 	}
-	public void setDataNascimento(String dataNascimento) {
+	public void setDataNascimento(Date dataNascimento) {
 		this.dataNascimento = dataNascimento;
 	}
 	public String getEndereco() {
@@ -63,10 +65,10 @@ public  class Usuario {
 	}
 	
 	
-	public String getIsAdm() {
+	public Boolean getIsAdm() {
 		return isAdm;
 	}
-	public void setIsAdm(String isAdm) {
+	public void setIsAdm(Boolean isAdm) {
 		this.isAdm = isAdm;
 	}
 

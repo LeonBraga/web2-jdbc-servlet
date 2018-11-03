@@ -32,12 +32,6 @@ public class AlteraUsuario implements Acao {
 
 		System.out.println("acao altera usuario " + id);
 
-		/*
-		 * Date dataAbertura = null; try { SimpleDateFormat sdf = new
-		 * SimpleDateFormat("dd/MM/yyyy"); dataAbertura = sdf.parse(paramDataEmpresa); }
-		 * catch (ParseException e) { throw new ServletException(e); }
-		 */
-
 		Usuario usuario = null;
 		try {
 			usuario = UsuarioService.buscaUsuarioPelaId(id);
@@ -46,13 +40,25 @@ public class AlteraUsuario implements Acao {
 			e.printStackTrace();
 		}
 
+		// convertendo data para string
+		SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+		// Date data = formato.parse("23/11/2015");
+		// Date data = formato.format("23/11/2015");
 		usuario.setNome(nome);
 		usuario.setSobrenome(sobrenome);
 		usuario.setEndereco(endereco);
 		usuario.setSenha(senha);
 		usuario.setLogin(login);
-		usuario.setDataNascimento(data);
-		usuario.setIsAdm(ehAdm);
+		try {
+			usuario.setDataNascimento(formato.parse(data));
+		} catch (ParseException e1) {
+			e1.printStackTrace();
+		}
+		if (ehAdm.equalsIgnoreCase("TRUE")) {
+			usuario.setIsAdm(true);
+		} else {
+			usuario.setIsAdm(false);
+		}
 
 		/*
 		 * UsuarioService us = new UsuarioService(); try { us.update(usuario); } catch
@@ -74,12 +80,12 @@ public class AlteraUsuario implements Acao {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
+
 		if (usuario.getIsAdm().equals("TRUE")) {
 			return "redirect:entrada?acao=ListaUsuario";
-		}else {
-			return "redirect:entrada?acao=MostraUsuario&id="+usuario.getId();
+		} else {
+			return "redirect:entrada?acao=MostraUsuario&id=" + usuario.getId();
 		}
-		
+
 	}
 }

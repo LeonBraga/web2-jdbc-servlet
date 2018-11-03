@@ -5,6 +5,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,17 +31,21 @@ public class UsuarioService {
 		}
 
 		String sql = "INSERT INTO usuario (nome, sobrenome, endereco, senha, login, dataNascimento, isadm ) VALUES (?,?,?,?,?,?,?)";
+		
+		// convertendo data para string
+		SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+		// Date data = formato.parse("23/11/2015");
+		// Date data = formato.format("23/11/2015");
 
 		try {
-
 			PreparedStatement ps = conexao.prepareStatement(sql);
 			ps.setString(1, usuario.getNome());
 			ps.setString(2, usuario.getSobrenome());
 			ps.setString(3, usuario.getEndereco());
 			ps.setString(4, usuario.getSenha());
 			ps.setString(5, usuario.getLogin());
-			ps.setString(6, usuario.getDataNascimento());
-			ps.setString(7, usuario.getIsAdm());
+			ps.setString(6, formato.format(usuario.getDataNascimento()));
+			ps.setString(7, usuario.getIsAdm().toString());
 
 			ps.execute();
 			conexao.commit();
@@ -79,6 +85,11 @@ public class UsuarioService {
 
 		String sql = "UPDATE usuario SET nome = ?, sobrenome = ?, endereco = ?,  senha = ?, login = ?, dataNascimento = ?, isadm = ? WHERE idusuario = ?";
 
+		// convertendo data para string
+		SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+		// Date data = formato.parse("23/11/2015");
+		// Date data = formato.format("23/11/2015");
+
 		try {
 			PreparedStatement ps = conexao.prepareStatement(sql);
 			ps.setString(1, usuario.getNome());
@@ -86,8 +97,8 @@ public class UsuarioService {
 			ps.setString(3, usuario.getEndereco());
 			ps.setString(4, usuario.getSenha());
 			ps.setString(5, usuario.getLogin());
-			ps.setString(6, usuario.getDataNascimento());
-			ps.setString(7, usuario.getIsAdm());
+			ps.setString(6, formato.format(usuario.getDataNascimento()));
+			ps.setString(7, usuario.getIsAdm().toString());
 			String id = usuario.getId().toString();
 			ps.setString(8, id);
 
@@ -118,11 +129,12 @@ public class UsuarioService {
 
 		ResultSet rs = statement.getResultSet();
 
+		// convertendo data para string
+		SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+		// Date data = formato.parse("23/11/2015");
+		// Date data = formato.format("23/11/2015");
+
 		while (rs.next()) {
-			// valores recebidos diretamente do banco de dados
-			int id = rs.getInt("idusuario");
-			String nome = rs.getString("nome");
-			// System.out.println("IMRIMINDO DO BANCO: id=" + id + ", nome=" + nome);
 
 			// adicionando na lista
 			Usuario usuario = new Usuario();
@@ -132,18 +144,17 @@ public class UsuarioService {
 			usuario.setEndereco(rs.getString("endereco"));
 			usuario.setSenha(rs.getString("senha"));
 			usuario.setLogin(rs.getString("login"));
-			usuario.setDataNascimento(rs.getString("datanascimento"));
-			usuario.setIsAdm(rs.getString("isAdm"));
+			try {
+				usuario.setDataNascimento(formato.parse(rs.getString("datanascimento")));
+			} catch (ParseException e) {
+				e.printStackTrace();
+				System.out.println("A data não pode ser convertida");
+			}
+			usuario.setIsAdm(rs.getBoolean("isAdm"));
 			listaUsuario.add(usuario);
 
 			// imprimindo do objeto
-			/*
-			 * System.out.println("USUARIO lista: " + usuario.getId() + " - " +
-			 * usuario.getNome() + " - " + usuario.getEndereco() + " - " +
-			 * usuario.getSobrenome() + "" + " - " + usuario.getLogin() + " - " +
-			 * usuario.getSenha() + " - " + usuario.getDataNascimento() + " - " +
-			 * usuario.getIsAdm());
-			 */
+
 		}
 
 		rs.close();
@@ -195,7 +206,12 @@ public class UsuarioService {
 			System.out.println("CONSULTAR SELECT: " + ps);
 			ResultSet rs = ps.executeQuery();
 
+			// convertendo data para string
+			SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+			// Date data = formato.parse("23/11/2015");
+
 			while (rs.next()) {
+				// adicionando na lista
 				Usuario usuario = new Usuario();
 				usuario.setId(rs.getInt("idusuario"));
 				usuario.setNome(rs.getString("nome"));
@@ -203,8 +219,13 @@ public class UsuarioService {
 				usuario.setEndereco(rs.getString("endereco"));
 				usuario.setSenha(rs.getString("senha"));
 				usuario.setLogin(rs.getString("login"));
-				usuario.setDataNascimento(rs.getString("datanascimento"));
-				usuario.setIsAdm(rs.getString("isAdm"));
+				try {
+					usuario.setDataNascimento(formato.parse(rs.getString("datanascimento")));
+				} catch (ParseException e) {
+					e.printStackTrace();
+					System.out.println("A data não pode ser convertida");
+				}
+				usuario.setIsAdm(rs.getBoolean("isAdm"));
 				listaUsuario.add(usuario);
 
 				/*

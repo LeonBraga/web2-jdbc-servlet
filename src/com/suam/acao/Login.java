@@ -47,17 +47,17 @@ public class Login implements Acao {
 		}
 
 		if (autenticou) {
-			if (user.getIsAdm().equalsIgnoreCase("true")) {
+			if (user.getIsAdm()) {
 				HttpSession sessao = request.getSession();
 				sessao.setAttribute("usuarioLogado", user);
-				System.out.println("USUARIO ADMINISTRADOR AUTENTICADO COM SUCESSO!");
+				System.out.println("Usuároio administrador AUTENTICADO COM SUCESSO!");
 				// return "redirect:entrada?acao=ListaUsuario";
 				return "redirect:entrada?acao=TelaInicial";
 			} else {
 				// criar paginas e funções para Usuarios não adm
 				HttpSession sessao = request.getSession();
 				sessao.setAttribute("usuarioLogado", user);
-				System.out.println("USUARIO NÃO ADMINISTRADOR AUTENTICADO COM SUCESSO!");
+				System.out.println("Uusário cliente AUTENTICADO COM SUCESSO!");
 				return "redirect:entrada?acao=TelaInicial";
 				// return "redirect:usuarioNAOADMINISTRADOR.html";
 			}

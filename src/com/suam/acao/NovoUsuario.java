@@ -36,14 +36,28 @@ public class NovoUsuario implements Acao {
 		 */
 
 		Usuario usuario = new Usuario();
+		// convertendo data para string
+		SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+		// Date data = formato.parse("23/11/2015");
+		// Date data = formato.format("23/11/2015");
+
 
 		usuario.setNome(nome);
 		usuario.setSobrenome(sobrenome);
 		usuario.setEndereco(endereco);
 		usuario.setSenha(senha);
 		usuario.setLogin(login);
-		usuario.setDataNascimento(data);
-		usuario.setIsAdm(ehAdm);
+		try {
+			System.out.println("===data formatada:: "+formato.parse(data));
+			usuario.setDataNascimento(formato.parse(data));
+		} catch (ParseException e1) {
+			e1.printStackTrace();
+		}
+		if (ehAdm.equalsIgnoreCase("TRUE")) {
+			usuario.setIsAdm(true);
+		} else {
+			usuario.setIsAdm(false);
+		}
 
 		UsuarioService us = new UsuarioService();
 		Boolean validaInsere;
