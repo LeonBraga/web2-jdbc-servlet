@@ -10,10 +10,14 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.suam.bean.CartaoDeCredito;
+import com.suam.bean.Usuario;
 import com.suam.bean.Voo;
+import com.suam.service.CartaoDeCreditoService;
+import com.suam.service.UsuarioService;
 import com.suam.service.VooService;
 
-public class AlteraVoo implements Acao {
+public class NovoVoo implements Acao {
 
 	public String executa(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -26,22 +30,13 @@ public class AlteraVoo implements Acao {
 		String volta = request.getParameter("volta");
 		String confirmacao = request.getParameter("confirmacao");
 		String assento = request.getParameter("assento");
-		String idVoo = request.getParameter("idVoo");
-		//Integer idVoo = Integer.valueOf(paramId);
-
-		System.out.println("acao altera voo: " + idVoo);
-
-		Voo voo = null;
-		try {
-			voo = VooService.buscaVooPelaId(Integer.parseInt(idVoo));
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
 
 		// convertendo data para string
 		SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
 		// Date data = formato.parse("23/11/2015");
 		// Date data = formato.format("23/11/2015");
+
+		Voo voo = new Voo();
 
 		try {
 			voo.setIda(formato.parse(ida));
@@ -64,20 +59,23 @@ public class AlteraVoo implements Acao {
 		voo.setOrigem(origem);
 		voo.setDestino(destino);
 
-		VooService vooS = new VooService();
 		Boolean validaInsere;
-
+		VooService vs = new VooService();
+		
 		try {
-			validaInsere = vooS.update(voo);
+			validaInsere = vs.inserir(voo);
 			if (validaInsere) {
-				System.out.println("ATUALIZADO com sucesso");
+				System.out.println("Inserido com sucesso");
 			} else {
 				request.setAttribute("voo", voo);
-				return "forward:formAlteraVoo.jsp";
+				return "forward:formNovoVoo.jsp";
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return "redirect:entrada?acao=MostraVoo&id=" + idVoo;
+		
+		request.setAttribute("voo", voo);
+		return "forward:formNovoVoo.jsp";
+
 	}
 }
