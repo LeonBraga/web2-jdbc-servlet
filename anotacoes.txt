@@ -1,2 +1,0 @@
-1 -  modificar método de remoção de usuário para deletar os voos COMPRADOS relacionados ao mesmo
-2 - atributos bean protecd

@@ -27,7 +27,7 @@
 		<br>
 		É Administrador:<input type="text" name="ehAdm" value="${usuario.isAdm}">
 		<br>
-		Data Nascimento: <input type="text" name="data"  value="${usuario.dataNascimento}"/><!--  pattern="dd/MM/yyyy"/> -->
+		Data Nascimento: <input type="text" name="data"  value="<fmt:formatDate value="${usuario.dataNascimento}" pattern="dd/MM/yyyy"/>"/>
 		<br>
 		<br>
 		<input type="hidden" name="acao" value="NovoUsuario">

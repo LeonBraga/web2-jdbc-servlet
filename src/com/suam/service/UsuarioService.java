@@ -31,7 +31,7 @@ public class UsuarioService {
 		}
 
 		String sql = "INSERT INTO usuario (nome, sobrenome, endereco, senha, login, dataNascimento, isadm ) VALUES (?,?,?,?,?,?,?)";
-		
+
 		// convertendo data para string
 		SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
 		// Date data = formato.parse("23/11/2015");

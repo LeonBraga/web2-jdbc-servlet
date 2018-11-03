@@ -5,9 +5,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.suam.bean.CartaoDeCredito;
 import com.suam.bean.Usuario;
 import com.suam.bean.Voo;
 import com.suam.factory.ConnectionFactory;
@@ -21,10 +24,15 @@ public class VooService {
 
 		String sql = "INSERT INTO voo ( ida, volta, destino, confirmacao, assento ) VALUES (?,?,?,?,?)";
 
+		// convertendo data para string
+		SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+		// Date data = formato.parse("23/11/2015");
+		// Date data = formato.format("23/11/2015");
+
 		try {
 			PreparedStatement ps = conexao.prepareStatement(sql);
-			ps.setString(1, voo.getIda());
-			ps.setString(2, voo.getVolta());
+			ps.setString(1, formato.format(voo.getIda()));
+			ps.setString(2, formato.format(voo.getVolta()));
 			ps.setString(3, voo.getDestino());
 			ps.setString(4, voo.getConfirmacao().toString());
 			ps.setString(5, voo.getAssento());
@@ -54,11 +62,16 @@ public class VooService {
 
 		String sql = "UPDATE usuario SET  ida = ?, volta = ?, destino = ?, confirmacao = ?, assento = ? WHERE idVoo = ?";
 
+		// convertendo data para string
+		SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+		// Date data = formato.parse("23/11/2015");
+		// Date data = formato.format("23/11/2015")
+
 		try {
 			PreparedStatement ps = conexao.prepareStatement(sql);
 
-			ps.setString(1, voo.getIda());
-			ps.setString(2, voo.getVolta());
+			ps.setString(1, formato.format(voo.getIda()));
+			ps.setString(2, formato.format(voo.getVolta()));
 			ps.setString(3, voo.getDestino());
 			ps.setString(4, voo.getConfirmacao().toString());
 			ps.setString(5, voo.getAssento());
@@ -91,13 +104,28 @@ public class VooService {
 
 		ResultSet rs = statement.getResultSet();
 
+		// convertendo data para string
+		SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+		// Date data = formato.parse("23/11/2015");
+		// Date data = formato.format("23/11/2015");
+
 		while (rs.next()) {
 			// adicionando na lista
 			Voo voo = new Voo();
 			voo.setIdVoo(rs.getInt("idvoo"));
-			voo.setIda(rs.getString("ida"));
-			voo.setVolta(rs.getString("volta"));
-			voo.setConfirmacao(rs.getString("confirmacao").toString());
+			try {
+				voo.setIda(formato.parse(rs.getString("ida")));
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
+			
+			try {
+				voo.setVolta(formato.parse(rs.getString("volta")));
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
+			
+			voo.setConfirmacao(rs.getBoolean("confirmacao"));
 			voo.setAssento(rs.getString("assento"));
 			voo.setDestino(rs.getString("destino"));
 			listaVoos.add(voo);
@@ -108,6 +136,16 @@ public class VooService {
 		connection.close();
 		System.out.println("LISTA(SELECT) CRIADA COM SUCESSO!");
 		return listaVoos;
+	}
+	
+	public static Voo buscaVooPelaId(Integer id) throws SQLException {
+		List<Voo> lista = ListaVoo();
+		for (Voo voo : lista) {
+			if (voo.getIdVoo()== id) {
+				return voo;
+			}
+		}
+		return null;
 	}
 
 }

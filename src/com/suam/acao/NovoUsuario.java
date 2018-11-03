@@ -48,7 +48,6 @@ public class NovoUsuario implements Acao {
 		usuario.setSenha(senha);
 		usuario.setLogin(login);
 		try {
-			System.out.println("===data formatada:: "+formato.parse(data));
 			usuario.setDataNascimento(formato.parse(data));
 		} catch (ParseException e1) {
 			e1.printStackTrace();

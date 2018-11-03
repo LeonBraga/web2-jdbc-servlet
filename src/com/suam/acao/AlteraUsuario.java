@@ -44,6 +44,7 @@ public class AlteraUsuario implements Acao {
 		SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
 		// Date data = formato.parse("23/11/2015");
 		// Date data = formato.format("23/11/2015");
+		
 		usuario.setNome(nome);
 		usuario.setSobrenome(sobrenome);
 		usuario.setEndereco(endereco);

@@ -8,19 +8,16 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>TELA DE ALTERAÇÃO DE USUARIO</title>
+<title>TELA DE ALTERAÇÃO DE VOO</title>
 </head>
 <body>
 	<c:import url="logout-parcial.jsp"/> 
 	<form action="${linkEntradaServlet }" method="post">
 		
 		<c:if test="${usuarioLogado.isAdm ==  'TRUE'}">
-				Nome titular do cartão: <input type="text" name="nome" value="${cartao.titular}" readonly="true"/>
+				Destino:<input type="text" name="nome" value="${voo.destino}"/>
 			<br>
-				Numero do cartao: <input type="text" name="numero" value="${cartao.numeroCartao}"/>
-			<br>
-				Data de Vencimento:<input type="text" name="dataVencimento" value="<fmt:formatDate value="${cartao.dataVencimento}" pattern="dd/MM/yyyy"/>"/>
-			<br>
+			
 		</c:if>
 		
 		<br>

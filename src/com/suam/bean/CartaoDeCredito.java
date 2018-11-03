@@ -1,19 +1,19 @@
 package com.suam.bean;
 
-import java.math.BigInteger;
+import java.util.Date;
 
 public class CartaoDeCredito {
 
 	private String titular;
 	private String  numeroCartao;
-	private String dataVencimento;
+	private Date dataVencimento;
 	private Integer idUser;
 
 	public CartaoDeCredito() {
 		super();
 	}
 
-	public CartaoDeCredito(String  numeroCartao, String dataVencimento, Integer idUser) {
+	public CartaoDeCredito(String  numeroCartao, Date dataVencimento, Integer idUser) {
 		super();
 		this.numeroCartao = numeroCartao;
 		this.dataVencimento = dataVencimento;
@@ -36,11 +36,11 @@ public class CartaoDeCredito {
 		this.numeroCartao = numeroCarto;
 	}
 
-	public String getDataVencimento() {
+	public Date getDataVencimento() {
 		return dataVencimento;
 	}
 
-	public void setDataVencimento(String dataVencimento) {
+	public void setDataVencimento(Date dataVencimento) {
 		this.dataVencimento = dataVencimento;
 	}
 

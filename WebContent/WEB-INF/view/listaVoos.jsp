@@ -21,8 +21,8 @@
 		<c:forEach items="${voos}" var="voo">
 			<li>
 				Destino: ${voo.destino} - 
-				Ida: ${voo.ida} - 
-				Volta: ${voo.volta} - 
+				Ida: <fmt:formatDate value="${voo.ida}" pattern="dd/MM/yyyy"/> - 
+				Volta: <fmt:formatDate value="${voo.volta}" pattern="dd/MM/yyyy"/> - 
 				Confirmação: ${voo.confirmacao} - 
 				Assento: ${voo.assento} <br>
 				<a	href="/Web2Sistema/entrada?acao=MostraVoo&id=${voo.idVoo}">edita</a>

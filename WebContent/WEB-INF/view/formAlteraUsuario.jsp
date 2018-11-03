@@ -48,7 +48,7 @@
 							Numero do cartao: ${cartao.numeroCartao}
 						</li>
 						<li> 
-							Data de Vencimento: ${cartao.dataVencimento}
+							Data de Vencimento: <fmt:formatDate value="${cartao.dataVencimento}" pattern="dd/MM/yyyy"/>
 						</li>
 						<li>
 						    <a href="entrada?acao=MostraCartao&id=${cartao.idUser}">edita</a>

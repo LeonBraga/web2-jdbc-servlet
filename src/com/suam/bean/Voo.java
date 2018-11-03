@@ -1,11 +1,13 @@
 package com.suam.bean;
 
+import java.util.Date;
+
 public class Voo {
 	Integer idVoo;
-	String ida;
-	String volta;
+	Date ida;
+	Date volta;
 	String destino;
-	String confirmacao;
+	Boolean confirmacao;
 	String assento;
 	
 	public Integer getIdVoo() {
@@ -14,17 +16,17 @@ public class Voo {
 	public void setIdVoo(Integer idVoo) {
 		this.idVoo = idVoo;
 	}
-	public String getIda() {
+	public Date getIda() {
 		return ida;
 	}
-	public void setIda(String ida) {
+	public void setIda(Date ida) {
 		this.ida = ida;
 	}
-	public String getVolta() {
+	public Date getVolta() {
 		return volta;
 	}
-	public void setVolta(String volta) {
-		this.volta = volta;
+	public void setVolta(Date date) {
+		this.volta = date;
 	}
 	public String getDestino() {
 		return destino;
@@ -32,10 +34,10 @@ public class Voo {
 	public void setDestino(String destino) {
 		this.destino = destino;
 	}
-	public String getConfirmacao() {
+	public Boolean getConfirmacao() {
 		return confirmacao;
 	}
-	public void setConfirmacao(String string) {
+	public void setConfirmacao(Boolean string) {
 		this.confirmacao = string;
 	}
 	public String getAssento() {

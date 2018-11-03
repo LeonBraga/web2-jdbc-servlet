@@ -30,10 +30,20 @@ public class NovoCartao implements Acao {
 		CartaoDeCredito cartao = new CartaoDeCredito();
 		CartaoDeCreditoService cc = new CartaoDeCreditoService();
 		
+		Usuario usuario = new Usuario();
+		// convertendo data para string
+		SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+		// Date data = formato.parse("23/11/2015");
+		// Date data = formato.format("23/11/2015");
 		
 		cartao.setTitular(nome);
 		cartao.setNumeroCartao(numero);
-		cartao.setDataVencimento(data);
+		try {
+			cartao.setDataVencimento(formato.parse(data));
+		} catch (ParseException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		System.out.println(idUser);
 		
 		cartao.setIdUser(Integer.parseInt(idUser.trim()));

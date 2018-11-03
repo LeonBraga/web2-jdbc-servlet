@@ -5,6 +5,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,11 +21,15 @@ public class CartaoDeCreditoService {
 
 		String sql = "INSERT INTO cartaodecredito (numeroCartao, dataVencimento, usuario_idusuario) VALUES (?,?,?)";
 
-		try {
+		// convertendo data para string
+		SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+		// Date data = formato.parse("23/11/2015");
+		// Date data = formato.format("23/11/2015");
 
+		try {
 			PreparedStatement ps = conexao.prepareStatement(sql);
 			ps.setString(1, cartao.getNumeroCartao().trim());
-			ps.setString(2, cartao.getDataVencimento().trim());
+			ps.setString(2, formato.format(cartao.getDataVencimento()));
 			ps.setString(3, cartao.getIdUser().toString().trim());
 
 			ps.execute();
@@ -48,10 +54,15 @@ public class CartaoDeCreditoService {
 
 		String sql = "UPDATE cartaodecredito SET dataVencimento= ? WHERE usuario_idusuario = ?";
 
+		// convertendo data para string
+		SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+		// Date data = formato.parse("23/11/2015");
+		// Date data = formato.format("23/11/2015");
+
 		try {
 			PreparedStatement ps = conexao.prepareStatement(sql);
 			// ps.setString(1, cartao.getNumeroCartao());
-			ps.setString(1, cartao.getDataVencimento().trim());
+			ps.setString(1, formato.format(cartao.getDataVencimento()));
 			ps.setString(2, cartao.getIdUser().toString().trim());
 
 			System.out.println("PS UPDATE: " + ps);
@@ -80,6 +91,11 @@ public class CartaoDeCreditoService {
 
 		ResultSet rs = statement.getResultSet();
 
+		// convertendo data para string
+		SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+		// Date data = formato.parse("23/11/2015");
+		// Date data = formato.format("23/11/2015");
+
 		while (rs.next()) {
 			// valores recebidos diretamente do banco de dados
 			int id = rs.getInt("usuario_idusuario");
@@ -90,7 +106,12 @@ public class CartaoDeCreditoService {
 			CartaoDeCredito cartao = new CartaoDeCredito();
 			cartao.setIdUser(rs.getInt("usuario_idusuario"));
 			cartao.setNumeroCartao(rs.getString("numeroCartao"));
-			cartao.setDataVencimento(rs.getString("dataVencimento"));
+			try {
+				cartao.setDataVencimento(formato.parse(rs.getString("dataVencimento")));
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			listaCartoes.add(cartao);
 		}
 
@@ -135,6 +156,11 @@ public class CartaoDeCreditoService {
 
 		String sql = "SELECT * FROM cartaodecredito where numerocartao=? and usuario_idusuario=?";
 
+		// convertendo data para string
+		SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+		// Date data = formato.parse("23/11/2015");
+		// Date data = formato.format("23/11/2015");
+
 		try {
 			PreparedStatement ps = conexao.prepareStatement(sql);
 			ps.setString(1, numero);
@@ -146,7 +172,7 @@ public class CartaoDeCreditoService {
 			while (rs.next()) {
 				CartaoDeCredito cartao = new CartaoDeCredito();
 				ps.setString(1, cartao.getNumeroCartao().toString());
-				ps.setString(2, cartao.getDataVencimento());
+				ps.setString(2, formato.format(cartao.getDataVencimento()));
 				ps.setString(3, cartao.getIdUser().toString());
 				listaCartoes.add(cartao);
 
@@ -166,6 +192,11 @@ public class CartaoDeCreditoService {
 		// String para execucao de select no banco de dados
 		String sql = ("select * from cartaodecredito where usuario_idusuario=?");
 
+		// convertendo data para string
+		SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+		// Date data = formato.parse("23/11/2015");
+		// Date data = formato.format("23/11/2015");
+
 		try {
 			PreparedStatement ps = conexao.prepareStatement(sql);
 			ps.setString(1, idUser);
@@ -175,7 +206,12 @@ public class CartaoDeCreditoService {
 				CartaoDeCredito cartao = new CartaoDeCredito();
 				cartao.setIdUser(rs.getInt("usuario_idusuario"));
 				cartao.setNumeroCartao(rs.getString("numeroCartao"));
-				cartao.setDataVencimento(rs.getString("dataVencimento"));
+				try {
+					cartao.setDataVencimento(formato.parse(rs.getString("dataVencimento")));
+				} catch (ParseException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				listaCartoes.add(cartao);
 			}
 			System.out.println("SELECT REALIZADO COM SUCESSO!");
@@ -184,7 +220,7 @@ public class CartaoDeCreditoService {
 		}
 		return listaCartoes;
 	}
-	
+
 	public static CartaoDeCredito buscaCartaoPelaId(Integer id) throws SQLException {
 		List<CartaoDeCredito> lista = ListaCartoes();
 		for (CartaoDeCredito cartao : lista) {
