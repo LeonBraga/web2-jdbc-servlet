@@ -122,7 +122,7 @@ public class CartaoDeCreditoService {
 		rs.close();
 		statement.close();
 		connection.close();
-		System.out.println("LISTA(SELECT) CRIADA COM SUCESSO!");
+		System.out.println("LISTA(SELECT) CRIADA COM SUCESSO ==>tabela cartao!");
 		return listaCartoes;
 	}
 
@@ -204,7 +204,6 @@ public class CartaoDeCreditoService {
 		try {
 			PreparedStatement ps = conexao.prepareStatement(sql);
 			ps.setString(1, idUser);
-			System.out.println("Deletar SELECT: " + ps);
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
 				CartaoDeCredito cartao = new CartaoDeCredito();
@@ -218,7 +217,7 @@ public class CartaoDeCreditoService {
 				}
 				listaCartoes.add(cartao);
 			}
-			System.out.println("SELECT REALIZADO COM SUCESSO!");
+			System.out.println("SELECT REALIZADO COM SUCESSO ==> tabela cartao!");
 		} catch (SQLException e) {
 			System.out.println("ERRO: " + e);
 		}

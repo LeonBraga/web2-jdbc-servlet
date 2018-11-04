@@ -27,37 +27,11 @@ public class RemoveVoo implements Acao {
 		Voo voo = null;
 		try {
 			voo = VooService.buscaVooPelaId(id);
+			VooService.delete(voo);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 
-		
-		// CÓDIGO PARA DESVINCULAR CC DO USUÁRIO.. SOMENTE SERÁ POSSÍVEL REMOÇÃO DE USER
-		// SE SEU ID NÃO FOR FK NA TABELA CC
-		List<CartaoDeCredito> listaCartao = null;
-		// O MÉTODO DE BUSCA DEVE RETORNAR UMA LIST _ NECESSITA DE REFATORACAO
-		Usuario usuario  =null;
-		try {
-			listaCartao = CartaoDeCreditoService.buscaCartoesPeloId(usuario.getId().toString());
-		} catch (SQLException e1) {
-			e1.printStackTrace();
-		}
-
-		for (CartaoDeCredito cartao : listaCartao) {
-			try {
-				CartaoDeCreditoService.delete(cartao);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		}
-
-		try {
-			UsuarioService.delete(usuario);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-
-		// request.setAttribute("usuario",usuario);
-		return "redirect:entrada?acao=ListaUsuario";
+		return "redirect:entrada?acao=ListaVoo";
 	}
 }

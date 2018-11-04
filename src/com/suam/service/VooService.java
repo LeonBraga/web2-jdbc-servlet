@@ -41,7 +41,8 @@ public class VooService {
 			ps.execute();
 			conexao.commit();
 			System.out.println("Dados do voo a serem inserido: " + voo.getVolta() + " - " + voo.getVolta() + " - "
-					+ voo.getOrigem() + " - " + voo.getDestino() + " - " + voo.getConfirmacao() + " - " + voo.getAssento());
+					+ voo.getOrigem() + " - " + voo.getDestino() + " - " + voo.getConfirmacao() + " - "
+					+ voo.getAssento());
 			System.out.println("INSERT REALIZADO COM SUCESSO =>>tabele voo!");
 		} catch (SQLException e) {
 			// Erro, provoca um Rollback (volta ao estado anterior do banco)
@@ -154,6 +155,32 @@ public class VooService {
 			}
 		}
 		return null;
+	}
+
+	public static void delete(Voo voo) throws SQLException {
+		Connection conexao = ConnectionFactory.getConnection();
+
+		String sql = "DELETE FROM voo WHERE idVoo = ?";
+
+		try {
+			PreparedStatement ps = conexao.prepareStatement(sql);
+
+			String id = voo.getIdVoo().toString();
+			ps.setString(1, id);
+
+			System.out.println("PS DELETE: " + ps);
+			ps.execute();
+			conexao.commit();
+			System.out.println("DELETE REALIZADO COM SUCESSO ==>tabela voo!");
+		} catch (SQLException e) {
+			// Erro, provoca um Rollback (volta ao estado anterior do banco)
+			conexao.rollback();
+			e.printStackTrace();
+			throw new SQLException();
+		} finally {
+			// fechar a conexão
+			conexao.close();
+		}
 	}
 
 }
