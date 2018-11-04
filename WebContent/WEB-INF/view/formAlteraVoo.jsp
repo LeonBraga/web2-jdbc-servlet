@@ -31,7 +31,7 @@
 
 		<br>
 		<br>
-		<input type="hidden" name="idUser" value="${voo.idVoo }">
+		<input type="hidden" name="idVoo" value="${voo.idVoo }">
 		<input type="hidden" name="acao" value="AlteraVoo">
 		<input type="submit" /> 
 	</form>

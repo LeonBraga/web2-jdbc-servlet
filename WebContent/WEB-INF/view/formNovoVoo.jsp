@@ -7,21 +7,21 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>TELA DE ALTERAÇÃO DE VOO</title>
+<title>Cadastrar VOO</title>
 </head>
 <body>
 	<c:import url="logout-parcial.jsp"/> 
 	<form action="${linkEntradaServlet }" method="post">		
 		<c:if test="${usuarioLogado.isAdm ==  'TRUE'}">
-			Origem:<input type="text" name="origem" value="" readonly="readonly"/>
+			Origem:<input type="text" name="origem" value=""/>
 			<br>	
-			Destino:<input type="text" name="destino" value="" readonly="readonly"/>
+			Destino:<input type="text" name="destino" value=""/>
 			<br>
-			Ida: <input type="text" name="ida" value="<fmt:formatDate value="" pattern="dd/MM/yyyy"/>" />
+			Ida: <input type="text" name="ida" value="" />
 			<br>
-			Volta:<input type="text" name="volta" value="<fmt:formatDate value="" pattern="dd/MM/yyyy"/>"/>
+			Volta:<input type="text" name="volta" value=""/>
 			<br>
-			Assento: <input type="text" name="assento" value="$"/> 
+			Assento: <input type="text" name="assento" value=""/> 
 			<br> 
 			Confirmação:<input type="text" name="confirmacao" value=""/>
 		</c:if>

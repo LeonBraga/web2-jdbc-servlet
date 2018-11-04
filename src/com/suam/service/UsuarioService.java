@@ -23,11 +23,8 @@ public class UsuarioService {
 		for (Usuario u : listaUsuarios) {
 			if (u.getLogin().equals(usuario.getLogin())) {
 				System.out.println("Usuario com login já cadastrado!");
-				// retornar um redirect para página de edição;
 				return false;
 			}
-			// o else se dá com a execução normal do método de inserção, porem temos que
-			// retornar uma string no final da execução.
 		}
 
 		String sql = "INSERT INTO usuario (nome, sobrenome, endereco, senha, login, dataNascimento, isadm ) VALUES (?,?,?,?,?,?,?)";
@@ -37,6 +34,9 @@ public class UsuarioService {
 		// Date data = formato.parse("23/11/2015");
 		// Date data = formato.format("23/11/2015");
 
+		System.out.println("Usuario a ser inserido: " + usuario.getNome() + " - " + usuario.getSobrenome() + " - "
+				+ usuario.getEndereco() + " - " + usuario.getSenha() + " - " + usuario.getLogin() + " - "
+				+ formato.format(usuario.getDataNascimento()) + " - " + usuario.getIsAdm());
 		try {
 			PreparedStatement ps = conexao.prepareStatement(sql);
 			ps.setString(1, usuario.getNome());
@@ -49,7 +49,7 @@ public class UsuarioService {
 
 			ps.execute();
 			conexao.commit();
-			System.out.println("INSERT REALIZADO COM SUCESSO!");
+			System.out.println("INSERT REALIZADO COM SUCESSO! ==> tabela usuario");
 		} catch (SQLException e) {
 			// Erro, provoca um Rollback (volta ao estado anterior do banco)
 			System.out.println("ERRO ROLLBACK" + e);
@@ -90,6 +90,10 @@ public class UsuarioService {
 		// Date data = formato.parse("23/11/2015");
 		// Date data = formato.format("23/11/2015");
 
+		System.out.println("Usuario a ser atualizado: " + usuario.getNome() + " - " + usuario.getSobrenome() + " - "
+				+ usuario.getEndereco() + " - " + usuario.getSenha() + " - " + usuario.getLogin() + " - "
+				+ formato.format(usuario.getDataNascimento()) + " - " + usuario.getIsAdm());
+
 		try {
 			PreparedStatement ps = conexao.prepareStatement(sql);
 			ps.setString(1, usuario.getNome());
@@ -105,7 +109,7 @@ public class UsuarioService {
 			System.out.println("PS UPDATE: " + ps);
 			ps.execute();
 			conexao.commit();
-			System.out.println("UPDATE REALIZADO COM SUCESSO!");
+			System.out.println("UPDATE REALIZADO COM SUCESSO!  ==> tabela usuario");
 		} catch (SQLException e) {
 			// Erro, provoca um Rollback (volta ao estado anterior do banco)
 
@@ -154,13 +158,15 @@ public class UsuarioService {
 			listaUsuario.add(usuario);
 
 			// imprimindo do objeto
-
+			System.out.println("Usuario adicionado a lista: " + usuario.getNome() + " - " + usuario.getSobrenome()
+					+ " - " + usuario.getEndereco() + " - " + usuario.getSenha() + " - " + usuario.getLogin() + " - "
+					+ formato.format(usuario.getDataNascimento()) + " - " + usuario.getIsAdm() + "\n");
 		}
 
 		rs.close();
 		statement.close();
 		connection.close();
-		System.out.println("LISTA(SELECT) CRIADA COM SUCESSO!");
+		System.out.println("LISTA(SELECT) CRIADA COM SUCESSO! ==> tabela usuario");
 		return listaUsuario;
 	}
 
@@ -169,6 +175,9 @@ public class UsuarioService {
 
 		String sql = "DELETE FROM usuario WHERE idusuario = ?";
 
+		System.out.println("Usuario a ser removido: " + usuario.getNome() + " - " + usuario.getSobrenome() + " - "
+				+ usuario.getEndereco() + " - " + usuario.getSenha() + " - " + usuario.getLogin() + " - "
+				+ usuario.getDataNascimento() + " - " + usuario.getIsAdm());
 		try {
 			PreparedStatement ps = conexao.prepareStatement(sql);
 
@@ -228,23 +237,15 @@ public class UsuarioService {
 				usuario.setIsAdm(rs.getBoolean("isAdm"));
 				listaUsuario.add(usuario);
 
-				/*
-				 * System.out.println("USUARIO: " + usuario.getNome() + " - " +
-				 * usuario.getSobrenome() + "" + " - " + usuario.getLogin() + " - " +
-				 * usuario.getSenha() + " - " + usuario.getDataNascimento() + " - " +
-				 * usuario.isAdm());
-				 */
 			}
 			// conexao.commit();
-			System.out.println("SELECT REALIZADO COM SUCESSO!");
+			System.out.println("SELECT REALIZADO COM SUCESSO!  ==> tabela usuario");
 		} catch (SQLException e) {
 			// Erro, provoca um Rollback (volta ao estado anterior do banco)
 			System.out.println("ERRO: " + e);
 			// conexao.rollback();
 		} finally {
-			// fechar a conexão
-			// System.out.println("FECHANDO CONEXAO");
-			// conexao.close();
+			 conexao.close();
 		}
 		return listaUsuario;
 	}

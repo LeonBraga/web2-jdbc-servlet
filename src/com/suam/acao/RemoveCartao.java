@@ -19,12 +19,13 @@ public class RemoveCartao  implements Acao{
 	public String executa(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("AÇÃO = REMOVENDO CARTÃO");
 		
-		String paramId = request.getParameter("id");
-		Integer id = Integer.valueOf(paramId);
+		String numero = request.getParameter("numero");
+		//String paramId = request.getParameter("id");
+		//Integer id = Integer.valueOf(paramId);
 		
 		CartaoDeCredito cartao = null;
 		try {
-			cartao = CartaoDeCreditoService.buscaCartaoPelaId(id);
+			cartao = CartaoDeCreditoService.buscaCartaoPeloNumero(numero);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

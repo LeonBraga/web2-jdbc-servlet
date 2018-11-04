@@ -52,7 +52,10 @@ public class CartaoDeCreditoService {
 	public static Boolean update(CartaoDeCredito cartao) throws SQLException {
 		Connection conexao = ConnectionFactory.getConnection();
 
-		String sql = "UPDATE cartaodecredito SET dataVencimento= ? WHERE usuario_idusuario = ?";
+		// Dessa forma serão alterados os dados de todo os usuários
+		// String sql = "UPDATE cartaodecredito SET dataVencimento= ? WHERE
+		// usuario_idusuario = ?";
+		String sql = "UPDATE cartaodecredito SET dataVencimento= ? WHERE numerocartao = ?";
 
 		// convertendo data para string
 		SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
@@ -63,7 +66,8 @@ public class CartaoDeCreditoService {
 			PreparedStatement ps = conexao.prepareStatement(sql);
 			// ps.setString(1, cartao.getNumeroCartao());
 			ps.setString(1, formato.format(cartao.getDataVencimento()));
-			ps.setString(2, cartao.getIdUser().toString().trim());
+			System.out.println("Numero do cartão a ser alterado: " + cartao.getNumeroCartao());
+			ps.setString(2, cartao.getNumeroCartao());
 
 			System.out.println("PS UPDATE: " + ps);
 			ps.execute();
@@ -225,6 +229,18 @@ public class CartaoDeCreditoService {
 		List<CartaoDeCredito> lista = ListaCartoes();
 		for (CartaoDeCredito cartao : lista) {
 			if (cartao.getIdUser() == id) {
+				return cartao;
+			}
+		}
+		return null;
+	}
+
+	public static CartaoDeCredito buscaCartaoPeloNumero(String numero) throws SQLException {
+		List<CartaoDeCredito> lista = ListaCartoes();
+		String num = numero;
+		System.out.println("NUMERO DO CARTAO A SER BUSCADO: "+ num);
+		for (CartaoDeCredito cartao : lista) {
+			if (cartao.getNumeroCartao().equalsIgnoreCase(num.trim())) {
 				return cartao;
 			}
 		}

@@ -29,8 +29,8 @@
 				Data de Vencimento: <fmt:formatDate value="${cartao.dataVencimento}" pattern="dd/MM/yyyy"/>
 			</li>
 			<li>
-				<a	href="/Web2Sistema/entrada?acao=MostraCatao&id=${cartao.idUser}">edita</a>
-				<a href="/Web2Sistema/entrada?acao=RemoveCartao&id=${cartao.idUser}">remove</a>
+				<a	href="entrada?acao=MostraCatao&id=${cartao.idUser}">edita</a>
+				<a href="entrada?acao=RemoveCartao&id=${cartao.idUser}">remove</a>
 			</li>
 			<br>
 		</c:forEach>

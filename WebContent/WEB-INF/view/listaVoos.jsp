@@ -26,8 +26,8 @@
 				Volta: <fmt:formatDate value="${voo.volta}" pattern="dd/MM/yyyy"/> - 
 				Confirmação: ${voo.confirmacao} - 
 				Assento: ${voo.assento} <br>
-				<a	href="/Web2Sistema/entrada?acao=MostraVoo&id=${voo.idVoo}">edita</a>
-				<a href="/Web2Sistema/entrada?acao=RemoveVoo&id=${voo.idVoo}">remove</a>
+				<a	href="entrada?acao=MostraVoo&id=${voo.idVoo}">edita</a>
+				<a href="entrada?acao=RemoveVoo&id=${voo.idVoo}">remove</a>
 			</li>
 			<br>
 		</c:forEach>

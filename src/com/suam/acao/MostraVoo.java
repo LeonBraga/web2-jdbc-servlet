@@ -2,6 +2,7 @@ package com.suam.acao;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.Date;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -14,26 +15,30 @@ import com.suam.service.CartaoDeCreditoService;
 import com.suam.service.UsuarioService;
 import com.suam.service.VooService;
 
+public class MostraVoo implements Acao {
 
-
-public class MostraVoo  implements Acao{
-
-	public String executa(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public String executa(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		System.out.println("AÇÃO = MOSTRANDO VOO");
-		
-		String paramId = request.getParameter("id");
-		Integer id = Integer.valueOf(paramId);
-		
-		Voo voo= null;
+
+		String idVoo = request.getParameter("id");
+		// String ida = request.getParameter("ida");
+		// String volta = request.getParameter("volta");
+		// String destino = request.getParameter("destino");
+		// String origem = request.getParameter("origem");
+		// String confirmacao = request.getParameter("confirmacao");
+		// String assento = request.getParameter("assento");
+
+		Integer id = Integer.valueOf(idVoo);
+		Voo voo = null;
 		try {
 			voo = VooService.buscaVooPelaId(id);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
-		
-		request.setAttribute("voo",voo);
-		
+
+		request.setAttribute("voo", voo);
+
 		return "forward:formAlteraVoo.jsp";
 	}
 }

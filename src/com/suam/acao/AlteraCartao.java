@@ -26,8 +26,7 @@ public class AlteraCartao implements Acao {
 		String idUser = request.getParameter("idUser");
 
 		CartaoDeCredito cartao = new CartaoDeCredito();
-		CartaoDeCreditoService cc = new CartaoDeCreditoService();
-
+		
 		// convertendo data para string
 		SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
 		// Date data = formato.parse("23/11/2015");
@@ -41,15 +40,16 @@ public class AlteraCartao implements Acao {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-		System.out.println(idUser);
-
-		cartao.setIdUser(Integer.parseInt(idUser.trim()));
+		System.out.println("Id do usuario titular: "+idUser);
+		
+		cartao.setNumeroCartao(numero);
+		cartao.setIdUser(Integer.parseInt(idUser));
 
 		Boolean validaInsere;
 		try {
-			validaInsere = cc.update(cartao);
+			validaInsere = CartaoDeCreditoService.update(cartao);
 			if (validaInsere) {
-				System.out.println("Inserido com sucesso");
+				System.out.println("Atualizado com sucesso!");
 			} else {
 				request.setAttribute("cartao", cartao);
 				return "forward:formNovoCartao.jsp";

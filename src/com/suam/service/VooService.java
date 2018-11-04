@@ -40,7 +40,9 @@ public class VooService {
 
 			ps.execute();
 			conexao.commit();
-			System.out.println("INSERT REALIZADO COM SUCESSO!");
+			System.out.println("Dados do voo a serem inserido: " + voo.getVolta() + " - " + voo.getVolta() + " - "
+					+ voo.getOrigem() + " - " + voo.getDestino() + " - " + voo.getConfirmacao() + " - " + voo.getAssento());
+			System.out.println("INSERT REALIZADO COM SUCESSO =>>tabele voo!");
 		} catch (SQLException e) {
 			// Erro, provoca um Rollback (volta ao estado anterior do banco)
 			System.out.println("ERRO ROLLBACK" + e);
@@ -61,12 +63,15 @@ public class VooService {
 		// Trecho de código para Validar se existe usuário com mesmo login no banco.
 		List<Voo> listaVoos = ListaVoo();
 
-		String sql = "UPDATE usuario SET  ida = ?, volta = ?,origem = ?,  destino = ?, confirmacao = ?, assento = ? WHERE idVoo = ?";
+		String sql = "UPDATE voo SET  ida = ?, volta = ?,origem = ?,  destino = ?, confirmacao = ?, assento = ? WHERE idVoo = ?";
 
 		// convertendo data para string
 		SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
 		// Date data = formato.parse("23/11/2015");
 		// Date data = formato.format("23/11/2015")
+
+		System.out.println("Dados do voo a ser modificado: " + voo.getVolta() + " - " + voo.getVolta() + " - "
+				+ voo.getOrigem() + " - " + voo.getDestino() + " - " + voo.getConfirmacao() + " - " + voo.getAssento());
 
 		try {
 			PreparedStatement ps = conexao.prepareStatement(sql);
@@ -82,7 +87,7 @@ public class VooService {
 			System.out.println("PS UPDATE: " + ps);
 			ps.execute();
 			conexao.commit();
-			System.out.println("UPDATE REALIZADO COM SUCESSO!");
+			System.out.println("UPDATE REALIZADO COM SUCESSO ==>tabela voo!");
 		} catch (SQLException e) {
 			// Erro, provoca um Rollback (volta ao estado anterior do banco)
 
@@ -137,7 +142,7 @@ public class VooService {
 		rs.close();
 		statement.close();
 		connection.close();
-		System.out.println("LISTA(SELECT) CRIADA COM SUCESSO!");
+		System.out.println("LISTA(SELECT) CRIADA COM SUCESSO ==> tabela voo!");
 		return listaVoos;
 	}
 

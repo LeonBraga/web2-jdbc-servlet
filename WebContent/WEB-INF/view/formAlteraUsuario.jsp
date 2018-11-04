@@ -13,6 +13,7 @@
 <body>
 	<c:import url="logout-parcial.jsp"/> 
 	Usuario Logado: ${usuarioLogado.login}
+	
 	<form action="${linkEntradaServlet }" method="post">
 	
 		Nome: <input type="text" name="nome" value="${usuario.nome}"/>
@@ -32,37 +33,39 @@
 			<br>
 		</c:if>
 		<c:if test="${usuarioLogado.isAdm=='FALSE'}">
-			Usuario possui perfil administrador:<input type="text" name="ehAdm" value="${usuario.isAdm}" readonly>
+			Usuario possui perfil administrador:<input type="text" name="ehAdm" value="${usuario.isAdm}" readonly="readonly">
 			<br>
 		</c:if>
 		<br>
-		<%-- <c:if test="${usuarioLogado.isAdm ==  'TRUE'}"> --%>
+		 <c:if test="${usuario.isAdm ==  'FALSE'}"> 
 			<c:if test="${cartoes!=null}">	
-				<h3>Lista de cartões do usuário</h3> 
-				<c:forEach items="${cartoes}" var="cartao">
-					<c:if test="${usuario.id ==  cartao.idUser}">
-						<li>
-							Nome titular: ${cartao.titular} -
-						</li>
-						<li> 
-							Numero do cartao: ${cartao.numeroCartao}
-						</li>
-						<li> 
-							Data de Vencimento: <fmt:formatDate value="${cartao.dataVencimento}" pattern="dd/MM/yyyy"/>
-						</li>
-						<li>
-						    <a href="entrada?acao=MostraCartao&id=${cartao.idUser}">edita</a>
-							<a href="entrada?acao=RemoveCartao&id=${cartao.idUser}">remove</a>
-						</li>
-						<br>
-				</c:if>
-			</c:forEach>	
+				<h3>Lista de cartões de ${usuarioLogado.nome}</h3> 
+					<c:forEach items="${cartoes}" var="cartao">
+						<c:if test="${usuario.id ==  cartao.idUser}">
+							<li>
+								Nome do titular: ${cartao.titular} 
+							</li>
+							<li> 
+								Numero do cartao: ${cartao.numeroCartao}
+							</li>
+							<li> 
+								Data de Vencimento: <fmt:formatDate value="${cartao.dataVencimento}" pattern="dd/MM/yyyy"/>
+							</li>
+							<li>
+							    <a href="entrada?acao=MostraCartao&id=${cartao.idUser}">edita</a>
+								<a href="entrada?acao=RemoveCartao&numero=${cartao.numeroCartao}">remove</a>
+							</li>
+							<br>
+					</c:if>
+				</c:forEach>	
+			</c:if>
 		</c:if>
-		<c:if test="${usuarioLogado.isAdm=='FALSE'}"> 
-			<li>
-				<a href="entrada?acao=FormNovoCartao&idUser=${usuario.id}">Novo Cartão</a>
-			</li>
-		</c:if>
+		
+	<c:if test="${usuario.isAdm=='FALSE'}"> 
+		<li>
+			<a href="entrada?acao=FormNovoCartao&idUser=${usuario.id}">Novo Cartão</a>
+		</li>
+	</c:if>
 		<%-- </c:if> --%>
 		<!--USUARIO COM APENAS UM CARTAO SENDO MOSTRADO -->	
 	<%-- <c:if test="${usuarioLogado.isAdm ==  'TRUE'}">
