@@ -1,7 +1,9 @@
 1 - Modificar método de remoção de usuário para deletar os voos COMPRADOS relacionados ao mesmo
 2 - ADM NÃO DEVE TER CC  ==> limitei possibilidade de inclusãos de cc em formAlteraUsuario ==> TESTAR
 3 - VOO PRECISA DO CAMPO ORIGEM  ==> criado em bd, voo, vooService ==>TESTAR
-4 - remover itens desnecessários da tela de login
+4 - remover itens desnecessários da tela de login 
+5 - CRIAR assento para voo de volta 
+
 
 STOP-- PAREI NA TELA QUANDO CLICAR EM EDITAR E MOSTRA VOO OBS: EXEPTION DE DATA VOLTA VAZIA
 
@@ -9,22 +11,19 @@ STOP-- PAREI NA TELA QUANDO CLICAR EM EDITAR E MOSTRA VOO OBS: EXEPTION DE DATA 
 
 
 
-
-
-
-
+============================================================================
 TESTE DE FUNÇÕES
 CRUD USUÁRIO:
-C:
-R:
-U:
-D:
+C: ok
+R: ok 
+U: ok
+D: ok
 
 CRUD CARTAO:
-C:
-R:
-U:
-D:
+C: ok
+R: ok
+U: ok
+D: ok
 
 CRUD VOO:
 C:

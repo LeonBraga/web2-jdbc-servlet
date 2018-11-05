@@ -68,14 +68,14 @@ public class NovoVoo implements Acao {
 				System.out.println("Inserido com sucesso");
 			} else {
 				request.setAttribute("voo", voo);
-				return "forward:formListaVoo.jsp";
+				return "forward:NovoVoo.jsp";
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		
-		request.setAttribute("voo", voo);
-		return "forward:formNovoVoo.jsp";
+		//request.setAttribute("voo", voo);
+		return "redirect:entrada?acao=ListaVoo";
 
 	}
 }
