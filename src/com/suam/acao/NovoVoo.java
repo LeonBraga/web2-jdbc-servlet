@@ -29,7 +29,6 @@ public class NovoVoo implements Acao {
 		String ida = request.getParameter("ida");
 		String volta = request.getParameter("volta");
 		String confirmacao = request.getParameter("confirmacao");
-		String assento = request.getParameter("assento");
 
 		// convertendo data para string
 		SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
@@ -55,7 +54,6 @@ public class NovoVoo implements Acao {
 		} else {
 			voo.setConfirmacao(false);
 		}
-		voo.setAssento(assento);
 		voo.setOrigem(origem);
 		voo.setDestino(destino);
 

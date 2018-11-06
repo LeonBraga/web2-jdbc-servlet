@@ -89,10 +89,10 @@ public class CartaoDeCreditoService {
 		System.out.println("LISTANDO TODOS!");
 		Connection connection = ConnectionFactory.getConnection();
 		List<CartaoDeCredito> listaCartoes = new ArrayList<CartaoDeCredito>();
-
+		
 		Statement statement = connection.createStatement();
-		boolean resultado = statement.execute("select * from cartaodecredito");
-
+		statement.execute("select * from cartaodecredito");
+		
 		ResultSet rs = statement.getResultSet();
 
 		// convertendo data para string
@@ -101,11 +101,6 @@ public class CartaoDeCreditoService {
 		// Date data = formato.format("23/11/2015");
 
 		while (rs.next()) {
-			// valores recebidos diretamente do banco de dados
-			int id = rs.getInt("usuario_idusuario");
-			String numeroCartao = rs.getString("numeroCartao");
-			// System.out.println("IMRIMINDO DO BANCO: id=" + id + ", nome=" + nome);
-
 			// adicionando na lista
 			CartaoDeCredito cartao = new CartaoDeCredito();
 			cartao.setIdUser(rs.getInt("usuario_idusuario"));
@@ -152,7 +147,35 @@ public class CartaoDeCreditoService {
 			conexao.close();
 		}
 	}
+	
+	public static void deleteCartoes(Usuario usuario) throws SQLException {
+		Connection conexao = ConnectionFactory.getConnection();
 
+		String sql = "DELETE FROM cartaodecredito WHERE USUARIO_IDUSUARIO = ?";
+
+		try {
+			PreparedStatement ps = conexao.prepareStatement(sql);
+
+			String id = usuario.getId().toString();
+			ps.setString(1, id);
+
+			System.out.println("PS DELETE: " + ps);
+			ps.execute();
+			conexao.commit();
+			System.out.println("DELETE REALIZADO COM SUCESSO!");
+		} catch (SQLException e) {
+			// Erro, provoca um Rollback (volta ao estado anterior do banco)
+
+			conexao.rollback();
+			e.printStackTrace();
+			throw new SQLException();
+		} finally {
+			// fechar a conexão
+			conexao.close();
+		}
+	}
+
+	
 	public static List<CartaoDeCredito> consultar(String numero, String idUser) throws SQLException {
 		System.out.println("CONSULTAR ==> NUMERO: " + numero + idUser);
 		Connection conexao = ConnectionFactory.getConnection();
@@ -189,7 +212,7 @@ public class CartaoDeCreditoService {
 	}
 
 	// Listar todos os cartões de um usuário.
-	public static List<CartaoDeCredito> buscaCartoesPeloId(String idUser) throws SQLException {
+	public static List<CartaoDeCredito> buscaCartoesPeloIdUsuario(String idUser) throws SQLException {
 		List<CartaoDeCredito> listaCartoes = new ArrayList<CartaoDeCredito>();
 		Connection conexao = ConnectionFactory.getConnection();
 

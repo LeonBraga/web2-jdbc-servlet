@@ -25,7 +25,6 @@ public class AlteraVoo implements Acao {
 		String ida = request.getParameter("ida");
 		String volta = request.getParameter("volta");
 		String confirmacao = request.getParameter("confirmacao");
-		String assento = request.getParameter("assento");
 		String idVoo = request.getParameter("idVoo");
 		//Integer idVoo = Integer.valueOf(paramId);
 
@@ -60,7 +59,6 @@ public class AlteraVoo implements Acao {
 		} else {
 			voo.setConfirmacao(false);
 		}
-		voo.setAssento(assento);
 		voo.setOrigem(origem);
 		voo.setDestino(destino);
 

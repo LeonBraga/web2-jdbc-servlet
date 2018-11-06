@@ -12,6 +12,7 @@
 </head>
 <body>
 	<c:import url="logout-parcial.jsp"/> 
+<c:if test="${usuarioLogado.isAdm ==  'TRUE'}">	
 	<form action="${linkEntradaServlet}" method="post">
 		Nome: <input type="text" name="nome" value="${usuario.nome}"/>
 		<br>
@@ -33,6 +34,7 @@
 		<input type="hidden" name="acao" value="NovoUsuario">
 		<input type="submit" /> 
 	</form>
+</c:if>
 <c:import url="menuLinks.jsp"/> 
 </body>
 </html>

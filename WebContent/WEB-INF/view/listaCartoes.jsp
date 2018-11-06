@@ -18,6 +18,7 @@
 	<br> Lista de cartoes:
 	<br/>
 	<ul>
+	<c:if test="${usuarioLogado.isAdm ==  'TRUE'}">
 		<c:forEach items="${cartoes}" var="cartao">
 			<li>
 				Nome titular: ${cartao.titular} -
@@ -34,6 +35,7 @@
 			</li>
 			<br>
 		</c:forEach>
+	</c:if>>
 	</ul>
 	<br>
 	<br>

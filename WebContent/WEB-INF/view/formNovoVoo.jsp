@@ -21,8 +21,6 @@
 			<br>
 			Volta:<input type="text" name="volta" value=""/>
 			<br>
-			Assento: <input type="text" name="assento" value=""/> 
-			<br> 
 			Confirmação:<input type="text" name="confirmacao" value=""/>
 		</c:if>
 		<br>

@@ -29,25 +29,14 @@ public class RemoveUsuario implements Acao {
 			e.printStackTrace();
 		}
 
-		// CÓDIGO PARA DESVINCULAR CC DO USUÁRIO.. SOMENTE SERÁ POSSÍVEL REMOÇÃO DE USER
-		// SE SEU ID NÃO FOR FK NA TABELA CC
-		List<CartaoDeCredito> listaCartao = null;
-
-		// O MÉTODO DE BUSCA DEVE RETORNAR UMA LIST _ NECESSITA DE REFATORACAO
+		
 		try {
-			listaCartao = CartaoDeCreditoService.buscaCartoesPeloId(usuario.getId().toString());
+			CartaoDeCreditoService.deleteCartoes(usuario);
 		} catch (SQLException e1) {
+			
 			e1.printStackTrace();
 		}
-
-		for (CartaoDeCredito cartao : listaCartao) {
-			try {
-				CartaoDeCreditoService.delete(cartao);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		}
-
+		
 		try {
 			UsuarioService.delete(usuario);
 		} catch (SQLException e) {

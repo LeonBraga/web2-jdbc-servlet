@@ -29,10 +29,7 @@
 		<a href="entrada?acao=ListaUsuario">LISTAR TODOS OS USUÁRIOS</a>
 		descrição:Tela de CRUD Administrador do Sistema
 		<br>
-		<a href="entrada?acao=ListaVoo">LISTAR VOOS</a>
-		descrição:Tela CRUD VOOS
-		<br>
-		<a href="entrada?acao=">Tela administração de Vôos</a>
+		<a href="entrada?acao=ListaVoo">Tela administração de Vôos</a>
 		descrição: Tela de CRUD de Vôos
 		<br>
 		<a href="entrada?acao=">Tela de acompanhamento dos pedidos de vôos</a>

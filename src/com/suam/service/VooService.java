@@ -20,10 +20,8 @@ public class VooService {
 	public static boolean inserir(Voo voo) throws SQLException {
 		Connection conexao = ConnectionFactory.getConnection();
 
-		List<Voo> listaVoos = ListaVoo();
-
-		String sql = "INSERT INTO voo ( ida, volta, origem, destino, confirmacao, assento ) VALUES (?,?,?,?,?,?)";
-
+		String sql = "INSERT INTO voo ( ida, volta, origem, destino, confirmacao) VALUES (?,?,?,?,?)";
+		
 		// convertendo data para string
 		SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
 		// Date data = formato.parse("23/11/2015");
@@ -36,13 +34,12 @@ public class VooService {
 			ps.setString(3, voo.getOrigem());
 			ps.setString(4, voo.getDestino());
 			ps.setString(5, voo.getConfirmacao().toString());
-			ps.setString(6, voo.getAssento());
 
+			// inserirAssento(voo.getAssento(), voo.getIdVoo());
 			ps.execute();
 			conexao.commit();
 			System.out.println("Dados do voo a serem inserido: " + voo.getVolta() + " - " + voo.getVolta() + " - "
-					+ voo.getOrigem() + " - " + voo.getDestino() + " - " + voo.getConfirmacao() + " - "
-					+ voo.getAssento());
+					+ voo.getOrigem() + " - " + voo.getDestino() + " - " + voo.getConfirmacao());
 			System.out.println("INSERT REALIZADO COM SUCESSO =>>tabele voo!");
 		} catch (SQLException e) {
 			// Erro, provoca um Rollback (volta ao estado anterior do banco)
@@ -64,7 +61,7 @@ public class VooService {
 		// Trecho de código para Validar se existe usuário com mesmo login no banco.
 		List<Voo> listaVoos = ListaVoo();
 
-		String sql = "UPDATE voo SET  ida = ?, volta = ?,origem = ?,  destino = ?, confirmacao = ?, assento = ? WHERE idVoo = ?";
+		String sql = "UPDATE voo SET  ida = ?, volta = ?,origem = ?,  destino = ?, confirmacao = ? WHERE idVoo = ?";
 
 		// convertendo data para string
 		SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
@@ -72,7 +69,7 @@ public class VooService {
 		// Date data = formato.format("23/11/2015")
 
 		System.out.println("Dados do voo a ser modificado: " + voo.getVolta() + " - " + voo.getVolta() + " - "
-				+ voo.getOrigem() + " - " + voo.getDestino() + " - " + voo.getConfirmacao() + " - " + voo.getAssento());
+				+ voo.getOrigem() + " - " + voo.getDestino() + " - " + voo.getConfirmacao());
 
 		try {
 			PreparedStatement ps = conexao.prepareStatement(sql);
@@ -82,8 +79,7 @@ public class VooService {
 			ps.setString(3, voo.getOrigem());
 			ps.setString(4, voo.getDestino());
 			ps.setString(5, voo.getConfirmacao().toString());
-			ps.setString(6, voo.getAssento());
-			ps.setString(7, voo.getIdVoo().toString());
+			ps.setString(6, voo.getIdVoo().toString());
 
 			System.out.println("PS UPDATE: " + ps);
 			ps.execute();
@@ -134,7 +130,6 @@ public class VooService {
 			}
 
 			voo.setConfirmacao(rs.getBoolean("confirmacao"));
-			voo.setAssento(rs.getString("assento"));
 			voo.setOrigem(rs.getString("origem"));
 			voo.setDestino(rs.getString("destino"));
 			listaVoos.add(voo);
@@ -161,15 +156,20 @@ public class VooService {
 		Connection conexao = ConnectionFactory.getConnection();
 
 		String sql = "DELETE FROM voo WHERE idVoo = ?";
+		String sql1 = "DELETE FROM ASSENTO WHERE idVoo =?";
 
 		try {
 			PreparedStatement ps = conexao.prepareStatement(sql);
-
+			PreparedStatement ps1 = conexao.prepareStatement(sql1);
+			
 			String id = voo.getIdVoo().toString();
 			ps.setString(1, id);
 
 			System.out.println("PS DELETE: " + ps);
+			
+			ps1.execute();
 			ps.execute();
+
 			conexao.commit();
 			System.out.println("DELETE REALIZADO COM SUCESSO ==>tabela voo!");
 		} catch (SQLException e) {

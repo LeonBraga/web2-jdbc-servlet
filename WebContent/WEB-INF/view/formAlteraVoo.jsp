@@ -13,7 +13,6 @@
 <body>
 	<c:import url="logout-parcial.jsp"/> 
 	<form action="${linkEntradaServlet }" method="post">
-		
 		<c:if test="${usuarioLogado.isAdm ==  'TRUE'}">
 			Origem:<input type="text" name="origem" value="${voo.origem}" readonly="readonly"/>
 			<br>	
@@ -22,13 +21,9 @@
 			Ida: <input type="text" name="ida" value="<fmt:formatDate value="${voo.ida}" pattern="dd/MM/yyyy"/>" />
 			<br>
 			Volta:<input type="text" name="volta" value="<fmt:formatDate value="${voo.volta}" pattern="dd/MM/yyyy"/>"/>
-			<br>
-			Assento: <input type="text" name="assento" value="${voo.assento}"/> 
 			<br> 
 			Confirmação:<input type="text" name="confirmacao" value="${voo.confirmacao}"/>
 		</c:if>
-		
-
 		<br>
 		<br>
 		<input type="hidden" name="idVoo" value="${voo.idVoo }">

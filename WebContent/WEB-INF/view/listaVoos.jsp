@@ -18,19 +18,20 @@
 	<br> Lista de voos:
 	<br/>
 	<ul>
+	<c:if test="${usuarioLogado.isAdm ==  'TRUE'}">
 		<c:forEach items="${voos}" var="voo">
 			<li>
 				Origem: ${voo.origem} -
 				Destino: ${voo.destino} - 
 				Ida: <fmt:formatDate value="${voo.ida}" pattern="dd/MM/yyyy"/> - 
 				Volta: <fmt:formatDate value="${voo.volta}" pattern="dd/MM/yyyy"/> - 
-				Confirmação: ${voo.confirmacao} - 
-				Assento: ${voo.assento} <br>
+				Confirmação: ${voo.confirmacao}<br>
 				<a	href="entrada?acao=MostraVoo&id=${voo.idVoo}">edita</a>
 				<a href="entrada?acao=RemoveVoo&id=${voo.idVoo}">remove</a>
 			</li>
 			<br>
 		</c:forEach>
+	</c:if>
 	</ul>
 	<br>
 	<br>
