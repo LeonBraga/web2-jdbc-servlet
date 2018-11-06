@@ -18,8 +18,6 @@
 	<br>
 	<br>
 	
-	<a href="entrada?acao=ListaAssentos">TESTE LISTA DE ASSENTOS</a>
-		<br>
 	<c:if test="${usuarioLogado.isAdm ==  'TRUE'}">
 		<h3>Administrador do Sistema</h3>
 		<p>Usuario ${usuarioLogado.nome} com privilegios de Administrador.</p>

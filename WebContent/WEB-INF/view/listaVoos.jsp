@@ -27,6 +27,8 @@
 				Confirmação: ${voo.confirmacao}<br>
 				<a	href="entrada?acao=MostraVoo&id=${voo.idVoo}">edita</a>
 				<a href="entrada?acao=RemoveVoo&id=${voo.idVoo}">remove</a>
+				<a href="entrada?acao=ListaAssento&vooId=${voo.idVoo}">TESTE LISTA DE ASSENTOS</a>
+			<br>
 			</li>
 			<br>
 		</c:forEach>

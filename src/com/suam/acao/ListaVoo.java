@@ -25,7 +25,6 @@ public class ListaVoo implements Acao {
 			e.printStackTrace();
 		}
 		
-		
 		request.setAttribute("voos", listaVoos);
 		return "forward:listaVoos.jsp";
 	}

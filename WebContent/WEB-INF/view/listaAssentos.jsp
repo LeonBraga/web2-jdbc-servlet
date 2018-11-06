@@ -8,7 +8,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Assentos</title>
+<title>Assentos do voo: ${assentos.idVoo}</title>
 </head>
 <body>
 	Usuario Logado: ${usuarioLogado.login}
