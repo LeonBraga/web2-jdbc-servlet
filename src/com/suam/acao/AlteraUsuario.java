@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -66,11 +65,10 @@ public class AlteraUsuario implements Acao {
 		 * (SQLException e) { // TODO Auto-generated catch block e.printStackTrace(); }
 		 */
 
-		UsuarioService us = new UsuarioService();
 		Boolean validaInsere;
 
 		try {
-			validaInsere = us.update(usuario);
+			validaInsere = UsuarioService.update(usuario);
 			if (validaInsere) {
 				System.out.println("ATUALIZADO com sucesso");
 			} else {

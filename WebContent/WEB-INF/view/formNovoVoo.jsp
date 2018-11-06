@@ -19,8 +19,6 @@
 			<br>
 			Ida: <input type="text" name="ida" value="" />
 			<br>
-			Volta:<input type="text" name="volta" value=""/>
-			<br>
 			Confirmação:<input type="text" name="confirmacao" value=""/>
 		</c:if>
 		<br>

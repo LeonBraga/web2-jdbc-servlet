@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -29,17 +28,9 @@ public class NovoUsuario implements Acao {
 		String data = request.getParameter("data");
 		String ehAdm = request.getParameter("ehAdm");
 
-		/*
-		 * Date dataAbertura = null; try { SimpleDateFormat sdf = new
-		 * SimpleDateFormat("dd/MM/yyyy"); dataAbertura = sdf.parse(paramDataEmpresa); }
-		 * catch (ParseException e) { throw new ServletException(e); }
-		 */
 
 		Usuario usuario = new Usuario();
-		// convertendo data para string
 		SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
-		// Date data = formato.parse("23/11/2015");
-		// Date data = formato.format("23/11/2015");
 
 
 		usuario.setNome(nome);
@@ -58,11 +49,10 @@ public class NovoUsuario implements Acao {
 			usuario.setIsAdm(false);
 		}
 
-		UsuarioService us = new UsuarioService();
 		Boolean validaInsere;
 		if (senha.equals(confirmaSenha)) {
 			try {
-				validaInsere = us.inserir(usuario);
+				validaInsere = UsuarioService.inserir(usuario);
 				if (validaInsere) {
 					System.out.println("Inserido com sucesso");
 				} else {

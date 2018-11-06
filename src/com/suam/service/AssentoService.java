@@ -64,14 +64,14 @@ public class AssentoService {
 		return true;
 	}
 
-	public static List<Assento> ListaAssentos(Voo voo) throws SQLException {
+	public static List<Assento> ListaAssentos(Integer idVoo) throws SQLException {
 		Connection conexao = ConnectionFactory.getConnection();
 		List<Assento> listaAssento = new ArrayList<Assento>();
 
 		String sql = "select * from assento where vooid_voo=?";
 		try {
 			PreparedStatement ps = conexao.prepareStatement(sql);
-			ps.setInt(1, voo.getIdVoo());
+			ps.setInt(1, idVoo);
 
 			ResultSet rs = ps.executeQuery();
 

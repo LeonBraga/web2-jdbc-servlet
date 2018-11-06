@@ -20,8 +20,6 @@
 			<br>
 			Ida: <input type="text" name="ida" value="<fmt:formatDate value="${voo.ida}" pattern="dd/MM/yyyy"/>" />
 			<br>
-			Volta:<input type="text" name="volta" value="<fmt:formatDate value="${voo.volta}" pattern="dd/MM/yyyy"/>"/>
-			<br> 
 			Confirmação:<input type="text" name="confirmacao" value="${voo.confirmacao}"/>
 		</c:if>
 		<br>

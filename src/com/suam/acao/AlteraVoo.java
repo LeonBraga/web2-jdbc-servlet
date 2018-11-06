@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -23,7 +22,6 @@ public class AlteraVoo implements Acao {
 		String origem = request.getParameter("origem");
 		String destino = request.getParameter("destino");
 		String ida = request.getParameter("ida");
-		String volta = request.getParameter("volta");
 		String confirmacao = request.getParameter("confirmacao");
 		String idVoo = request.getParameter("idVoo");
 		//Integer idVoo = Integer.valueOf(paramId);
@@ -37,23 +35,14 @@ public class AlteraVoo implements Acao {
 			e.printStackTrace();
 		}
 
-		// convertendo data para string
 		SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
-		// Date data = formato.parse("23/11/2015");
-		// Date data = formato.format("23/11/2015");
-
+		
 		try {
 			voo.setIda(formato.parse(ida));
 		} catch (ParseException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-		try {
-			voo.setVolta(formato.parse(volta));
-		} catch (ParseException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
+		
 		if (confirmacao.equalsIgnoreCase("TRUE")) {
 			voo.setConfirmacao(true);
 		} else {
@@ -62,13 +51,11 @@ public class AlteraVoo implements Acao {
 		voo.setOrigem(origem);
 		voo.setDestino(destino);
 
-		VooService vooS = new VooService();
 		Boolean validaInsere;
 
 		try {
-			validaInsere = vooS.update(voo);
+			validaInsere = VooService.update(voo);
 			if (validaInsere) {
-				System.out.println("ATUALIZADO com sucesso");
 			} else {
 				request.setAttribute("voo", voo);
 				return "forward:formAlteraVoo.jsp";

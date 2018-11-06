@@ -8,26 +8,27 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.suam.bean.Voo;
-import com.suam.service.VooService;
+import com.suam.bean.Assento;
+import com.suam.service.AssentoService;
 
-public class ListaVoo implements Acao {
+public class ListaAssento implements Acao {
 
 	public String executa(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
+		
 		System.out.println("AÇÃO = LISTANDO VOOS");
-
-		List<Voo> listaVoos = null;
+		String vooIdParam = request.getParameter("vooId");
+		Integer vooId =Integer.valueOf(vooIdParam);
+		
+		List<Assento> listaAssentos = null;
 		try {
-			listaVoos = VooService.ListaVoo();
+			listaAssentos = AssentoService.ListaAssentos(vooId);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		
-		
-		request.setAttribute("voos", listaVoos);
-		return "forward:listaVoos.jsp";
+		request.setAttribute("voos", listaAssentos);
+		return "forward:listaAssentos.jsp";
 	}
 
 }

@@ -6,12 +6,10 @@
 	<c:if test="${usuarioLogado.isAdm ==  'TRUE'}">
 		<h3>MENU de Administrador do Sistema</h3>
 		<p>Usuario ${usuarioLogado.nome} com privilegios de Administrador.</p>
-		<a href="entrada?acao=FormNovoUsuario">NOVO USUARIO</a>
+		<a href="entrada?acao=FormNovoUsuario">Novo Usuário</a>
 		descrição:Tela de CRUD Administrador do Sistema
 		<br>
-		<a href="entrada?acao=ListaCartaoDeCredito">LISTAR TODOS OS CARTOES</a>
-		<br>
-		<a href="entrada?acao=ListaUsuario">LISTAR TODOS OS USUÁRIOS</a>
+		<a href="entrada?acao=ListaUsuario">Listar usuários cadastrados no sistema</a>
 		descrição:Tela de CRUD Administrador do Sistema
 		<br>
 		<a href="entrada?acao=ListaVoo">Tela administração de Vôos</a>

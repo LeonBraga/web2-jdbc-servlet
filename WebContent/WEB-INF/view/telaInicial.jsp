@@ -21,12 +21,10 @@
 	<c:if test="${usuarioLogado.isAdm ==  'TRUE'}">
 		<h3>Administrador do Sistema</h3>
 		<p>Usuario ${usuarioLogado.nome} com privilegios de Administrador.</p>
-		<a href="entrada?acao=FormNovoUsuario">NOVO USUARIO</a>
+		<a href="entrada?acao=FormNovoUsuario">Novo Usuário</a>
 		descrição:Tela de CRUD Administrador do Sistema
 		<br>
-		<a href="entrada?acao=ListaCartaoDeCredito">LISTAR TODOS OS CARTOES</a>
-		<br>
-		<a href="entrada?acao=ListaUsuario">LISTAR TODOS OS USUÁRIOS</a>
+		<a href="entrada?acao=ListaUsuario">Listar usuários cadastrados no sistema</a>
 		descrição:Tela de CRUD Administrador do Sistema
 		<br>
 		<a href="entrada?acao=ListaVoo">Tela administração de Vôos</a>
@@ -35,8 +33,10 @@
 		<a href="entrada?acao=">Tela de acompanhamento dos pedidos de vôos</a>
 		<br>
 		</c:if>
-	<br>
-	<c:if test="${usuarioLogado.isAdm ==  'FALSE'}">
+		<br>
+		<br>
+	<h3>Para teste o adm ira ver opções disponiveis para clientes também.</h3>
+	<c:if test="${usuarioLogado.isAdm ==  'FALSE' || usuarioLogado.isAdm ==  'TRUE'}">
 		<h3>Cliente</h3>
 		<a href="entrada?acao=MostraUsuario&id=${usuarioLogado.id}">Alterar Cadastro do Usuário</a>
 		descrição: Telas de CRUD Cliente

@@ -38,7 +38,7 @@ public class ListaCartaoDeCredito implements Acao {
 		}
 		
 		request.setAttribute("cartoes", listaCartao);
-		return "forward:listaCartoes.jsp";
+		return "forward:listaCartoes_JSP_PARA_TESTE.jsp";
 	}
 
 }
