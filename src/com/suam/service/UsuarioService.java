@@ -18,11 +18,10 @@ public class UsuarioService {
 	public static boolean inserir(Usuario usuario) throws SQLException {
 		Connection conexao = ConnectionFactory.getConnection();
 
-		// Trecho de código para Validar se existe usuário com mesmo login no banco.
+		// Código para Validar se existe usuário com mesmo login no banco.
 		List<Usuario> listaUsuarios = ListaUsuarios();
 		for (Usuario u : listaUsuarios) {
 			if (u.getLogin().equals(usuario.getLogin())) {
-				System.out.println("Usuario com login já cadastrado!");
 				return false;
 			}
 		}
@@ -49,16 +48,11 @@ public class UsuarioService {
 
 			ps.execute();
 			conexao.commit();
-			System.out.println("INSERT REALIZADO COM SUCESSO! ==> tabela usuario");
 		} catch (SQLException e) {
-			// Erro, provoca um Rollback (volta ao estado anterior do banco)
-			System.out.println("ERRO ROLLBACK" + e);
 			conexao.rollback();
 			e.printStackTrace();
 			throw new SQLException();
 		} finally {
-			// fechar a conexão
-			System.out.println("FECHANDO CONEXAO: ");
 			conexao.close();
 		}
 		return true;
@@ -67,7 +61,7 @@ public class UsuarioService {
 	public static Boolean update(Usuario usuario) throws SQLException {
 		Connection conexao = ConnectionFactory.getConnection();
 
-		// Trecho de código para Validar se existe usuário com mesmo login no banco.
+		// Código para Validar se existe usuário com mesmo login no banco.
 		List<Usuario> listaUsuarios = ListaUsuarios();
 
 		for (Usuario u : listaUsuarios) {
@@ -75,25 +69,21 @@ public class UsuarioService {
 				if (u.getLogin().equals(usuario.getLogin())) {
 					System.out.println("Usuario com login já cadastrado!");
 					System.out.println("CORRIGIR LOGIN!!");
-					// retornar um redirect para página de edição;
 					return false;
 				}
 			}
-			// o else se dá com a execução normal do método de inserção, porem temos que
-			// retornar uma string no final da execução.
 		}
 
 		String sql = "UPDATE usuario SET nome = ?, sobrenome = ?, endereco = ?,  senha = ?, login = ?, dataNascimento = ?, isadm = ? WHERE idusuario = ?";
 
-		// convertendo data para string
 		SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
-		// Date data = formato.parse("23/11/2015");
-		// Date data = formato.format("23/11/2015");
 
-		System.out.println("Usuario a ser atualizado: " + usuario.getNome() + " - " + usuario.getSobrenome() + " - "
-				+ usuario.getEndereco() + " - " + usuario.getSenha() + " - " + usuario.getLogin() + " - "
-				+ formato.format(usuario.getDataNascimento()) + " - " + usuario.getIsAdm());
-
+		/*
+		 * System.out.println("Usuario a ser atualizado: " + usuario.getNome() + " - " +
+		 * usuario.getSobrenome() + " - " + usuario.getEndereco() + " - " +
+		 * usuario.getSenha() + " - " + usuario.getLogin() + " - " +
+		 * formato.format(usuario.getDataNascimento()) + " - " + usuario.getIsAdm());
+		 */
 		try {
 			PreparedStatement ps = conexao.prepareStatement(sql);
 			ps.setString(1, usuario.getNome());
@@ -106,18 +96,13 @@ public class UsuarioService {
 			String id = usuario.getId().toString();
 			ps.setString(8, id);
 
-			System.out.println("PS UPDATE: " + ps);
 			ps.execute();
 			conexao.commit();
-			System.out.println("UPDATE REALIZADO COM SUCESSO!  ==> tabela usuario");
 		} catch (SQLException e) {
-			// Erro, provoca um Rollback (volta ao estado anterior do banco)
-
 			conexao.rollback();
 			e.printStackTrace();
 			throw new SQLException();
 		} finally {
-			// fechar a conexão
 			conexao.close();
 		}
 		return true;
@@ -133,14 +118,9 @@ public class UsuarioService {
 
 		ResultSet rs = statement.getResultSet();
 
-		// convertendo data para string
 		SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
-		// Date data = formato.parse("23/11/2015");
-		// Date data = formato.format("23/11/2015");
 
 		while (rs.next()) {
-
-			// adicionando na lista
 			Usuario usuario = new Usuario();
 			usuario.setId(rs.getInt("idusuario"));
 			usuario.setNome(rs.getString("nome"));
@@ -157,16 +137,17 @@ public class UsuarioService {
 			usuario.setIsAdm(rs.getBoolean("isAdm"));
 			listaUsuario.add(usuario);
 
-			// imprimindo do objeto
-			System.out.println("Usuario adicionado a lista: " + usuario.getNome() + " - " + usuario.getSobrenome()
-					+ " - " + usuario.getEndereco() + " - " + usuario.getSenha() + " - " + usuario.getLogin() + " - "
-					+ formato.format(usuario.getDataNascimento()) + " - " + usuario.getIsAdm() + "\n");
-		}
+			/*
+			 * System.out.println("Usuario adicionado a lista: " + usuario.getNome() + " - "
+			 * + usuario.getSobrenome() + " - " + usuario.getEndereco() + " - " +
+			 * usuario.getSenha() + " - " + usuario.getLogin() + " - " +
+			 * formato.format(usuario.getDataNascimento()) + " - " + usuario.getIsAdm() +
+			 * "\n");
+			 */ }
 
 		rs.close();
 		statement.close();
 		connection.close();
-		System.out.println("LISTA(SELECT) CRIADA COM SUCESSO! ==> tabela usuario");
 		return listaUsuario;
 	}
 
@@ -183,19 +164,13 @@ public class UsuarioService {
 
 			String id = usuario.getId().toString();
 			ps.setString(1, id);
-
-			System.out.println("PS DELETE: " + ps);
 			ps.execute();
 			conexao.commit();
-			System.out.println("DELETE REALIZADO COM SUCESSO!");
 		} catch (SQLException e) {
-			// Erro, provoca um Rollback (volta ao estado anterior do banco)
-
 			conexao.rollback();
 			e.printStackTrace();
 			throw new SQLException();
 		} finally {
-			// fechar a conexão
 			conexao.close();
 		}
 	}
@@ -215,12 +190,9 @@ public class UsuarioService {
 			System.out.println("CONSULTAR SELECT: " + ps);
 			ResultSet rs = ps.executeQuery();
 
-			// convertendo data para string
 			SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
-			// Date data = formato.parse("23/11/2015");
 
 			while (rs.next()) {
-				// adicionando na lista
 				Usuario usuario = new Usuario();
 				usuario.setId(rs.getInt("idusuario"));
 				usuario.setNome(rs.getString("nome"));
@@ -239,13 +211,11 @@ public class UsuarioService {
 
 			}
 			// conexao.commit();
-			System.out.println("SELECT REALIZADO COM SUCESSO!  ==> tabela usuario");
 		} catch (SQLException e) {
-			// Erro, provoca um Rollback (volta ao estado anterior do banco)
 			System.out.println("ERRO: " + e);
 			// conexao.rollback();
 		} finally {
-			 conexao.close();
+			conexao.close();
 		}
 		return listaUsuario;
 	}

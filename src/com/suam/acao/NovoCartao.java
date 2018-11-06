@@ -51,7 +51,7 @@ public class NovoCartao implements Acao {
 		
 		Boolean validaInsere;
 			try {
-				validaInsere = cc.inserir(cartao);
+				validaInsere = cc.inserirCartao(cartao);
 				if (validaInsere) {
 					System.out.println("Inserido com sucesso");
 				} else {

@@ -4,9 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,8 +27,6 @@ public class AssentoService {
 			ps.execute();
 			conexao.commit();
 		} catch (SQLException e) {
-			// Erro, provoca um Rollback (volta ao estado anterior do banco)
-			System.out.println("ERRO ROLLBACK" + e);
 			conexao.rollback();
 			e.printStackTrace();
 			throw new SQLException();
@@ -56,60 +52,40 @@ public class AssentoService {
 			ps.setInt(2, assento.getIdVoo());
 			ps.setInt(1, assento.getNumeroAssento());
 
-			System.out.println("PS UPDATE: " + ps);
 			ps.execute();
 			conexao.commit();
-			System.out.println("UPDATE REALIZADO COM SUCESSO ==>tabela voo!");
 		} catch (SQLException e) {
-			// Erro, provoca um Rollback (volta ao estado anterior do banco)
-
 			conexao.rollback();
 			e.printStackTrace();
 			throw new SQLException();
 		} finally {
-			// fechar a conexão
 			conexao.close();
 		}
 		return true;
 	}
 
-	public static List<Voo> ListaAssentos(Voo voo) throws SQLException {
+	public static List<Assento> ListaAssentos(Voo voo) throws SQLException {
+		Connection conexao = ConnectionFactory.getConnection();
+		List<Assento> listaAssento = new ArrayList<Assento>();
 
-		Connection connection = ConnectionFactory.getConnection();
-		List<Voo> listaVoos = new ArrayList<Voo>();
+		String sql = "select * from assento where vooid_voo=?";
+		try {
+			PreparedStatement ps = conexao.prepareStatement(sql);
+			ps.setInt(1, voo.getIdVoo());
 
-		Statement statement = connection.createStatement();
-		boolean resultado = statement.execute("select * from assento where vooid_voo");
+			ResultSet rs = ps.executeQuery();
 
-		ResultSet rs = statement.getResultSet();
+			while (rs.next()) {
+				Assento assento = new Assento();
+				assento.setNumeroAssento(rs.getInt("assento"));
+				assento.setIdVoo(rs.getInt("vooid_voo"));
+				assento.setOcupado(rs.getBoolean("ocupado"));
 
-		while (rs.next()) {
-			// adicionando na lista
-			Assento assento = new Assento();
-			assento.setIdVoo(rs.getInt));
-			try {
-				voo.setIda(formato.parse(rs.getString("ida")));
-			} catch (ParseException e) {
-				e.printStackTrace();
+				listaAssento.add(assento);
 			}
-
-			try {
-				voo.setVolta(formato.parse(rs.getString("volta")));
-			} catch (ParseException e) {
-				e.printStackTrace();
-			}
-
-			voo.setConfirmacao(rs.getBoolean("confirmacao"));
-			voo.setOrigem(rs.getString("origem"));
-			voo.setDestino(rs.getString("destino"));
-			listaVoos.add(voo);
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
-
-		rs.close();
-		statement.close();
-		connection.close();
-		System.out.println("LISTA(SELECT) CRIADA COM SUCESSO ==> tabela voo!");
-		return listaVoos;
+		return listaAssento;
 	}
-
 }
