@@ -6,9 +6,11 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Inserir Cartao</title>
+<title>Cadastrar Cartao de Credito para ${usuarioLogado.login}</title>
 </head>
 <body>
+<p>Olá ${usuarioLogado.login}, insira os dados de seu cartão aqui:</p>
+<br>
 	<c:import url="logout-parcial.jsp"/> 
 	<form action="${linkEntradaServlet}" method="post">
 		Nome: <input type="text" name="nome" value="${usuario.nome}" readonly="true"/>

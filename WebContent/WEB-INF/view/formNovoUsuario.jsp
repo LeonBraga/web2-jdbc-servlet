@@ -8,7 +8,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>TELA DE CRIAÇÃO DE USUARIO</title>
+<title>Novo Usuário</title>
 </head>
 <body>
 	<c:import url="logout-parcial.jsp"/> 

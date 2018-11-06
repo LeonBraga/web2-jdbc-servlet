@@ -8,35 +8,28 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Lista de Voos</title>
+<title>Assentos</title>
 </head>
 <body>
-
 	Usuario Logado: ${usuarioLogado.login}
 	<br>
 	<br>
-	<br> Lista de voos:
-	<br />
-
+	<br> Assentos:
+	<br>
+	
+	Todos os assentos:
 	<c:forEach var="i" begin="1" end="100">
-         Assento<c:out value="${i}"/>
+         Assento <c:out value="${i}" />
 		<p>
-		<c:forEach items="${assentos}" var="assento">
-			<c:if test="${assento.numeroAssento}== ${i} " >
-			
-			
-			</c:if>
-
-		</c:forEach>
 	</c:forEach>
 
+	Assentos já ocupados:
 	<c:forEach items="${assentos}" var="assento">
-
-
+		<c:if test="${assento.isocupado ==  'TRUE'} ">
+			Assento ocupados <c:out value="${assento.numeroAssento}" />
+		</c:if>
 	</c:forEach>
 
-	<br>
-	<br>
 
 	<br>
 	<a href="entrada?acao=ListaAssento">REFRESH</a>

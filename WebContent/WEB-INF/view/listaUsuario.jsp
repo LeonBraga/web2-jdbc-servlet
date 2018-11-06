@@ -16,11 +16,10 @@
 	<br>
 	<br>
 	<br> Lista de usuarios:
-	<br />
+	<br/>
 	<ul>
-		
-			<c:if test="${usuarioLogado.isAdm ==  'TRUE'}">
-			<h3>Administradores</h3>
+		<c:if test="${usuarioLogado.isAdm ==  'TRUE'}">
+			<h3>Usuários administradores do sistema:</h3>
 				<c:forEach items="${usuarios}" var="usuario">	
 					<c:if test="${usuario.isAdm ==  'TRUE'}">	
 						<li>ID:${usuario.id} -NOME: ${usuario.nome} - <a
@@ -31,7 +30,6 @@
 				</c:forEach>
 			</c:if>
 			
-		
 			<h3>Clientes</h3>
 			<c:forEach items="${usuarios}" var="usuario">
 				<c:if test="${usuario.isAdm ==  'FALSE'}">	
@@ -43,18 +41,12 @@
 			</c:forEach>
 	</ul>
 	
-	<br><br><br><br>
+	<br><br>>
 	<c:if test="${usuarioLogado.isAdm ==  'TRUE'}">
 		<a href="entrada?acao=FormNovoUsuario">Novo usuário</a>
 	</c:if>
-		
-	<br>
-	<br>
-	
 	<br>
 	<a href="entrada?acao=ListaUsuario">REFRESH</a>
-	<br>
-	
 	<br>
 	<c:import url="logout-parcial.jsp" />
 </body>

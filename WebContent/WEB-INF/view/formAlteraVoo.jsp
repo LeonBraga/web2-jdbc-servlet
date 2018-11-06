@@ -8,7 +8,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>TELA DE ALTERAÇÃO DE VOO</title>
+<title>Altera cadastro do voo: ID-${voo.idVoo }</title>
 </head>
 <body>
 	<c:import url="logout-parcial.jsp"/> 

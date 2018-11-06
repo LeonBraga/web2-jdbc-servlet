@@ -8,7 +8,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>TELA DE ALTERAÇÃO DE USUARIO</title>
+<title>Alterar cadastro de cartão de credito</title>
 </head>
 <body>
 	<c:import url="logout-parcial.jsp"/> 

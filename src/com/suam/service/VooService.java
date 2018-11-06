@@ -45,7 +45,7 @@ public class VooService {
 	public static Boolean update(Voo voo) throws SQLException {
 		Connection conexao = ConnectionFactory.getConnection();
 
-		String sql = "UPDATE voo SET  ida = ?,origem = ?,  destino = ?, confirmacao = ? WHERE idVoo = ?";
+		String sql = "UPDATE voo SET  ida = ?,origem = ?,  destino = ?, confirmacao = ? WHERE idVooIda = ?";
 
 		SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
 
@@ -114,7 +114,7 @@ public class VooService {
 	public static void delete(Voo voo) throws SQLException {
 		Connection conexao = ConnectionFactory.getConnection();
 
-		String sql = "DELETE FROM voo WHERE idVoo = ?";
+		String sql = "DELETE FROM voo WHERE idVooIda = ?";
 		String sql1 = "DELETE FROM ASSENTO WHERE voo_idVoo =?";
 		String id = voo.getIdVoo().toString();
 		try {

@@ -23,8 +23,8 @@ public class AlteraVoo implements Acao {
 		String destino = request.getParameter("destino");
 		String ida = request.getParameter("ida");
 		String confirmacao = request.getParameter("confirmacao");
-		String idVoo = request.getParameter("idVoo");
-		//Integer idVoo = Integer.valueOf(paramId);
+		String idVoo = request.getParameter("idVooIda");
+		//Integer idVooIda = Integer.valueOf(paramId);
 
 		System.out.println("acao altera voo: " + idVoo);
 

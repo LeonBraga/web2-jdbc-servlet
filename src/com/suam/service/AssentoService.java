@@ -40,7 +40,7 @@ public class AssentoService {
 	public static Boolean update(Assento assento) throws SQLException {
 		Connection conexao = ConnectionFactory.getConnection();
 
-		String sql = "UPDATE assento SET  ocupado = ? WHERE Voo_idVoo = ? and idassento =?";
+		String sql = "UPDATE assento SET  ocupado = ? WHERE voo_idVoo = ? and idassento =?";
 
 		try {
 			PreparedStatement ps = conexao.prepareStatement(sql);

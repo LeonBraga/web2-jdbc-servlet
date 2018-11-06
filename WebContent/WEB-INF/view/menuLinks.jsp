@@ -4,16 +4,13 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 	<c:if test="${usuarioLogado.isAdm ==  'TRUE'}">
-		<h3>MENU de Administrador do Sistema</h3>
+		<h3>Administrador do Sistema</h3>
 		<p>Usuario ${usuarioLogado.nome} com privilegios de Administrador.</p>
-		<a href="entrada?acao=FormNovoUsuario">Novo Usuário</a>
-		descrição:Tela de CRUD Administrador do Sistema
+		<a href="entrada?acao=FormNovoUsuario">Criar Usuário</a>
 		<br>
-		<a href="entrada?acao=ListaUsuario">Listar usuários cadastrados no sistema</a>
-		descrição:Tela de CRUD Administrador do Sistema
+		<a href="entrada?acao=ListaUsuario">Usuários cadastrados no sistema</a>
 		<br>
 		<a href="entrada?acao=ListaVoo">Tela administração de Vôos</a>
-		descrição: Tela de CRUD de Vôos
 		<br>
 		<a href="entrada?acao=">Tela de acompanhamento dos pedidos de vôos</a>
 		<br>

@@ -17,29 +17,28 @@
 	<br>
 	<br>
 	<br>
-
+	
+	<a href="entrada?acao=ListaAssentos">TESTE LISTA DE ASSENTOS</a>
+		<br>
 	<c:if test="${usuarioLogado.isAdm ==  'TRUE'}">
 		<h3>Administrador do Sistema</h3>
 		<p>Usuario ${usuarioLogado.nome} com privilegios de Administrador.</p>
-		<a href="entrada?acao=FormNovoUsuario">Novo Usuário</a>
-		descrição:Tela de CRUD Administrador do Sistema
+		<a href="entrada?acao=FormNovoUsuario">Criar Usuário</a>
 		<br>
-		<a href="entrada?acao=ListaUsuario">Listar usuários cadastrados no sistema</a>
-		descrição:Tela de CRUD Administrador do Sistema
+		<a href="entrada?acao=ListaUsuario">Usuários cadastrados no sistema</a>
 		<br>
 		<a href="entrada?acao=ListaVoo">Tela administração de Vôos</a>
-		descrição: Tela de CRUD de Vôos
 		<br>
 		<a href="entrada?acao=">Tela de acompanhamento dos pedidos de vôos</a>
 		<br>
 		</c:if>
 		<br>
 		<br>
+		
 	<h3>Para teste o adm ira ver opções disponiveis para clientes também.</h3>
 	<c:if test="${usuarioLogado.isAdm ==  'FALSE' || usuarioLogado.isAdm ==  'TRUE'}">
 		<h3>Cliente</h3>
 		<a href="entrada?acao=MostraUsuario&id=${usuarioLogado.id}">Alterar Cadastro do Usuário</a>
-		descrição: Telas de CRUD Cliente
 		<br>
 		<a href="entrada?acao=">Tela de Compra de passagem Aérea</a>
 		decrição: Tela de Compra de passagem Aérea OBS: CRIAR Tela de finalização da compra
