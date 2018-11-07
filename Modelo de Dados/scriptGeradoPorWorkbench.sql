@@ -8,19 +8,19 @@ SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
 
 -- -----------------------------------------------------
--- Schema web2db
+-- Schema dbweb2
 -- -----------------------------------------------------
 
 -- -----------------------------------------------------
--- Schema web2db
+-- Schema dbweb2
 -- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `web2db` ;
-USE `web2db` ;
+CREATE SCHEMA IF NOT EXISTS `dbweb2` ;
+USE `dbweb2` ;
 
 -- -----------------------------------------------------
--- Table `web2db`.`USUARIO`
+-- Table `dbweb2`.`USUARIO`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `web2db`.`USUARIO` (
+CREATE TABLE IF NOT EXISTS `dbweb2`.`USUARIO` (
   `IDUSUARIO` INT NOT NULL AUTO_INCREMENT,
   `NOME` VARCHAR(25) NOT NULL,
   `SOBRENOME` VARCHAR(50) NOT NULL,
@@ -28,15 +28,15 @@ CREATE TABLE IF NOT EXISTS `web2db`.`USUARIO` (
   `SENHA` VARCHAR(12) NOT NULL,
   `LOGIN` VARCHAR(20) NOT NULL,
   `DATANASCIMENTO` VARCHAR(12) NOT NULL,
-  `ISADM` TINYINT NOT NULL,
+  `ISADM` TINYINT NOT NULL DEFAULT 0,
   PRIMARY KEY (`IDUSUARIO`))
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `web2db`.`CARTAODECREDITO`
+-- Table `dbweb2`.`CARTAODECREDITO`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `web2db`.`CARTAODECREDITO` (
+CREATE TABLE IF NOT EXISTS `dbweb2`.`CARTAODECREDITO` (
   `NUMEROCARTAO` VARCHAR(19) NOT NULL,
   `DATAVENCIMENTO` VARCHAR(12) NOT NULL,
   `USUARIO_IDUSUARIO` INT NOT NULL,
@@ -44,16 +44,15 @@ CREATE TABLE IF NOT EXISTS `web2db`.`CARTAODECREDITO` (
   INDEX (`USUARIO_IDUSUARIO` ASC),
   CONSTRAINT ``
     FOREIGN KEY (`USUARIO_IDUSUARIO`)
-    REFERENCES `web2db`.`USUARIO` (`IDUSUARIO`));
+    REFERENCES `dbweb2`.`USUARIO` (`IDUSUARIO`));
 
 
 -- -----------------------------------------------------
--- Table `web2db`.`voo`
+-- Table `dbweb2`.`voo`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `web2db`.`voo` (
+CREATE TABLE IF NOT EXISTS `dbweb2`.`voo` (
   `idvoo` INT NOT NULL AUTO_INCREMENT,
   `ida` DATETIME NOT NULL,
-  `volta` DATETIME NULL DEFAULT NULL,
   `origem` VARCHAR(100) NOT NULL,
   `destino` VARCHAR(100) NOT NULL,
   `confirmacao` TINYINT(1) NOT NULL DEFAULT 0,
@@ -62,9 +61,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `web2db`.`compraVoo`
+-- Table `dbweb2`.`compraVoo`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `web2db`.`compraVoo` (
+CREATE TABLE IF NOT EXISTS `dbweb2`.`compraVoo` (
   `idcompraVoo` INT NOT NULL AUTO_INCREMENT,
   `USUARIO_IDUSUARIO` INT NOT NULL,
   `voo_idvoo` INT NOT NULL,
@@ -74,21 +73,21 @@ CREATE TABLE IF NOT EXISTS `web2db`.`compraVoo` (
   INDEX `fk_compraVoo_voo1_idx` (`voo_idvoo` ASC),
   CONSTRAINT `fk_compraVoo_USUARIO1`
     FOREIGN KEY (`USUARIO_IDUSUARIO`)
-    REFERENCES `web2db`.`USUARIO` (`IDUSUARIO`)
+    REFERENCES `dbweb2`.`USUARIO` (`IDUSUARIO`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_compraVoo_voo1`
     FOREIGN KEY (`voo_idvoo`)
-    REFERENCES `web2db`.`voo` (`idvoo`)
+    REFERENCES `dbweb2`.`voo` (`idvoo`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `web2db`.`assento`
+-- Table `dbweb2`.`assento`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `web2db`.`assento` (
+CREATE TABLE IF NOT EXISTS `dbweb2`.`assento` (
   `idassento` INT NOT NULL,
   `ocupado` TINYINT(1) NOT NULL DEFAULT 0,
   `voo_idvoo` INT NOT NULL,
@@ -96,7 +95,7 @@ CREATE TABLE IF NOT EXISTS `web2db`.`assento` (
   INDEX `fk_assento_voo1_idx` (`voo_idvoo` ASC),
   CONSTRAINT `fk_assento_voo1`
     FOREIGN KEY (`voo_idvoo`)
-    REFERENCES `web2db`.`voo` (`idvoo`)
+    REFERENCES `dbweb2`.`voo` (`idvoo`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;

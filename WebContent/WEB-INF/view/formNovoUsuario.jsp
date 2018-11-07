@@ -26,7 +26,9 @@
 		<br>
 		Confirma Senha:<input type="text" name="confirmaSenha" value="">
 		<br>
-		É Administrador:<input type="text" name="ehAdm" value="${usuario.isAdm}">
+		Usuário possui perfil Administrador:<input type="checkbox"  name="ehAdm" value="${usuario.isAdm}"/>
+				<%--<input type="text" name="ehAdm" value="${usuario.isAdm}"> --%>
+				<br>
 		<br>
 		Data Nascimento: <input type="text" name="data"  value="<fmt:formatDate value="${usuario.dataNascimento}" pattern="dd/MM/yyyy"/>"/>
 		<br>

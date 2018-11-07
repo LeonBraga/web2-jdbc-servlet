@@ -114,7 +114,7 @@ public class UsuarioService {
 		List<Usuario> listaUsuario = new ArrayList<Usuario>();
 
 		Statement statement = connection.createStatement();
-		boolean resultado = statement.execute("select * from usuario");
+		statement.execute("select * from usuario");
 
 		ResultSet rs = statement.getResultSet();
 

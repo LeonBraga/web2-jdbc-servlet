@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 
 import com.suam.bean.Voo;
+import com.suam.service.AssentoService;
 import com.suam.service.VooService;
 
 public class NovoVoo implements Acao {
@@ -55,9 +56,14 @@ public class NovoVoo implements Acao {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-
+		
+		try {
+			AssentoService.inserirAssentosPorVoo();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
 		// request.setAttribute("voo", voo);
 		return "redirect:entrada?acao=ListaVoo";
-
 	}
 }

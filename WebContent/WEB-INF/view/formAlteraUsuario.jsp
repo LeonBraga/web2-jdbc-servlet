@@ -29,17 +29,28 @@
 		Data Nascimento: <input type="text" name="data"  value="<fmt:formatDate value="${usuario.dataNascimento }" pattern="dd/MM/yyyy"/>"/>
 		<br>
 		<c:if test="${usuarioLogado.isAdm=='TRUE'}">
-			Usuario possui perfil administrador:<input type="text" name="ehAdm" value="${usuario.isAdm}">
-			<br>
+			Usuario possui perfil administrador:
+			<c:if test="${usuario.isAdm=='TRUE'}">
+				<input type="checkbox"  name="ehAdm" value="${usuario.isAdm}" checked="checked"/>
+				<%--<input type="text" name="ehAdm" value="${usuario.isAdm}"> --%>
+				<br>
+			</c:if>
+			<c:if test="${usuario.isAdm=='FALSE'}">
+				<input type="checkbox"  name="ehAdm" value="${usuario.isAdm}"/>
+				<%--<input type="text" name="ehAdm" value="${usuario.isAdm}"> --%>
+				<br>
+			</c:if>
 		</c:if>
 		<c:if test="${usuarioLogado.isAdm=='FALSE'}">
-			Usuario possui perfil administrador:<input type="text" name="ehAdm" value="${usuario.isAdm}" readonly="readonly">
+			Usuario possui perfil administrador:
+			<input type="checkbox"  name="ehAdm" value="${usuario.isAdm}" readonly="readonly"/>
+			<%-- <input type="text" name="ehAdm" value="${usuario.isAdm}" readonly="readonly"> --%>
 			<br>
 		</c:if>
 		<br>
 		 <c:if test="${usuario.isAdm ==  'FALSE'}"> 
 			<c:if test="${cartoes!=null}">	
-				<h3>Lista de cartões de ${usuarioLogado.nome}</h3> 
+				<h3>Lista de cartões de ${usuario.nome}</h3> 
 					<c:forEach items="${cartoes}" var="cartao">
 						<c:if test="${usuario.id ==  cartao.idUser}">
 							<li>

@@ -4,7 +4,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 	<c:if test="${usuarioLogado.isAdm ==  'TRUE'}">
-		<h3>Administrador do Sistema</h3>
+		<h3>Menu do Administrador do Sistema</h3>
 		<p>Usuario ${usuarioLogado.nome} com privilegios de Administrador.</p>
 		<a href="entrada?acao=FormNovoUsuario">Criar Usuário</a>
 		<br>
@@ -17,7 +17,7 @@
 		</c:if>
 	<br>
 	<c:if test="${usuarioLogado.isAdm ==  'FALSE'}">
-		<h3>MENU de Cliente</h3>
+		<h3>Menu de Cliente</h3>
 		<a href="entrada?acao=MostraUsuario&id=${usuarioLogado.id}">Alterar Cadastro do Usuário</a>
 		descrição: Telas de CRUD Cliente
 		<br>

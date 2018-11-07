@@ -114,7 +114,7 @@ public class VooService {
 	public static void delete(Voo voo) throws SQLException {
 		Connection conexao = ConnectionFactory.getConnection();
 
-		String sql = "DELETE FROM voo WHERE idVooIda = ?";
+		String sql = "DELETE FROM voo WHERE idVoo = ?";
 		String sql1 = "DELETE FROM ASSENTO WHERE voo_idVoo =?";
 		String id = voo.getIdVoo().toString();
 		try {

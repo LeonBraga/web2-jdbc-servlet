@@ -4,10 +4,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-
 import com.suam.bean.Assento;
 import com.suam.bean.Voo;
 import com.suam.factory.ConnectionFactory;
@@ -31,8 +30,6 @@ public class AssentoService {
 			e.printStackTrace();
 			throw new SQLException();
 		} finally {
-			// fechar a conexão
-			System.out.println("FECHANDO CONEXAO: ");
 			conexao.close();
 		}
 	}
@@ -87,5 +84,44 @@ public class AssentoService {
 			e.printStackTrace();
 		}
 		return listaAssento;
+	}
+
+	public static void inserirAssentosPorVoo() throws SQLException {
+		Connection conexao = ConnectionFactory.getConnection();
+		Voo voo = new Voo();
+		// Statement statement = conexao.createStatement();
+		// statement.execute("SELECT * FROM voo WHERE idvoo= (SELECT MAX(idvoo) FROM
+		// voo)");
+		// ResultSet rs = statement.getResultSet();
+
+		String sql = "INSERT INTO assento VALUES(?,false,?)";
+		String sql1 = "SELECT * FROM voo WHERE idvoo= (SELECT MAX(idvoo) FROM voo)";
+		try {
+			PreparedStatement ps = conexao.prepareStatement(sql1);
+			ps.execute();
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				voo.setIdVoo(rs.getInt("idVoo"));
+				rs.close();
+			}
+		} catch (SQLException e) {
+
+		}
+
+		for (int assento = 0; assento < 100; assento++) {
+			try {
+				PreparedStatement ps = conexao.prepareStatement(sql);
+				ps.setInt(1, assento);
+				ps.setInt(2, voo.getIdVoo());
+
+				ps.execute();
+				conexao.commit();
+			} catch (SQLException e) {
+				conexao.rollback();
+				e.printStackTrace();
+				throw new SQLException();
+			}
+		}
+		conexao.close();
 	}
 }

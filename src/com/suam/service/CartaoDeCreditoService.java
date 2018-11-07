@@ -140,35 +140,6 @@ public class CartaoDeCreditoService {
 		}
 	}
 
-//	public static List<CartaoDeCredito> consultarCartao(String numero, String idUser) throws SQLException {
-//		System.out.println("CONSULTAR ==> NUMERO: " + numero + idUser);
-//		Connection conexao = ConnectionFactory.getConnection();
-//		List<CartaoDeCredito> listaCartoes = new ArrayList<CartaoDeCredito>();
-//
-//		String sql = "SELECT * FROM cartaodecredito where numerocartao=? and usuario_idusuario=?";
-//
-//		SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
-//
-//		try {
-//			PreparedStatement ps = conexao.prepareStatement(sql);
-//			ps.setString(1, numero);
-//			ps.setString(2, idUser);
-//
-//			ResultSet rs = ps.executeQuery();
-//
-//			while (rs.next()) {
-//				CartaoDeCredito cartao = new CartaoDeCredito();
-//				ps.setString(1, cartao.getNumeroCartao().toString());
-//				ps.setString(2, formato.format(cartao.getDataVencimento()));
-//				ps.setString(3, cartao.getIdUser().toString());
-//				listaCartoes.add(cartao);
-//			}
-//		} catch (SQLException e) {
-//			System.out.println("ERRO: " + e);
-//		}
-//		return listaCartoes;
-//	}
-
 	// Listar todos os cartões de um usuário.
 	public static List<CartaoDeCredito> buscaCartoesPeloIdUsuario(String idUser) throws SQLException {
 		List<CartaoDeCredito> listaCartoes = new ArrayList<CartaoDeCredito>();

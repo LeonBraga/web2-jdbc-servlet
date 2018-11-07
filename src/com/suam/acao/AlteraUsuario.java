@@ -35,15 +35,11 @@ public class AlteraUsuario implements Acao {
 		try {
 			usuario = UsuarioService.buscaUsuarioPelaId(id);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
-		// convertendo data para string
 		SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
-		// Date data = formato.parse("23/11/2015");
-		// Date data = formato.format("23/11/2015");
-		
+
 		usuario.setNome(nome);
 		usuario.setSobrenome(sobrenome);
 		usuario.setEndereco(endereco);
@@ -54,15 +50,17 @@ public class AlteraUsuario implements Acao {
 		} catch (ParseException e1) {
 			e1.printStackTrace();
 		}
-		if (ehAdm.equalsIgnoreCase("TRUE")) {
+		if (ehAdm != null) {
+			// if (ehAdm.equalsIgnoreCase("TRUE")) {
 			usuario.setIsAdm(true);
+			// }
 		} else {
 			usuario.setIsAdm(false);
 		}
 
 		/*
 		 * UsuarioService us = new UsuarioService(); try { us.update(usuario); } catch
-		 * (SQLException e) { // TODO Auto-generated catch block e.printStackTrace(); }
+		 * (SQLException e) { }
 		 */
 
 		Boolean validaInsere;
@@ -80,11 +78,6 @@ public class AlteraUsuario implements Acao {
 			e.printStackTrace();
 		}
 
-		if (usuario.getIsAdm().equals("TRUE")) {
-			return "redirect:entrada?acao=ListaUsuario";
-		} else {
-			return "redirect:entrada?acao=MostraUsuario&id=" + usuario.getId();
-		}
-
+		return "redirect:entrada?acao=MostraUsuario&id=" + usuario.getId();
 	}
 }

@@ -43,8 +43,10 @@ public class NovoUsuario implements Acao {
 		} catch (ParseException e1) {
 			e1.printStackTrace();
 		}
-		if (ehAdm.equalsIgnoreCase("TRUE")) {
-			usuario.setIsAdm(true);
+		if (ehAdm != null) {
+			//if (ehAdm.equalsIgnoreCase("TRUE")) {
+				usuario.setIsAdm(true);
+			//}
 		} else {
 			usuario.setIsAdm(false);
 		}

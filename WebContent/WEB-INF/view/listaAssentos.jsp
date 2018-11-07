@@ -4,10 +4,12 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
+<c:url value="/entrada" var="linkEntradaServlet"/>
+
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="ISO-8859-1">
+<meta charset="UTF-8">
 <title>Assentos do voo: ${assentos.idVoo}</title>
 </head>
 <body>
@@ -18,19 +20,30 @@
 	<br>
 	
 	Todos os assentos:
-	<c:forEach var="i" begin="1" end="100">
-         Assento <c:out value="${i}" />
-		<p>
-	</c:forEach>
+	<br>
 
-	Assentos já ocupados:
+<form action="${linkEntradaServlet }" method="post">
+Assentos já ocupados:
 	<c:forEach items="${assentos}" var="assento">
 		<c:if test="${assento.isocupado ==  'TRUE'} ">
 			Assento ocupados <c:out value="${assento.numeroAssento}" />
+			input type="checkbox" nome="ocupa" value="">
 		</c:if>
 	</c:forEach>
 
+Assentos Livres:
+    <c:forEach items="${assentos}" var="assento">
+		<c:if test="${assento.isocupado ==  'FALSE'} ">
+			Assento ocupados <c:out value="${assento.numeroAssento}" />
+			<input type="checkbox" nome="ocupa" value="">
+		</c:if>
+	</c:forEach>
+	
+	<input type="hidden" name="idVoo" value="${voo.idVoo }">
+		<input type="hidden" name="acao" value="AssentoOcupa">
+		<input type="submit" /> 
 
+</form>
 	<br>
 	<a href="entrada?acao=ListaAssento">REFRESH</a>
 	<br>

@@ -1,29 +1,39 @@
 package br.com.suam.TESTE;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import com.suam.bean.Voo;
 import com.suam.factory.ConnectionFactory;
 
 public class TestaInsercao {
 
 	public static void main(String[] args) throws SQLException, ClassNotFoundException {
-		Connection connection = ConnectionFactory.getConnection();
-		Statement statement = connection.createStatement();
+		
 
-		// int resultado = statement.executeUpdate(
-		boolean resultado = statement.execute(
-				"INSERT INTO cartaodecredito (numeroCartao, dataVencimento, usuario_idusuario) VALUES ('2222222','15/01/2001','4')",
-				Statement.RETURN_GENERATED_KEYS);
-		System.out.println("RESULTADO: " + resultado);
+		
+			Connection conexao = ConnectionFactory.getConnection();
+			
+			String sql = "INSERT INTO assento VALUES(?,false,?)";
+		
 
-		/*
-		 * ResultSet generatedKeys = statement.getGeneratedKeys(); while
-		 * (generatedKeys.next()) { long id = generatedKeys.getInt("idusuario");
-		 * System.out.println("id gerado: " + id); } generatedKeys.close();
-		 */
-		statement.close();
-		connection.close();
+			for (int assento = 0; assento < 100; assento++) {
+				try {
+					PreparedStatement ps = conexao.prepareStatement(sql);
+					ps.setInt(1, assento);
+					ps.setInt(2, 5);
+
+					ps.execute();
+					conexao.commit();
+				} catch (SQLException e) {
+					conexao.rollback();
+					e.printStackTrace();
+					throw new SQLException();
+				}
+			}
+			conexao.close();
 	}
 }
