@@ -64,8 +64,8 @@ public class AssentoService {
 	public static List<Assento> ListaAssentos(Integer idVoo) throws SQLException {
 		Connection conexao = ConnectionFactory.getConnection();
 		List<Assento> listaAssento = new ArrayList<Assento>();
-
-		String sql = "select * from assento where vooid_voo=?";
+		
+		String sql = "select * from assento where voo_idvoo=?";
 		try {
 			PreparedStatement ps = conexao.prepareStatement(sql);
 			ps.setInt(1, idVoo);
@@ -74,8 +74,8 @@ public class AssentoService {
 
 			while (rs.next()) {
 				Assento assento = new Assento();
-				assento.setNumeroAssento(rs.getInt("assento"));
-				assento.setIdVoo(rs.getInt("vooid_voo"));
+				assento.setNumeroAssento(rs.getInt("idassento"));
+				assento.setIdVoo(rs.getInt("voo_idvoo"));
 				assento.setOcupado(rs.getBoolean("ocupado"));
 
 				listaAssento.add(assento);

@@ -4,46 +4,46 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
-<c:url value="/entrada" var="linkEntradaServlet"/>
+<c:url value="/entrada" var="linkEntradaServlet" />
 
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Assentos do voo: ${assentos.idVoo}</title>
+<title>Assentos </title>
 </head>
 <body>
 	Usuario Logado: ${usuarioLogado.login}
 	<br>
-	<br>
-	<br> Assentos:
-	<br>
-	
-	Todos os assentos:
+	<br> Todos os assentos:
 	<br>
 
-<form action="${linkEntradaServlet }" method="post">
-Assentos já ocupados:
-	<c:forEach items="${assentos}" var="assento">
-		<c:if test="${assento.isocupado ==  'TRUE'} ">
-			Assento ocupados <c:out value="${assento.numeroAssento}" />
-			input type="checkbox" nome="ocupa" value="">
-		</c:if>
-	</c:forEach>
+	<form action="${linkEntradaServlet }" method="post">
+		Assentos já ocupados:
+		<c:forEach items="${assentos}" var="assento">
+			<c:if test="${assento.ocupado =='true'}">
+				<br>
+				 <c:out value="${assento.numeroAssento}"/>
+				<input type="checkbox" nome="ocupa" value="">
+				<br>
+			</c:if>
+		</c:forEach>
+<br><br>
+		Assentos Livres:
+		<c:forEach items="${assentos}" var="assento">
+			 <c:if test="${assento.ocupado == 'false'}"> 
+			 	<br>
+				 <c:out value="${assento.numeroAssento}" />
+				<input type="checkbox" nome="ocupa" value="">
+				<br>
+		    </c:if> 
+		</c:forEach>
 
-Assentos Livres:
-    <c:forEach items="${assentos}" var="assento">
-		<c:if test="${assento.isocupado ==  'FALSE'} ">
-			Assento ocupados <c:out value="${assento.numeroAssento}" />
-			<input type="checkbox" nome="ocupa" value="">
-		</c:if>
-	</c:forEach>
-	
-	<input type="hidden" name="idVoo" value="${voo.idVoo }">
-		<input type="hidden" name="acao" value="AssentoOcupa">
-		<input type="submit" /> 
+		<input type="hidden" name="idVoo" value="${voo.idVoo }"> <input
+			type="hidden" name="acao" value="AssentoOcupa"> <input
+			type="submit" />
 
-</form>
+	</form>
 	<br>
 	<a href="entrada?acao=ListaAssento">REFRESH</a>
 	<br>

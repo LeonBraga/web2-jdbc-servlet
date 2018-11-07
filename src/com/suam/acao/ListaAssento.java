@@ -16,7 +16,7 @@ public class ListaAssento implements Acao {
 	public String executa(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
-		System.out.println("AÇÃO = LISTANDO VOOS");
+		System.out.println("AÇÃO = LISTANDO Assentos");
 		String vooIdParam = request.getParameter("vooId");
 		Integer vooId =Integer.valueOf(vooIdParam);
 		
@@ -27,7 +27,7 @@ public class ListaAssento implements Acao {
 			e.printStackTrace();
 		}
 		
-		request.setAttribute("voos", listaAssentos);
+		request.setAttribute("assentos", listaAssentos);
 		return "forward:listaAssentos.jsp";
 	}
 
