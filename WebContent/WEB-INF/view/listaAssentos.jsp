@@ -15,16 +15,17 @@
 <body>
 	Usuario Logado: ${usuarioLogado.login}
 	<br>
-	<br> Todos os assentos:
+	<br> Todos os assentos do voo - id: ${assento.idVoo}:
 	<br>
 
-	<form action="${linkEntradaServlet }" method="post">
+	<form action="${linkEntradaServlet }" method="get">
 		Assentos já ocupados:
 		<c:forEach items="${assentos}" var="assento">
 			<c:if test="${assento.ocupado =='true'}">
 				<br>
 				 <c:out value="${assento.numeroAssento}"/>
-				<input type="checkbox" nome="ocupa" value="">
+				<input type="hidden" nome="ocupa" value="true">
+				<input type="checkbox" nome="numeroAssento" value="${assento.numeroAssento}" checked="checked">
 				<br>
 			</c:if>
 		</c:forEach>
@@ -33,15 +34,16 @@
 		<c:forEach items="${assentos}" var="assento">
 			 <c:if test="${assento.ocupado == 'false'}"> 
 			 	<br>
-				 <c:out value="${assento.numeroAssento}" />
-				<input type="checkbox" nome="ocupa" value="">
+				 <c:out value="${assento.numeroAssento}"/>
+				<!--  <input type="hidden" nome="ocupa" value="true"> -->
+				<input type="checkbox" nome="numeroAssento" value="${assento.numeroAssento}">
 				<br>
 		    </c:if> 
 		</c:forEach>
 
-		<input type="hidden" name="idVoo" value="${voo.idVoo }"> <input
-			type="hidden" name="acao" value="AssentoOcupa"> <input
-			type="submit" />
+		<input type="hidden" name="idVooIda" value="${voo.idVoo }"> 
+		<input type="hidden" name="acao" value="AssentoOcupa">
+		 <input type="submit" />
 
 	</form>
 	<br>

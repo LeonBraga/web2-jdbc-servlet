@@ -6,7 +6,7 @@
 	<c:if test="${usuarioLogado.isAdm ==  'TRUE'}">
 		<h3>Menu do Administrador do Sistema</h3>
 		<p>Usuario ${usuarioLogado.nome} com privilegios de Administrador.</p>
-		<a href="entrada?acao=FormNovoUsuario">Criar Usuário</a>
+		<a href="entrada?acao=FormNovoUsuario">Criar novo usuário</a>
 		<br>
 		<a href="entrada?acao=ListaUsuario">Usuários cadastrados no sistema</a>
 		<br>

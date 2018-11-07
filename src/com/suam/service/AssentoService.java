@@ -85,7 +85,8 @@ public class AssentoService {
 		}
 		return listaAssento;
 	}
-
+	
+	//insere assentos ao cadastrar voos
 	public static void inserirAssentosPorVoo() throws SQLException {
 		Connection conexao = ConnectionFactory.getConnection();
 		Voo voo = new Voo();
