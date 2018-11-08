@@ -24,12 +24,12 @@ public class AssentoOcupa implements Acao {
 		Integer id = Integer.valueOf(idVoo);
 		Integer idOcupante = Integer.valueOf(ocupante);
 		
-		
 		if (numeroAssento != null ) {
 			for (String assentoNum : numeroAssento) {
 				Integer numAssento = Integer.valueOf(assentoNum);
 				assent.setIdVoo(id);
 				assent.setNumeroAssento(numAssento);
+				assent.setOcupante(idOcupante);
 				if (ocupa != null) {
 					assent.setOcupado(true);
 				} else {
@@ -49,6 +49,7 @@ public class AssentoOcupa implements Acao {
 				Integer numAssento = Integer.valueOf(assentoNum);
 				assent.setIdVoo(id);
 				assent.setNumeroAssento(numAssento);
+				assent.setOcupante(idOcupante);
 				if (desocupa != null) {
 					assent.setOcupado(false);
 				} else {

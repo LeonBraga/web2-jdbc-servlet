@@ -20,16 +20,22 @@
 	<br>
 	<br> Todos os assentos do voo - id: ${vooId}.
 	<br>
-
+<!-- SOMENTE O CLIENTE QUE OCUPOU O ASSENTO PODERÁ DESOCUPAR -->
 	<form action="${linkEntradaServlet }" method="get">
 		Assentos já ocupados: Marque para desocupar:
 		<br>
+	
 		<c:forEach items="${assentos}" var="assento">
-			<%-- <c:if test="${assento.ocupado =='true'}"> --%>
+			 <c:if test="${assento.ocupante == usuarioLogado.id}"> 
 				 <c:out value="${assento.numeroAssento}"/>
 				<input type="checkbox" name="numeroAssentoOcupado" id="numeroAssentoOcupado" value="${assento.numeroAssento}">
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			<%-- </c:if> --%>
+			 </c:if> 
+			 <c:if test="${assento.ocupante != usuarioLogado.id}"> 
+				 <c:out value="${assento.numeroAssento}"/>
+				<input type="checkbox" name="numeroAssentoOcupado" id="numeroAssentoOcupado" value="${assento.numeroAssento}" disabled="disabled">
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			 </c:if> 
 		</c:forEach>
 <br><br>
 		Assentos Livres: Marque para ocupar:

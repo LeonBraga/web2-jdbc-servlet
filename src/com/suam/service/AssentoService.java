@@ -37,7 +37,7 @@ public class AssentoService {
 	public static Boolean update(Assento assento) throws SQLException {
 		Connection conexao = ConnectionFactory.getConnection();
 
-		String sql = "UPDATE assento SET  ocupado = ? WHERE voo_idVoo = ? and idassento =?";
+		String sql = "UPDATE assento SET  ocupado = ?, usuario_idusuario = ? WHERE voo_idVoo = ? and idassento =? ";
 		
 		try {
 			PreparedStatement ps = conexao.prepareStatement(sql);
@@ -46,9 +46,11 @@ public class AssentoService {
 			} else {
 				ps.setString(1, "false");
 			}
-			ps.setInt(2, assento.getIdVoo());
-			ps.setInt(3, assento.getNumeroAssento());
-
+			ps.setInt(2, assento.getOcupante());
+			ps.setInt(3, assento.getIdVoo());
+			ps.setInt(4, assento.getNumeroAssento());
+			
+			
 			ps.execute();
 			conexao.commit();
 		} catch (SQLException e) {
@@ -77,6 +79,7 @@ public class AssentoService {
 				assento.setNumeroAssento(rs.getInt("idassento"));
 				assento.setIdVoo(rs.getInt("voo_idvoo"));
 				assento.setOcupado(rs.getBoolean("ocupado"));
+				assento.setOcupante(rs.getInt("usuario_idusuario"));
 				if (assento.isOcupado()) {
 					listaAssento.add(assento);
 				} else {
