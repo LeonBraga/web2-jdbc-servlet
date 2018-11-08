@@ -1,8 +1,10 @@
 1 - Modificar método de remoção de usuário para deletar os voos COMPRADOS relacionados ao mesmo
 5
-CHECAR STOP-- Tela de escolha de assento TESTANDO \ logica de compra voo
+CHECkAR STOP-- Tela de escolha de assento TESTANDO \ 
+Modificar logica de compra voo
 
-
+==>>incluir campo preco na tabela de compra ou n tabela de voo??
+==>>
 
 ============================================================================
 TESTE DE FUNÇÕES

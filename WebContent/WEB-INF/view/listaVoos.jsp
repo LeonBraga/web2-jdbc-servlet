@@ -11,7 +11,6 @@
 <title>Lista de Voos</title>
 </head>
 <body>
-
 	Usuario Logado: ${usuarioLogado.login}
 	<br>
 	<br>
@@ -29,8 +28,12 @@
 					<a	href="entrada?acao=MostraVoo&id=${voo.idVoo}">edita</a>
 					<a href="entrada?acao=RemoveVoo&id=${voo.idVoo}">remove</a>
 				</c:if>
-				<a href="entrada?acao=ListaAssento&vooId=${voo.idVoo}">Escolher este voo, escolha seu assento!</a>
-				
+				<c:if test="${usuarioLogado.isAdm ==  'TRUE'}">
+					<a href="entrada?acao=ListaAssento&vooId=${voo.idVoo}">Checar Assentos do voo id: ${voo.idVoo}.</a>
+				</c:if>
+				<c:if test="${usuarioLogado.isAdm ==  'FALSE'}">
+					<a href="entrada?acao=ListaAssento&vooId=${voo.idVoo}">Escolher este voo, escolha seu assento!</a>
+				</c:if>
 			<br>
 			</li>
 			<br>

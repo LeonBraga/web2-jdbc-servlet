@@ -4,6 +4,15 @@ public class Assento {
 	protected Integer idVoo;
 	protected Integer numeroAssento;
 	protected boolean ocupado;
+	protected Integer ocupante;
+
+	public Integer getOcupante() {
+		return ocupante;
+	}
+
+	public void setOcupante(Integer ocupante) {
+		this.ocupante = ocupante;
+	}
 
 	public Integer getNumeroAssento() {
 		return numeroAssento;

@@ -16,9 +16,15 @@
 		<br>
 		</c:if>
 	<br>
+	
+	<a href="entrada?acao=">Tela de Compra de passagem Aérea</a>
+		decrição: Tela de Compra de passagem Aérea OBS: CRIAR Tela de finalização da compra
+		<br>
+	
+	
 	<c:if test="${usuarioLogado.isAdm ==  'FALSE'}">
 		<h3>Menu de Cliente</h3>
-		<a href="entrada?acao=MostraUsuario&id=${usuarioLogado.id}">Alterar Cadastro do Usuário</a>
+		<a href="entrada?acao=MostraUsuario&id=${usuarioLogado.id}">Alterar Meus Dados</a>
 		descrição: Telas de CRUD Cliente
 		<br>
 		<a href="entrada?acao=">Tela de Compra de passagem Aérea</a>

@@ -17,7 +17,7 @@ public class TestaInsercao {
 		
 			Connection conexao = ConnectionFactory.getConnection();
 			
-			String sql = "INSERT INTO assento VALUES(?,false,?)";
+			String sql = "INSERT INTO assento VALUES(?,false,?,?)";
 		
 
 			for (int assento = 0; assento < 100; assento++) {
@@ -25,7 +25,7 @@ public class TestaInsercao {
 					PreparedStatement ps = conexao.prepareStatement(sql);
 					ps.setInt(1, assento);
 					ps.setInt(2, 5);
-
+					ps.setInt(3, 1);
 					ps.execute();
 					conexao.commit();
 				} catch (SQLException e) {

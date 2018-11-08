@@ -38,11 +38,7 @@ public class AssentoService {
 		Connection conexao = ConnectionFactory.getConnection();
 
 		String sql = "UPDATE assento SET  ocupado = ? WHERE voo_idVoo = ? and idassento =?";
-
-		System.out.println(assento.getNumeroAssento());
-		System.out.println(assento.getIdVoo());
-		System.out.println(assento.isOcupado());
-
+		
 		try {
 			PreparedStatement ps = conexao.prepareStatement(sql);
 			if (assento.isOcupado()) {

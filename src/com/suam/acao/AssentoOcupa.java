@@ -17,11 +17,14 @@ public class AssentoOcupa implements Acao {
 		String idVoo = request.getParameter("idVoo");
 		String ocupa = request.getParameter("ocupa");
 		String desocupa = request.getParameter("desocupa");
+		String ocupante = request.getParameter("ocupante");
 		String[] numeroAssento = request.getParameterValues("numeroAssento");
+		String[] numeroAssentoOcupado = request.getParameterValues("numeroAssentoOcupado");
 		Assento assent = new Assento();
 		Integer id = Integer.valueOf(idVoo);
-		String[] numeroAssentoOcupado = request.getParameterValues("numeroAssentoOcupado");
-
+		Integer idOcupante = Integer.valueOf(ocupante);
+		
+		
 		if (numeroAssento != null ) {
 			for (String assentoNum : numeroAssento) {
 				Integer numAssento = Integer.valueOf(assentoNum);
@@ -32,6 +35,7 @@ public class AssentoOcupa implements Acao {
 				} else {
 					assent.setOcupado(false);
 				}
+				assent.setOcupante(idOcupante);
 				try {
 					AssentoService.update(assent);
 				} catch (SQLException e) {

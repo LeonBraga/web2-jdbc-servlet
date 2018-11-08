@@ -27,11 +27,7 @@ public class ListaAssento implements Acao {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
-//		for (Assento assento : listaAssentos) {
-//			System.out.println("num "+assento.getNumeroAssento()+" id "+assento.getIdVoo()+" ocupa "+assento.isOcupado());
-//		}
-		
+
 		request.setAttribute("vooId", vooId);
 		request.setAttribute("assentosDesocupados", listaAssentosDesocupados);
 		request.setAttribute("assentos", listaAssentos);
