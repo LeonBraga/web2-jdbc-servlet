@@ -39,6 +39,10 @@ public class AssentoService {
 
 		String sql = "UPDATE assento SET  ocupado = ? WHERE voo_idVoo = ? and idassento =?";
 
+		System.out.println(assento.getNumeroAssento());
+		System.out.println(assento.getIdVoo());
+		System.out.println(assento.isOcupado());
+
 		try {
 			PreparedStatement ps = conexao.prepareStatement(sql);
 			if (assento.isOcupado()) {
@@ -47,7 +51,7 @@ public class AssentoService {
 				ps.setString(1, "false");
 			}
 			ps.setInt(2, assento.getIdVoo());
-			ps.setInt(1, assento.getNumeroAssento());
+			ps.setInt(3, assento.getNumeroAssento());
 
 			ps.execute();
 			conexao.commit();
@@ -64,8 +68,8 @@ public class AssentoService {
 	public static List<Assento> ListaAssentos(Integer idVoo) throws SQLException {
 		Connection conexao = ConnectionFactory.getConnection();
 		List<Assento> listaAssento = new ArrayList<Assento>();
-		
-		String sql = "select * from assento where voo_idvoo=?";
+
+		String sql = "select * from assento where voo_idvoo=? order by idassento";
 		try {
 			PreparedStatement ps = conexao.prepareStatement(sql);
 			ps.setInt(1, idVoo);
@@ -77,16 +81,47 @@ public class AssentoService {
 				assento.setNumeroAssento(rs.getInt("idassento"));
 				assento.setIdVoo(rs.getInt("voo_idvoo"));
 				assento.setOcupado(rs.getBoolean("ocupado"));
-
-				listaAssento.add(assento);
+				if (assento.isOcupado()) {
+					listaAssento.add(assento);
+				} else {
+					
+				}
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return listaAssento;
 	}
-	
-	//insere assentos ao cadastrar voos
+
+	public static List<Assento> ListaAssentosDesocupados(Integer idVoo) throws SQLException {
+		Connection conexao = ConnectionFactory.getConnection();
+		List<Assento> listaAssento = new ArrayList<Assento>();
+
+		String sql = "select * from assento where voo_idvoo=? order by idassento";
+		try {
+			PreparedStatement ps = conexao.prepareStatement(sql);
+			ps.setInt(1, idVoo);
+
+			ResultSet rs = ps.executeQuery();
+
+			while (rs.next()) {
+				Assento assento = new Assento();
+				assento.setNumeroAssento(rs.getInt("idassento"));
+				assento.setIdVoo(rs.getInt("voo_idvoo"));
+				assento.setOcupado(rs.getBoolean("ocupado"));
+				if (assento.isOcupado()) {
+					
+				} else {
+					listaAssento.add(assento);
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return listaAssento;
+	}
+
+	// insere assentos ao cadastrar voos
 	public static void inserirAssentosPorVoo() throws SQLException {
 		Connection conexao = ConnectionFactory.getConnection();
 		Voo voo = new Voo();

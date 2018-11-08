@@ -1,6 +1,6 @@
 1 - Modificar método de remoção de usuário para deletar os voos COMPRADOS relacionados ao mesmo
 5
-CHECAR STOP-- Tela de escolha de assento \ logica de compra voo
+CHECAR STOP-- Tela de escolha de assento TESTANDO \ logica de compra voo
 
 
 

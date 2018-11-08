@@ -2,46 +2,61 @@ package com.suam.acao;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import com.suam.bean.Assento;
 import com.suam.service.AssentoService;
-import com.suam.service.UsuarioService;
 
 public class AssentoOcupa implements Acao {
 
 	public String executa(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		
-	//	String[] numeroAssento = request.getParameter("numeroAsssento");
-		String idVoo = request.getParameter("idVooIda");
+		// String[] numeroAssento = request.getParameter("numeroAsssento");
+		String idVoo = request.getParameter("idVoo");
 		String ocupa = request.getParameter("ocupa");
-		String numeroAssento = request.getParameter("numeroAsssento");
-		
-		System.out.println("AÇÃO = OCUPANDO ASSENTO "+ numeroAssento);
+		String desocupa = request.getParameter("desocupa");
+		String[] numeroAssento = request.getParameterValues("numeroAssento");
+		Assento assent = new Assento();
+		Integer id = Integer.valueOf(idVoo);
+		String[] numeroAssentoOcupado = request.getParameterValues("numeroAssentoOcupado");
 
-		Assento assento = null;
-		System.out.println("================>>>>"+idVoo);
-		assento.setIdVoo(Integer.valueOf(idVoo));
-		assento.setNumeroAssento(Integer.valueOf(numeroAssento));
-		if (ocupa != null) {
-			assento.setOcupado(true);
-		} else {
-			assento.setOcupado(false);
+		if (numeroAssento != null ) {
+			for (String assentoNum : numeroAssento) {
+				Integer numAssento = Integer.valueOf(assentoNum);
+				assent.setIdVoo(id);
+				assent.setNumeroAssento(numAssento);
+				if (ocupa != null) {
+					assent.setOcupado(true);
+				} else {
+					assent.setOcupado(false);
+				}
+				try {
+					AssentoService.update(assent);
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
 		}
+		if (numeroAssentoOcupado != null ) {
 
-		try {
-			AssentoService.update(assento);
-		} catch (SQLException e) {
-			e.printStackTrace();
+			for (String assentoNum : numeroAssentoOcupado) {
+				Integer numAssento = Integer.valueOf(assentoNum);
+				assent.setIdVoo(id);
+				assent.setNumeroAssento(numAssento);
+				if (desocupa != null) {
+					assent.setOcupado(false);
+				} else {
+					assent.setOcupado(true);
+				}
+				try {
+					AssentoService.update(assent);
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
 		}
-
-		return "redirect:entrada?acao=ListaAssento&vooId=" + assento.getIdVoo();
+		return "redirect:entrada?acao=ListaAssento&vooId=" + assent.getIdVoo();
 	}
 }
