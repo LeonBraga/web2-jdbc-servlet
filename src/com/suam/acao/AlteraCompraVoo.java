@@ -10,22 +10,20 @@ import javax.servlet.http.HttpServletResponse;
 import com.suam.bean.Usuario;
 import com.suam.service.UsuarioService;
 
-public class FormNovoCartao implements Acao {
+public class AlteraCompraVoo implements Acao {
 
 	@Override
 	public String executa(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		String paramId = request.getParameter("idUser");
-		Integer id = Integer.valueOf(paramId);
+		String voo_idvooVolta = request.getParameter("idvooVolta");
+		String assento = request.getParameter("assento");
+		String valorTotalCompra = request.getParameter("valorTotalCompra");
+		String voo_idvoo = request.getParameter("idvoo");
+		String usuario_idusuario = request.getParameter("idusuario");
+		String cartaodecredito_numerocartao = request.getParameter("numerocartao");
 
-		Usuario user = null;
-		System.out.println("FORM NOVO CARTAO 1 ==>");
-		try {
-			user = UsuarioService.buscaUsuarioPelaId(id);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		request.setAttribute("usuario", user);
+		request.setAttribute("idParam", paramId);
 		System.out.println("FORM NOVO CARTAO 2 ==>");
 		return "forward:formNovoCartao.jsp";
 	}
