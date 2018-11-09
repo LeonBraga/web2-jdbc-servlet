@@ -16,6 +16,8 @@
 <title>Assentos</title>
 </head>
 <body>
+<c:import url="logout-parcial.jsp" />
+<br>
 	Usuario Logado: ${usuarioLogado.login}
 	<br>
 	<br> Todos os assentos do voo - id: ${vooId}.
@@ -66,7 +68,7 @@
 	<br>
 
 	<br>
-	<c:import url="logout-parcial.jsp" />
+	
 	<c:import url="menuLinks.jsp" />
 </body>
 </html>

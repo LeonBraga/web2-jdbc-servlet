@@ -3,6 +3,7 @@
 <%@ page import="java.util.List, com.suam.bean.Usuario"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
+	<br>
 	<c:if test="${usuarioLogado.isAdm ==  'TRUE'}">
 		<h3>Menu do Administrador do Sistema</h3>
 		<p>Usuario ${usuarioLogado.nome} com privilegios de Administrador.</p>
@@ -17,17 +18,16 @@
 		</c:if>
 	<br>
 	
-	<a href="entrada?acao=">Tela de Compra de passagem Aérea</a>
-		decrição: Tela de Compra de passagem Aérea OBS: CRIAR Tela de finalização da compra
-		<br>
 	
 	
-	<c:if test="${usuarioLogado.isAdm ==  'FALSE'}">
+	
+	<h3>==>>Para teste o adm ira ver opções disponiveis para clientes também.****</h3>
+	<c:if test="${usuarioLogado.isAdm ==  'FALSE' || usuarioLogado.isAdm ==  'TRUE'}">
 		<h3>Menu de Cliente</h3>
 		<a href="entrada?acao=MostraUsuario&id=${usuarioLogado.id}">Alterar Meus Dados</a>
 		descrição: Telas de CRUD Cliente
 		<br>
-		<a href="entrada?acao=">Tela de Compra de passagem Aérea</a>
+		<a href="entrada?acao=ListaVoo">Tela de Compra de passagem Aérea</a>
 		decrição: Tela de Compra de passagem Aérea OBS: CRIAR Tela de finalização da compra
 		<br>
 		<a href="entrada?acao=">Tela de acompanhamento dos pedidos de vôos</a>

@@ -17,7 +17,7 @@
 	<br> Lista de voos:
 	<br/>
 	<ul>
-	<c:if test="${usuarioLogado.isAdm ==  'TRUE'}">
+	<%-- <c:if test="${usuarioLogado.isAdm ==  'TRUE'}"> --%>
 		<c:forEach items="${voos}" var="voo">
 			<li>
 				Origem: ${voo.origem} -
@@ -39,7 +39,7 @@
 			</li>
 			<br>
 		</c:forEach>
-	</c:if>
+	<%-- </c:if> --%>
 	</ul>
 	
 	<br>
