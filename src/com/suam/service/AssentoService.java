@@ -181,10 +181,12 @@ public class AssentoService {
 				assento.setOcupado(rs.getBoolean("ocupado"));
 				if (assento.isOcupado()) {
 					assento.setOcupado(true);
+					listaAssentos.add(assento);
 				} else {
 					assento.setOcupado(false);
+					listaAssentos.remove(assento);
 				}
-				listaAssentos.add(assento);
+				
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
