@@ -1,4 +1,4 @@
-package com.suam.acao;
+/*package com.suam.acao;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -29,3 +29,4 @@ public class AlteraCompraVoo implements Acao {
 	}
 
 }
+*/

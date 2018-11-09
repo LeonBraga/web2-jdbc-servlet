@@ -38,7 +38,7 @@ public class AssentoService {
 		Connection conexao = ConnectionFactory.getConnection();
 
 		String sql = "UPDATE assento SET  ocupado = ?, usuario_idusuario = ? WHERE voo_idVoo = ? and idassento =? ";
-		
+
 		try {
 			PreparedStatement ps = conexao.prepareStatement(sql);
 			if (assento.isOcupado()) {
@@ -49,8 +49,7 @@ public class AssentoService {
 			ps.setInt(2, assento.getOcupante());
 			ps.setInt(3, assento.getIdVoo());
 			ps.setInt(4, assento.getNumeroAssento());
-			
-			
+
 			ps.execute();
 			conexao.commit();
 		} catch (SQLException e) {
@@ -83,7 +82,7 @@ public class AssentoService {
 				if (assento.isOcupado()) {
 					listaAssento.add(assento);
 				} else {
-					
+
 				}
 			}
 		} catch (SQLException e) {
@@ -109,7 +108,7 @@ public class AssentoService {
 				assento.setIdVoo(rs.getInt("voo_idvoo"));
 				assento.setOcupado(rs.getBoolean("ocupado"));
 				if (assento.isOcupado()) {
-					
+
 				} else {
 					listaAssento.add(assento);
 				}
@@ -158,5 +157,34 @@ public class AssentoService {
 			}
 		}
 		conexao.close();
+	}
+
+	// insere assentos ao cadastrar voos
+	public static List<Assento> listarAssentosPorUsuario(Integer usuarioId) throws SQLException {
+		Connection conexao = ConnectionFactory.getConnection();
+		List<Assento> listaAssentos = new ArrayList<Assento>();
+
+		String sql = "SELECT * FROM assento WHERE USUARIO_IDUSUARIO = ?";
+		try {
+			PreparedStatement ps = conexao.prepareStatement(sql);
+			ps.setInt(1, usuarioId);
+
+			ResultSet rs = ps.executeQuery();
+
+			while (rs.next()) {
+				Assento assento = new Assento();
+				assento.setNumeroAssento(rs.getInt("idassento"));
+				assento.setIdVoo(rs.getInt("voo_idvoo"));
+				assento.setOcupado(rs.getBoolean("ocupado"));
+				if (assento.isOcupado()) {
+
+				} else {
+					listaAssentos.add(assento);
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return listaAssentos;
 	}
 }

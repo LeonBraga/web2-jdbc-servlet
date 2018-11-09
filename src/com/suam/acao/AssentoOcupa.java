@@ -12,7 +12,9 @@ public class AssentoOcupa implements Acao {
 
 	public String executa(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
+		
+		String comprar = request.getParameter("comprar");
+		
 		// String[] numeroAssento = request.getParameter("numeroAsssento");
 		String idVoo = request.getParameter("idVoo");
 		String ocupa = request.getParameter("ocupa");
@@ -44,7 +46,6 @@ public class AssentoOcupa implements Acao {
 			}
 		}
 		if (numeroAssentoOcupado != null ) {
-
 			for (String assentoNum : numeroAssentoOcupado) {
 				Integer numAssento = Integer.valueOf(assentoNum);
 				assent.setIdVoo(id);
@@ -62,6 +63,13 @@ public class AssentoOcupa implements Acao {
 				}
 			}
 		}
+		
+		//QUANDO O USUÁRIO CLICAR EM COMPRAR SERÁ REDIRECIONADO PARA TELA DE COMPRA
+		if (comprar != null) {
+			request.setAttribute("numeroAssentoOcupado", numeroAssentoOcupado);
+			return "forward:entrada?acao=FormNovaCompraVoo&compradorId="+idOcupante+"&idvoo="+id;
+		} 
+		
 		return "redirect:entrada?acao=ListaAssento&vooId=" + assent.getIdVoo();
 	}
 }
