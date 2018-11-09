@@ -44,7 +44,13 @@ public class UsuarioService {
 			ps.setString(4, usuario.getSenha());
 			ps.setString(5, usuario.getLogin());
 			ps.setString(6, formato.format(usuario.getDataNascimento()));
-			ps.setString(7, usuario.getIsAdm().toString());
+			
+			if (usuario.getIsAdm()) {
+				ps.setInt(7, 1);
+			}else {
+				ps.setInt(7, 0);
+			}
+			//ps.setBoolean(7, usuario.getIsAdm());
 
 			ps.execute();
 			conexao.commit();
@@ -92,9 +98,13 @@ public class UsuarioService {
 			ps.setString(4, usuario.getSenha());
 			ps.setString(5, usuario.getLogin());
 			ps.setString(6, formato.format(usuario.getDataNascimento()));
-			ps.setString(7, usuario.getIsAdm().toString());
-			String id = usuario.getId().toString();
-			ps.setString(8, id);
+			if (usuario.getIsAdm()) {
+				ps.setInt(7, 1);
+			}else {
+				ps.setInt(7, 0);
+			}
+			//ps.setBoolean(7, usuario.getIsAdm());
+			ps.setInt(8,usuario.getId());
 
 			ps.execute();
 			conexao.commit();
@@ -136,14 +146,7 @@ public class UsuarioService {
 			}
 			usuario.setIsAdm(rs.getBoolean("isAdm"));
 			listaUsuario.add(usuario);
-
-			/*
-			 * System.out.println("Usuario adicionado a lista: " + usuario.getNome() + " - "
-			 * + usuario.getSobrenome() + " - " + usuario.getEndereco() + " - " +
-			 * usuario.getSenha() + " - " + usuario.getLogin() + " - " +
-			 * formato.format(usuario.getDataNascimento()) + " - " + usuario.getIsAdm() +
-			 * "\n");
-			 */ }
+		}
 
 		rs.close();
 		statement.close();

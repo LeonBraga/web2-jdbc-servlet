@@ -23,7 +23,8 @@
 				Origem: ${voo.origem} -
 				Destino: ${voo.destino} - 
 				Ida: <fmt:formatDate value="${voo.ida}" pattern="dd/MM/yyyy"/> -  
-				Confirmação: ${voo.confirmacao}<br>
+				Confirmação: ${voo.confirmacao} - 
+				Valor: ${voo.valorVoo} <br>
 				<c:if test="${usuarioLogado.isAdm ==  'TRUE'}">
 					<a	href="entrada?acao=MostraVoo&id=${voo.idVoo}">edita</a>
 					<a href="entrada?acao=RemoveVoo&id=${voo.idVoo}">remove</a>

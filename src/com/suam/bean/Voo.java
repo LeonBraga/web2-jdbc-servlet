@@ -1,6 +1,6 @@
 package com.suam.bean;
 
-import java.util.Date;
+import java.sql.Date;
 
 public class Voo {
 	protected Integer idVoo;
@@ -8,7 +8,15 @@ public class Voo {
 	protected String destino;
 	protected String origem;
 	protected Boolean confirmacao;
-	protected String assento;
+	protected Integer ValorVoo;
+	
+	public Integer getValorVoo() {
+		return ValorVoo;
+	}
+
+	public void setValorVoo(Integer valorVoo) {
+		ValorVoo = valorVoo;
+	}
 
 	public Integer getIdVoo() {
 		return idVoo;
@@ -49,13 +57,4 @@ public class Voo {
 	public void setConfirmacao(Boolean string) {
 		this.confirmacao = string;
 	}
-
-	public String getAssento() {
-		return assento;
-	}
-
-	public void setAssento(String assento) {
-		this.assento = assento;
-	}
-
 }

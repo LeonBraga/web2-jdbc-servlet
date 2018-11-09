@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+import com.suam.factory.ConnectionFactory;
+
 public class TestaConexao {
 
 	public static void main(String[] args) throws SQLException {
@@ -17,7 +19,10 @@ public class TestaConexao {
 		//Connection connection = DriverManager.getConnection(URL,USERNAME, PASSWORD);
 		
 		//HSQLDB
-		Connection connection = DriverManager.getConnection("jdbc:hsqldb:hsql://localhost/dbweb2", "SA", "");
+		//Connection connection = DriverManager.getConnection("jdbc:hsqldb:hsql://localhost/dbweb2", "SA", "");
+		
+		
+		Connection connection = ConnectionFactory.getConnection();
 		System.out.println("CONEXAO: ");
 		System.out.println(connection);
 		

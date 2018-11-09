@@ -42,9 +42,9 @@ public class AssentoService {
 		try {
 			PreparedStatement ps = conexao.prepareStatement(sql);
 			if (assento.isOcupado()) {
-				ps.setString(1, "true");
+				ps.setBoolean(1, true);
 			} else {
-				ps.setString(1, "false");
+				ps.setBoolean(1, false);
 			}
 			ps.setInt(2, assento.getOcupante());
 			ps.setInt(3, assento.getIdVoo());
@@ -129,7 +129,7 @@ public class AssentoService {
 		// voo)");
 		// ResultSet rs = statement.getResultSet();
 
-		String sql = "INSERT INTO assento VALUES(?,false,?)";
+		String sql = "INSERT INTO assento VALUES(?,false,?,1)";
 		String sql1 = "SELECT * FROM voo WHERE idvoo= (SELECT MAX(idvoo) FROM voo)";
 		try {
 			PreparedStatement ps = conexao.prepareStatement(sql1);

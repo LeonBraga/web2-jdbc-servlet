@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-
+import java.sql.Date;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -24,6 +24,8 @@ public class AlteraVoo implements Acao {
 		String ida = request.getParameter("ida");
 		String confirmacao = request.getParameter("confirmacao");
 		String idVoo = request.getParameter("idVooIda");
+		String valorVoo = request.getParameter("valorVoo");
+		
 		//Integer idVooIda = Integer.valueOf(paramId);
 
 		System.out.println("acao altera voo: " + idVoo);
@@ -35,21 +37,24 @@ public class AlteraVoo implements Acao {
 			e.printStackTrace();
 		}
 
-		SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
-		
+		SimpleDateFormat formato = new SimpleDateFormat("dd-MM-yyyy");	
+		java.util.Date date =null;
 		try {
-			voo.setIda(formato.parse(ida));
+			date = formato.parse(ida);
 		} catch (ParseException e1) {
+			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
+		java.sql.Date sqlIda = new java.sql.Date(date.getTime());
 		
-		if (confirmacao.equalsIgnoreCase("TRUE")) {
+		if (confirmacao != null) {
 			voo.setConfirmacao(true);
 		} else {
 			voo.setConfirmacao(false);
 		}
 		voo.setOrigem(origem);
 		voo.setDestino(destino);
+		voo.setValorVoo(Integer.valueOf(valorVoo));
 
 		Boolean validaInsere;
 

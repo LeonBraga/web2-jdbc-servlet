@@ -20,7 +20,14 @@
 			<br>
 			Ida: <input type="text" name="ida" value="<fmt:formatDate value="${voo.ida}" pattern="dd/MM/yyyy"/>" />
 			<br>
-			Confirmação:<input type="text" name="confirmacao" value="${voo.confirmacao}"/>
+			<c:if test="${voo.confirmacao ==  'TRUE'}">
+				Confirmação:<input type="checkbox" name="confirmacao" value="" checked="checked"/>
+			</c:if>
+			<c:if test="${voo.confirmacao ==  'FALSE'}">
+				Confirmação:<input type="checkbox" name="confirmacao" value="" />
+			</c:if>
+			<br>
+			Valor: <input type="text" name="confirmacao" value="${voo.valorVoo}"/>
 		</c:if>
 		<br>
 		<br>

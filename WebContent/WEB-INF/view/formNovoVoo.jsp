@@ -17,9 +17,12 @@
 			<br>	
 			Destino:<input type="text" name="destino" value=""/>
 			<br>
-			Ida: <input type="text" name="ida" value="" />
+			Ida: <input type="text" pattern="\d{1,2}-\d{1,2}-\d{4}" class="datepicker"  name="ida" value="" />
+			<input class="datepicker" type="text" name="ida" value="XX-XX-XXXX" readonly />
 			<br>
-			Confirmação:<input type="text" name="confirmacao" value=""/>
+			Confirmação:<input type="checkbox" name="confirmacao" value="true"/>
+			<br>
+			Valor:<input type="text" name="valorVoo" value=""/>
 		</c:if>
 		<br>
 		<br>

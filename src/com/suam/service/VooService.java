@@ -1,11 +1,11 @@
 package com.suam.service;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,16 +18,17 @@ public class VooService {
 	public static boolean inserir(Voo voo) throws SQLException {
 		Connection conexao = ConnectionFactory.getConnection();
 
-		String sql = "INSERT INTO voo ( ida, origem, destino, confirmacao) VALUES (?,?,?,?)";
+		String sql = "INSERT INTO voo ( ida, origem, destino, confirmacao, valorVoo) VALUES (?,?,?,?,?)";
 
-		SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+		// SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
 
 		try {
 			PreparedStatement ps = conexao.prepareStatement(sql);
-			ps.setString(1, formato.format(voo.getIda()));
+			ps.setDate(1, voo.getIda());
 			ps.setString(2, voo.getOrigem());
 			ps.setString(3, voo.getDestino());
-			ps.setString(4, voo.getConfirmacao().toString());
+			ps.setBoolean(4, voo.getConfirmacao());
+			ps.setInt(5, voo.getValorVoo());
 
 			ps.execute();
 			conexao.commit();
@@ -45,18 +46,19 @@ public class VooService {
 	public static Boolean update(Voo voo) throws SQLException {
 		Connection conexao = ConnectionFactory.getConnection();
 
-		String sql = "UPDATE voo SET  ida = ?,origem = ?,  destino = ?, confirmacao = ? WHERE idVooIda = ?";
+		String sql = "UPDATE voo SET  ida = ?,origem = ?,  destino = ?, confirmacao = ?, valorVoo = ? WHERE idVooIda = ?";
 
-		SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+		//SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
 
 		try {
 			PreparedStatement ps = conexao.prepareStatement(sql);
 
-			ps.setString(1, formato.format(voo.getIda()));
+			ps.setDate(1, voo.getIda());
 			ps.setString(2, voo.getOrigem());
 			ps.setString(3, voo.getDestino());
 			ps.setString(4, voo.getConfirmacao().toString());
-			ps.setString(5, voo.getIdVoo().toString());
+			ps.setInt(5, voo.getValorVoo());
+			ps.setString(6, voo.getIdVoo().toString());
 
 			ps.execute();
 			conexao.commit();
@@ -80,19 +82,16 @@ public class VooService {
 
 		ResultSet rs = statement.getResultSet();
 
-		SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+		// SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
 
 		while (rs.next()) {
 			Voo voo = new Voo();
 			voo.setIdVoo(rs.getInt("idvoo"));
-			try {
-				voo.setIda(formato.parse(rs.getString("ida")));
-			} catch (ParseException e) {
-				e.printStackTrace();
-			}
+			voo.setIda(rs.getDate("ida"));
 			voo.setConfirmacao(rs.getBoolean("confirmacao"));
 			voo.setOrigem(rs.getString("origem"));
 			voo.setDestino(rs.getString("destino"));
+			voo.setValorVoo(rs.getInt("valorVoo"));
 			listaVoos.add(voo);
 		}
 		rs.close();
@@ -127,8 +126,8 @@ public class VooService {
 			conexao.rollback();
 			e.printStackTrace();
 			throw new SQLException();
-		} 
-		
+		}
+
 		try {
 			PreparedStatement ps = conexao.prepareStatement(sql);
 			ps.setString(1, id);
