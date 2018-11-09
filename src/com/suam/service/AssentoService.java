@@ -123,6 +123,8 @@ public class AssentoService {
 	public static void inserirAssentosPorVoo() throws SQLException {
 		Connection conexao = ConnectionFactory.getConnection();
 		Voo voo = new Voo();
+		
+		//não funcionou?
 		// Statement statement = conexao.createStatement();
 		// statement.execute("SELECT * FROM voo WHERE idvoo= (SELECT MAX(idvoo) FROM
 		// voo)");
@@ -160,15 +162,16 @@ public class AssentoService {
 	}
 
 	// insere assentos ao cadastrar voos
-	public static List<Assento> listarAssentosPorUsuario(Integer usuarioId) throws SQLException {
+	public static List<Assento> listarAssentosPorUsuario(Integer usuarioId, Integer vooId) throws SQLException {
 		Connection conexao = ConnectionFactory.getConnection();
 		List<Assento> listaAssentos = new ArrayList<Assento>();
 
-		String sql = "SELECT * FROM assento WHERE USUARIO_IDUSUARIO = ?";
+		String sql = "SELECT * FROM assento WHERE USUARIO_IDUSUARIO = ? and voo_idvoo =?";
 		try {
 			PreparedStatement ps = conexao.prepareStatement(sql);
 			ps.setInt(1, usuarioId);
-
+			ps.setInt(2, vooId);
+			
 			ResultSet rs = ps.executeQuery();
 
 			while (rs.next()) {
@@ -177,10 +180,11 @@ public class AssentoService {
 				assento.setIdVoo(rs.getInt("voo_idvoo"));
 				assento.setOcupado(rs.getBoolean("ocupado"));
 				if (assento.isOcupado()) {
-
+					assento.setOcupado(true);
 				} else {
-					listaAssentos.add(assento);
+					assento.setOcupado(false);
 				}
+				listaAssentos.add(assento);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

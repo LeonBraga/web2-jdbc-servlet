@@ -33,8 +33,13 @@ public class FormNovoCompraVoo implements Acao {
 		
 		//RECEBERA A LISTA DE ASSENTOS OCUPADOS NO MOMENTO DA COMPRA
 		//String[] numeroAssentoOcupado = request.getParameterValues("numeroAssentoOcupado");
+		//TESTANDO
+		/*for (String string : numeroAssentoOcupado) {
+			System.out.println("ASSENTO" + string);
+		}*/
 		
-		//COMPRAR VOO VOLTA
+		
+		//COMPRAR VOO VOLTA===>>>>IMPLEMENTAR
 		//String voo_idvooVolta = request.getParameter("idVooVolta");
 		
 		// usuario
@@ -56,7 +61,7 @@ public class FormNovoCompraVoo implements Acao {
 		request.setAttribute("cartoes", listaCartao);
 
 		
-		//Talvez seja necessaÁrio uma lista de voos
+		//Talvez seja necessaária uma lista de voos
 		Integer idVoo = Integer.valueOf(voo_idvoo);
 		Voo vooIda = null;
 		try {
@@ -77,11 +82,11 @@ public class FormNovoCompraVoo implements Acao {
 //		request.setAttribute("idvooVolta", vooVolta);
 
 		
-		//==========>>>>>
+		//==========>>>>>LÓGICA TRANSFERIDA PARA OCUPA ASSENTO
 		//LISTARÁ TODOS  ===> FILTAR SOMENTE SO ESCOLHIDOS NAQUELE INSTANTE
 		List<Assento> listaAssentos = new ArrayList<Assento>();
 		try {
-			listaAssentos = AssentoService.listarAssentosPorUsuario(id);
+			listaAssentos = AssentoService.listarAssentosPorUsuario(id,idVoo);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

@@ -16,7 +16,7 @@
 	<form action="${linkEntradaServlet }" method="post">		
 	Identificador do voo: <input type="text" name="idVooIda" value="${idvoo.idVoo}" readonly="readonly"/>
 	<%-- <input type="text" name="idVooVolta" value="${vooVolta.idVoo}" readonly="readonly"/> --%>
-	<c:if test="${cartoes!=null}">	
+			<c:if test="${cartoes!=null}">	
 				<h3>Selecione o cartão desejado ${usuario.nome}</h3> 
 					<c:forEach items="${cartoes}" var="cartao">
 						<c:if test="${usuario.id ==  cartao.idUser}">
@@ -28,9 +28,11 @@
 				</c:forEach>	
 			</c:if>
 	
-	
-	
-		
+		<c:forEach items="${assentos}" var="assento">
+			<c:out value="${assento.numeroAssento}"/>
+			<input type="checkbox" name="numeroAssentoOcupado" id="numeroAssentoOcupado" value="${assento.numeroAssento}" checked="checked" disabled="disabled">
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+		</c:forEach>
 		
 		<br>
 		<input type="hidden" name="acao" value="NovoCompraVoo">

@@ -67,11 +67,13 @@
 	<br>
 	<br>
 	<form action="${linkEntradaServlet }" method="post">
+	
 		<!-- PASSAR POR JQUERY AQUI A LISTA DE ASSENTOS OCUPADOS -->
+		<input type="hidden" name="numeroAssentoOcupado" value="35">
 		<input type="hidden" name="compradorId" value="${usuarioLogado.id}"/>
 		<input type="hidden" name="idvoo" value="${vooId}"> 
 		<input type="hidden" name="acao" value="FormNovoCompraVoo">
-		 <input type="submit" value="Finalizar Compra" />
+		 <input type="submit" value="FinalizarCompra"/>
 	</form>
 	
 	<br>

@@ -2,6 +2,9 @@ package com.suam.acao;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -45,6 +48,8 @@ public class AssentoOcupa implements Acao {
 				}
 			}
 		}
+		
+		//List<String> listaAssentosOcupados = new ArrayList<String>();
 		if (numeroAssentoOcupado != null ) {
 			for (String assentoNum : numeroAssentoOcupado) {
 				Integer numAssento = Integer.valueOf(assentoNum);
@@ -58,6 +63,7 @@ public class AssentoOcupa implements Acao {
 				}
 				try {
 					AssentoService.update(assent);
+					//listaAssentosOcupados.add(assentoNum);
 				} catch (SQLException e) {
 					e.printStackTrace();
 				}
@@ -65,10 +71,14 @@ public class AssentoOcupa implements Acao {
 		}
 		
 		//QUANDO O USUÁRIO CLICAR EM COMPRAR SERÁ REDIRECIONADO PARA TELA DE COMPRA
-		if (comprar != null) {
-			request.setAttribute("numeroAssentoOcupado", numeroAssentoOcupado);
+		/*if (comprar != null) {
+			for (String string : listaAssentosOcupados) {
+				System.out.println("ASSENTO" + string);
+			}
+			
+			request.setAttribute("numeroAssentoOcupado", listaAssentosOcupados);
 			return "forward:entrada?acao=FormNovaCompraVoo&compradorId="+idOcupante+"&idvoo="+id;
-		} 
+		} */
 		
 		return "redirect:entrada?acao=ListaAssento&vooId=" + assent.getIdVoo();
 	}
