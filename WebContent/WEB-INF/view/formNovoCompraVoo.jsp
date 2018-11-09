@@ -12,11 +12,12 @@
 <body>
 	<c:import url="logout-parcial.jsp"/> 
 	
-	<h1>TESTE===>>> cheqguei até aqui</h1>	
-	<%-- Nome: <input type="text" name="nome" value="${usuario.nome}" readonly="readonly"/>
+	Nome: <input type="text" name="nome" value="${usuario.nome}" readonly="readonly"/>
 	<form action="${linkEntradaServlet }" method="post">		
-		<c:if test="${cartoes!=null}">	
-				<h3>Lista de cartões de ${usuario.nome}</h3> 
+	Identificador do voo: <input type="text" name="idVooIda" value="${idvoo.idVoo}" readonly="readonly"/>
+	<%-- <input type="text" name="idVooVolta" value="${vooVolta.idVoo}" readonly="readonly"/> --%>
+	<c:if test="${cartoes!=null}">	
+				<h3>Selecione o cartão desejado ${usuario.nome}</h3> 
 					<c:forEach items="${cartoes}" var="cartao">
 						<c:if test="${usuario.id ==  cartao.idUser}">
 							<li> 
@@ -26,8 +27,7 @@
 					</c:if>
 				</c:forEach>	
 			</c:if>
-	<input type="text" name="idVooIda" value="${vooIda.idVoo}" readonly="readonly"/>
-	<input type="text" name="idVooVolta" value="${vooVolta.idVoo}" readonly="readonly"/>
+	
 	
 	
 		
@@ -35,7 +35,7 @@
 		<br>
 		<input type="hidden" name="acao" value="NovoCompraVoo">
 		<input type="submit" /> 
-	</form> --%>
+	</form> 
 
 
 <c:import url="menuLinks.jsp"/> 
