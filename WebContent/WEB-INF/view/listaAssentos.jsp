@@ -73,7 +73,7 @@
 		<input type="hidden" name="compradorId" value="${usuarioLogado.id}"/>
 		<input type="hidden" name="idvoo" value="${vooId}"> 
 		<input type="hidden" name="acao" value="FormNovoCompraVoo">
-		 <input type="submit" value="FinalizarCompra"/>
+		 <input type="submit" value="Comprar Assentos(s)"/>
 	</form>
 	
 	<br>

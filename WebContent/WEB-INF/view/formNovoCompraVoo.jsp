@@ -15,6 +15,12 @@
 	Nome: <input type="text" name="nome" value="${usuario.nome}" readonly="readonly"/>
 	<form action="${linkEntradaServlet }" method="post">		
 	Identificador do voo: <input type="text" name="idVooIda" value="${idvoo.idVoo}" readonly="readonly"/>
+	Origem: ${idvoo.origem} -
+	Destino: ${idvoo.destino} - 
+	Ida: <fmt:formatDate value="${idvoo.ida}" pattern="dd/MM/yyyy"/> -  
+	Confirmação: ${idvoo.confirmacao} - 
+	Valor por assento: ${idvoo.valorVoo} <br>
+	
 	<%-- <input type="text" name="idVooVolta" value="${vooVolta.idVoo}" readonly="readonly"/> --%>
 			<c:if test="${cartoes!=null}">	
 				<h3>Selecione o cartão desejado ${usuario.nome}</h3> 
@@ -27,16 +33,19 @@
 					</c:if>
 				</c:forEach>	
 			</c:if>
-	
+		
 		<c:forEach items="${assentos}" var="assento">
 			<c:out value="${assento.numeroAssento}"/>
 			<input type="checkbox" name="numeroAssentoOcupado" id="numeroAssentoOcupado" value="${assento.numeroAssento}" checked="checked" disabled="disabled">
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+			<c:set var="precoTotal" value="${idvoo.valor + $[precoTotal]}" scope="page"/>
 		</c:forEach>
+		Preço total: <c:out value="precoTotal}"/>
+		
 		
 		<br>
 		<input type="hidden" name="acao" value="NovoCompraVoo">
-		<input type="submit" /> 
+		<input type="submit" value="Confirmar Compra"/> 
 	</form> 
 
 

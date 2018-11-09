@@ -2,7 +2,7 @@ package com.suam.bean;
 
 public class CompraVoo {
 
-	protected Integer idCompra;
+	//protected Integer idCompra;
 	protected Integer idUser;
 	protected Integer idCartao;
 	protected Integer idVooIda;
@@ -12,12 +12,12 @@ public class CompraVoo {
 	protected Integer valorTotalCompra;
 	
 	
-	public Integer getIdCompra() {
+	/*public Integer getIdCompra() {
 		return idCompra;
 	}
 	public void setIdCompra(Integer idCompra) {
 		this.idCompra = idCompra;
-	}
+	}*/
 	public Integer getIdUser() {
 		return idUser;
 	}
