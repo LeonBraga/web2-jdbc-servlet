@@ -27,13 +27,13 @@ public class NovoCompraVoo implements Acao {
 	public String executa(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		String paramId = request.getParameter("idUser");
-		//String[] assento = request.getParameterValues("assento");
+		// String[] assento = request.getParameterValues("assento");
 		String valorTotalCompra = request.getParameter("valorTotalCompra");
 		String[] voo_idvoo = request.getParameterValues("idVoo");
 		String cartaodecredito_numerocartao = request.getParameter("numerocartao");
 
-		System.out.println(paramId + " - " + Arrays.toString(voo_idvoo) + " - " + valorTotalCompra
-				+ " - " + cartaodecredito_numerocartao);
+		System.out.println(paramId + " - " + Arrays.toString(voo_idvoo) + " - " + valorTotalCompra + " - "
+				+ cartaodecredito_numerocartao);
 
 		Usuario usuario = new Usuario();
 		try {
@@ -50,61 +50,51 @@ public class NovoCompraVoo implements Acao {
 		} catch (SQLException e1) {
 			e1.printStackTrace();
 		}
-		
-		
+
 		List<Integer> listaNumeroVoo = new ArrayList<Integer>();
 		Voo voo = new Voo();
 		List<Assento> listaNumeroAssento = new ArrayList<Assento>();
+		Integer totalCompra = 0;
 		for (String vooIdVoo : voo_idvoo) {
 			try {
 				voo = VooService.buscaVooPelaId(Integer.valueOf(vooIdVoo));
-				listaNumeroAssento= AssentoService.listarAssentosPorUsuarioIdVooId(usuario.getId(), voo.getIdVoo());						
+				listaNumeroAssento = AssentoService.listarAssentosPorUsuarioIdVooId(usuario.getId(), voo.getIdVoo());
 				listaNumeroVoo.add(Integer.valueOf(vooIdVoo));
-				valorTotalCompra +=(voo.getValorVoo() * listaNumeroAssento.size());
-				
+				totalCompra += (voo.getValorVoo() * listaNumeroAssento.size());
+				System.out.println("VALOR TOTAL:  " + valorTotalCompra);
 			} catch (NumberFormatException | SQLException e) {
 				e.printStackTrace();
 			}
 		}
-		
-		
-		/*List<Assento> listaAssentos = new ArrayList<Assento>();
-		Assento assent = new Assento();
-		if (assento != null) {
-			for (String assentoNum : assento) {
-				Integer numAssento = Integer.valueOf(assentoNum);
-				assent.setIdVoo(voo.getIdVoo());
-				assent.setNumeroAssento(numAssento);
-				assent.setOcupante(usuario.getId());
-				listaAssentos.add(assent);
-			}
-		}
 
-		List<Integer> listaAssentosNumeros = new ArrayList<Integer>();
-		Assento assentNum = new Assento();
-		if (assento != null) {
-			for (String assentoNum : assento) {
-				Integer numAssento = Integer.valueOf(assentoNum);
-				listaAssentosNumeros.add(numAssento);
-			}
-		}*/
+		/*
+		 * List<Assento> listaAssentos = new ArrayList<Assento>(); Assento assent = new
+		 * Assento(); if (assento != null) { for (String assentoNum : assento) { Integer
+		 * numAssento = Integer.valueOf(assentoNum); assent.setIdVoo(voo.getIdVoo());
+		 * assent.setNumeroAssento(numAssento); assent.setOcupante(usuario.getId());
+		 * listaAssentos.add(assent); } }
+		 * 
+		 * List<Integer> listaAssentosNumeros = new ArrayList<Integer>(); Assento
+		 * assentNum = new Assento(); if (assento != null) { for (String assentoNum :
+		 * assento) { Integer numAssento = Integer.valueOf(assentoNum);
+		 * listaAssentosNumeros.add(numAssento); } }
+		 */
 
-		
-		//Criando a compra
+		// Criando a compra
 		CompraVoo compra = new CompraVoo();
-		//compra.setAssento(listaAssentosNumeros);
+		// compra.setAssento(listaAssentosNumeros);
 		compra.setIdCartao(cartaodecredito_numerocartao);
 		compra.setIdUser(usuario.getId());
 		compra.setIdVoo(listaNumeroVoo);
-		compra.setValorTotalCompra(Integer.valueOf(valorTotalCompra));
-		//compra.setIdVooVolta(idVooVolta);
-		
+		compra.setValorTotalCompra(totalCompra);
+		// compra.setIdVooVolta(idVooVolta);
+
 		try {
 			CompraVooService.inserir(compra);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
+
 		request.setAttribute("compradorId", paramId);
 		request.setAttribute("idParam", paramId);
 		// Formulário e java aina mão criado// mesma lógica do FormNovoCompraVoo.java

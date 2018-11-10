@@ -19,8 +19,6 @@
 <body>
 	<c:import url="logout-parcial.jsp" />
 	<br>
-
-
 	<br>
 	<br> Lista de usuarios:
 	<br> Pesquisar:
