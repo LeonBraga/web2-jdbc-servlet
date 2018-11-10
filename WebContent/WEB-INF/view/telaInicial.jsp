@@ -15,30 +15,31 @@
 	<br>
 	<a href="entrada?acao=ListaAssento">Atualizar Página</a>
 	<br>
-	
-	<br>
-	<br>
-	<br>
-	
+
+
 	<c:if test="${usuarioLogado.isAdm ==  'TRUE'}">
-		<h3>Administrador do Sistema</h3>
-		<p>Usuario ${usuarioLogado.nome} com privilegios de Administrador.</p>
+		<h3>Usuario ${usuarioLogado.nome} com privilegios de
+			Administrador.</h3>
 		<a href="entrada?acao=FormNovoUsuario">Criar Usuário</a>
 		<br>
-		<a href="entrada?acao=ListaUsuario">Usuários cadastrados no sistema</a>
+		<a href="entrada?acao=ListaUsuario">Usuários cadastrados no
+			sistema</a>
 		<br>
 		<a href="entrada?acao=ListaVoo">Tela administração de Vôos</a>
 		<br>
-		Tela de acompanhamento dos pedidos de vôos. ==> A FAZER
+		<a href="entrada?acao=">Tela de acompanhamento dos pedidos de vôos</a> ==>> A FAZER
 		<br>
-		</c:if>
-		<br>
-		<br>
-		
-	
-	<c:if test="${usuarioLogado.isAdm ==  'FALSE' || usuarioLogado.isAdm ==  'TRUE'}">
-		<h3>Cliente      ===>>>==>>Para teste o adm ira ver opções disponiveis para clientes também.****</h3>
-		<a href="entrada?acao=MostraUsuario&id=${usuarioLogado.id}">Alterar Meus Dados</a>
+	</c:if>
+	<br>
+	<br>
+
+
+	<c:if
+		test="${usuarioLogado.isAdm ==  'FALSE' || usuarioLogado.isAdm ==  'TRUE'}">
+		<h3>Espaço do Cliente, seja bem vindo ${usuarioLogado.nome}. ===>>>==>>Para teste o adm ira ver opções disponiveis
+			para clientes também.****</h3>
+		<a href="entrada?acao=MostraUsuario&id=${usuarioLogado.id}">Alterar
+			Meus Dados</a>
 		<br>
 		<a href="entrada?acao=ListaVoo">Tela de Compra de passagem Aérea</a>
 		decrição: Tela de Compra de passagem Aérea OBS: CRIAR Tela de finalização da compra
