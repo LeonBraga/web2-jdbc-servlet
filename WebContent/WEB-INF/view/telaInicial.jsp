@@ -29,25 +29,25 @@
 		<br>
 		<a href="entrada?acao=ListaVoo">Tela administração de Vôos</a>
 		<br>
-		<a href="entrada?acao=">Tela de acompanhamento dos pedidos de vôos</a>
+		Tela de acompanhamento dos pedidos de vôos. ==> A FAZER
 		<br>
 		</c:if>
 		<br>
 		<br>
 		
-	<h3>==>>Para teste o adm ira ver opções disponiveis para clientes também.****</h3>
+	
 	<c:if test="${usuarioLogado.isAdm ==  'FALSE' || usuarioLogado.isAdm ==  'TRUE'}">
-		<h3>Cliente</h3>
+		<h3>Cliente      ===>>>==>>Para teste o adm ira ver opções disponiveis para clientes também.****</h3>
 		<a href="entrada?acao=MostraUsuario&id=${usuarioLogado.id}">Alterar Meus Dados</a>
 		<br>
 		<a href="entrada?acao=ListaVoo">Tela de Compra de passagem Aérea</a>
 		decrição: Tela de Compra de passagem Aérea OBS: CRIAR Tela de finalização da compra
 		<br>
-		<a href="entrada?acao=">Tela de acompanhamento dos pedidos de vôos</a>
+		<a href="entrada?acao=">Tela de acompanhamento dos pedidos de vôos</a> ==>> A FAZER
 		<br>
-		<a href="entrada?acao=">Tela de escolha de assento e Cálculo do valor final</a>
+		Tela de escolha de assento e Cálculo do valor final.  ===>>> PRONTO
 		<br>
-		<a href="entrada?acao=">Tela da Lista de resultados e escolha do vôo do cliente com destaque da linha após ser escolhido e botão de enviar.</a>
+		Tela da Lista de resultados e escolha do vôo do cliente com destaque da linha após ser escolhido e botão de enviar. ==>>EM DESENVOLVIMENTO
 		<br>
 	</c:if>
 </body>
