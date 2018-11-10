@@ -7,14 +7,13 @@ import java.util.List;
 
 import com.suam.bean.Assento;
 import com.suam.bean.CartaoDeCredito;
-import com.suam.bean.CompraVoo;
 import com.suam.bean.Usuario;
 import com.suam.bean.Voo;
 import com.suam.factory.ConnectionFactory;
 
 public class CompraVooService {
 
-	public static void inserir(CompraVoo compra, List<Voo> listaVoo, Usuario usuario, Assento assento,
+	public static void inserir(List<Voo> listaVoo, Usuario usuario, Assento assento,
 			CartaoDeCredito cartao) throws SQLException {
 		Connection conexao = ConnectionFactory.getConnection();
 

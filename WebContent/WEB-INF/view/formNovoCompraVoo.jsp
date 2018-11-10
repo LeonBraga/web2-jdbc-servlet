@@ -37,7 +37,7 @@
 				<c:if test="${usuario.id ==  cartao.idUser}">
 					<li>Numero do cartao: ${cartao.numeroCartao} <input
 						type="checkbox" name="cartaoSelecionado"
-						value="${cartao.numeroCartao}">
+						value="${cartao.numeroCartao}" checked="checked">
 					</li>
 					<br>
 				</c:if>
@@ -46,16 +46,16 @@
 		<br> <br> Assentos selecionados:
 		<c:forEach items="${assentos}" var="assento">
 			<c:out value="${assento.numeroAssento}" />
-			<input type="checkbox" name="numeroAssentoOcupado"
+			<input type="checkbox" name="assento"
 				id="numeroAssentoOcupado" value="${assento.numeroAssento}"
-				checked="checked" disabled="disabled">
+				checked="checked" readonly="readonly">
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
 			<c:set var="precoTotal" value="${precoTotal + idvoo.valorVoo}"
 				scope="page" />
 		</c:forEach>
 		<br> <br> Preço total:<input type="text"
 			name="valorTotalCompra" value="${precoTotal}" readonly="readonly">
-		<input type="hidden" name="idUser" value="${usuarioLogado.login}">
+		<input type="hidden" name="idUser" value="${usuarioLogado.id}">
 		<input type="hidden" name="idVoo" value="${idvoo.idVoo}"> <input
 			type="hidden" name="acao" value="NovoCompraVoo"> <input
 			type="submit" value="Confirmar Compra" />
