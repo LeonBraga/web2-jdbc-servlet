@@ -162,7 +162,7 @@ public class AssentoService {
 	}
 
 	// insere assentos ao cadastrar voos
-	public static List<Assento> listarAssentosPorUsuario(Integer usuarioId, Integer vooId) throws SQLException {
+	public static List<Assento> listarAssentosPorUsuarioIdVooId(Integer usuarioId, Integer vooId) throws SQLException {
 		Connection conexao = ConnectionFactory.getConnection();
 		List<Assento> listaAssentos = new ArrayList<Assento>();
 

@@ -1,58 +1,33 @@
 package com.suam.bean;
 
+import java.util.List;
+
 public class CompraVoo {
 
-	//protected Integer idCompra;
+	// protected Integer idCompra;
+	protected List<Integer> idVoo;
 	protected Integer idUser;
-	protected Integer idCartao;
-	protected Integer idVooIda;
-	protected Integer idVooVolta;
-	protected Integer assento;
-	protected Integer idCompraVoo;
+	protected String idCartao;
 	protected Integer valorTotalCompra;
+	protected String horaCompra;
 	
-	
-	/*public Integer getIdCompra() {
-		return idCompra;
+	public List<Integer> getIdVoo() {
+		return idVoo;
 	}
-	public void setIdCompra(Integer idCompra) {
-		this.idCompra = idCompra;
-	}*/
+	public void setIdVoo(List<Integer> idVoo) {
+		this.idVoo = idVoo;
+	}
 	public Integer getIdUser() {
 		return idUser;
 	}
 	public void setIdUser(Integer idUser) {
 		this.idUser = idUser;
 	}
-	public Integer getIdCartao() {
+	public String getIdCartao() {
 		return idCartao;
 	}
-	public void setIdCartao(Integer idCartao) {
+	public void setIdCartao(String idCartao) {
 		this.idCartao = idCartao;
-	}
-	public Integer getIdVooIda() {
-		return idVooIda;
-	}
-	public void setIdVooIda(Integer idVooIda) {
-		this.idVooIda = idVooIda;
-	}
-	public Integer getIdVooVolta() {
-		return idVooVolta;
-	}
-	public void setIdVooVolta(Integer idVooVolta) {
-		this.idVooVolta = idVooVolta;
-	}
-	public Integer getAssento() {
-		return assento;
-	}
-	public void setAssento(Integer assento) {
-		this.assento = assento;
-	}
-	public Integer getIdCompraVoo() {
-		return idCompraVoo;
-	}
-	public void setIdCompraVoo(Integer idCompraVoo) {
-		this.idCompraVoo = idCompraVoo;
 	}
 	public Integer getValorTotalCompra() {
 		return valorTotalCompra;
@@ -60,8 +35,12 @@ public class CompraVoo {
 	public void setValorTotalCompra(Integer valorTotalCompra) {
 		this.valorTotalCompra = valorTotalCompra;
 	}
-
-	
+	public String getHoraCompra() {
+		return horaCompra;
+	}
+	public void setHoraCompra(String horaCompra) {
+		this.horaCompra = horaCompra;
+	}
 	
 	
 }

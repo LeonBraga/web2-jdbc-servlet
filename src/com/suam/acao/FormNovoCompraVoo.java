@@ -78,7 +78,7 @@ public class FormNovoCompraVoo implements Acao {
 		//LISTARÁ TODOS  ===> FILTAR SOMENTE SO ESCOLHIDOS NAQUELE INSTANTE
 		List<Assento> listaAssentos = new ArrayList<Assento>();
 		try {
-			listaAssentos = AssentoService.listarAssentosPorUsuario(id,idVoo);
+			listaAssentos = AssentoService.listarAssentosPorUsuarioIdVooId(id,idVoo);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
