@@ -39,10 +39,8 @@
 							</div>
 							<!-- <div class="col-xs-6">
 								<a href="#" class="active" id="login-form-link">Login</a>
-							</div>
-							<div class="col-xs-6">
-								<a href="#" id="register-form-link">Register</a>
 							</div> -->
+
 						</div>
 						<hr>
 					</div>
@@ -75,7 +73,11 @@
 											</div>
 										</div>
 									</div>
-									
+									<div class="form-group">
+										<h2 class="active">
+											<a href="formEntradaCadastro?cadastrarNovo=true">Registrar-se</a>
+										</h2>
+									</div>
 								</form>
 							</div>
 						</div>

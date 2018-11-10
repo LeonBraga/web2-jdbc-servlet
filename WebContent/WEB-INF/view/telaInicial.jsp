@@ -13,9 +13,6 @@
 <body>
 	<c:import url="logout-parcial.jsp" />
 	<br>
-	<a href="entrada?acao=ListaAssento">Atualizar Página</a>
-	<br>
-
 
 	<c:if test="${usuarioLogado.isAdm ==  'TRUE'}">
 		<h3>Usuario ${usuarioLogado.nome} com privilegios de

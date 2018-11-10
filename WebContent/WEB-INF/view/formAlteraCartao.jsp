@@ -13,10 +13,7 @@
 <body>
 	<c:import url="logout-parcial.jsp" />
 	<br>
-	<a href="entrada?acao=ListaAssento">Atualizar Página</a>
-	<br>
-	
-	
+
 	<form action="${linkEntradaServlet }" method="post">
 
 		<c:if test="${usuarioLogado.isAdm ==  'TRUE'}">

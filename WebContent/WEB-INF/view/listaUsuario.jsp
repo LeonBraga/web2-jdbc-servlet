@@ -19,13 +19,11 @@
 <body>
 	<c:import url="logout-parcial.jsp" />
 	<br>
-	<a href="entrada?acao=ListaAssento">Atualizar Página</a>
-	<br>
+
 
 	<br>
 	<br> Lista de usuarios:
-	<br>
-	Pesquisar:
+	<br> Pesquisar:
 	<input type="text" id="txtBusca"
 		placeholder="Digite aqui um valor para filtrar..." />
 	<br>
@@ -36,8 +34,9 @@
 			<c:forEach items="${usuarios}" var="usuario">
 				<c:if test="${usuario.isAdm ==  'TRUE'}">
 					<li>ID:${usuario.id} -NOME: ${usuario.nome} - <a
-						href="entrada?acao=MostraUsuario&id=${usuario.id}">Editar Usuário</a> <a
-						href="entrada?acao=RemoveUsuario&id=${usuario.id}">Remover Usuário</a>
+						href="entrada?acao=MostraUsuario&id=${usuario.id}"><button>Editar
+								Usuário</button></a> <a href="entrada?acao=RemoveUsuario&id=${usuario.id}"><button>Remover
+								Usuário</button></a>
 					</li>
 				</c:if>
 			</c:forEach>
@@ -47,22 +46,20 @@
 		<c:forEach items="${usuarios}" var="usuario">
 			<c:if test="${usuario.isAdm ==  'FALSE'}">
 				<li>ID:${usuario.id} -NOME: ${usuario.nome} - <a
-					href="entrada?acao=MostraUsuario&id=${usuario.id}">edita</a> <a
-					href="entrada?acao=RemoveUsuario&id=${usuario.id}">remove</a>
+					href="entrada?acao=MostraUsuario&id=${usuario.id}"><button>Editar
+							Usuário</button></a> <a href="entrada?acao=RemoveUsuario&id=${usuario.id}"><button>Remover
+							Usuário</button></a>
 				</li>
 			</c:if>
 		</c:forEach>
 	</ul>
 
 	<br>
-	<br>>
+	<br>
 	<c:if test="${usuarioLogado.isAdm ==  'TRUE'}">
-		<a href="entrada?acao=FormNovoUsuario">Novo usuário</a>
+		<a href="entrada?acao=FormNovoUsuario"><button>Novo usuário</button></a>
 	</c:if>
-	<br>
-	<a href="entrada?acao=ListaUsuario">REFRESH</a>
-	<br>
-	<c:import url="logout-parcial.jsp" />
+
 </body>
 </html>
 

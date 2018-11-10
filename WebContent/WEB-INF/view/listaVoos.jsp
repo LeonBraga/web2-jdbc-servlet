@@ -20,8 +20,7 @@
 <body>
 	<c:import url="logout-parcial.jsp" />
 	<br>
-	<a href="entrada?acao=ListaAssento">Ataulizar Página</a>
-	<br>
+	
 	<br> Lista de voos:
 	<br>
 	
@@ -37,11 +36,11 @@
 					value="${voo.ida}" pattern="dd/MM/yyyy" /> - Confirmação:
 				${voo.confirmacao} - Valor por assento: ${voo.valorVoo} <br> <c:if
 					test="${usuarioLogado.isAdm ==  'TRUE'}">
-					<a href="entrada?acao=MostraVoo&id=${voo.idVoo}">Edita este Voo</a>
-					<a href="entrada?acao=RemoveVoo&id=${voo.idVoo}">Remover este Voo</a>
+					<a href="entrada?acao=MostraVoo&id=${voo.idVoo}"><button>Editar este Voo</button></a>
+					<a href="entrada?acao=RemoveVoo&id=${voo.idVoo}"><button>Remover este Voo</button></a>
 				</c:if> <c:if test="${usuarioLogado.isAdm ==  'TRUE'}">
-					<a href="entrada?acao=ListaAssento&vooId=${voo.idVoo}">Escolher
-						este voo, escolha seu assento no voo Identificador: ${voo.idVoo}.</a>
+					<a href="entrada?acao=ListaAssento&vooId=${voo.idVoo}"><button>Escolher
+						este voo, escolha seu assento no voo Identificador: ${voo.idVoo}.</button></a>
 				</c:if> <c:if test="${usuarioLogado.isAdm ==  'FALSE'}">
 					<a href="entrada?acao=ListaAssento&vooId=${voo.idVoo}">Escolher
 						este voo, escolha seu assento no voo Identificador: ${voo.idVoo}.</a>
@@ -54,7 +53,7 @@
 
 	<br>
 	<c:if test="${usuarioLogado.isAdm ==  'TRUE'}">
-		<a href="entrada?acao=FormNovoVoo">Cadastrar Novo Voo</a>
+		<a href="entrada?acao=FormNovoVoo"><button>Cadastrar Novo Voo</button></a>
 	</c:if>
 
 	<br>

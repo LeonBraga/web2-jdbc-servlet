@@ -7,16 +7,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="ISO-8859-1">
+<meta charset="UTF-8">
 <title>Cadastrar Novo Usuário</title>
 </head>
 <body>
-	<
 	<c:import url="logout-parcial.jsp" />
 	<br>
-	<a href="entrada?acao=ListaAssento">Atualizar Página</a>
-	<br>
-
 	<c:if test="${usuarioLogado.isAdm ==  'TRUE'}">
 		<form action="${linkEntradaServlet}" method="post">
 			Nome: <input type="text" name="nome" value="${usuario.nome}" /> <br>
@@ -35,7 +31,16 @@
 			<br> <br> <input type="hidden" name="acao"
 				value="NovoUsuario"> <input type="submit" />
 		</form>
+		<c:import url="menuLinks.jsp" />
 	</c:if>
-	<c:import url="menuLinks.jsp" />
+
+	<%-- <c:if test="${empty var1}">
+    var1 is empty or null.
+</c:if>
+<c:if test="${not empty var1}">
+    var1 is NOT empty or null.
+</c:if> --%>
+
+
 </body>
 </html>

@@ -5,13 +5,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="ISO-8859-1">
+<meta charset="UTF-8">
 <title>Cadastrar Cartao de Credito para ${usuarioLogado.login}</title>
 </head>
 <body>
 	<c:import url="logout-parcial.jsp" />
 	<br>
-	<a href="entrada?acao=ListaAssento">Atualizar Página</a>
 	<br>
 	<p>Olá ${usuarioLogado.login}, insira os dados de seu cartão aqui:</p>
 	<br>
@@ -22,7 +21,8 @@
 			value="" /> <br> Data Vencimento:<input type="text"
 			name="dataVencimento" value="" /> <br> <input type="hidden"
 			name="idUser" value="${usuario.id}" /> <input type="hidden"
-			name="acao" value="NovoCartao"> <input type="submit" value="Cadastrar Cartão" />
+			name="acao" value="NovoCartao"> <input type="submit"
+			value="Cadastrar Cartão" />
 	</form>
 	<c:import url="menuLinks.jsp" />
 </body>

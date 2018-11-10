@@ -12,7 +12,7 @@
 <body>
 	<c:import url="logout-parcial.jsp" />
 	<br>
-	<a href="entrada?acao=ListaAssento">Atualizar Página</a>
+	
 	<br> Nome: ${usuario.nome}
 	<br> Identificador do voo: ${idvoo.idVoo} - Origem:
 	${idvoo.origem} - Destino: ${idvoo.destino} - Ida:
@@ -36,7 +36,7 @@
 			<c:forEach items="${cartoes}" var="cartao">
 				<c:if test="${usuario.id ==  cartao.idUser}">
 					<li>Numero do cartao: ${cartao.numeroCartao} <input
-						type="checkbox" name="cartaoSelecionado"
+						type="checkbox" name="numerocartao"
 						value="${cartao.numeroCartao}" checked="checked">
 					</li>
 					<br>
@@ -45,10 +45,10 @@
 		</c:if>
 		<br> <br> Assentos selecionados:
 		<c:forEach items="${assentos}" var="assento">
-			<c:out value="${assento.numeroAssento}" />
-			<input type="checkbox" name="assento"
+			<%-- <c:out value="${assento.numeroAssento}" /> --%>
+			<input type="text" name="assento"
 				id="numeroAssentoOcupado" value="${assento.numeroAssento}"
-				checked="checked" readonly="readonly">
+				readonly="true">
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
 			<c:set var="precoTotal" value="${precoTotal + idvoo.valorVoo}"
 				scope="page" />

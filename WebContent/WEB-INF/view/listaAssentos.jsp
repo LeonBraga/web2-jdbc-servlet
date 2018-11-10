@@ -19,8 +19,6 @@
 <body>
 	<c:import url="logout-parcial.jsp" />
 	<br>
-	<a href="entrada?acao=ListaAssento">Ataulizar Página</a>
-	<br>
 	<br>
 	<br> Listagem dos assentos do Voo - ID: ${vooId}.
 	<br>

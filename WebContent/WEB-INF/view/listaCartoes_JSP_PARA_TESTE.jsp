@@ -11,31 +11,26 @@
 <title>Lista de Cartoes</title>
 </head>
 <body>
+	<c:import url="logout-parcial.jsp" />
+	<br>
 
-	Usuario Logado: ${usuarioLogado.login}
-	<br>
-	<br>
 	<br> Lista de cartoes:
-	<br/>
+	<br />
 	<ul>
-	<c:if test="${usuarioLogado.isAdm ==  'TRUE'}">
-		<c:forEach items="${cartoes}" var="cartao">
-			<li>
-				Nome titular: ${cartao.titular} -
-			</li>
-			<li> 
-				Numero do cartao: ${cartao.numeroCartao}
-			</li>
-			<li> 
-				Data de Vencimento: <fmt:formatDate value="${cartao.dataVencimento}" pattern="dd/MM/yyyy"/>
-			</li>
-			<li>
-				<a	href="entrada?acao=MostraCatao&id=${cartao.idUser}">edita</a>
-				<a href="entrada?acao=RemoveCartao&id=${cartao.idUser}">remove</a>
-			</li>
-			<br>
-		</c:forEach>
-	</c:if>>
+		<c:if test="${usuarioLogado.isAdm ==  'TRUE'}">
+			<c:forEach items="${cartoes}" var="cartao">
+				<li>Nome titular: ${cartao.titular} -</li>
+				<li>Numero do cartao: ${cartao.numeroCartao}</li>
+				<li>Data de Vencimento: <fmt:formatDate
+						value="${cartao.dataVencimento}" pattern="dd/MM/yyyy" />
+				</li>
+				<li><a href="entrada?acao=MostraCatao&id=${cartao.idUser}">edita</a>
+					<a href="entrada?acao=RemoveCartao&id=${cartao.idUser}">remove</a>
+				</li>
+				<br>
+			</c:forEach>
+		</c:if>
+		>
 	</ul>
 	<br>
 	<br>
@@ -45,10 +40,10 @@
 	<br>
 	<a href="entrada?acao=ListaCartoes">REFRESH</a>
 	<br>
-	
+
 	<br>
 	<c:import url="logout-parcial.jsp" />
-	<c:import url="menuLinks.jsp"/> 
+	<c:import url="menuLinks.jsp" />
 </body>
 </html>
 

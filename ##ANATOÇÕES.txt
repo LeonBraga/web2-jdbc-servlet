@@ -3,7 +3,7 @@
 CHECkAR STOP-- Tela de escolha de assento TESTANDO \ 
 Modificar logica de compra voo
 
-==>>incluir campo preco na tabela de compra ou n tabela de voo??
+==>>criar "tela" de cadastro de usuário não cadastrado
 ==>>
 
 ============================================================================

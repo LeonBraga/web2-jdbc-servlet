@@ -32,7 +32,6 @@ public class NovoCompraVoo implements Acao {
 		//String usuario_idusuario = request.getParameter("idusuario");
 		String cartaodecredito_numerocartao = request.getParameter("numerocartao");
 
-		
 		System.out.println(paramId +" - "+Arrays.toString(assento) +" - "+voo_idvoo +" - "+ valorTotalCompra+" - "+cartaodecredito_numerocartao);
 		
 		Usuario usuario = new Usuario();

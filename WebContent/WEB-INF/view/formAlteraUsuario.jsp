@@ -13,7 +13,6 @@
 <body>
 	<c:import url="logout-parcial.jsp" />
 	<br>
-	<a href="entrada?acao=ListaAssento">Ataulizar Página</a>
 	
 	<form action="${linkEntradaServlet }" method="post">
 	
@@ -42,12 +41,12 @@
 				<br>
 			</c:if>
 		</c:if>
-		<c:if test="${usuarioLogado.isAdm=='FALSE'}">
+		<%-- <c:if test="${usuarioLogado.isAdm=='FALSE'}">
 			Usuario possui perfil administrador:
-			<input type="checkbox"  name="ehAdm" value="${usuario.isAdm}" readonly="readonly"/>
-			<%-- <input type="text" name="ehAdm" value="${usuario.isAdm}" readonly="readonly"> --%>
+			<input type="checkbox"  name="ehAdm" value="${usuario.isAdm}" disabled="disabled"/>
+			<input type="text" name="ehAdm" value="${usuario.isAdm}" readonly="readonly">
 			<br>
-		</c:if>
+		</c:if> --%>
 		<br>
 		 <c:if test="${usuario.isAdm ==  'FALSE'}"> 
 			<c:if test="${cartoes!=null}">	
@@ -64,8 +63,8 @@
 								Data de Vencimento: <fmt:formatDate value="${cartao.dataVencimento}" pattern="dd/MM/yyyy"/>
 							</li>
 							<li>
-							    <a href="entrada?acao=MostraCartao&id=${cartao.idUser}">Editar Cartão</a>
-								<a href="entrada?acao=RemoveCartao&numero=${cartao.numeroCartao}">Remover Cartão</a>
+							    <a href="entrada?acao=MostraCartao&id=${cartao.idUser}"><button>Editar Cartão</button></a>
+								<a href="entrada?acao=RemoveCartao&numero=${cartao.numeroCartao}"><button>Remover Cartão</button></a>
 							</li>
 							<br>
 					</c:if>
@@ -75,7 +74,7 @@
 		
 	<c:if test="${usuario.isAdm=='FALSE'}"> 
 		<li>
-			<a href="entrada?acao=FormNovoCartao&idUser=${usuario.id}">Cadastrar Novo Cartão</a>
+			<a href="entrada?acao=FormNovoCartao&idUser=${usuario.id}"><button>Cadastrar Novo Cartão</button></a>
 		</li>
 	</c:if>
 		<%-- </c:if> --%>
