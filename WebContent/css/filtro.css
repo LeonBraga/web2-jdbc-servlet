@@ -1,0 +1,22 @@
+@charset "UTF-8";
+
+{
+	font-family: "Century Gothic", Arial;
+	font-size: 20px
+}
+
+input[type="text"] {
+	width: 100%;
+	border: solid 1px
+}
+
+ul {
+	padding: 0;;
+	margin: 0
+}
+
+ul li {
+	list-style: none;
+	border: dashed 1px;
+	padding: 5px
+}

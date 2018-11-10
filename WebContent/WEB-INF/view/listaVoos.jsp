@@ -7,54 +7,58 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="ISO-8859-1">
+<meta charset="UTF-8">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<!-- Inclusão do js -->
+<script src="javascript/filtro.js" type="text/javascript"></script>
+<!-- Inclusão da folha de estilo-->
+<link rel="stylesheet" type="text/css" href="css/filtro.css">
+
 <title>Lista de Voos</title>
 </head>
 <body>
-	Usuario Logado: ${usuarioLogado.login}
+	<c:import url="logout-parcial.jsp" />
 	<br>
+	<a href="entrada?acao=ListaAssento">Ataulizar Página</a>
 	<br>
 	<br> Lista de voos:
-	<br/>
-	<ul>
-	<%-- <c:if test="${usuarioLogado.isAdm ==  'TRUE'}"> --%>
+	<br>
+	
+	Pesquisar
+	<input type="text" id="txtBusca"
+		placeholder="Digite aqui um valor para filtrar..." />
+	<br>
+	<br>
+	<ul id="ulItens">
+		<%-- <c:if test="${usuarioLogado.isAdm ==  'TRUE'}"> --%>
 		<c:forEach items="${voos}" var="voo">
-			<li>
-				Origem: ${voo.origem} -
-				Destino: ${voo.destino} - 
-				Ida: <fmt:formatDate value="${voo.ida}" pattern="dd/MM/yyyy"/> -  
-				Confirmação: ${voo.confirmacao} - 
-				Valor por assento: ${voo.valorVoo} <br>
-				
-				<c:if test="${usuarioLogado.isAdm ==  'TRUE'}">
-					<a	href="entrada?acao=MostraVoo&id=${voo.idVoo}">edita</a>
-					<a href="entrada?acao=RemoveVoo&id=${voo.idVoo}">remove</a>
-				</c:if>
-				<c:if test="${usuarioLogado.isAdm ==  'TRUE'}">
-					<a href="entrada?acao=ListaAssento&vooId=${voo.idVoo}">Checar Assentos do voo id: ${voo.idVoo}.</a>
-				</c:if>
-				<c:if test="${usuarioLogado.isAdm ==  'FALSE'}">
-					<a href="entrada?acao=ListaAssento&vooId=${voo.idVoo}">Escolher este voo, escolha seu assento!</a>
-				</c:if>
-			<br>
+			<li>Origem: ${voo.origem} - Destino: ${voo.destino} - Ida: <fmt:formatDate
+					value="${voo.ida}" pattern="dd/MM/yyyy" /> - Confirmação:
+				${voo.confirmacao} - Valor por assento: ${voo.valorVoo} <br> <c:if
+					test="${usuarioLogado.isAdm ==  'TRUE'}">
+					<a href="entrada?acao=MostraVoo&id=${voo.idVoo}">Edita este Voo</a>
+					<a href="entrada?acao=RemoveVoo&id=${voo.idVoo}">Remover este Voo</a>
+				</c:if> <c:if test="${usuarioLogado.isAdm ==  'TRUE'}">
+					<a href="entrada?acao=ListaAssento&vooId=${voo.idVoo}">Escolher
+						este voo, escolha seu assento no voo Identificador: ${voo.idVoo}.</a>
+				</c:if> <c:if test="${usuarioLogado.isAdm ==  'FALSE'}">
+					<a href="entrada?acao=ListaAssento&vooId=${voo.idVoo}">Escolher
+						este voo, escolha seu assento no voo Identificador: ${voo.idVoo}.</a>
+				</c:if> <br>
 			</li>
 			<br>
 		</c:forEach>
-	<%-- </c:if> --%>
+		<%-- </c:if> --%>
 	</ul>
-	
+
 	<br>
 	<c:if test="${usuarioLogado.isAdm ==  'TRUE'}">
-		<a href="entrada?acao=FormNovoVoo">NOVO VOO</a>
+		<a href="entrada?acao=FormNovoVoo">Cadastrar Novo Voo</a>
 	</c:if>
 
 	<br>
-	<a href="entrada?acao=ListaVoos">REFRESH</a>
-	<br>
-	
-	<br>
-	<c:import url="logout-parcial.jsp" />
-	<c:import url="menuLinks.jsp"/> 
+	<c:import url="menuLinks.jsp" />
 </body>
 </html>
 

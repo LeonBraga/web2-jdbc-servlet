@@ -7,12 +7,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="ISO-8859-1">
+<meta charset="UTF-8">
 <title>Alterar dados do usuário</title>
 </head>
 <body>
-	<c:import url="logout-parcial.jsp"/> 
-	Usuario Logado: ${usuarioLogado.login}
+	<c:import url="logout-parcial.jsp" />
+	<br>
+	<a href="entrada?acao=ListaAssento">Ataulizar Página</a>
 	
 	<form action="${linkEntradaServlet }" method="post">
 	
@@ -63,8 +64,8 @@
 								Data de Vencimento: <fmt:formatDate value="${cartao.dataVencimento}" pattern="dd/MM/yyyy"/>
 							</li>
 							<li>
-							    <a href="entrada?acao=MostraCartao&id=${cartao.idUser}">edita</a>
-								<a href="entrada?acao=RemoveCartao&numero=${cartao.numeroCartao}">remove</a>
+							    <a href="entrada?acao=MostraCartao&id=${cartao.idUser}">Editar Cartão</a>
+								<a href="entrada?acao=RemoveCartao&numero=${cartao.numeroCartao}">Remover Cartão</a>
 							</li>
 							<br>
 					</c:if>
@@ -74,7 +75,7 @@
 		
 	<c:if test="${usuario.isAdm=='FALSE'}"> 
 		<li>
-			<a href="entrada?acao=FormNovoCartao&idUser=${usuario.id}">Novo Cartão</a>
+			<a href="entrada?acao=FormNovoCartao&idUser=${usuario.id}">Cadastrar Novo Cartão</a>
 		</li>
 	</c:if>
 		<%-- </c:if> --%>
@@ -103,10 +104,9 @@
 	 --%>		
 	 	
 		<br>
-		<br>
 		<input type="hidden" name="id" value="${usuario.id}">
 		<input type="hidden" name="acao" value="AlteraUsuario">
-		<input type="submit" /> 
+		<input type="submit" value="Alterar Dados" /> 
 	</form>
 <c:import url="menuLinks.jsp"/> 
 </body>

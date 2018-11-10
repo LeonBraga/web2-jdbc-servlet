@@ -7,41 +7,55 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="ISO-8859-1">
+<meta charset="UTF-8">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<!-- Inclusão do js -->
+<script src="javascript/filtro.js" type="text/javascript"></script>
+<!-- Inclusão da folha de estilo-->
+<link rel="stylesheet" type="text/css" href="css/filtro.css">
 <title>Lista de Usuários</title>
 </head>
 <body>
-
-	Usuario Logado: ${usuarioLogado.login}
+	<c:import url="logout-parcial.jsp" />
 	<br>
+	<a href="entrada?acao=ListaAssento">Atualizar Página</a>
+	<br>
+
 	<br>
 	<br> Lista de usuarios:
-	<br/>
-	<ul>
+	<br>
+	Pesquisar:
+	<input type="text" id="txtBusca"
+		placeholder="Digite aqui um valor para filtrar..." />
+	<br>
+	<br>
+	<ul id="ulItens">
 		<c:if test="${usuarioLogado.isAdm ==  'TRUE'}">
 			<h3>Usuários administradores do sistema:</h3>
-				<c:forEach items="${usuarios}" var="usuario">	
-					<c:if test="${usuario.isAdm ==  'TRUE'}">	
-						<li>ID:${usuario.id} -NOME: ${usuario.nome} - <a
-							href="entrada?acao=MostraUsuario&id=${usuario.id}">edita</a>
-							<a href="entrada?acao=RemoveUsuario&id=${usuario.id}">remove</a>
-						</li>
-					</c:if>
-				</c:forEach>
-			</c:if>
-			
-			<h3>Clientes</h3>
 			<c:forEach items="${usuarios}" var="usuario">
-				<c:if test="${usuario.isAdm ==  'FALSE'}">	
+				<c:if test="${usuario.isAdm ==  'TRUE'}">
 					<li>ID:${usuario.id} -NOME: ${usuario.nome} - <a
-						href="entrada?acao=MostraUsuario&id=${usuario.id}">edita</a>
-						<a href="entrada?acao=RemoveUsuario&id=${usuario.id}">remove</a>
+						href="entrada?acao=MostraUsuario&id=${usuario.id}">Editar Usuário</a> <a
+						href="entrada?acao=RemoveUsuario&id=${usuario.id}">Remover Usuário</a>
 					</li>
 				</c:if>
 			</c:forEach>
+		</c:if>
+
+		<h3>Clientes</h3>
+		<c:forEach items="${usuarios}" var="usuario">
+			<c:if test="${usuario.isAdm ==  'FALSE'}">
+				<li>ID:${usuario.id} -NOME: ${usuario.nome} - <a
+					href="entrada?acao=MostraUsuario&id=${usuario.id}">edita</a> <a
+					href="entrada?acao=RemoveUsuario&id=${usuario.id}">remove</a>
+				</li>
+			</c:if>
+		</c:forEach>
 	</ul>
-	
-	<br><br>>
+
+	<br>
+	<br>>
 	<c:if test="${usuarioLogado.isAdm ==  'TRUE'}">
 		<a href="entrada?acao=FormNovoUsuario">Novo usuário</a>
 	</c:if>

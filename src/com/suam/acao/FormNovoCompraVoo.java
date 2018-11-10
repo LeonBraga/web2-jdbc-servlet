@@ -31,14 +31,6 @@ public class FormNovoCompraVoo implements Acao {
 		
 		System.out.println("PARAMETROS RECEBIDOS: "+compradorId+" - "+voo_idvoo);
 		
-		//RECEBERA A LISTA DE ASSENTOS OCUPADOS NO MOMENTO DA COMPRA
-		//String[] numeroAssentoOcupado = request.getParameterValues("numeroAssentoOcupado");
-		//TESTANDO
-		/*for (String string : numeroAssentoOcupado) {
-			System.out.println("ASSENTO" + string);
-		}*/
-		
-		
 		//COMPRAR VOO VOLTA===>>>>IMPLEMENTAR
 		//String voo_idvooVolta = request.getParameter("idVooVolta");
 		

@@ -1,36 +1,37 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
-<c:url value="/entrada" var="linkEntradaServlet"/>
+<c:url value="/entrada" var="linkEntradaServlet" />
 
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="ISO-8859-1">
-<title>Cadastrar VOO</title>
+<meta charset="UTF-8">
+<title>Cadastrar Voo</title>
 </head>
 <body>
-	<c:import url="logout-parcial.jsp"/> 
-	<form action="${linkEntradaServlet }" method="post">		
+	<c:import url="logout-parcial.jsp" />
+	<br>
+	<a href="entrada?acao=ListaAssento">Atualizar Página</a>
+	<br>
+	<form action="${linkEntradaServlet }" method="post">
 		<c:if test="${usuarioLogado.isAdm ==  'TRUE'}">
-			Origem:<input type="text" name="origem" value=""/>
+			Origem:<input type="text" name="origem" value="" />
 			<br>	
-			Destino:<input type="text" name="destino" value=""/>
+			Destino:<input type="text" name="destino" value="" />
 			<br>
-			Ida: <input type="text" pattern="\d{1,2}-\d{1,2}-\d{4}" class="datepicker"  name="ida" value="" />
-			<input class="datepicker" type="text" name="ida" value="XX-XX-XXXX" readonly />
+			Ida: <input type="text" pattern="\d{1,2}-\d{1,2}-\d{4}"
+				class="datepicker" name="ida" value="" />
+			<input class="datepicker" type="text" name="ida" value="XX-XX-XXXX"
+				readonly />
 			<br>
-			Confirmação:<input type="checkbox" name="confirmacao" value="true"/>
+			Confirmação:<input type="checkbox" name="confirmacao" value="true" />
 			<br>
-			Valor:<input type="text" name="valorVoo" value=""/>
+			Valor:<input type="text" name="valorVoo" value="" />
 		</c:if>
-		<br>
-		<br>
-		<input type="hidden" name="acao" value="NovoVoo">
-		<input type="submit" /> 
+		<br> <br> <input type="hidden" name="acao" value="NovoVoo">
+		<input type="submit" />
 	</form>
-
-
-<c:import url="menuLinks.jsp"/> 
+	<c:import url="menuLinks.jsp" />
 </body>
 </html>

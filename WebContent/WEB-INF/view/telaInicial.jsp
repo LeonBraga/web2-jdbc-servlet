@@ -7,13 +7,15 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="ISO-8859-1">
+<meta charset="UTF-8">
 <title>Inicio</title>
 </head>
 <body>
 	<c:import url="logout-parcial.jsp" />
-
-	Usuario Logado: ${usuarioLogado.login}
+	<br>
+	<a href="entrada?acao=ListaAssento">Atualizar Página</a>
+	<br>
+	
 	<br>
 	<br>
 	<br>
