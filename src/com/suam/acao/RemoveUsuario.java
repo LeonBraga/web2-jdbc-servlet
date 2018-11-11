@@ -8,7 +8,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.suam.bean.Usuario;
+import com.suam.service.AssentoService;
 import com.suam.service.CartaoDeCreditoService;
+import com.suam.service.CompraVooService;
 import com.suam.service.UsuarioService;
 
 public class RemoveUsuario implements Acao {
@@ -27,14 +29,27 @@ public class RemoveUsuario implements Acao {
 			e.printStackTrace();
 		}
 
-		
 		try {
 			CartaoDeCreditoService.deleteCartoes(usuario);
 		} catch (SQLException e1) {
-			
+
 			e1.printStackTrace();
 		}
-		
+
+		try {
+			AssentoService.desocuparAssentoPorUsuarioId(usuario.getId());
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+
+		try {
+			CompraVooService.deleteCompraPorUsuario(usuario.getId());
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+
 		try {
 			UsuarioService.delete(usuario);
 		} catch (SQLException e) {

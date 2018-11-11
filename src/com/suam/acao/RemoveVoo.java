@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.suam.bean.Voo;
+import com.suam.service.CompraVooService;
 import com.suam.service.VooService;
 
 public class RemoveVoo implements Acao {
@@ -20,6 +21,14 @@ public class RemoveVoo implements Acao {
 		Integer id = Integer.valueOf(paramId);
 
 		Voo voo = null;
+		
+		try {
+			CompraVooService.deleteCompraPorVoo(id);
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
 		try {
 			voo = VooService.buscaVooPelaId(id);
 			VooService.delete(voo);

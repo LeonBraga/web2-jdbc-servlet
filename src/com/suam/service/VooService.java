@@ -21,7 +21,6 @@ public class VooService {
 		String sql = "INSERT INTO voo ( ida, origem, destino, confirmacao, valorVoo) VALUES (?,?,?,?,?)";
 
 		// SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
-
 		try {
 			PreparedStatement ps = conexao.prepareStatement(sql);
 			ps.setDate(1, voo.getIda());
@@ -78,7 +77,7 @@ public class VooService {
 		List<Voo> listaVoos = new ArrayList<Voo>();
 
 		Statement statement = connection.createStatement();
-		statement.execute("select * from voo");
+		statement.execute("select * from voo where exclusaoLogica = 1");
 
 		ResultSet rs = statement.getResultSet();
 
@@ -112,9 +111,11 @@ public class VooService {
 
 	public static void delete(Voo voo) throws SQLException {
 		Connection conexao = ConnectionFactory.getConnection();
-
-		String sql = "DELETE FROM voo WHERE idVoo = ?";
-		String sql1 = "DELETE FROM ASSENTO WHERE voo_idVoo =?";
+		//String sql = "DELETE FROM voo WHERE idVoo = ?";
+		String sql = "UPDATE voo SET exclusaoLogica = 0 WHERE idVoo = ?";
+		//String sql1 = "DELETE FROM ASSENTO WHERE voo_idVoo =?";
+		String sql1 = "UPDADE ASSENTO SET exclusaoLogica = 0 WHERE idVoo = ?";
+		
 		String id = voo.getIdVoo().toString();
 		try {
 			PreparedStatement ps1 = conexao.prepareStatement(sql1);

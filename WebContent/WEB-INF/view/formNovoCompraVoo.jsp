@@ -12,7 +12,7 @@
 <body>
 	<c:import url="logout-parcial.jsp" />
 	<br>
-	
+
 	<br> Nome: ${usuario.nome}
 	<br> Identificador do voo: ${idvoo.idVoo} - Origem:
 	${idvoo.origem} - Destino: ${idvoo.destino} - Ida:
@@ -33,22 +33,25 @@
 		<c:if test="${cartoes!=null}">
 			<h3>Selecione o cartão que deseja usar nesta compra
 				${usuario.nome}</h3>
-			<c:forEach items="${cartoes}" var="cartao">
-				<c:if test="${usuario.id ==  cartao.idUser}">
-					<li>Numero do cartao: ${cartao.numeroCartao} <input
+			Numero do cartao:<select>
+				<c:forEach items="${cartoes}" var="cartao">
+					<c:if test="${usuario.id ==  cartao.idUser}">
+						<option value="${cartao.numeroCartao}">${cartao.numeroCartao}</option>
+						<%-- <li>Numero do cartao: ${cartao.numeroCartao} <input
 						type="checkbox" name="numerocartao"
 						value="${cartao.numeroCartao}" checked="checked">
-					</li>
-					<br>
-				</c:if>
-			</c:forEach>
+					</li> --%>
+						<br>
+					</c:if>
+				</c:forEach>
+			</select>
 		</c:if>
 		<br> <br> Assentos selecionados:
 		<c:forEach items="${assentos}" var="assento">
 			<%-- <c:out value="${assento.numeroAssento}" /> --%>
-			<input type="checkbox" name="assento"
+			${assento.numeroAssento}<input type="checkbox" name="assento"
 				id="numeroAssentoOcupado" value="${assento.numeroAssento}"
-				checked="checked"  readonly="true">
+				checked="checked" readonly="true">
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
 			<c:set var="precoTotal" value="${precoTotal + idvoo.valorVoo}"
 				scope="page" />

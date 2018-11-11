@@ -22,9 +22,13 @@
 			Login:<input type="text" name="login" value="${usuario.login}">
 			<br> Senha:<input type="text" name="senha"
 				value="${usuario.senha}"> <br> Confirma Senha:<input
-				type="text" name="confirmaSenha" value=""> <br> Usuário
+				type="text" name="confirmaSenha" value=""> <br><%--  Usuário
 			possui perfil Administrador:<input type="checkbox" name="ehAdm"
-				value="${usuario.isAdm}" />
+				value="${usuario.isAdm}" /> --%>
+				Perfil do Usuário:
+				<br>
+				<input type="radio" name="ehAdm" value="${usuario.isAdm}" checked> Administrador<br>
+  				<input type="radio" name="ehAdm" value=""> Cliente<br>
 			<%--<input type="text" name="ehAdm" value="${usuario.isAdm}"> --%>
 			<br> <br> Data Nascimento: <input type="text" name="data"
 				value="<fmt:formatDate value="${usuario.dataNascimento}" pattern="dd/MM/yyyy"/>" />

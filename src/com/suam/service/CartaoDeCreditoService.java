@@ -73,10 +73,8 @@ public class CartaoDeCreditoService {
 		List<CartaoDeCredito> listaCartoes = new ArrayList<CartaoDeCredito>();
 
 		Statement statement = connection.createStatement();
-		statement.execute("select * from cartaodecredito");
-
+		statement.execute("select * from cartaodecredito where exclusaoLogica = 1");
 		ResultSet rs = statement.getResultSet();
-
 		SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
 
 		while (rs.next()) {
@@ -99,7 +97,8 @@ public class CartaoDeCreditoService {
 	public static void delete(CartaoDeCredito cartao) throws SQLException {
 		Connection conexao = ConnectionFactory.getConnection();
 
-		String sql = "DELETE FROM cartaodecredito WHERE numerocartao = ?";
+		// String sql = "DELETE FROM cartaodecredito WHERE numerocartao = ?";
+		String sql = "UPDATE cartaodecredito SET exclusaoLogica = 0 WHERE numerocartao = ?";
 
 		try {
 			PreparedStatement ps = conexao.prepareStatement(sql);
@@ -121,8 +120,9 @@ public class CartaoDeCreditoService {
 	public static void deleteCartoes(Usuario usuario) throws SQLException {
 		Connection conexao = ConnectionFactory.getConnection();
 
-		String sql = "DELETE FROM cartaodecredito WHERE USUARIO_IDUSUARIO = ?";
-
+		//String sql = "DELETE FROM cartaodecredito WHERE USUARIO_IDUSUARIO = ?";
+		String sql = "UPDATE cartaodecredito SET exclusaoLogica = 0 WHERE IDUSUARIO = ?";
+		
 		try {
 			PreparedStatement ps = conexao.prepareStatement(sql);
 
@@ -185,7 +185,6 @@ public class CartaoDeCreditoService {
 	public static CartaoDeCredito buscaCartaoPeloNumero(String numero) throws SQLException {
 		List<CartaoDeCredito> lista = ListaCartoes();
 		String num = numero;
-		System.out.println("NUMERO DO CARTAO A SER BUSCADO: " + num);
 		for (CartaoDeCredito cartao : lista) {
 			if (cartao.getNumeroCartao().equalsIgnoreCase(num.trim())) {
 				return cartao;

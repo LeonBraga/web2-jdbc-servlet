@@ -157,7 +157,8 @@ public class UsuarioService {
 	public static void delete(Usuario usuario) throws SQLException {
 		Connection conexao = ConnectionFactory.getConnection();
 
-		String sql = "DELETE FROM usuario WHERE idusuario = ?";
+		//String sql = "DELETE FROM usuario WHERE idusuario = ?";
+		String sql = "UPDATE WHERE idusuario = ? and exclusaoLogica=0";
 
 		System.out.println("Usuario a ser removido: " + usuario.getNome() + " - " + usuario.getSobrenome() + " - "
 				+ usuario.getEndereco() + " - " + usuario.getSenha() + " - " + usuario.getLogin() + " - "
@@ -183,7 +184,7 @@ public class UsuarioService {
 		Connection conexao = ConnectionFactory.getConnection();
 		List<Usuario> listaUsuario = new ArrayList<Usuario>();
 
-		String sql = "SELECT * FROM usuario where login=? and senha=?";
+		String sql = "SELECT * FROM usuario where login=? and senha=? and exclusaoLogica=1";
 
 		try {
 			PreparedStatement ps = conexao.prepareStatement(sql);
@@ -211,7 +212,6 @@ public class UsuarioService {
 				}
 				usuario.setIsAdm(rs.getBoolean("isAdm"));
 				listaUsuario.add(usuario);
-
 			}
 			// conexao.commit();
 		} catch (SQLException e) {
@@ -224,9 +224,7 @@ public class UsuarioService {
 	}
 
 	public static boolean autenticar(String login, String senha) throws SQLException {
-		System.out.println("TENTANDO AUTENTICAR ==> LOGIN: " + login + " SENHA: " + senha);
 		List<Usuario> listaUsuario = consultar(login, senha);
-
 		if (!listaUsuario.isEmpty()) {
 			return true;
 		} else {
@@ -244,5 +242,4 @@ public class UsuarioService {
 		}
 		return null;
 	}
-
 }
