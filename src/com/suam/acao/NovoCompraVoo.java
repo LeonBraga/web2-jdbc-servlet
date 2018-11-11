@@ -11,10 +11,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.suam.bean.Assento;
+import com.suam.bean.AssentoComprados;
 import com.suam.bean.CartaoDeCredito;
 import com.suam.bean.CompraVoo;
 import com.suam.bean.Usuario;
 import com.suam.bean.Voo;
+import com.suam.service.AssentoCompradosService;
 import com.suam.service.AssentoService;
 import com.suam.service.CartaoDeCreditoService;
 import com.suam.service.CompraVooService;
@@ -27,12 +29,12 @@ public class NovoCompraVoo implements Acao {
 	public String executa(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		String paramId = request.getParameter("idUser");
-		// String[] assento = request.getParameterValues("assento");
+		String[] assento = request.getParameterValues("assento");
 		String valorTotalCompra = request.getParameter("valorTotalCompra");
 		String[] voo_idvoo = request.getParameterValues("idVoo");
 		String cartaodecredito_numerocartao = request.getParameter("numerocartao");
 
-		System.out.println(paramId + " - " + Arrays.toString(voo_idvoo) + " - " + valorTotalCompra + " - "
+		System.out.println(paramId + " - " + Arrays.toString(assento)+ " - " +Arrays.toString(voo_idvoo) + " - " + valorTotalCompra + " - "
 				+ cartaodecredito_numerocartao);
 
 		Usuario usuario = new Usuario();
@@ -54,14 +56,34 @@ public class NovoCompraVoo implements Acao {
 		List<Integer> listaNumeroVoo = new ArrayList<Integer>();
 		Voo voo = new Voo();
 		List<Assento> listaNumeroAssento = new ArrayList<Assento>();
+		List<AssentoComprados> listaAssentosComprados = new ArrayList<AssentoComprados>();
 		Integer totalCompra = 0;
+		boolean assentoJaOcupado = false;
+		int contador = 0;
 		for (String vooIdVoo : voo_idvoo) {
 			try {
+				listaAssentosComprados = AssentoCompradosService.ListaAssentosPorIvoo(vooIdVoo);
+				listaNumeroAssento = AssentoService.listarAssentosPorUsuarioIdVooId(usuario.getId(), Integer.valueOf(vooIdVoo));
+				for (AssentoComprados assentoComprados : listaAssentosComprados) {
+					if(listaNumeroAssento.get(contador).getIdVoo().equals(assentoComprados.getIdVoo())) {
+						System.out.println("ASSENTO JÁ COPRADO");
+						assentoJaOcupado = true;
+						break;
+					}else {
+						assentoJaOcupado =false;
+					}
+					contador++;
+				}
+				if(assentoJaOcupado) {
+					//CRIAR LOGICA PARA ASENTO JÁ COMPRADO
+					break;
+				}
 				voo = VooService.buscaVooPelaId(Integer.valueOf(vooIdVoo));
-				listaNumeroAssento = AssentoService.listarAssentosPorUsuarioIdVooId(usuario.getId(), voo.getIdVoo());
 				listaNumeroVoo.add(Integer.valueOf(vooIdVoo));
 				totalCompra += (voo.getValorVoo() * listaNumeroAssento.size());
+				AssentoCompradosService.inserir(assento, vooIdVoo);
 				System.out.println("VALOR TOTAL:  " + valorTotalCompra);
+				contador=0;
 			} catch (NumberFormatException | SQLException e) {
 				e.printStackTrace();
 			}

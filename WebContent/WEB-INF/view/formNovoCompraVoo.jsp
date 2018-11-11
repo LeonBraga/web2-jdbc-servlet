@@ -46,9 +46,9 @@
 		<br> <br> Assentos selecionados:
 		<c:forEach items="${assentos}" var="assento">
 			<%-- <c:out value="${assento.numeroAssento}" /> --%>
-			<input type="text" name="assento"
+			<input type="checkbox" name="assento"
 				id="numeroAssentoOcupado" value="${assento.numeroAssento}"
-				readonly="true">
+				checked="checked"  readonly="true">
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
 			<c:set var="precoTotal" value="${precoTotal + idvoo.valorVoo}"
 				scope="page" />

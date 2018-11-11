@@ -1,9 +1,16 @@
 package br.com.suam.TESTE;
 
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+
+import com.suam.factory.ConnectionFactory;
+
 import java.time.Duration;
 import java.time.Instant;
 import java.time.LocalDate;
@@ -18,19 +25,23 @@ public class Data {
 	public static void main(String[] args) {
 
 		// LocalDate hoje = LocalDate.now();
-		// System.out.println(LocalDate.now());
+		// Obtém LocalDateTime de agora
+		// LocalDateTime agora = LocalDateTime.now();
 		// DateTimeFormatter formatador = DateTimeFormatter.ofPattern("dd-MM-yyyy
-		// hh:mm:ss");
-		// hoje.format(formatador);
+		// HH:mm:ss");
+		// String agoraFormatado = agora.format(formatador);
+		// System.out.println("LocalDateTime depois de formatar: " + agoraFormatado);
+		//
 		// SimpleDateFormat formato = new SimpleDateFormat("dd-MM-yyyy hh:mm:ss");
 		// java.util.Date date = null;
 		// try {
-		// date = formato.parse(hoje.format(formatador).toString());
+		// date = formato.parse(agora.format(formatador).toString());
 		// } catch (ParseException e1) {
 		// e1.printStackTrace();
 		// }
-		// java.sql.Date sqlAgora = new java.sql.Date(date.getTime());
-		//
+		// System.out.println("====>>"+date);
+		// //java.sql.Date sqlAgora = new java.sql.Date(date.getTime());
+		// java.sql.Timestamp sqlAgora = new java.sql.Timestamp(date.getTime());
 		// System.out.println("HORA::::" + sqlAgora);
 
 		// criação de datas com a nova classe LocalDate e
@@ -108,7 +119,6 @@ public class Data {
 
 		// métodos interessantes
 		LocalDate data = LocalDate.now();
-
 		System.out.println("Ano bissexto: " + data.isLeapYear());
 		System.out.println("Número de dias do mês: " + data.lengthOfMonth());
 		System.out.println("Número de dias do ano: " + data.lengthOfYear());
@@ -117,20 +127,56 @@ public class Data {
 
 		// Obtém LocalDate de hoje
 		LocalDate hoje2 = LocalDate.now();
-
 		System.out.println("LocalDate antes de formatar: " + hoje2);
-
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-
 		String hojeFormatado = hoje2.format(formatter);
-
 		System.out.println("LocalDate depois de formatar: " + hojeFormatado);
 
 		// Obtém LocalDateTime de agora
-		LocalDateTime agora = LocalDateTime.now();
-		System.out.println("LocalDateTime antes de formatar: " + agora);
-		formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
-		String agoraFormatado = agora.format(formatter);
-		System.out.println("LocalDateTime depois de formatar: " + agoraFormatado);
+		/*
+		 * LocalDateTime agora = LocalDateTime.now();
+		 * System.out.println("LocalDateTime antes de formatar: " + agora); formatter =
+		 * DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss"); String agoraFormatado =
+		 * agora.format(formatter);
+		 * System.out.println("LocalDateTime depois de formatar: " + agoraFormatado);
+		 */
+
+		Connection conexao = null;
+		try {
+			conexao = ConnectionFactory.getConnection();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		Statement statement = null;
+		try {
+			statement = conexao.createStatement();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			statement.execute("SELECT DATE_FORMAT(now(), '%d-%m-%y %H:%i:%s')as 'agora'");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		ResultSet rs = null;
+		try {
+			rs = statement.getResultSet();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		java.util.Date date1 = new java.util.Date();
+		try {
+			while (rs.next()) {
+				System.out.println(rs.getString("agora"));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
 }
