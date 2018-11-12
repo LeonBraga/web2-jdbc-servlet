@@ -29,7 +29,7 @@
 		<c:forEach items="${assentos}" var="assento">
 			<c:if test="${assento.ocupante == usuarioLogado.id}">
 				<c:if test="${assento.comfirmaPagamento != true}">
-					<c:out value="${assento.numeroAssento}" />
+					<c:out value="${assento.numeroAssento}"/> - NÃO	Confirmado
 					<input type="checkbox" name="numeroAssentoOcupado"
 						id="numeroAssentoOcupado" value="${assento.numeroAssento}">
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
