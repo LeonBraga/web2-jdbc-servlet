@@ -1,8 +1,8 @@
-package com.suam.bean;
+package com.suam.VO;
 
 import java.util.List;
 
-public class CompraVoo {
+public class CompraVooVO {
 
 	// protected Integer idCompra;
 	protected List<Integer> idVoo;
@@ -10,13 +10,14 @@ public class CompraVoo {
 	protected String idCartao;
 	protected Integer valorTotalCompra;
 	protected String horaCompra;
-	protected String idCompra;
+	protected String nomeUsuario;
 	
-	public String getIdCompra() {
-		return idCompra;
+	
+	public String getNomeUsuario() {
+		return nomeUsuario;
 	}
-	public void setIdCompra(String idCompra) {
-		this.idCompra = idCompra;
+	public void setNomeUsuario(String nomeUsuario) {
+		this.nomeUsuario = nomeUsuario;
 	}
 	public List<Integer> getIdVoo() {
 		return idVoo;

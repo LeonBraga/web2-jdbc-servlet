@@ -2,9 +2,15 @@ package com.suam.service;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.suam.bean.CompraVoo;
+import com.suam.bean.Usuario;
 import com.suam.factory.ConnectionFactory;
 import com.suam.util.DataUtils;
 
@@ -19,27 +25,28 @@ public class CompraVooService {
 		System.out.println("Dados da Compra:: " + compra.getIdCartao() + " - " + compra.getIdVoo().toString() + " - "
 				+ compra.getIdUser() + " - " + compra.getValorTotalCompra());
 
-//		// PEGANDO A DATA ATUAL:::
-//		String agora = null;
-//		Statement statement = conexao.createStatement();
-//		try {
-//			statement.execute("SELECT DATE_FORMAT(now(), '%y-%m-%d %H:%i:%s')as 'agora'");
-//		} catch (SQLException e) {
-//			e.printStackTrace();
-//		}
-//
-//		ResultSet rs = statement.getResultSet();
-//		try {
-//			while (rs.next()) {
-//				agora = rs.getString("agora");
-//				System.out.println("Hora da Compra: " + rs.getString("agora"));
-//			}
-//		} catch (SQLException e) {
-//			e.printStackTrace();
-//		}
-		
+		// // PEGANDO A DATA ATUAL:::
+		// String agora = null;
+		// Statement statement = conexao.createStatement();
+		// try {
+		// statement.execute("SELECT DATE_FORMAT(now(), '%y-%m-%d %H:%i:%s')as
+		// 'agora'");
+		// } catch (SQLException e) {
+		// e.printStackTrace();
+		// }
+		//
+		// ResultSet rs = statement.getResultSet();
+		// try {
+		// while (rs.next()) {
+		// agora = rs.getString("agora");
+		// System.out.println("Hora da Compra: " + rs.getString("agora"));
+		// }
+		// } catch (SQLException e) {
+		// e.printStackTrace();
+		// }
+
 		String agora = DataUtils.gravarDataEHoraAtualBD();
-		System.out.println("HORA====>>> "+agora);
+		System.out.println("HORA====>>> " + agora);
 
 		try {
 			PreparedStatement ps = conexao.prepareStatement(sql);
@@ -62,7 +69,7 @@ public class CompraVooService {
 		}
 	}
 
-	//Deletando compras feitas por um usuario
+	// Deletando compras feitas por um usuario
 	public static void deleteCompraPorVoo(Integer vooId) throws SQLException {
 		Connection conexao = ConnectionFactory.getConnection();
 
@@ -82,26 +89,64 @@ public class CompraVooService {
 			conexao.close();
 		}
 	}
-	
-	//Deletando voos comprados =>> AO DELETAR UM VOO ELE PERMANECERÁ REGISTRADO
-		public static void deleteCompraPorUsuario(Integer usuarioId) throws SQLException {
-			Connection conexao = ConnectionFactory.getConnection();
 
-			// String sql = "DELETE FROM compravoo WHERE usuario_IDUSUARIO = ?";
-			String sql = "UPDATE compravoo SET exclusaoLogica = '0' WHERE usuario_IDUSUARIO = ?";
+	// Deletando voos comprados =>> AO DELETAR UM VOO ELE PERMANECERÁ REGISTRADO
+	public static void deleteCompraPorUsuario(Integer usuarioId) throws SQLException {
+		Connection conexao = ConnectionFactory.getConnection();
 
-			try {
-				PreparedStatement ps1 = conexao.prepareStatement(sql);
-				ps1.setInt(1, usuarioId);
-				ps1.execute();
-				conexao.commit();
-			} catch (SQLException e) {
-				conexao.rollback();
-				e.printStackTrace();
-				throw new SQLException();
-			} finally {
-				conexao.close();
-			}
+		// String sql = "DELETE FROM compravoo WHERE usuario_IDUSUARIO = ?";
+		String sql = "UPDATE compravoo SET exclusaoLogica = '0' WHERE usuario_IDUSUARIO = ?";
+
+		try {
+			PreparedStatement ps1 = conexao.prepareStatement(sql);
+			ps1.setInt(1, usuarioId);
+			ps1.execute();
+			conexao.commit();
+		} catch (SQLException e) {
+			conexao.rollback();
+			e.printStackTrace();
+			throw new SQLException();
+		} finally {
+			conexao.close();
 		}
+	}
+
+	// Listando Todas as Compras
+	public static List<CompraVoo> ListaCompras() throws SQLException {
+
+		Connection connection = ConnectionFactory.getConnection();
+		List<CompraVoo> listaCompras = new ArrayList<CompraVoo>();
+
+		Statement statement = connection.createStatement();
+		statement.execute("select * from compravoo where exclusaoLogica = '1' ");
+
+		ResultSet rs = statement.getResultSet();
+
+		while (rs.next()) {
+			CompraVoo compraVoo = new CompraVoo();
+			compraVoo.setIdUser(rs.getInt("usuario_IDUSUARIO"));
+			compraVoo.setIdCartao(rs.getString("cartaodecredito_NUMEROCARTAO"));
+			List<Integer> listaNumeroVoo = new ArrayList<Integer>();
+			listaNumeroVoo.add(rs.getInt("voo_idvoo"));
+			listaNumeroVoo.add(rs.getInt("voo_idvooVolta"));
+			compraVoo.setIdVoo(listaNumeroVoo);
+			compraVoo.setValorTotalCompra(rs.getInt("valorTotalCompra"));
+			compraVoo.setIdCompra(rs.getString("idcompraVoo"));
+			
+			String dataRecebida = rs.getString("horaDaCompra");
+			compraVoo.setHoraCompra(dataRecebida);
+			
+			listaCompras.add(compraVoo);
+		}
+		
+		for (CompraVoo compraVoo : listaCompras) {
+			System.out.println(compraVoo.getHoraCompra());
+		}
+
+		rs.close();
+		statement.close();
+		connection.close();
+		return listaCompras;
+	}
 
 }

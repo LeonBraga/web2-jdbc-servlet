@@ -1,15 +1,17 @@
 # Projeto   A2 ==>> VALENDO 6 PONTOS
+======>OK
+*******>>>NOK
 
 # Telas obrigatórias do Sistema:
  ====>>>OK - a)	Tela de Login, serão 2 perfis, o perfil de cliente e o perfil de administrador do sistema. (cliente e adm) 
  ====>>>OK - b)	Telas de CRUD Cliente (nome, sobrenome, data de nascimento, Endereço, Cadastro do cartão de crédito, login, senha e confirma senha). (acesso à tela: cliente)
  ====>>>OK - c)	Tela de CRUD Administrador do Sistema (Acesso à funcionalidade: adm geral do sistema)
  ====>>>OK - d)	Tela de CRUD de Vôos (Acesso à tela: adm)
- ====>>>OK ===***>>>PENDENCIA VOO - VOLTA - e)	Tela de Compra de passagem Aérea (ida, data da ida, volta, data da volta, opção de marcar só ida) (Acesso à tela: cliente) 
- - f)	Tela da Lista de resultados e escolha do vôo do cliente com destaque da linha após ser escolhido e botão de enviar. (acesso à tela: cliente)
+*******>>>PENDENCIA VOO - VOLTA - e)	Tela de Compra de passagem Aérea (ida, data da ida, volta, data da volta, opção de marcar só ida) (Acesso à tela: cliente) 
+*******>>> - f)	Tela da Lista de resultados e escolha do vôo do cliente com destaque da linha após ser escolhido e botão de enviar. (acesso à tela: cliente)
 ====>>>OK - g)	Tela de escolha de assento e Cálculo do valor final (acesso à tela: cliente)
 ====>>>OK - h)	Tela de finalização da compra (acesso à tela: cliente)
- - i)	Tela de acompanhamento dos pedidos de vôos (acesso à tela: cliente e adm)
+*******>>> - i)	Tela de acompanhamento dos pedidos de vôos (acesso à tela: cliente e adm)
 
 
 (Obs: O administrador geral do sistema é cadastrado no próprio banco de dados, somente ele pode cadastrar administradores do sistema)

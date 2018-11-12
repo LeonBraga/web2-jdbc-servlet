@@ -98,7 +98,7 @@ public class NovoCompraVoo implements Acao {
 
 		request.setAttribute("compradorId", paramId);
 		request.setAttribute("idParam", paramId);
-		// Formulário e java aina mão criado// mesma lógica do FormNovoCompraVoo.java
+		
 		return "forward:compraRealizadaComSucesso.jsp";
 	}
 

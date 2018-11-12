@@ -24,7 +24,7 @@
 		<br>
 		<a href="entrada?acao=ListaVoo">Tela administração de Vôos</a>
 		<br>
-		<a href="entrada?acao=">Tela de acompanhamento dos pedidos de vôos</a> ==>> A FAZER
+		<a href="entrada?acao=ListaCompras">Tela de acompanhamento dos pedidos de vôos</a> ==>> A FAZER
 		<br>
 	</c:if>
 	<br>
