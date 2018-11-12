@@ -27,9 +27,9 @@ public class NovoVoo implements Acao {
 		String valorVoo = request.getParameter("valorVoo");
 
 		Voo voo = new Voo();
-		
-		SimpleDateFormat formato = new SimpleDateFormat("dd-MM-yyyy");	
-		java.util.Date date =null;
+
+		SimpleDateFormat formato = new SimpleDateFormat("dd-MM-yyyy");
+		java.util.Date date = null;
 		try {
 			date = formato.parse(ida);
 		} catch (ParseException e1) {
@@ -37,15 +37,19 @@ public class NovoVoo implements Acao {
 			e1.printStackTrace();
 		}
 		java.sql.Date sqlIda = new java.sql.Date(date.getTime());
-		
-		
+
 		voo.setIda(sqlIda);
 
 		if (confirmacao != null) {
-			voo.setConfirmacao(true);
+			if (confirmacao.equals("true") || confirmacao.equals("administrador") || confirmacao.equals("1")) {
+				voo.setConfirmacao(true);
+			} else if (confirmacao.equals("cliente") || confirmacao.equals("") || confirmacao.equals("0")) {
+				voo.setConfirmacao(false);
+			}
 		} else {
 			voo.setConfirmacao(false);
 		}
+
 		voo.setOrigem(origem);
 		voo.setDestino(destino);
 		voo.setValorVoo(Integer.valueOf(valorVoo));

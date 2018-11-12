@@ -27,15 +27,20 @@
 			value="<fmt:formatDate value="${usuario.dataNascimento }" pattern="dd/MM/yyyy"/>" />
 		<br>
 		<c:if test="${usuarioLogado.isAdm=='TRUE'}">
-			Usuario possui perfil administrador:
+			 Usuario possui perfil administrador:
+			 <br>
 			<c:if test="${usuario.isAdm=='TRUE'}">
-				<input type="checkbox" name="ehAdm" value="${usuario.isAdm}"
-					checked="checked" />
+				<%-- <input type="checkbox" name="ehAdm" value="${usuario.isAdm}"
+					checked="checked" /> --%>
+				<input type="radio" name="ehAdm" value="1" checked="checked"> Administrador<br>
+				<input type="radio" name="ehAdm" value="0"> Cliente<br>
 				<%--<input type="text" name="ehAdm" value="${usuario.isAdm}"> --%>
 				<br>
 			</c:if>
 			<c:if test="${usuario.isAdm=='FALSE'}">
-				<input type="checkbox" name="ehAdm" value="${usuario.isAdm}" />
+				<input type="radio" name="ehAdm" value="1"> Administrador<br>
+				<input type="radio" name="ehAdm" value="0" checked="checked"> Cliente<br>
+				<%-- <input type="checkbox" name="ehAdm" value="${usuario.isAdm}" /> --%>
 				<%--<input type="text" name="ehAdm" value="${usuario.isAdm}"> --%>
 				<br>
 			</c:if>

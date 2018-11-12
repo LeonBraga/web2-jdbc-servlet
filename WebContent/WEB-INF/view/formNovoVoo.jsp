@@ -24,8 +24,10 @@
 			<input class="datepicker" type="text" name="ida" value="XX-XX-XXXX"
 				readonly />
 			<br>
-			Confirmação:<input type="checkbox" name="confirmacao" value="true" />
-			<br>
+			Confirmação:<!-- <input type="checkbox" name="confirmacao" value="true" /> -->
+			<br> <input type="radio" name="confirmacao"
+				value="1"> Confirmado<br> <input type="radio"
+				name="confirmacao" value="0">Não Confirmado<br>
 			Valor:<input type="text" name="valorVoo" value="" />
 		</c:if>
 		<br> <br> <input type="hidden" name="acao" value="NovoVoo">

@@ -124,7 +124,7 @@ public class UsuarioService {
 		List<Usuario> listaUsuario = new ArrayList<Usuario>();
 
 		Statement statement = connection.createStatement();
-		statement.execute("select * from usuario");
+		statement.execute("select * from usuario where exclusaoLogica = '1'");
 
 		ResultSet rs = statement.getResultSet();
 
@@ -158,7 +158,7 @@ public class UsuarioService {
 		Connection conexao = ConnectionFactory.getConnection();
 
 		//String sql = "DELETE FROM usuario WHERE idusuario = ?";
-		String sql = "UPDATE WHERE idusuario = ? and exclusaoLogica=0";
+		String sql = "UPDATE usuario SET exclusaoLogica = '0' WHERE idusuario = ? ";
 
 		System.out.println("Usuario a ser removido: " + usuario.getNome() + " - " + usuario.getSobrenome() + " - "
 				+ usuario.getEndereco() + " - " + usuario.getSenha() + " - " + usuario.getLogin() + " - "
@@ -166,8 +166,8 @@ public class UsuarioService {
 		try {
 			PreparedStatement ps = conexao.prepareStatement(sql);
 
-			String id = usuario.getId().toString();
-			ps.setString(1, id);
+			//String id = usuario.getId().toString();
+			ps.setInt(1, usuario.getId());
 			ps.execute();
 			conexao.commit();
 		} catch (SQLException e) {
@@ -184,7 +184,7 @@ public class UsuarioService {
 		Connection conexao = ConnectionFactory.getConnection();
 		List<Usuario> listaUsuario = new ArrayList<Usuario>();
 
-		String sql = "SELECT * FROM usuario where login=? and senha=? and exclusaoLogica=1";
+		String sql = "SELECT * FROM usuario where login=? and senha=? and exclusaoLogica = '1' ";
 
 		try {
 			PreparedStatement ps = conexao.prepareStatement(sql);

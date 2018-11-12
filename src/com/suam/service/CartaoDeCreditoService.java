@@ -73,7 +73,7 @@ public class CartaoDeCreditoService {
 		List<CartaoDeCredito> listaCartoes = new ArrayList<CartaoDeCredito>();
 
 		Statement statement = connection.createStatement();
-		statement.execute("select * from cartaodecredito where exclusaoLogica = 1");
+		statement.execute("select * from cartaodecredito where exclusaoLogica = '1'");
 		ResultSet rs = statement.getResultSet();
 		SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
 
@@ -98,7 +98,7 @@ public class CartaoDeCreditoService {
 		Connection conexao = ConnectionFactory.getConnection();
 
 		// String sql = "DELETE FROM cartaodecredito WHERE numerocartao = ?";
-		String sql = "UPDATE cartaodecredito SET exclusaoLogica = 0 WHERE numerocartao = ?";
+		String sql = "UPDATE cartaodecredito SET exclusaoLogica = '0' WHERE numerocartao = ?";
 
 		try {
 			PreparedStatement ps = conexao.prepareStatement(sql);
@@ -121,13 +121,13 @@ public class CartaoDeCreditoService {
 		Connection conexao = ConnectionFactory.getConnection();
 
 		//String sql = "DELETE FROM cartaodecredito WHERE USUARIO_IDUSUARIO = ?";
-		String sql = "UPDATE cartaodecredito SET exclusaoLogica = 0 WHERE IDUSUARIO = ?";
+		String sql = "UPDATE cartaodecredito SET exclusaoLogica = '0' WHERE USUARIO_IDUSUARIO = ?";
 		
 		try {
 			PreparedStatement ps = conexao.prepareStatement(sql);
 
-			String id = usuario.getId().toString();
-			ps.setString(1, id);
+			//String id = usuario.getId().toString();
+			ps.setInt(1, usuario.getId());
 
 			ps.execute();
 			conexao.commit();

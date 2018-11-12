@@ -51,17 +51,15 @@ public class AlteraUsuario implements Acao {
 			e1.printStackTrace();
 		}
 		if (ehAdm != null) {
-			// if (ehAdm.equalsIgnoreCase("TRUE")) {
-			usuario.setIsAdm(true);
-			// }
+			System.out.println("NOVO USUARIO E ADM: " + ehAdm);
+			if (ehAdm.equals("true") || ehAdm.equals("administrador") || ehAdm.equals("1")) {
+				usuario.setIsAdm(true);
+			} else if (ehAdm.equals("cliente") || ehAdm.equals("") || ehAdm.equals("0")) {
+				usuario.setIsAdm(false);
+			}
 		} else {
 			usuario.setIsAdm(false);
 		}
-
-		/*
-		 * UsuarioService us = new UsuarioService(); try { us.update(usuario); } catch
-		 * (SQLException e) { }
-		 */
 
 		Boolean validaInsere;
 

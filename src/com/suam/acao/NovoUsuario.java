@@ -28,10 +28,8 @@ public class NovoUsuario implements Acao {
 		String data = request.getParameter("data");
 		String ehAdm = request.getParameter("ehAdm");
 
-
 		Usuario usuario = new Usuario();
 		SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
-
 
 		usuario.setNome(nome);
 		usuario.setSobrenome(sobrenome);
@@ -44,9 +42,12 @@ public class NovoUsuario implements Acao {
 			e1.printStackTrace();
 		}
 		if (ehAdm != null) {
-			//if (ehAdm.equalsIgnoreCase("TRUE")) {
+		System.out.println("NOVO USUARIO E ADM: "+ehAdm);
+			if (ehAdm.equals("true") || ehAdm.equals("administrador") || ehAdm.equals("1")) {
 				usuario.setIsAdm(true);
-			//}
+			} else if(ehAdm.equals("cliente") || ehAdm.equals("") || ehAdm.equals("0")) {
+				usuario.setIsAdm(false);
+			}
 		} else {
 			usuario.setIsAdm(false);
 		}

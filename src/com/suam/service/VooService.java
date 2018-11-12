@@ -45,7 +45,7 @@ public class VooService {
 	public static Boolean update(Voo voo) throws SQLException {
 		Connection conexao = ConnectionFactory.getConnection();
 
-		String sql = "UPDATE voo SET  ida = ?,origem = ?,  destino = ?, confirmacao = ?, valorVoo = ? WHERE idVooIda = ?";
+		String sql = "UPDATE voo SET  ida = ?,origem = ?,  destino = ?, confirmacao = ?, valorVoo = ? WHERE idVoo = ?";
 
 		//SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
 
@@ -55,7 +55,12 @@ public class VooService {
 			ps.setDate(1, voo.getIda());
 			ps.setString(2, voo.getOrigem());
 			ps.setString(3, voo.getDestino());
-			ps.setString(4, voo.getConfirmacao().toString());
+			if(voo.getConfirmacao()) {
+				ps.setString(4, "1");
+			}else {
+				ps.setString(4, "0");
+			}
+			
 			ps.setInt(5, voo.getValorVoo());
 			ps.setString(6, voo.getIdVoo().toString());
 
@@ -77,7 +82,7 @@ public class VooService {
 		List<Voo> listaVoos = new ArrayList<Voo>();
 
 		Statement statement = connection.createStatement();
-		statement.execute("select * from voo where exclusaoLogica = 1");
+		statement.execute("select * from voo where exclusaoLogica = '1'");
 
 		ResultSet rs = statement.getResultSet();
 
@@ -112,14 +117,13 @@ public class VooService {
 	public static void delete(Voo voo) throws SQLException {
 		Connection conexao = ConnectionFactory.getConnection();
 		//String sql = "DELETE FROM voo WHERE idVoo = ?";
-		String sql = "UPDATE voo SET exclusaoLogica = 0 WHERE idVoo = ?";
+		String sql = "UPDATE voo SET exclusaoLogica = '0' WHERE idVoo = ?";
 		//String sql1 = "DELETE FROM ASSENTO WHERE voo_idVoo =?";
-		String sql1 = "UPDADE ASSENTO SET exclusaoLogica = 0 WHERE idVoo = ?";
+		String sql1 = "UPDATE assento SET exclusaoLogica = '0' WHERE voo_idvoo = ?";
 		
-		String id = voo.getIdVoo().toString();
 		try {
 			PreparedStatement ps1 = conexao.prepareStatement(sql1);
-			ps1.setString(1, id);
+			ps1.setInt(1, voo.getIdVoo());
 			ps1.execute();
 			conexao.commit();
 
@@ -131,7 +135,7 @@ public class VooService {
 
 		try {
 			PreparedStatement ps = conexao.prepareStatement(sql);
-			ps.setString(1, id);
+			ps.setInt(1,voo.getIdVoo());
 			ps.execute();
 			conexao.commit();
 		} catch (SQLException e) {

@@ -66,7 +66,7 @@ public class AssentoService {
 		Connection conexao = ConnectionFactory.getConnection();
 		List<Assento> listaAssento = new ArrayList<Assento>();
 
-		String sql = "select * from assento where voo_idvoo=?  and exclusaoLogica = 1 order by idassento";
+		String sql = "select * from assento where voo_idvoo=?  and exclusaoLogica = '1' order by idassento";
 		try {
 			PreparedStatement ps = conexao.prepareStatement(sql);
 			ps.setInt(1, idVoo);
@@ -95,7 +95,7 @@ public class AssentoService {
 		Connection conexao = ConnectionFactory.getConnection();
 		List<Assento> listaAssento = new ArrayList<Assento>();
 
-		String sql = "select * from assento where voo_idvoo=?  and exclusaoLogica = 1 order by idassento";
+		String sql = "select * from assento where voo_idvoo=?  and exclusaoLogica = '1' order by idassento";
 		try {
 			PreparedStatement ps = conexao.prepareStatement(sql);
 			ps.setInt(1, idVoo);
@@ -124,8 +124,8 @@ public class AssentoService {
 		Connection conexao = ConnectionFactory.getConnection();
 		Voo voo = new Voo();
 
-		String sql = "INSERT INTO assento VALUES(?,false,?,1)";
-		String sql1 = "SELECT * FROM voo WHERE idvoo= (SELECT MAX(idvoo) FROM voo)  and exclusaoLogica = 1";
+		String sql = "INSERT INTO assento VALUES(?,false,?,0,1)";
+		String sql1 = "SELECT * FROM voo WHERE idvoo= (SELECT MAX(idvoo) FROM voo)  and exclusaoLogica = '1'";
 		try {
 			PreparedStatement ps = conexao.prepareStatement(sql1);
 			ps.execute();
@@ -191,7 +191,7 @@ public class AssentoService {
 		Connection conexao = ConnectionFactory.getConnection();
 		List<Assento> listaAssentos = new ArrayList<Assento>();
 
-		String sql = "SELECT * FROM assento WHERE USUARIO_IDUSUARIO = ? and exclusaoLogica = 1";
+		String sql = "SELECT * FROM assento WHERE USUARIO_IDUSUARIO = ? and exclusaoLogica = '1'";
 		try {
 			PreparedStatement ps = conexao.prepareStatement(sql);
 			ps.setInt(1, usuarioId);
@@ -221,7 +221,7 @@ public class AssentoService {
 	public static Boolean desocuparAssentoPorUsuarioId(Integer usuarioId) throws SQLException {
 		Connection conexao = ConnectionFactory.getConnection();
 
-		String sql = "UPDATE assento SET ocupado = false WHERE USUARIO_IDUSUARIO = ? ";
+		String sql = "UPDATE assento SET ocupado ='0' WHERE USUARIO_IDUSUARIO = ? ";
 
 		try {
 			PreparedStatement ps = conexao.prepareStatement(sql);

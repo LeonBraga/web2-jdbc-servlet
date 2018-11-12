@@ -25,20 +25,20 @@ public class AlteraVoo implements Acao {
 		String confirmacao = request.getParameter("confirmacao");
 		String idVoo = request.getParameter("idVooIda");
 		String valorVoo = request.getParameter("valorVoo");
-		
-		//Integer idVooIda = Integer.valueOf(paramId);
+
+		// Integer idVooIda = Integer.valueOf(paramId);
 
 		System.out.println("acao altera voo: " + idVoo);
 
 		Voo voo = null;
 		try {
-			voo = VooService.buscaVooPelaId(Integer.parseInt(idVoo));
+			voo = VooService.buscaVooPelaId(Integer.valueOf(idVoo));
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 
-		SimpleDateFormat formato = new SimpleDateFormat("dd-MM-yyyy");	
-		java.util.Date date =null;
+		SimpleDateFormat formato = new SimpleDateFormat("dd-MM-yyyy");
+		java.util.Date date = null;
 		try {
 			date = formato.parse(ida);
 		} catch (ParseException e1) {
@@ -46,9 +46,13 @@ public class AlteraVoo implements Acao {
 			e1.printStackTrace();
 		}
 		java.sql.Date sqlIda = new java.sql.Date(date.getTime());
-		
+
 		if (confirmacao != null) {
-			voo.setConfirmacao(true);
+			if (confirmacao.equals("true") || confirmacao.equals("administrador") || confirmacao.equals("1")) {
+				voo.setConfirmacao(true);
+			} else if (confirmacao.equals("cliente") || confirmacao.equals("") || confirmacao.equals("0")) {
+				voo.setConfirmacao(false);
+			}
 		} else {
 			voo.setConfirmacao(false);
 		}

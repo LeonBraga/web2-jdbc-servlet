@@ -69,7 +69,7 @@ public class CompraVooService {
 		Connection conexao = ConnectionFactory.getConnection();
 
 		// String sql = "DELETE FROM compravoo WHERE usuario_IDUSUARIO = ?";
-		String sql = "UPDATE compravoo SET exclusaoLogica = 0 WHERE voo_idvoo = ?";
+		String sql = "UPDATE compravoo SET exclusaoLogica = '0' WHERE voo_idvoo = ?";
 
 		try {
 			PreparedStatement ps1 = conexao.prepareStatement(sql);
@@ -90,7 +90,7 @@ public class CompraVooService {
 			Connection conexao = ConnectionFactory.getConnection();
 
 			// String sql = "DELETE FROM compravoo WHERE usuario_IDUSUARIO = ?";
-			String sql = "UPDATE compravoo SET exclusaoLogica = 0 WHERE usuario_IDUSUARIO = ?";
+			String sql = "UPDATE compravoo SET exclusaoLogica = '0' WHERE usuario_IDUSUARIO = ?";
 
 			try {
 				PreparedStatement ps1 = conexao.prepareStatement(sql);
