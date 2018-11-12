@@ -44,13 +44,13 @@ public class UsuarioService {
 			ps.setString(4, usuario.getSenha());
 			ps.setString(5, usuario.getLogin());
 			ps.setString(6, formato.format(usuario.getDataNascimento()));
-			
+
 			if (usuario.getIsAdm()) {
 				ps.setInt(7, 1);
-			}else {
+			} else {
 				ps.setInt(7, 0);
 			}
-			//ps.setBoolean(7, usuario.getIsAdm());
+			// ps.setBoolean(7, usuario.getIsAdm());
 
 			ps.execute();
 			conexao.commit();
@@ -84,12 +84,6 @@ public class UsuarioService {
 
 		SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
 
-		/*
-		 * System.out.println("Usuario a ser atualizado: " + usuario.getNome() + " - " +
-		 * usuario.getSobrenome() + " - " + usuario.getEndereco() + " - " +
-		 * usuario.getSenha() + " - " + usuario.getLogin() + " - " +
-		 * formato.format(usuario.getDataNascimento()) + " - " + usuario.getIsAdm());
-		 */
 		try {
 			PreparedStatement ps = conexao.prepareStatement(sql);
 			ps.setString(1, usuario.getNome());
@@ -100,11 +94,11 @@ public class UsuarioService {
 			ps.setString(6, formato.format(usuario.getDataNascimento()));
 			if (usuario.getIsAdm()) {
 				ps.setInt(7, 1);
-			}else {
+			} else {
 				ps.setInt(7, 0);
 			}
-			//ps.setBoolean(7, usuario.getIsAdm());
-			ps.setInt(8,usuario.getId());
+			// ps.setBoolean(7, usuario.getIsAdm());
+			ps.setInt(8, usuario.getId());
 
 			ps.execute();
 			conexao.commit();
@@ -157,7 +151,7 @@ public class UsuarioService {
 	public static void delete(Usuario usuario) throws SQLException {
 		Connection conexao = ConnectionFactory.getConnection();
 
-		//String sql = "DELETE FROM usuario WHERE idusuario = ?";
+		// String sql = "DELETE FROM usuario WHERE idusuario = ?";
 		String sql = "UPDATE usuario SET exclusaoLogica = '0' WHERE idusuario = ? ";
 
 		System.out.println("Usuario a ser removido: " + usuario.getNome() + " - " + usuario.getSobrenome() + " - "
@@ -166,7 +160,7 @@ public class UsuarioService {
 		try {
 			PreparedStatement ps = conexao.prepareStatement(sql);
 
-			//String id = usuario.getId().toString();
+			// String id = usuario.getId().toString();
 			ps.setInt(1, usuario.getId());
 			ps.execute();
 			conexao.commit();
@@ -234,12 +228,37 @@ public class UsuarioService {
 	}
 
 	public static Usuario buscaUsuarioPelaId(Integer id) throws SQLException {
-		List<Usuario> lista = ListaUsuarios();
-		for (Usuario usuario : lista) {
-			if (usuario.getId() == id) {
-				return usuario;
+		Connection conexao = ConnectionFactory.getConnection();
+		String sql = "SELECT * FROM usuario where idusuario = ? and exclusaoLogica = '1' ";
+		Usuario usuario = new Usuario();
+
+		try {
+			PreparedStatement ps = conexao.prepareStatement(sql);
+			ps.setInt(1, id);
+			ResultSet rs = ps.executeQuery();
+			SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+			while (rs.next()) {
+				usuario.setId(rs.getInt("idusuario"));
+				usuario.setNome(rs.getString("nome"));
+				usuario.setSobrenome(rs.getString("sobrenome"));
+				usuario.setEndereco(rs.getString("endereco"));
+				usuario.setSenha(rs.getString("senha"));
+				usuario.setLogin(rs.getString("login"));
+				try {
+					usuario.setDataNascimento(formato.parse(rs.getString("datanascimento")));
+				} catch (ParseException e) {
+					e.printStackTrace();
+					System.out.println("A data não pode ser convertida");
+				}
+				usuario.setIsAdm(rs.getBoolean("isAdm"));
 			}
+		} catch (SQLException e) {
+			System.out.println("ERRO: " + e);
+			// conexao.rollback();
+		} finally {
+			conexao.close();
 		}
-		return null;
+		return usuario;
+
 	}
 }

@@ -4,7 +4,16 @@ public class Assento {
 	protected Integer idVoo;
 	protected Integer numeroAssento;
 	protected boolean ocupado;
+	protected boolean comfirmaPagamento;
 	protected Integer ocupante;
+	
+	public boolean isComfirmaPagamento() {
+		return comfirmaPagamento;
+	}
+
+	public void setComfirmaPagamento(boolean comfirmaPagamento) {
+		this.comfirmaPagamento = comfirmaPagamento;
+	}
 
 	public Integer getOcupante() {
 		return ocupante;

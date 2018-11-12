@@ -16,7 +16,7 @@ public class AssentoService {
 	public static void inserir(String assento, Integer idVoo) throws SQLException {
 		Connection conexao = ConnectionFactory.getConnection();
 
-		String sql = "INSERT INTO assento VALUES(?,true,?)";
+		String sql = "INSERT INTO assento VALUES(?,true,?,0)";
 
 		try {
 			PreparedStatement ps = conexao.prepareStatement(sql);
@@ -79,6 +79,7 @@ public class AssentoService {
 				assento.setIdVoo(rs.getInt("voo_idvoo"));
 				assento.setOcupado(rs.getBoolean("ocupado"));
 				assento.setOcupante(rs.getInt("usuario_idusuario"));
+				assento.setComfirmaPagamento(rs.getBoolean("comfirmaPagamento"));
 				if (assento.isOcupado()) {
 					listaAssento.add(assento);
 				} else {
@@ -107,6 +108,7 @@ public class AssentoService {
 				assento.setNumeroAssento(rs.getInt("idassento"));
 				assento.setIdVoo(rs.getInt("voo_idvoo"));
 				assento.setOcupado(rs.getBoolean("ocupado"));
+				assento.setComfirmaPagamento(rs.getBoolean("comfirmaPagamento"));
 				if (assento.isOcupado()) {
 
 				} else {
@@ -124,7 +126,7 @@ public class AssentoService {
 		Connection conexao = ConnectionFactory.getConnection();
 		Voo voo = new Voo();
 
-		String sql = "INSERT INTO assento VALUES(?,false,?,0,1)";
+		String sql = "INSERT INTO assento VALUES(?,false,?,0,1,0)";
 		String sql1 = "SELECT * FROM voo WHERE idvoo= (SELECT MAX(idvoo) FROM voo)  and exclusaoLogica = '1'";
 		try {
 			PreparedStatement ps = conexao.prepareStatement(sql1);
@@ -172,6 +174,7 @@ public class AssentoService {
 				assento.setNumeroAssento(rs.getInt("idassento"));
 				assento.setIdVoo(rs.getInt("voo_idvoo"));
 				assento.setOcupado(rs.getBoolean("ocupado"));
+				assento.setComfirmaPagamento(rs.getBoolean("comfirmaPagamento"));
 				if (assento.isOcupado()) {
 					assento.setOcupado(true);
 					listaAssentos.add(assento);
@@ -202,6 +205,7 @@ public class AssentoService {
 				assento.setNumeroAssento(rs.getInt("idassento"));
 				assento.setIdVoo(rs.getInt("voo_idvoo"));
 				assento.setOcupado(rs.getBoolean("ocupado"));
+				assento.setComfirmaPagamento(rs.getBoolean("comfirmaPagamento"));
 				if (assento.isOcupado()) {
 					assento.setOcupado(true);
 					listaAssentos.add(assento);
@@ -238,4 +242,31 @@ public class AssentoService {
 		}
 		return true;
 	}
+	
+	
+	//Ao excluir um usuario desocupar seus assentos
+		public static Boolean PagamentoAssentoPorUsuarioId(Integer usuarioId, Integer numeroAssento, Integer vooId) throws SQLException {
+			Connection conexao = ConnectionFactory.getConnection();
+
+			String sql = "UPDATE assento SET comfirmaPagamento ='1',  USUARIO_IDUSUARIO = ? WHERE idassento = ? and voo_idvoo = ?";
+
+			try {
+				System.out.println("GRAVANDO CONFIRMAÇÃO DE PAGAMENTO");
+				PreparedStatement ps = conexao.prepareStatement(sql);
+				ps.setInt(1, usuarioId);
+				ps.setInt(2, numeroAssento);
+				ps.setInt(3, vooId);
+
+				ps.execute();
+				conexao.commit();
+			} catch (SQLException e) {
+				System.out.println("ERRO AO GRAVAR CONFIRMAÇÃO DE PAGAMENTO");
+				conexao.rollback();
+				e.printStackTrace();
+				throw new SQLException();
+			} finally {
+				conexao.close();
+			}
+			return true;
+		}
 }

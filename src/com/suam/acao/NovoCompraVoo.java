@@ -5,18 +5,14 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import com.suam.bean.Assento;
-import com.suam.bean.AssentoComprados;
 import com.suam.bean.CartaoDeCredito;
 import com.suam.bean.CompraVoo;
 import com.suam.bean.Usuario;
 import com.suam.bean.Voo;
-import com.suam.service.AssentoCompradosService;
 import com.suam.service.AssentoService;
 import com.suam.service.CartaoDeCreditoService;
 import com.suam.service.CompraVooService;
@@ -34,8 +30,8 @@ public class NovoCompraVoo implements Acao {
 		String[] voo_idvoo = request.getParameterValues("idVoo");
 		String cartaodecredito_numerocartao = request.getParameter("numerocartao");
 
-		System.out.println(paramId + " - " + Arrays.toString(assento)+ " - " +Arrays.toString(voo_idvoo) + " - " + valorTotalCompra + " - "
-				+ cartaodecredito_numerocartao);
+		System.out.println(paramId + " - " + Arrays.toString(assento) + " - " + Arrays.toString(voo_idvoo) + " - "
+				+ valorTotalCompra + " - " + cartaodecredito_numerocartao);
 
 		Usuario usuario = new Usuario();
 		try {
@@ -56,51 +52,24 @@ public class NovoCompraVoo implements Acao {
 		List<Integer> listaNumeroVoo = new ArrayList<Integer>();
 		Voo voo = new Voo();
 		List<Assento> listaNumeroAssento = new ArrayList<Assento>();
-		List<AssentoComprados> listaAssentosComprados = new ArrayList<AssentoComprados>();
 		Integer totalCompra = 0;
-		boolean assentoJaOcupado = false;
-		int contador = 0;
 		for (String vooIdVoo : voo_idvoo) {
 			try {
-				listaAssentosComprados = AssentoCompradosService.ListaAssentosPorIvoo(vooIdVoo);
-				listaNumeroAssento = AssentoService.listarAssentosPorUsuarioIdVooId(usuario.getId(), Integer.valueOf(vooIdVoo));
-				for (AssentoComprados assentoComprados : listaAssentosComprados) {
-					if(listaNumeroAssento.get(contador).getIdVoo().equals(assentoComprados.getIdVoo())) {
-						System.out.println("ASSENTO JÁ COPRADO");
-						assentoJaOcupado = true;
-						break;
-					}else {
-						assentoJaOcupado =false;
-					}
-					contador++;
+				listaNumeroAssento = AssentoService.listarAssentosPorUsuarioIdVooId(usuario.getId(),
+						Integer.valueOf(vooIdVoo));
+				for (Assento assento2 : listaNumeroAssento) {
+					AssentoService.PagamentoAssentoPorUsuarioId(usuario.getId(), assento2.getNumeroAssento(),
+							Integer.valueOf(vooIdVoo));
 				}
-				if(assentoJaOcupado) {
-					//CRIAR LOGICA PARA ASENTO JÁ COMPRADO
-					break;
-				}
+
 				voo = VooService.buscaVooPelaId(Integer.valueOf(vooIdVoo));
 				listaNumeroVoo.add(Integer.valueOf(vooIdVoo));
 				totalCompra += (voo.getValorVoo() * listaNumeroAssento.size());
-				AssentoCompradosService.inserir(assento, vooIdVoo);
 				System.out.println("VALOR TOTAL:  " + valorTotalCompra);
-				contador=0;
 			} catch (NumberFormatException | SQLException e) {
 				e.printStackTrace();
 			}
 		}
-
-		/*
-		 * List<Assento> listaAssentos = new ArrayList<Assento>(); Assento assent = new
-		 * Assento(); if (assento != null) { for (String assentoNum : assento) { Integer
-		 * numAssento = Integer.valueOf(assentoNum); assent.setIdVoo(voo.getIdVoo());
-		 * assent.setNumeroAssento(numAssento); assent.setOcupante(usuario.getId());
-		 * listaAssentos.add(assent); } }
-		 * 
-		 * List<Integer> listaAssentosNumeros = new ArrayList<Integer>(); Assento
-		 * assentNum = new Assento(); if (assento != null) { for (String assentoNum :
-		 * assento) { Integer numAssento = Integer.valueOf(assentoNum);
-		 * listaAssentosNumeros.add(numAssento); } }
-		 */
 
 		// Criando a compra
 		CompraVoo compra = new CompraVoo();
@@ -110,6 +79,16 @@ public class NovoCompraVoo implements Acao {
 		compra.setIdVoo(listaNumeroVoo);
 		compra.setValorTotalCompra(totalCompra);
 		// compra.setIdVooVolta(idVooVolta);
+
+		// pagamento por assento
+		for (String assent : assento) {
+			try {
+				AssentoService.PagamentoAssentoPorUsuarioId(usuario.getId(), Integer.valueOf(assent),
+						Integer.valueOf(voo_idvoo[0]));
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
 
 		try {
 			CompraVooService.inserir(compra);

@@ -20,7 +20,7 @@
 	<c:import url="logout-parcial.jsp" />
 	<br>
 	<br>
-	<br> Listagem dos assentos do Voo - ID: ${vooId}.
+	<br> Listagem dos assentos do Voo - Indentificador: ${vooId}.
 	<br>
 	<!-- SOMENTE O CLIENTE QUE OCUPOU O ASSENTO PODERÁ DESOCUPAR O MESMO -->
 	<form action="${linkEntradaServlet }" method="get">
@@ -28,11 +28,24 @@
 
 		<c:forEach items="${assentos}" var="assento">
 			<c:if test="${assento.ocupante == usuarioLogado.id}">
-				<c:out value="${assento.numeroAssento}" />
-				<input type="checkbox" name="numeroAssentoOcupado"
-					id="numeroAssentoOcupado" value="${assento.numeroAssento}">
-				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			 </c:if>
+				<c:if test="${assento.comfirmaPagamento != true}">
+					<c:out value="${assento.numeroAssento}" />
+					<input type="checkbox" name="numeroAssentoOcupado"
+						id="numeroAssentoOcupado" value="${assento.numeroAssento}">
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				 </c:if>
+			</c:if>
+			
+			<c:if test="${assento.ocupante == usuarioLogado.id}">
+				<c:if test="${assento.comfirmaPagamento == true}">
+					<c:out value="${assento.numeroAssento}"/> - Pagamento Confirmado
+					<input type="checkbox" name="numeroAssentoOcupado"
+						id="numeroAssentoOcupado" value="${assento.numeroAssento}" disabled="disabled">
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				 </c:if>
+			</c:if>
+			
+			
 			<c:if test="${assento.ocupante != usuarioLogado.id}">
 				<c:out value="${assento.numeroAssento}" />
 				<input type="checkbox" name="numeroAssentoOcupado"

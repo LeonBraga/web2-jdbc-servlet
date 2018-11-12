@@ -33,7 +33,7 @@
 		<c:if test="${cartoes!=null}">
 			<h3>Selecione o cartão que deseja usar nesta compra
 				${usuario.nome}</h3>
-			Numero do cartao:<select>
+			Numero do cartao:<select name="numerocartao">
 				<c:forEach items="${cartoes}" var="cartao">
 					<c:if test="${usuario.id ==  cartao.idUser}">
 						<option value="${cartao.numeroCartao}">${cartao.numeroCartao}</option>
