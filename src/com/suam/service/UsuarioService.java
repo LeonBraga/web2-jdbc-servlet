@@ -12,6 +12,7 @@ import java.util.List;
 
 import com.suam.bean.Usuario;
 import com.suam.factory.ConnectionFactory;
+import com.suam.util.DataUtils;
 
 public class UsuarioService {
 
@@ -28,14 +29,9 @@ public class UsuarioService {
 
 		String sql = "INSERT INTO usuario (nome, sobrenome, endereco, senha, login, dataNascimento, isadm ) VALUES (?,?,?,?,?,?,?)";
 
-		// convertendo data para string
-		SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
-		// Date data = formato.parse("23/11/2015");
-		// Date data = formato.format("23/11/2015");
-
 		System.out.println("Usuario a ser inserido: " + usuario.getNome() + " - " + usuario.getSobrenome() + " - "
 				+ usuario.getEndereco() + " - " + usuario.getSenha() + " - " + usuario.getLogin() + " - "
-				+ formato.format(usuario.getDataNascimento()) + " - " + usuario.getIsAdm());
+				+ DataUtils.formatarData().format(usuario.getDataNascimento()) + " - " + usuario.getIsAdm());
 		try {
 			PreparedStatement ps = conexao.prepareStatement(sql);
 			ps.setString(1, usuario.getNome());
@@ -43,7 +39,7 @@ public class UsuarioService {
 			ps.setString(3, usuario.getEndereco());
 			ps.setString(4, usuario.getSenha());
 			ps.setString(5, usuario.getLogin());
-			ps.setString(6, formato.format(usuario.getDataNascimento()));
+			ps.setString(6, DataUtils.formatarData().format(usuario.getDataNascimento()));
 
 			if (usuario.getIsAdm()) {
 				ps.setInt(7, 1);
@@ -82,8 +78,6 @@ public class UsuarioService {
 
 		String sql = "UPDATE usuario SET nome = ?, sobrenome = ?, endereco = ?,  senha = ?, login = ?, dataNascimento = ?, isadm = ? WHERE idusuario = ?";
 
-		SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
-
 		try {
 			PreparedStatement ps = conexao.prepareStatement(sql);
 			ps.setString(1, usuario.getNome());
@@ -91,7 +85,7 @@ public class UsuarioService {
 			ps.setString(3, usuario.getEndereco());
 			ps.setString(4, usuario.getSenha());
 			ps.setString(5, usuario.getLogin());
-			ps.setString(6, formato.format(usuario.getDataNascimento()));
+			ps.setString(6, DataUtils.formatarData().format(usuario.getDataNascimento()));
 			if (usuario.getIsAdm()) {
 				ps.setInt(7, 1);
 			} else {
@@ -122,8 +116,6 @@ public class UsuarioService {
 
 		ResultSet rs = statement.getResultSet();
 
-		SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
-
 		while (rs.next()) {
 			Usuario usuario = new Usuario();
 			usuario.setId(rs.getInt("idusuario"));
@@ -133,7 +125,8 @@ public class UsuarioService {
 			usuario.setSenha(rs.getString("senha"));
 			usuario.setLogin(rs.getString("login"));
 			try {
-				usuario.setDataNascimento(formato.parse(rs.getString("datanascimento")));
+				String dataRecebida = rs.getString("datanascimento");
+				usuario.setDataNascimento(DataUtils.formatarData().parse(dataRecebida));
 			} catch (ParseException e) {
 				e.printStackTrace();
 				System.out.println("A data não pode ser convertida");
@@ -188,8 +181,6 @@ public class UsuarioService {
 			System.out.println("CONSULTAR SELECT: " + ps);
 			ResultSet rs = ps.executeQuery();
 
-			SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
-
 			while (rs.next()) {
 				Usuario usuario = new Usuario();
 				usuario.setId(rs.getInt("idusuario"));
@@ -199,7 +190,7 @@ public class UsuarioService {
 				usuario.setSenha(rs.getString("senha"));
 				usuario.setLogin(rs.getString("login"));
 				try {
-					usuario.setDataNascimento(formato.parse(rs.getString("datanascimento")));
+					usuario.setDataNascimento(DataUtils.formatarData().parse(rs.getString("datanascimento")));
 				} catch (ParseException e) {
 					e.printStackTrace();
 					System.out.println("A data não pode ser convertida");
@@ -236,7 +227,7 @@ public class UsuarioService {
 			PreparedStatement ps = conexao.prepareStatement(sql);
 			ps.setInt(1, id);
 			ResultSet rs = ps.executeQuery();
-			SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+
 			while (rs.next()) {
 				usuario.setId(rs.getInt("idusuario"));
 				usuario.setNome(rs.getString("nome"));
@@ -245,7 +236,7 @@ public class UsuarioService {
 				usuario.setSenha(rs.getString("senha"));
 				usuario.setLogin(rs.getString("login"));
 				try {
-					usuario.setDataNascimento(formato.parse(rs.getString("datanascimento")));
+					usuario.setDataNascimento(DataUtils.formatarData().parse(rs.getString("datanascimento")));
 				} catch (ParseException e) {
 					e.printStackTrace();
 					System.out.println("A data não pode ser convertida");
@@ -259,6 +250,6 @@ public class UsuarioService {
 			conexao.close();
 		}
 		return usuario;
-
 	}
+
 }

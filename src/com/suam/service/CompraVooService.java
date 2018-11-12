@@ -2,16 +2,11 @@ package com.suam.service;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.List;
 
-import com.suam.bean.Assento;
 import com.suam.bean.CompraVoo;
-import com.suam.bean.Voo;
 import com.suam.factory.ConnectionFactory;
+import com.suam.util.DataUtils;
 
 public class CompraVooService {
 
@@ -24,24 +19,27 @@ public class CompraVooService {
 		System.out.println("Dados da Compra:: " + compra.getIdCartao() + " - " + compra.getIdVoo().toString() + " - "
 				+ compra.getIdUser() + " - " + compra.getValorTotalCompra());
 
-		// PEGANDO A DATA ATUAL:::
-		String agora = null;
-		Statement statement = conexao.createStatement();
-		try {
-			statement.execute("SELECT DATE_FORMAT(now(), '%y-%m-%d %H:%i:%s')as 'agora'");
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-
-		ResultSet rs = statement.getResultSet();
-		try {
-			while (rs.next()) {
-				agora = rs.getString("agora");
-				System.out.println("Hora da Compra: " + rs.getString("agora"));
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+//		// PEGANDO A DATA ATUAL:::
+//		String agora = null;
+//		Statement statement = conexao.createStatement();
+//		try {
+//			statement.execute("SELECT DATE_FORMAT(now(), '%y-%m-%d %H:%i:%s')as 'agora'");
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//		}
+//
+//		ResultSet rs = statement.getResultSet();
+//		try {
+//			while (rs.next()) {
+//				agora = rs.getString("agora");
+//				System.out.println("Hora da Compra: " + rs.getString("agora"));
+//			}
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//		}
+		
+		String agora = DataUtils.gravarDataEHoraAtualBD();
+		System.out.println("HORA====>>> "+agora);
 
 		try {
 			PreparedStatement ps = conexao.prepareStatement(sql);

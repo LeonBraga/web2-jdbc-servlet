@@ -21,12 +21,10 @@ public class ConnectionFactory {
 			try {
 				Class.forName("com.mysql.cj.jdbc.Driver");
 			} catch (ClassNotFoundException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 
 			/* Tenta se conectar */
-			System.out.println("String de conexão MYSQL: " + STRINGCONEXAO);
 			conexao = DriverManager.getConnection(URL, USERNAME, PASSWORD);
 
 			/* Configura commit como NÃO Automático */
@@ -47,7 +45,6 @@ public class ConnectionFactory {
 			// "SA", "");
 			// System.out.println("CONEXAO FACTORY STRING: "+conexao );
 			return conexao;
-
 		} catch (SQLException e) {
 			e.printStackTrace();
 			System.out.println("Nao foi possivel conectar ao banco de dados.");

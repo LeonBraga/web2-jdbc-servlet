@@ -15,6 +15,16 @@ import java.time.format.DateTimeFormatter;
 import com.suam.factory.ConnectionFactory;
 
 public class DataUtils {
+
+	// formatar datas
+	public static SimpleDateFormat formatarData() {
+		// convertendo data para string
+		SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+		// Date data = formato.parse("23/11/2015");
+		// Date data = formato.format("23/11/2015");
+		return formato;
+	}
+
 	public static String gravarDataEHoraAtualBD() throws SQLException {
 		Connection conexao = ConnectionFactory.getConnection();
 		// PEGANDO A DATA ATUAL NO SERVER DB:::
@@ -34,7 +44,7 @@ public class DataUtils {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		conexao.close();
+		//conexao.close();
 		return agora;
 	}
 

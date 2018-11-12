@@ -20,7 +20,6 @@ public class VooService {
 
 		String sql = "INSERT INTO voo ( ida, origem, destino, confirmacao, valorVoo) VALUES (?,?,?,?,?)";
 
-		// SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
 		try {
 			PreparedStatement ps = conexao.prepareStatement(sql);
 			ps.setDate(1, voo.getIda());
@@ -46,8 +45,6 @@ public class VooService {
 		Connection conexao = ConnectionFactory.getConnection();
 
 		String sql = "UPDATE voo SET  ida = ?,origem = ?,  destino = ?, confirmacao = ?, valorVoo = ? WHERE idVoo = ?";
-
-		//SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
 
 		try {
 			PreparedStatement ps = conexao.prepareStatement(sql);
@@ -85,8 +82,6 @@ public class VooService {
 		statement.execute("select * from voo where exclusaoLogica = '1'");
 
 		ResultSet rs = statement.getResultSet();
-
-		// SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
 
 		while (rs.next()) {
 			Voo voo = new Voo();
