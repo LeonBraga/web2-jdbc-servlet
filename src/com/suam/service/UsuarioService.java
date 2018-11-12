@@ -118,7 +118,7 @@ public class UsuarioService {
 		List<Usuario> listaUsuario = new ArrayList<Usuario>();
 
 		Statement statement = connection.createStatement();
-		statement.execute("select * from usuario where exclusaoLogica = '1'");
+		statement.execute("select * from usuario where exclusaoLogica = '1' and IDUSUARIO != '0'");
 
 		ResultSet rs = statement.getResultSet();
 
@@ -178,7 +178,7 @@ public class UsuarioService {
 		Connection conexao = ConnectionFactory.getConnection();
 		List<Usuario> listaUsuario = new ArrayList<Usuario>();
 
-		String sql = "SELECT * FROM usuario where login=? and senha=? and exclusaoLogica = '1' ";
+		String sql = "SELECT * FROM usuario where login=? and senha=? and exclusaoLogica = '1' and IDUSUARIO != '0'";
 
 		try {
 			PreparedStatement ps = conexao.prepareStatement(sql);
