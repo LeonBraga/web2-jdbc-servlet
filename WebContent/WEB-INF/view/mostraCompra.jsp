@@ -14,7 +14,7 @@
 <script src="javascript/filtro.js" type="text/javascript"></script>
 <!-- Inclusão da folha de estilo-->
 <link rel="stylesheet" type="text/css" href="css/filtro.css">
-<title>Listar Compras Realizadas</title>
+<title>Listar Detalhes</title>
 </head>
 <body>
 	<c:import url="logout-parcial.jsp" />
@@ -46,25 +46,24 @@ Use a hidden field that will contain ${configParams.key} value. Use loop iterato
 
 When form will be submitted then you can access all these values from request by giving names in getParameter('') method. --%>
 	<c:if test="${usuarioLogado.isAdm ==  'TRUE'}">
+		Assentos comprados neste voo pelo usuário:<br>
 		<ul id="ulItens">
-			<c:forEach items="${compras}" var="compra">
+			<c:forEach items="${listaAssentoPagamentoConfirmado}" var="assento">
 					<li>
-						Nome do Comprador: ${compra.nomeUsuario}
-						<br>
-						Hora da compra: ${compra.horaCompra}
-						<%-- <br>
-						Numero Do Cartão Utilizado:  ${compra.idCartao} --%>
-						<br>
-						Identificador do Voo: ${compra.idVoo[0]}
-						<%-- Valor Total: ${compra.valorTotalCompra} --%>
-						<br>
-						 <a href="entrada?acao=MostraCompra&idUsuario=${compra.idUser}&idVoo=${compra.idVoo[0]}&valorTotal=${compra.valorTotalCompra}&numeroCartao=${compra.idCartao}">
-						 	<button>Mostrar Detalhes</button>
-						 </a>
-						<br>
+						<c:if test="${assento.comfirmaPagamento == true}">
+							<c:out value="${assento.numeroAssento}"/> - Pagamento Confirmado
+							<input type="checkbox" name="numeroAssentoOcupado"
+							id="numeroAssentoOcupado" value="${assento.numeroAssento}" disabled="disabled">
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				 		</c:if>
 					</li>
 			</c:forEach>
 		</ul>
+		<br>
+		Número do Cartão utilizado: ${numeroCartao}
+		<br>
+		Valor total desta compra: ${valorTotal}  
+		
 	</c:if>
 	<br>
 	<br>
