@@ -244,7 +244,7 @@ public class UsuarioService {
 				usuario.setIsAdm(rs.getBoolean("isAdm"));
 			}
 		} catch (SQLException e) {
-			System.out.println("ERRO: " + e);
+			e.printStackTrace();
 			// conexao.rollback();
 		} finally {
 			conexao.close();

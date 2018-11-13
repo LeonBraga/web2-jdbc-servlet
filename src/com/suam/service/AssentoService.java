@@ -221,7 +221,7 @@ public class AssentoService {
 		return listaAssentos;
 	}
 	
-	//Ao excluir um usuario desocupar seus assentos
+	//Ao excluir um usuario, desocupar seus assentos
 	public static Boolean desocuparAssentoPorUsuarioId(Integer usuarioId) throws SQLException {
 		Connection conexao = ConnectionFactory.getConnection();
 

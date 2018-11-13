@@ -24,7 +24,7 @@
 		<br>
 		<a href="entrada?acao=ListaVoo">Tela administração de Vôos</a>
 		<br>
-		<a href="entrada?acao=ListaCompras">Tela de acompanhamento dos pedidos de vôos</a> ==>> A FAZER
+		<a href="entrada?acao=ListaCompras">Tela de acompanhamento dos pedidos de vôos</a>
 		<br>
 	</c:if>
 	<br>
@@ -39,11 +39,8 @@
 			Meus Dados</a>
 		<br>
 		<a href="entrada?acao=ListaVoo">Tela de Compra de passagem Aérea</a>
-		decrição: Tela de Compra de passagem Aérea OBS: CRIAR Tela de finalização da compra
 		<br>
-		<a href="entrada?acao=">Tela de acompanhamento dos pedidos de vôos</a> ==>> A FAZER
-		<br>
-		Tela de escolha de assento e Cálculo do valor final.  ===>>> PRONTO
+		<a href="entrada?acao=ListaCompras">Tela de acompanhamento dos pedidos de vôos</a>
 		<br>
 		Tela da Lista de resultados e escolha do vôo do cliente com destaque da linha após ser escolhido e botão de enviar. ==>>EM DESENVOLVIMENTO
 		<br>

@@ -13,6 +13,7 @@ import java.util.List;
 import com.suam.bean.CartaoDeCredito;
 import com.suam.bean.Usuario;
 import com.suam.factory.ConnectionFactory;
+import com.suam.util.DataUtils;
 
 public class CartaoDeCreditoService {
 
@@ -147,8 +148,6 @@ public class CartaoDeCreditoService {
 
 		String sql = ("select * from cartaodecredito where usuario_idusuario=?");
 
-		SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
-
 		try {
 			PreparedStatement ps = conexao.prepareStatement(sql);
 			ps.setString(1, idUser);
@@ -158,16 +157,14 @@ public class CartaoDeCreditoService {
 				cartao.setIdUser(rs.getInt("usuario_idusuario"));
 				cartao.setNumeroCartao(rs.getString("numeroCartao"));
 				try {
-					cartao.setDataVencimento(formato.parse(rs.getString("dataVencimento")));
+					cartao.setDataVencimento(DataUtils.formatarData().parse(rs.getString("dataVencimento")));
 				} catch (ParseException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 				listaCartoes.add(cartao);
 			}
-			System.out.println("SELECT REALIZADO COM SUCESSO ==> tabela cartao!");
 		} catch (SQLException e) {
-			System.out.println("ERRO: " + e);
+			e.printStackTrace();
 		}
 		return listaCartoes;
 	}
