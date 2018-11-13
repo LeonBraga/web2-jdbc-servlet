@@ -19,7 +19,6 @@
 <body>
 	<c:import url="logout-parcial.jsp" />
 	<br>
-	<br>
 	<br> Listagem dos assentos do Voo - Indentificador: ${vooId}.
 	<br>
 	<!-- SOMENTE O CLIENTE QUE OCUPOU O ASSENTO PODERÁ DESOCUPAR O MESMO -->
@@ -29,23 +28,24 @@
 		<c:forEach items="${assentos}" var="assento">
 			<c:if test="${assento.ocupante == usuarioLogado.id}">
 				<c:if test="${assento.comfirmaPagamento != true}">
-					<c:out value="${assento.numeroAssento}"/> - NÃO	Confirmado
+					<c:out value="${assento.numeroAssento}" /> - NÃO	Confirmado
 					<input type="checkbox" name="numeroAssentoOcupado"
 						id="numeroAssentoOcupado" value="${assento.numeroAssento}">
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				 </c:if>
 			</c:if>
-			
+
 			<c:if test="${assento.ocupante == usuarioLogado.id}">
 				<c:if test="${assento.comfirmaPagamento == true}">
-					<c:out value="${assento.numeroAssento}"/> - Pagamento Confirmado
+					<c:out value="${assento.numeroAssento}" /> - Pagamento Confirmado
 					<input type="checkbox" name="numeroAssentoOcupado"
-						id="numeroAssentoOcupado" value="${assento.numeroAssento}" disabled="disabled">
+						id="numeroAssentoOcupado" value="${assento.numeroAssento}"
+						disabled="disabled">
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				 </c:if>
 			</c:if>
-			
-			
+
+
 			<c:if test="${assento.ocupante != usuarioLogado.id}">
 				<c:out value="${assento.numeroAssento}" />
 				<input type="checkbox" name="numeroAssentoOcupado"
@@ -80,8 +80,22 @@
 	</form>
 	<br>
 	<br>
-	<form action="${linkEntradaServlet }" method="post">
 
+	<br> Deseja comprar passagem de volta:
+	<br>
+	<input type="radio" name="volta" value="0" checked="checked">
+	Somente Ida
+	<br>
+	<input type="radio" name="volta" value="1">Volta
+	<br>
+
+
+	<!-- AO CLICAR EM VOLTA DEVE SE CARREGAR UM MOSTRA
+	 VOO COM OS DESTINOS DE PARTIDA IGUAIS AOS DE IDA DO VOO ATUAL -->
+	<!-- OUUU IR PRA UMA NOVA TELA DE COMPRA DE VOO COM OS VALORES 
+	SELECIONADOS NESTA CARREGADOS LÁ-->
+
+	<form action="${linkEntradaServlet }" method="post">
 		<!-- PASSAR POR JQUERY AQUI A LISTA DE ASSENTOS OCUPADOS -->
 		<input type="hidden" name="numeroAssentoOcupado" value="35"> <input
 			type="hidden" name="compradorId" value="${usuarioLogado.id}" /> <input

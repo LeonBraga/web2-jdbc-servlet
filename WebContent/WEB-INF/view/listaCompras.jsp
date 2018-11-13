@@ -66,6 +66,29 @@ When form will be submitted then you can access all these values from request by
 			</c:forEach>
 		</ul>
 	</c:if>
+	<c:if test="${usuarioLogado.isAdm ==  'FALSE'}">
+	<c:if test="${usuarioLogado.isAdm ==  compra.idUser}">
+		<ul id="ulItens">
+			<c:forEach items="${compras}" var="compra">
+					<li>
+						Nome do Comprador: ${compra.nomeUsuario}
+						<br>
+						Hora da compra: ${compra.horaCompra}
+						<%-- <br>
+						Numero Do Cartão Utilizado:  ${compra.idCartao} --%>
+						<br>
+						Identificador do Voo: ${compra.idVoo[0]}
+						<%-- Valor Total: ${compra.valorTotalCompra} --%>
+						<br>
+						 <a href="entrada?acao=MostraCompra&idUsuario=${compra.idUser}&idVoo=${compra.idVoo[0]}&valorTotal=${compra.valorTotalCompra}&numeroCartao=${compra.idCartao}">
+						 	<button>Mostrar Detalhes</button>
+						 </a>
+						<br>
+					</li>
+			</c:forEach>
+		</ul>
+	</c:if>	
+	</c:if>
 	<br>
 	<br>
 
