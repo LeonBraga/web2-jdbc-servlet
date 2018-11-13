@@ -137,7 +137,7 @@ CREATE TABLE `usuario` (
   `isadm` tinyint(1) DEFAULT NULL,
   `exclusaoLogica` tinyint(1) DEFAULT '1',
   PRIMARY KEY (`IDUSUARIO`)
-) ENGINE=InnoDB AUTO_INCREMENT=2147483647 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -146,7 +146,7 @@ CREATE TABLE `usuario` (
 
 LOCK TABLES `usuario` WRITE;
 /*!40000 ALTER TABLE `usuario` DISABLE KEYS */;
-INSERT INTO `usuario` VALUES (0,'padraoAssento','','','','','',NULL,1),(1,'Anderson CLIENTE','Ferreira Canel','R. Severiano das Chagas','and','and','15/04/1988',0,1),(7,'Anderson ADM','Fereira Canel','Rua teste','adm','adm','15/04/1988',1,1),(8,'Alex','Canel','teste','alex','alex','21/01/1992',0,1),(10,'Maria','das Graças','Cap Masceno','maria','maria','11/12/1960',0,1),(2147483647,'a','a','a','a','a','01/01/1980',0,0);
+INSERT INTO `usuario` VALUES (0,'padraoAssento','','','','','',NULL,1),(1,'Anderson CLIENTE','Ferreira Canel','R. Severiano das Chagas','and','and','15/04/1988',0,1),(7,'Anderson ADM','Fereira Canel','Rua teste','adm','adm','15/04/1988',1,1),(8,'Alex','Canel','teste','alex','alex','21/01/1992',0,1),(10,'Maria','das Graças','Cap Masceno','maria','maria','11/12/1960',0,1),(20,'a','a','a','a','a','01/01/1980',0,0);
 /*!40000 ALTER TABLE `usuario` ENABLE KEYS */;
 UNLOCK TABLES;
 
