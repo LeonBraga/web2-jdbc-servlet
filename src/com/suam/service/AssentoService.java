@@ -304,4 +304,37 @@ public class AssentoService {
 		}
 		
 		
+		public static List<Assento> listarAssentosPorUsuarioIdVooIdPagamentoNaoConfirmado(Integer usuarioId, Integer vooId) throws SQLException {
+			Connection conexao = ConnectionFactory.getConnection();
+			List<Assento> listaAssentos = new ArrayList<Assento>();
+
+			String sql = "SELECT * FROM assento WHERE USUARIO_IDUSUARIO = ? and voo_idvoo =? and comfirmaPagamento = '0'";
+			try {
+				PreparedStatement ps = conexao.prepareStatement(sql);
+				ps.setInt(1, usuarioId);
+				ps.setInt(2, vooId);
+				
+				ResultSet rs = ps.executeQuery();
+
+				while (rs.next()) {
+					Assento assento = new Assento();
+					assento.setNumeroAssento(rs.getInt("idassento"));
+					assento.setIdVoo(rs.getInt("voo_idvoo"));
+					assento.setOcupado(rs.getBoolean("ocupado"));
+					assento.setComfirmaPagamento(rs.getBoolean("comfirmaPagamento"));
+					if (assento.isOcupado()) {
+						assento.setOcupado(true);
+						listaAssentos.add(assento);
+					} else {
+						assento.setOcupado(false);
+						listaAssentos.remove(assento);
+					}
+					
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			return listaAssentos;
+		}
+		
 }

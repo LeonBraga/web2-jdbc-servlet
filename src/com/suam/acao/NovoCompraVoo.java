@@ -55,7 +55,7 @@ public class NovoCompraVoo implements Acao {
 		Integer totalCompra = 0;
 		for (String vooIdVoo : voo_idvoo) {
 			try {
-				listaNumeroAssento = AssentoService.listarAssentosPorUsuarioIdVooId(usuario.getId(),
+				listaNumeroAssento = AssentoService.listarAssentosPorUsuarioIdVooIdPagamentoNaoConfirmado(usuario.getId(),
 						Integer.valueOf(vooIdVoo));
 				for (Assento assento2 : listaNumeroAssento) {
 					AssentoService.PagamentoAssentoPorUsuarioId(usuario.getId(), assento2.getNumeroAssento(),
