@@ -84,7 +84,7 @@ public class AssentoOcupa implements Acao {
 			}
 		}
 		if (idVolta != null) {
-			if (numeroAssento != null) {
+			if (numeroAssentoVolta != null) {
 				for (String assentoNumVolta : numeroAssentoVolta) {
 					System.out.println("Assento numero: " + assentoNumVolta);
 					System.out.println("Voo id: " + idVooVolta);

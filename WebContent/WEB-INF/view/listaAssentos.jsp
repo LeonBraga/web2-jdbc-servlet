@@ -98,7 +98,7 @@
 					<c:if test="${assento.comfirmaPagamento != true}">
 						<c:out value="${assento.numeroAssento}" /> - NÃO	Confirmado
 					<input type="checkbox" name="numeroAssentoOcupadoVolta"
-							id="numeroAssentoOcupado" value="${assento.numeroAssento}">
+							id="numeroAssentoOcupadoVolta" value="${assento.numeroAssento}">
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				 </c:if>
 				</c:if>
@@ -107,7 +107,7 @@
 					<c:if test="${assento.comfirmaPagamento == true}">
 						<c:out value="${assento.numeroAssento}" /> - Pagamento Confirmado
 					<input type="checkbox" name="numeroAssentoOcupadoVolta"
-							id="numeroAssentoOcupado" value="${assento.numeroAssento}"
+							id="numeroAssentoOcupadoVolta" value="${assento.numeroAssento}"
 							disabled="disabled">
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				 </c:if>
