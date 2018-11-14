@@ -73,34 +73,25 @@
 			<input type="hidden" name="desocupa" value="true">
 		</div>
 		<input type="hidden" name="ocupante" value="${usuarioLogado.id}" /> <input
-			type="hidden" name="idVoo" value="${vooId}"> <input
+			type="hidden" name="vooId" value="${vooId}"> <input
 			type="hidden" name="acao" value="AssentoOcupa"> <br> <input
 			type="submit" value="Ocupar/Desocupar Assento" />
-
 	</form>
 	<br>
 	<br>
 
 
-	<form action="${linkEntradaServlet }" method="post">
-		<!-- PASSAR POR JQUERY AQUI A LISTA DE ASSENTOS OCUPADOS -->
-		<input type="hidden" name="numeroAssentoOcupado" value="35"> <input
-			type="hidden" name="compradorId" value="${usuarioLogado.id}" /> <input
-			type="hidden" name="idvoo" value="${vooId}"> <input
-			type="hidden" name="acao" value="FormNovoCompraVoo"> <input
-			type="submit" value="Comprar Assentos(s)" />
-	</form>
+
+
+
 
 	<br>
-
-
 	<c:if test="${volta == true }">
-
 		<br> Listagem dos assentosVolta do Voo de VOLTA - Indentificador: ${vooIdVolta}.
-	<br>
+		<br>
 		<!-- SOMENTE O CLIENTE QUE OCUPOU O ASSENTO PODERÁ DESOCUPAR O MESMO -->
 		<form action="${linkEntradaServlet }" method="post">
-			Assentos do  voo de Volta já ocupados: Clique para desocupar: <br>
+			Assentos do voo de Volta já ocupados: Clique para desocupar: <br>
 
 			<c:forEach items="${assentosVolta}" var="assento">
 				<c:if test="${assento.ocupante == usuarioLogado.id}">
@@ -126,7 +117,7 @@
 				<c:if test="${assento.ocupante != usuarioLogado.id}">
 					<c:out value="${assento.numeroAssento}" />
 					<input type="checkbox" name="numeroAssentoOcupadoVolta"
-						id="numeroAssentoOcupado" value="${assento.numeroAssento}"
+						id="numeroAssentoOcupadoVolta" value="${assento.numeroAssento}"
 						disabled="disabled">
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			 </c:if>
@@ -135,29 +126,38 @@
 			<c:forEach items="${assentosDesocupadosVolta}" var="assento">
 				<%--  <c:if test="${assento.ocupado == 'false'}">  --%>
 				<c:out value="${assento.numeroAssento}" />
-				<input type="checkbox" name="numeroAssentoVolta" id="numeroAssento"
-					value="${assento.numeroAssento}">
+				<input type="checkbox" name="numeroAssentoVolta"
+					id="numeroAssentoVolta" value="${assento.numeroAssento}">
 		    	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 		    <%-- </c:if> --%>
 			</c:forEach>
-
 			<!-- parametro adicionado via jQuery -->
 			<div id="ocupa" style="display: none">
 				<input type="hidden" name="ocupa" value="true">
 			</div>
-
 			<div id="desocupa" style="display: none">
 				<input type="hidden" name="desocupa" value="true">
 			</div>
 			<input type="hidden" name="ocupante" value="${usuarioLogado.id}" />
-			<input type="hidden" name="idVooVolta" value="${vooIdVolta}"> <input
+			<input type="hidden" name="vooId" value="${vooId}"> <input
+				type="hidden" name="idVooVolta" value="${vooIdVolta}"> <input
 				type="hidden" name="acao" value="AssentoOcupa"> <br> <input
 				type="submit" value="Ocupar/Desocupar Assento" />
-
 		</form>
 		<br>
-
 	</c:if>
+
+
+
+
+
+
+	<form action="${linkEntradaServlet }" method="post">
+		<input type="hidden" name="compradorId" value="${usuarioLogado.id}" />
+		<input type="hidden" name="idvoo" value="${vooId}"> <input
+			type="hidden" name="acao" value="FormNovoCompraVoo"> <input
+			type="submit" value="Comprar Assentos(s)" />
+	</form>
 
 
 	<c:import url="menuLinks.jsp" />

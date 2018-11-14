@@ -2,9 +2,6 @@ package com.suam.acao;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -16,84 +13,47 @@ public class AssentoOcupa implements Acao {
 	public String executa(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		String comprar = request.getParameter("comprar");
-		String idVoo = request.getParameter("idVoo");
+		System.out.println("AÇÃO => OCUPANDO ASSENTOS");
+		// String comprar = request.getParameter("comprar");
+		String idVoo = request.getParameter("vooId");
+		System.out.println("idvoo" + idVoo);
 		String ocupa = request.getParameter("ocupa");
 		String desocupa = request.getParameter("desocupa");
 		String ocupante = request.getParameter("ocupante");
 		String[] numeroAssento = request.getParameterValues("numeroAssento");
 		String[] numeroAssentoOcupado = request.getParameterValues("numeroAssentoOcupado");
-		Assento assent = new Assento();
+		String[] numeroAssentoVolta = request.getParameterValues("numeroAssentoVolta");
+		String[] numeroAssentoOcupadoVolta = request.getParameterValues("numeroAssentoOcupadoVolta");
+		String idVooVolta = request.getParameter("idVooVolta");
+		Assento assentoIda = new Assento();
+		Assento assentoVolta = new Assento();
+		Integer idOcupante = Integer.valueOf(ocupante);
+		Integer idVolta = null;
+		if (idVooVolta != null) {
+			idVolta = Integer.valueOf(idVooVolta);
+		}
 
 		Integer id = null;
 		if (idVoo != null) {
 			id = Integer.valueOf(idVoo);
 		}
-		Integer idOcupante = Integer.valueOf(ocupante);
-		String idVooVolta = request.getParameter("idVooVolta");
-		Integer idVolta = null;
-		if (idVooVolta != null) {
-			idVolta = Integer.valueOf(idVooVolta);
-		}
-		String[] numeroAssentoVolta = request.getParameterValues("numeroAssentoVolta");
-		String[] numeroAssentoOcupadoVolta = request.getParameterValues("numeroAssentoOcupadoVolta");
-
-		if (numeroAssento != null && idVoo != null) {
-			for (String assentoNum : numeroAssento) {
-				Integer numAssento = Integer.valueOf(assentoNum);
-				assent.setIdVoo(id);
-				assent.setNumeroAssento(numAssento);
-				assent.setOcupante(idOcupante);
-				if (ocupa != null) {
-					assent.setOcupado(true);
-				} else {
-					assent.setOcupado(false);
-				}
-				assent.setOcupante(idOcupante);
-				try {
-					AssentoService.update(assent);
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
-		}
-
-		// List<String> listaAssentosOcupados = new ArrayList<String>();
-		if (numeroAssentoOcupado != null && idVooVolta != null) {
-			for (String assentoNum : numeroAssentoOcupado) {
-				Integer numAssento = Integer.valueOf(assentoNum);
-				assent.setIdVoo(id);
-				assent.setNumeroAssento(numAssento);
-				assent.setOcupante(idOcupante);
-				if (desocupa != null) {
-					assent.setOcupado(false);
-				} else {
-					assent.setOcupado(true);
-				}
-				try {
-					AssentoService.update(assent);
-					// listaAssentosOcupados.add(assentoNum);
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
-		}
-
-		if (idVolta != null) {
+		if (idVoo != null) {
 			if (numeroAssento != null) {
-				for (String assentoNum : numeroAssentoVolta) {
+				for (String assentoNum : numeroAssento) {
+					System.out.println("Assento numero: " + assentoNum);
+					System.out.println("Voo id: " + id);
 					Integer numAssento = Integer.valueOf(assentoNum);
-					assent.setIdVoo(idVolta);
-					assent.setNumeroAssento(numAssento);
-					assent.setOcupante(idOcupante);
+					assentoIda.setIdVoo(id);
+					assentoIda.setNumeroAssento(numAssento);
+					assentoIda.setOcupante(idOcupante);
 					if (ocupa != null) {
-						assent.setOcupado(true);
+						assentoIda.setOcupado(true);
 					} else {
-						assent.setOcupado(false);
+						assentoIda.setOcupado(false);
 					}
-					assent.setOcupante(idOcupante);
+					assentoIda.setOcupante(idOcupante);
 					try {
-						AssentoService.update(assent);
+						AssentoService.update(assentoIda);
 					} catch (SQLException e) {
 						e.printStackTrace();
 					}
@@ -102,25 +62,73 @@ public class AssentoOcupa implements Acao {
 
 			// List<String> listaAssentosOcupados = new ArrayList<String>();
 			if (numeroAssentoOcupado != null) {
-				for (String assentoNum : numeroAssentoOcupadoVolta) {
+				for (String assentoNum : numeroAssentoOcupado) {
+					System.out.println("Assento numero: " + assentoNum);
+					System.out.println("Voo id: " + id);
 					Integer numAssento = Integer.valueOf(assentoNum);
-					assent.setIdVoo(idVolta);
-					assent.setNumeroAssento(numAssento);
-					assent.setOcupante(idOcupante);
+					assentoIda.setIdVoo(id);
+					assentoIda.setNumeroAssento(numAssento);
+					assentoIda.setOcupante(idOcupante);
 					if (desocupa != null) {
-						assent.setOcupado(false);
+						assentoIda.setOcupado(false);
 					} else {
-						assent.setOcupado(true);
+						assentoIda.setOcupado(true);
 					}
 					try {
-						AssentoService.update(assent);
+						AssentoService.update(assentoIda);
 						// listaAssentosOcupados.add(assentoNum);
 					} catch (SQLException e) {
 						e.printStackTrace();
 					}
 				}
 			}
-			return "redirect:entrada?acao=ListaAssento&vooId=" + idVoo + "&voltaId=" + idVolta;
+		}
+		if (idVolta != null) {
+			if (numeroAssento != null) {
+				for (String assentoNumVolta : numeroAssentoVolta) {
+					System.out.println("Assento numero: " + assentoNumVolta);
+					System.out.println("Voo id: " + idVooVolta);
+					Integer numAssento = Integer.valueOf(assentoNumVolta);
+					assentoVolta.setIdVoo(idVolta);
+					assentoVolta.setNumeroAssento(numAssento);
+					assentoVolta.setOcupante(idOcupante);
+					if (ocupa != null) {
+						assentoVolta.setOcupado(true);
+					} else {
+						assentoVolta.setOcupado(false);
+					}
+					assentoVolta.setOcupante(idOcupante);
+					try {
+						AssentoService.update(assentoVolta);
+					} catch (SQLException e) {
+						e.printStackTrace();
+					}
+				}
+			}
+
+			// List<String> listaAssentosOcupados = new ArrayList<String>();
+			if (numeroAssentoOcupado != null) {
+				for (String assentoNumVolta : numeroAssentoOcupadoVolta) {
+					System.out.println("Assento numero: " + assentoNumVolta);
+					System.out.println("Voo id: " + idVooVolta);
+					Integer numAssento = Integer.valueOf(assentoNumVolta);
+					assentoVolta.setIdVoo(idVolta);
+					assentoVolta.setNumeroAssento(numAssento);
+					assentoVolta.setOcupante(idOcupante);
+					if (desocupa != null) {
+						assentoVolta.setOcupado(false);
+					} else {
+						assentoVolta.setOcupado(true);
+					}
+					try {
+						AssentoService.update(assentoVolta);
+						// listaAssentosOcupados.add(assentoNum);
+					} catch (SQLException e) {
+						e.printStackTrace();
+					}
+				}
+			}
+			return "redirect:entrada?acao=ListaAssento&vooId=" + idVoo + "&voltaId=" + idVooVolta;
 		}
 		// QUANDO O USUÁRIO CLICAR EM COMPRAR SERÁ REDIRECIONADO PARA TELA DE COMPRA
 		/*
@@ -132,6 +140,6 @@ public class AssentoOcupa implements Acao {
 		 * id; }
 		 */
 
-		return "redirect:entrada?acao=ListaAssento&vooId=" + assent.getIdVoo();
+		return "redirect:entrada?acao=ListaAssento&vooId=" + assentoIda.getIdVoo();
 	}
 }
