@@ -22,7 +22,7 @@
 	<br> Listagem dos assentos do Voo - Indentificador: ${vooId}.
 	<br>
 	<!-- SOMENTE O CLIENTE QUE OCUPOU O ASSENTO PODERÁ DESOCUPAR O MESMO -->
-	<form action="${linkEntradaServlet }" method="get">
+	<form action="${linkEntradaServlet }" method="post">
 		Assentos já ocupados: Clique para desocupar: <br>
 
 		<c:forEach items="${assentos}" var="assento">
@@ -81,19 +81,6 @@
 	<br>
 	<br>
 
-	<br> Deseja comprar passagem de volta:
-	<br>
-	<input type="radio" name="volta" value="0" checked="checked">
-	Somente Ida
-	<br>
-	<input type="radio" name="volta" value="1">Volta
-	<br>
-
-
-	<!-- AO CLICAR EM VOLTA DEVE SE CARREGAR UM MOSTRA
-	 VOO COM OS DESTINOS DE PARTIDA IGUAIS AOS DE IDA DO VOO ATUAL -->
-	<!-- OUUU IR PRA UMA NOVA TELA DE COMPRA DE VOO COM OS VALORES 
-	SELECIONADOS NESTA CARREGADOS LÁ-->
 
 	<form action="${linkEntradaServlet }" method="post">
 		<!-- PASSAR POR JQUERY AQUI A LISTA DE ASSENTOS OCUPADOS -->
@@ -106,9 +93,73 @@
 
 	<br>
 
+
+	<c:if test="${volta == true }">
+
+		<br> Listagem dos assentosVolta do Voo de VOLTA - Indentificador: ${vooIdVolta}.
+	<br>
+		<!-- SOMENTE O CLIENTE QUE OCUPOU O ASSENTO PODERÁ DESOCUPAR O MESMO -->
+		<form action="${linkEntradaServlet }" method="post">
+			Assentos do  voo de Volta já ocupados: Clique para desocupar: <br>
+
+			<c:forEach items="${assentosVolta}" var="assento">
+				<c:if test="${assento.ocupante == usuarioLogado.id}">
+					<c:if test="${assento.comfirmaPagamento != true}">
+						<c:out value="${assento.numeroAssento}" /> - NÃO	Confirmado
+					<input type="checkbox" name="numeroAssentoOcupadoVolta"
+							id="numeroAssentoOcupado" value="${assento.numeroAssento}">
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				 </c:if>
+				</c:if>
+
+				<c:if test="${assento.ocupante == usuarioLogado.id}">
+					<c:if test="${assento.comfirmaPagamento == true}">
+						<c:out value="${assento.numeroAssento}" /> - Pagamento Confirmado
+					<input type="checkbox" name="numeroAssentoOcupadoVolta"
+							id="numeroAssentoOcupado" value="${assento.numeroAssento}"
+							disabled="disabled">
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				 </c:if>
+				</c:if>
+
+
+				<c:if test="${assento.ocupante != usuarioLogado.id}">
+					<c:out value="${assento.numeroAssento}" />
+					<input type="checkbox" name="numeroAssentoOcupadoVolta"
+						id="numeroAssentoOcupado" value="${assento.numeroAssento}"
+						disabled="disabled">
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			 </c:if>
+			</c:forEach>
+			<br> <br> assentosVolta Livres: Clique para ocupar: <br>
+			<c:forEach items="${assentosDesocupadosVolta}" var="assento">
+				<%--  <c:if test="${assento.ocupado == 'false'}">  --%>
+				<c:out value="${assento.numeroAssento}" />
+				<input type="checkbox" name="numeroAssentoVolta" id="numeroAssento"
+					value="${assento.numeroAssento}">
+		    	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		    <%-- </c:if> --%>
+			</c:forEach>
+
+			<!-- parametro adicionado via jQuery -->
+			<div id="ocupa" style="display: none">
+				<input type="hidden" name="ocupa" value="true">
+			</div>
+
+			<div id="desocupa" style="display: none">
+				<input type="hidden" name="desocupa" value="true">
+			</div>
+			<input type="hidden" name="ocupante" value="${usuarioLogado.id}" />
+			<input type="hidden" name="idVooVolta" value="${vooIdVolta}"> <input
+				type="hidden" name="acao" value="AssentoOcupa"> <br> <input
+				type="submit" value="Ocupar/Desocupar Assento" />
+
+		</form>
+		<br>
+
+	</c:if>
+
+
 	<c:import url="menuLinks.jsp" />
 </body>
 </html>
-
-
-

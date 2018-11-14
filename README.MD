@@ -1,4 +1,4 @@
-# Projeto   A2 ==>> VALENDO 6 PONTOS
+# Projeto   A2 ==>>
 ======>OK
 *******>>>NOK
 
