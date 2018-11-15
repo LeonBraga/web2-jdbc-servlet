@@ -44,12 +44,12 @@ public class CompraVooService {
 				ps.setInt(4, compra.getIdUser());
 				ps.setString(5, compra.getIdCartao());
 				ps.setString(6, agora);
+			} else {
+				ps.setInt(2, compra.getValorTotalCompra());
+				ps.setInt(3, compra.getIdUser());
+				ps.setString(4, compra.getIdCartao());
+				ps.setString(5, agora);
 			}
-			ps.setInt(2, compra.getValorTotalCompra());
-			ps.setInt(3, compra.getIdUser());
-			ps.setString(4, compra.getIdCartao());
-			ps.setString(5, agora);
-
 			ps.execute();
 			conexao.commit();
 		} catch (SQLException e) {
