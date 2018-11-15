@@ -25,13 +25,8 @@
 	</form>
 
 
-	<%-- <c:if test="${empty var1}">
-    var1 is empty or null.
-</c:if>
-<c:if test="${not empty var1}">
-    var1 is NOT empty or null.
-</c:if> --%>
-
+	<br>
+	<c:import url="menuLinks.jsp" />
 
 </body>
 </html>

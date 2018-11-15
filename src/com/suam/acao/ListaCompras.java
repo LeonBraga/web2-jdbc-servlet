@@ -28,24 +28,10 @@ public class ListaCompras implements Acao {
 		System.out.println("AÇÃO = LISTANDO COMPRAS");
 
 		List<CompraVoo> listaCompras = new ArrayList<CompraVoo>();
-		List<CompraVooVO> listaComprasVO = new ArrayList<CompraVooVO>();
-		Usuario usuario = new Usuario();
 		// HashMap<Integer, CompraVoo> mapCompras = new HashMap<Integer, CompraVoo>();
 
 		try {
 			listaCompras = CompraVooService.ListaCompras();
-			for (CompraVoo compraVoo : listaCompras) {
-				CompraVooVO comprasVO = new CompraVooVO();
-				comprasVO.setHoraCompra(compraVoo.getHoraCompra());
-				comprasVO.setIdCartao(compraVoo.getIdCartao());
-				comprasVO.setIdUser(compraVoo.getIdUser());
-				comprasVO.setNomeUsuario(UsuarioService.buscaUsuarioPelaId(compraVoo.getIdUser()).getNome() + " "
-						+ UsuarioService.buscaUsuarioPelaId(compraVoo.getIdUser()).getSobrenome());
-				comprasVO.setValorTotalCompra(compraVoo.getValorTotalCompra());
-				comprasVO.setIdVoo(compraVoo.getIdVoo());
-
-				listaComprasVO.add(comprasVO);
-			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -53,7 +39,7 @@ public class ListaCompras implements Acao {
 		// request.setAttribute("map", mapCompras);
 		// request.setAttribute("usuario", listaUsuario);
 		// request.setAttribute("compras", listaCompras);
-		request.setAttribute("compras", listaComprasVO);
+		request.setAttribute("compras", listaCompras);
 		return "forward:listaCompras.jsp";
 	}
 

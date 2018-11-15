@@ -46,19 +46,16 @@ Use a hidden field that will contain ${configParams.key} value. Use loop iterato
 
 When form will be submitted then you can access all these values from request by giving names in getParameter('') method. --%>
 	<c:if test="${usuarioLogado.isAdm ==  'TRUE'}">
-		<ul id="ulItens">
+		<ul>
 			<c:forEach items="${compras}" var="compra">
 					<li>
+						Número da Compra: ${compra.idCompra}
+						<br>
 						Nome do Comprador: ${compra.nomeUsuario}
 						<br>
 						Hora da compra: ${compra.horaCompra}
-						<%-- <br>
-						Numero Do Cartão Utilizado:  ${compra.idCartao} --%>
-						<br>
-						Identificador do Voo: ${compra.idVoo[0]}
-						<%-- Valor Total: ${compra.valorTotalCompra} --%>
-						<br>
-						 <a href="entrada?acao=MostraCompra&idUsuario=${compra.idUser}&idVoo=${compra.idVoo[0]}&valorTotal=${compra.valorTotalCompra}&numeroCartao=${compra.idCartao}">
+						<br>	
+						 <a href="entrada?acao=MostraCompra&idCompra=${compra.idCompra}">
 						 	<button>Mostrar Detalhes</button>
 						 </a>
 						<br>
@@ -71,16 +68,13 @@ When form will be submitted then you can access all these values from request by
 		<ul id="ulItens">
 			<c:forEach items="${compras}" var="compra">
 					<li>
+						Número da Compra: ${compra.idCompra}
+						<br>
 						Nome do Comprador: ${compra.nomeUsuario}
 						<br>
 						Hora da compra: ${compra.horaCompra}
-						<%-- <br>
-						Numero Do Cartão Utilizado:  ${compra.idCartao} --%>
 						<br>
-						Identificador do Voo: ${compra.idVoo[0]}
-						<%-- Valor Total: ${compra.valorTotalCompra} --%>
-						<br>
-						 <a href="entrada?acao=MostraCompra&idUsuario=${compra.idUser}&idVoo=${compra.idVoo[0]}&valorTotal=${compra.valorTotalCompra}&numeroCartao=${compra.idCartao}">
+						 <a href="entrada?acao=MostraCompra&idCompra=${compra.idCompra}">
 						 	<button>Mostrar Detalhes</button>
 						 </a>
 						<br>
@@ -91,6 +85,7 @@ When form will be submitted then you can access all these values from request by
 	</c:if>
 	<br>
 	<br>
+	<c:import url="menuLinks.jsp" />
 
 
 

@@ -19,57 +19,35 @@
 <body>
 	<c:import url="logout-parcial.jsp" />
 	<br>
-	<br>
-	<br> Lista de Compras Confirmadas:
-	<br> Pesquisar:
-	<input type="text" id="txtBusca"
-		placeholder="Digite aqui um valor para filtrar..." />
-	<br>
-	<br>
-	
-<!-- LISTANDO UM MAP EXEMPLO-->
-<%-- Write all your code inside form tag.
-
-Use this code :
-
-<c:forEach var="configParams" items="${configParamsMap}" varStatus="itemsRow">
-   <tr>
-        <td>
-        <c:out value="${configParams.key}" />
-        </td>
-        <td><input type="text" name="" value="${configParams.value}" /></td>
-  </tr>
-</c:forEach>
-Use a hidden field that will contain ${configParams.key} value. Use loop iterator ${itemsRow.index} to make distinguished parameter names like
-
-<input type="text"name="configParam.${itemsRow.index}"value="${configParams.value}" />
-
-When form will be submitted then you can access all these values from request by giving names in getParameter('') method. --%>
 	<c:if test="${usuarioLogado.isAdm ==  'TRUE'}">
-		Assentos comprados neste voo pelo usuário:<br>
-		<ul id="ulItens">
-			<c:forEach items="${listaAssentoPagamentoConfirmado}" var="assento">
-					<li>
-						<c:if test="${assento.comfirmaPagamento == true}">
-							<c:out value="${assento.numeroAssento}"/> - Pagamento Confirmado
-							<input type="checkbox" name="numeroAssentoOcupado"
-							id="numeroAssentoOcupado" value="${assento.numeroAssento}" disabled="disabled">
-							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				 		</c:if>
-					</li>
+		Número da Compra: ${compra.idCompra}
+		<br>
+		Assentos comprados no voo id ${compra.idVoo} pelo usuário:<br>
+		<ul >
+			<c:forEach items="${compra.listaNumeroAssentosIda}" var="assento">
+				<li><c:out value="${assento}" /> <input type="checkbox"
+					value="${assento}" disabled="disabled">
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>
 			</c:forEach>
 		</ul>
 		<br>
-		Número do Cartão utilizado: ${numeroCartao}
+		<c:if test="${compra.idVooVolta != 0}">
+			Assentos comprados no voo id ${compra.idVooVolta} pelo usuário:<br>
+			<ul >
+				<c:forEach items="${compra.listaNumeroAssentosVolta}" var="assento">
+					<li><c:out value="${assento}" /> <input type="checkbox"
+						value="${assento}" disabled="disabled">
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>
+				</c:forEach>
+			</ul>
+		</c:if>
 		<br>
-		Valor total desta compra: ${valorTotal}  
-		
+		<br>
+		Número do Cartão utilizado: ${compra.idCartao}
+		<br>
+		Valor total desta compra: ${compra.valorTotalCompra}  
 	</c:if>
-	<br>
-	<br>
-
-
-
+	
 
 </body>
 </html>

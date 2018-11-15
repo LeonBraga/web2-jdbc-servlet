@@ -96,12 +96,13 @@
 
 		<input type="hidden" name="idUser" value="${usuarioLogado.id}">
 		<input type="hidden" name="idVoo" value="${idvoo.idVoo}">
-		<input type="hidden" name="idVoo" value="${idvooVolta.idVoo}"> <input
+		<input type="hidden" name="idVooVolta" value="${idvooVolta.idVoo}"> <input
 			type="hidden" name="acao" value="NovoCompraVoo"> <input
 			type="submit" value="Confirmar Compra" />
 	</form>
 
 
+	<br>
 	<c:import url="menuLinks.jsp" />
 </body>
 </html>

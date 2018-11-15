@@ -5,22 +5,44 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
-
+import com.suam.bean.Assento;
 import com.suam.bean.CompraVoo;
-import com.suam.bean.Usuario;
 import com.suam.factory.ConnectionFactory;
 import com.suam.util.DataUtils;
 
 public class CompraVooService {
 
+	public static String idUltimaCompra() throws SQLException {
+		Connection conexao = ConnectionFactory.getConnection();
+		
+		String sql;
+
+		sql = "SELECT MAX(idcompraVoo) as 'idcompraVoo' FROM compravoo ";
+
+		String idCompra = null;
+		try {
+			PreparedStatement ps = conexao.prepareStatement(sql);
+			ps.execute();
+			ResultSet rs = ps.executeQuery();
+
+			while (rs.next()) {
+				idCompra = rs.getString("idcompraVoo");
+			}
+			rs.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		// conexao.close();
+		return idCompra;
+	}
+
 	public static void inserir(CompraVoo compra) throws SQLException {
 		Connection conexao = ConnectionFactory.getConnection();
 
 		String sql;
-		if (compra.getIdVoo().size() > 1) {
+		if (compra.getIdVooVolta() != null) {
 			sql = "INSERT INTO compravoo (" + "voo_idvoo, " + "voo_idvooVolta, " + "valorTotalCompra, "
 					+ "usuario_idusuario, " + "cartaodecredito_numerocartao," + "horaDaCompra) "
 					+ "VALUES(?,?,?,?,?,?)";
@@ -28,18 +50,21 @@ public class CompraVooService {
 			sql = "INSERT INTO compravoo (" + "voo_idvoo, " + "valorTotalCompra, " + "usuario_idusuario, "
 					+ "cartaodecredito_numerocartao," + "horaDaCompra) " + "VALUES(?,?,?,?,?)";
 		}
-		System.out.println("Dados da Compra:: " + compra.getIdCartao() + " - " + compra.getIdVoo().toString() + " - "
-				+ compra.getIdUser() + " - " + compra.getValorTotalCompra());
+
+		System.out.println("Dados da Compra:: \n ID CARTÃO: " + compra.getIdCartao() + "\n ID VOO IDA: "
+				+ compra.getIdVoo().toString() + "\n ID VOO VOLTA " + compra.getIdVooVolta() + "\n ASSENTOS IDA: "
+				+ compra.getListaAssentosIda().toString() + " \n ASSENTOS VOLTA: " + " \nID DA COMPRA "
+				+ compra.getIdUser() + " \nVALOR TOTAL: " + compra.getValorTotalCompra());
 
 		String agora = DataUtils.gravarDataEHoraAtualBD();
 		System.out.println("HORA====>>> " + agora);
 
 		try {
 			PreparedStatement ps = conexao.prepareStatement(sql);
-			System.out.println("ID-Voo " + compra.getIdVoo().get(0));
-			ps.setInt(1, compra.getIdVoo().get(0));
-			if (compra.getIdVoo().size() > 1) {
-				ps.setInt(2, compra.getIdVoo().get(1));
+
+			ps.setInt(1, compra.getIdVoo());
+			if (compra.getIdVooVolta() != null) {
+				ps.setInt(2, compra.getIdVooVolta());
 				ps.setInt(3, compra.getValorTotalCompra());
 				ps.setInt(4, compra.getIdUser());
 				ps.setString(5, compra.getIdCartao());
@@ -56,9 +81,56 @@ public class CompraVooService {
 			conexao.rollback();
 			e.printStackTrace();
 			throw new SQLException();
-		} finally {
-			conexao.close();
+		} /*
+			 * finally { conexao.close(); }
+			 */
+
+		String sql1 = "INSERT INTO assentosCompradosPorVoo (assenNumero, vooId, "
+				+ " compravoo_idcompraVoo) VALUES (?,?,?)";
+		String sql2 = "INSERT INTO assentosCompradosPorVoo (assenNumero, vooIdVolta,"
+				+ " compravoo_idcompraVoo) VALUES (?,?,?)";
+
+		List<Assento> listaAssentoIda = new ArrayList<Assento>();
+		listaAssentoIda = compra.getListaAssentosIda();
+		for (Assento assento : listaAssentoIda) {
+			try {
+				PreparedStatement ps = conexao.prepareStatement(sql1);
+
+				ps.setInt(1, assento.getNumeroAssento());
+				ps.setInt(2, compra.getIdVoo());
+				ps.setInt(3, Integer.valueOf(idUltimaCompra()));
+				ps.execute();
+
+				conexao.commit();
+			} catch (SQLException e) {
+				conexao.rollback();
+				e.printStackTrace();
+				throw new SQLException();
+			}
 		}
+		if (compra.getIdVooVolta() != null) {
+			List<Assento> listaAssentoVolta = new ArrayList<Assento>();
+			listaAssentoVolta = compra.getListaAssentosVolta();
+			for (Assento assento : listaAssentoVolta) {
+				try {
+					PreparedStatement ps = conexao.prepareStatement(sql2);
+
+					ps.setInt(1, assento.getNumeroAssento());
+					ps.setInt(2, compra.getIdVooVolta());
+					ps.setInt(3, Integer.valueOf(idUltimaCompra()));
+
+					ps.execute();
+					conexao.commit();
+				} catch (SQLException e) {
+					conexao.rollback();
+					e.printStackTrace();
+					throw new SQLException();
+				}
+			}
+		}
+
+		conexao.close();
+
 	}
 
 	// Deletando compras feitas por um usuario
@@ -110,7 +182,7 @@ public class CompraVooService {
 		List<CompraVoo> listaCompras = new ArrayList<CompraVoo>();
 
 		Statement statement = connection.createStatement();
-		statement.execute("select * from compravoo where exclusaoLogica = '1' ");
+		statement.execute("select * from compravoo ");
 
 		ResultSet rs = statement.getResultSet();
 
@@ -118,12 +190,11 @@ public class CompraVooService {
 			CompraVoo compraVoo = new CompraVoo();
 			compraVoo.setIdUser(rs.getInt("usuario_IDUSUARIO"));
 			compraVoo.setIdCartao(rs.getString("cartaodecredito_NUMEROCARTAO"));
-			List<Integer> listaNumeroVoo = new ArrayList<Integer>();
-			listaNumeroVoo.add(rs.getInt("voo_idvoo"));
-			listaNumeroVoo.add(rs.getInt("voo_idvooVolta"));
-			compraVoo.setIdVoo(listaNumeroVoo);
+			compraVoo.setIdVoo(rs.getInt("voo_idvoo"));
+			compraVoo.setIdVooVolta(rs.getInt("voo_idvooVolta"));
 			compraVoo.setValorTotalCompra(rs.getInt("valorTotalCompra"));
 			compraVoo.setIdCompra(rs.getString("idcompraVoo"));
+			compraVoo.setNomeUsuario(UsuarioService.buscaUsuarioPelaId(compraVoo.getIdUser()).getNome());
 
 			String dataRecebida = rs.getString("horaDaCompra");
 			compraVoo.setHoraCompra(dataRecebida);
@@ -139,6 +210,96 @@ public class CompraVooService {
 		statement.close();
 		connection.close();
 		return listaCompras;
+	}
+
+	// Listando Todas as Compras
+	public static CompraVoo comprasPorId(Integer idcompraVoo) throws SQLException {
+		Connection conexao = ConnectionFactory.getConnection();
+		String sql = "select * from compravoo where idcompraVoo = ?  ";
+
+		CompraVoo compraVoo = new CompraVoo();
+		try {
+			PreparedStatement ps = conexao.prepareStatement(sql);
+			ps.setInt(1, idcompraVoo);
+			ps.execute();
+			System.out.println("CONSULTAR SELECT: " + ps);
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				compraVoo.setIdUser(rs.getInt("usuario_IDUSUARIO"));
+				compraVoo.setIdCartao(rs.getString("cartaodecredito_NUMEROCARTAO"));
+				compraVoo.setIdVoo(rs.getInt("voo_idvoo"));
+				compraVoo.setIdVooVolta(rs.getInt("voo_idvooVolta"));
+				compraVoo.setValorTotalCompra(rs.getInt("valorTotalCompra"));
+				compraVoo.setIdCompra(rs.getString("idcompraVoo"));
+
+				String dataRecebida = rs.getString("horaDaCompra");
+				compraVoo.setHoraCompra(dataRecebida);
+			}
+			conexao.commit();
+		} catch (SQLException e) {
+			conexao.rollback();
+			e.printStackTrace();
+			throw new SQLException();
+		} finally {
+			conexao.close();
+		}
+
+		return compraVoo;
+	}
+
+	public static List<Integer> comprasAssentosVooIda(Integer idcompraVoo, Integer idVoo) throws SQLException {
+		Connection conexao = ConnectionFactory.getConnection();
+		String sql = "select * from assentoscompradosporvoo where compravoo_idcompraVoo = ? and vooId = ? ";
+		List<Integer> listaAssentos = new ArrayList<Integer>();
+
+		try {
+			PreparedStatement ps = conexao.prepareStatement(sql);
+			ps.setInt(1, idcompraVoo);
+			ps.setInt(2, idVoo);
+			ps.execute();
+			System.out.println("CONSULTAR SELECT: " + ps);
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				listaAssentos.add(rs.getInt("assenNumero"));
+
+			}
+			conexao.commit();
+		} catch (SQLException e) {
+			conexao.rollback();
+			e.printStackTrace();
+			throw new SQLException();
+		} finally {
+			conexao.close();
+		}
+
+		return listaAssentos;
+	}
+
+	public static List<Integer> comprasAssentosVooVolta(Integer idcompraVoo, Integer idVooVolta) throws SQLException {
+		Connection conexao = ConnectionFactory.getConnection();
+		String sql = "select * from assentoscompradosporvoo where compravoo_idcompraVoo = ? and vooIdVolta = ? ";
+		List<Integer> listaAssentos = new ArrayList<Integer>();
+
+		try {
+			PreparedStatement ps = conexao.prepareStatement(sql);
+			ps.setInt(1, idcompraVoo);
+			ps.setInt(2, idVooVolta);
+			ps.execute();
+			System.out.println("CONSULTAR SELECT: " + ps);
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				listaAssentos.add(rs.getInt("assenNumero"));
+			}
+			conexao.commit();
+		} catch (SQLException e) {
+			conexao.rollback();
+			e.printStackTrace();
+			throw new SQLException();
+		} finally {
+			conexao.close();
+		}
+
+		return listaAssentos;
 	}
 
 }

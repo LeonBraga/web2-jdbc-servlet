@@ -33,6 +33,7 @@
 		<br> <br> <input type="hidden" name="acao" value="NovoVoo">
 		<input type="submit" />
 	</form>
+	<br>
 	<c:import url="menuLinks.jsp" />
 </body>
 </html>

@@ -52,6 +52,7 @@
 	</form>
 
 
+	<br>
 	<c:import url="menuLinks.jsp" />
 </body>
 </html>

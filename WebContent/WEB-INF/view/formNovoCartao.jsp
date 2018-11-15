@@ -24,6 +24,7 @@
 			name="acao" value="NovoCartao"> <input type="submit"
 			value="Cadastrar Cartão" />
 	</form>
+	<br>
 	<c:import url="menuLinks.jsp" />
 </body>
 </html>

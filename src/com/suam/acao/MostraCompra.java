@@ -2,17 +2,13 @@ package com.suam.acao;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import com.suam.bean.Assento;
-import com.suam.bean.Voo;
-import com.suam.service.AssentoService;
-import com.suam.service.VooService;
+import com.suam.bean.CompraVoo;
+import com.suam.bean.Usuario;
+import com.suam.service.CompraVooService;
+import com.suam.service.UsuarioService;
 
 public class MostraCompra implements Acao {
 
@@ -20,24 +16,50 @@ public class MostraCompra implements Acao {
 			throws ServletException, IOException {
 		System.out.println("AÇÃO = MOSTRANDO COMPRA");
 
-		String[] idVoo = request.getParameterValues("idVoo");
-		String idUsuario = request.getParameter("idUsuario");
-		String valorTotal =  request.getParameter("valorTotal");
-		String numeroCartao =  request.getParameter("numeroCartao");
+		String idCompra = request.getParameter("idCompra");
+		Integer idCompraInt = Integer.valueOf(idCompra);
 
-		Integer vooId = Integer.valueOf(idVoo[0]);
-		Integer userId = Integer.valueOf(idUsuario);
-		List<Assento> listaAssentoPagamentoConfirmado = new ArrayList<Assento>();
+		CompraVoo compraVoo = new CompraVoo();
+		Usuario usuario = new Usuario();
 
 		try {
-			listaAssentoPagamentoConfirmado = AssentoService.listarAssentosPagosPorUsuarioIdVooId(userId, vooId);
+			compraVoo = CompraVooService.comprasPorId(idCompraInt);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		try {
+			usuario = UsuarioService.buscaUsuarioPelaId(compraVoo.getIdUser());
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+		}
+
+		try {
+			compraVoo.setListaNumeroAssentosIda(
+					CompraVooService.comprasAssentosVooIda(idCompraInt, compraVoo.getIdVoo()));
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 
-		request.setAttribute("listaAssentoPagamentoConfirmado", listaAssentoPagamentoConfirmado);
-		request.setAttribute("numeroCartao", numeroCartao);
-		request.setAttribute("valorTotal", valorTotal);
+		if (compraVoo.getIdVooVolta() != null) {
+			try {
+				compraVoo.setListaNumeroAssentosVolta(
+						CompraVooService.comprasAssentosVooVolta(idCompraInt, compraVoo.getIdVooVolta()));
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+
+		compraVoo.setNomeUsuario(usuario.getNome());
+
+		/*
+		 * try { listaAssentoPagamentoConfirmado =
+		 * AssentoService.listarAssentosPagosPorUsuarioIdVooId(compraVoo.getIdUser(),
+		 * CvooId); } catch (SQLException e) { e.printStackTrace(); }
+		 */
+		// Integer valorTotal = (listaAssentoPagamentoConfirmado.size() *
+		// voo.getValorVoo())+valorTotal;
+
+		request.setAttribute("compra", compraVoo);
 		return "forward:mostraCompra.jsp";
 	}
 }

@@ -7,7 +7,9 @@
 		type="button" value="Avançar" onCLick="history.forward()"> <input
 		type="button" value="Atualizar" onClick="history.go(0)">
 </form>
-<br>
-<a href="entrada?acao=Logout"><button>Sair</button></a>
-<a href="entrada?acao=TelaInicial"><button>Tela Inicial</button></a>
+
 Usuario Logado: ${usuarioLogado.login}
+
+<a href="entrada?acao=Logout"><button>Sair</button></a>
+
+<a href="entrada?acao=TelaInicial"><button>Tela Inicial</button></a>

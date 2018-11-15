@@ -82,6 +82,7 @@
 		<a href="entrada?acao=FormNovoCartao&idUser=${usuario.id}"><button>Cadastrar
 				Novo Cartão</button></a>
 	</c:if>
+	<br>
 	<c:import url="menuLinks.jsp" />
 </body>
 </html>

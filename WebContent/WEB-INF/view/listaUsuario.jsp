@@ -53,11 +53,12 @@
 	</ul>
 
 	<br>
-	<br>
 	<c:if test="${usuarioLogado.isAdm ==  'TRUE'}">
-		<a href="entrada?acao=FormNovoUsuario"><button>Novo usuário</button></a>
+		<a href="entrada?acao=FormNovoUsuario"><button>Novo
+				usuário</button></a>
 	</c:if>
-
+	<br>
+	<c:import url="menuLinks.jsp" />
 </body>
 </html>
 

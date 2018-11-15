@@ -15,6 +15,9 @@
 	<br>
 	<br>
 	<h3>Compra Realizada com Sucesso!</h3> 
+	
+	<br>
+	<c:import url="menuLinks.jsp" />
 </body>
 </html>
 

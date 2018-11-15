@@ -28,10 +28,17 @@ public class FormNovoCompraVoo implements Acao {
 		String voo_idvoo = request.getParameter("idvoo");
 		String voo_idvooVolta = request.getParameter("idvooVolta");
 
-		System.out.println("PARAMETROS RECEBIDOS: " + compradorId + " - " + voo_idvoo);
+		Usuario user = new Usuario();
+		List<CartaoDeCredito> listaCartao = null;
+		boolean idaVolta = false;
+		Integer idVoo = Integer.valueOf(voo_idvoo);
+		Voo vooIda = null;
+		List<Assento> listaNumeroAssento = new ArrayList<Assento>();
+		List<Assento> listaNumeroAssentoTratada = new ArrayList<Assento>();
+		List<Assento> listaNumeroAssentoVolta = new ArrayList<Assento>();
+		List<Assento> listaNumeroAssentoTratadaVolta = new ArrayList<Assento>();
 
 		// usuario
-		Usuario user = new Usuario();
 		try {
 			user = UsuarioService.buscaUsuarioPelaId(id);
 		} catch (SQLException e) {
@@ -40,18 +47,14 @@ public class FormNovoCompraVoo implements Acao {
 		request.setAttribute("usuario", user);
 
 		// lista de cartões do usuario
-		List<CartaoDeCredito> listaCartao = null;
 		try {
 			listaCartao = CartaoDeCreditoService.buscaCartoesPeloIdUsuario(compradorId);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		request.setAttribute("cartoes", listaCartao);
-		
+
 		// encontra voo
-		boolean idaVolta = false;
-		Integer idVoo = Integer.valueOf(voo_idvoo);
-		Voo vooIda = null;
 		try {
 			vooIda = VooService.buscaVooPelaId(idVoo);
 		} catch (SQLException e) {
@@ -61,8 +64,6 @@ public class FormNovoCompraVoo implements Acao {
 
 		// Voo ida
 		// LISTARÁ TODOS ===> FILTAR SOMENTE SO ESCOLHIDOS NAQUELE INSTANTE
-		List<Assento> listaNumeroAssento = new ArrayList<Assento>();
-		List<Assento> listaNumeroAssentoTratada = new ArrayList<Assento>();
 		try {
 			listaNumeroAssento = AssentoService.listarAssentosPorUsuarioIdVooId(id, idVoo);
 			for (Assento numeroAssento : listaNumeroAssento) {
@@ -79,8 +80,6 @@ public class FormNovoCompraVoo implements Acao {
 
 		// Voo Volta
 		// LISTARÁ TODOS ===> FILTAR SOMENTE SO ESCOLHIDOS NAQUELE INSTANTE
-		List<Assento> listaNumeroAssentoVolta = new ArrayList<Assento>();
-		List<Assento> listaNumeroAssentoTratadaVolta = new ArrayList<Assento>();
 		if (voo_idvooVolta != null && voo_idvooVolta != "" && voo_idvooVolta != "null") {
 			idaVolta = true;
 			// encontra voo
@@ -92,7 +91,7 @@ public class FormNovoCompraVoo implements Acao {
 				e.printStackTrace();
 			}
 			request.setAttribute("idvooVolta", vooIdaVolta);
-			
+
 			try {
 				listaNumeroAssentoVolta = AssentoService.listarAssentosPorUsuarioIdVooId(id, idVooVolta);
 				for (Assento numeroAssento : listaNumeroAssentoVolta) {
@@ -107,7 +106,6 @@ public class FormNovoCompraVoo implements Acao {
 				e.printStackTrace();
 			}
 		}
-		
 
 		request.setAttribute("idaVolta", idaVolta);
 		request.setAttribute("assentos", listaNumeroAssentoTratada);
