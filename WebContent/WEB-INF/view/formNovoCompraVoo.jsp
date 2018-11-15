@@ -6,7 +6,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="ISO-8859-1">
+<meta charset="UTF-8">
 <title>Comprar passagem</title>
 </head>
 <body>
@@ -28,6 +28,23 @@
 	<br> Valor por assento: ${idvoo.valorVoo}
 	<br>
 
+	<c:if test="${idaVolta == true }">
+		<br> Nome: ${usuario.nome}
+		<br> Identificador do voo: ${idvooVolta.idVoo} - Origem:
+			${idvooVolta.origem} - Destino: ${idvooVolta.destino} - Ida:
+			<fmt:formatDate value="${idvooVolta.ida}" pattern="dd/MM/yyyy" />
+			- Confirmação:
+		<c:if test="${idvooVolta.confirmacao == 'TRUE'}">
+			Confirmado
+		</c:if>
+		<c:if test="${idvooVolta.confirmacao == 'FALSE'}">
+			Não confirmado
+		</c:if>
+		<br>
+		<br> Valor por assento: ${idvooVolta.valorVoo}
+			<br>
+	</c:if>
+
 	<form action="${linkEntradaServlet }" method="post">
 		<%-- <input type="text" name="idVooVolta" value="${vooVolta.idVoo}" readonly="readonly"/> --%>
 		<c:if test="${cartoes!=null}">
@@ -46,7 +63,8 @@
 				</c:forEach>
 			</select>
 		</c:if>
-		<br> <br> Assentos selecionados:
+		<br> <br> Assentos selecionados no voo identificador
+		${idvoo.idVoo}:
 		<c:forEach items="${assentos}" var="assento">
 			<%-- <c:out value="${assento.numeroAssento}" /> --%>
 			${assento.numeroAssento}<input type="checkbox" name="assento"
@@ -56,10 +74,29 @@
 			<c:set var="precoTotal" value="${precoTotal + idvoo.valorVoo}"
 				scope="page" />
 		</c:forEach>
+
+
+		<c:if test="${idaVolta == true }">
+			<br>
+			<br> Assentos selecionados no voo de VOLTA, identificador ${idvooVolta.idVoo}:
+			<c:forEach items="${assentosVolta}" var="assento">
+				<%-- <c:out value="${assento.numeroAssento}" /> --%>
+				${assento.numeroAssento}<input type="checkbox" name="assentoVolta"
+					id="numeroAssentoOcupado" value="${assento.numeroAssento}"
+					checked="checked" readonly="true">
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+				<c:set var="precoTotal" value="${precoTotal + idvooVolta.valorVoo}"
+					scope="page" />
+			</c:forEach>
+		</c:if>
+
 		<br> <br> Preço total:<input type="text"
 			name="valorTotalCompra" value="${precoTotal}" readonly="readonly">
+
+
 		<input type="hidden" name="idUser" value="${usuarioLogado.id}">
-		<input type="hidden" name="idVoo" value="${idvoo.idVoo}"> <input
+		<input type="hidden" name="idVoo" value="${idvoo.idVoo}">
+		<input type="hidden" name="idVoo" value="${idvooVolta.idVoo}"> <input
 			type="hidden" name="acao" value="NovoCompraVoo"> <input
 			type="submit" value="Confirmar Compra" />
 	</form>

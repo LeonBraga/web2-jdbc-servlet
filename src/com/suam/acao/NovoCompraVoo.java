@@ -55,6 +55,7 @@ public class NovoCompraVoo implements Acao {
 		Integer totalCompra = 0;
 		for (String vooIdVoo : voo_idvoo) {
 			try {
+				if(vooIdVoo != null && vooIdVoo != "" && vooIdVoo !="null") { 
 				listaNumeroAssento = AssentoService.listarAssentosPorUsuarioIdVooIdPagamentoNaoConfirmado(usuario.getId(),
 						Integer.valueOf(vooIdVoo));
 				for (Assento assento2 : listaNumeroAssento) {
@@ -66,6 +67,7 @@ public class NovoCompraVoo implements Acao {
 				listaNumeroVoo.add(Integer.valueOf(vooIdVoo));
 				totalCompra += (voo.getValorVoo() * listaNumeroAssento.size());
 				System.out.println("VALOR TOTAL:  " + valorTotalCompra);
+				}
 			} catch (NumberFormatException | SQLException e) {
 				e.printStackTrace();
 			}

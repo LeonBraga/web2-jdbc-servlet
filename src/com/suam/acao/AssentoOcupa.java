@@ -14,7 +14,6 @@ public class AssentoOcupa implements Acao {
 			throws ServletException, IOException {
 
 		System.out.println("AÇÃO => OCUPANDO ASSENTOS");
-		// String comprar = request.getParameter("comprar");
 		String idVoo = request.getParameter("vooId");
 		System.out.println("idvoo" + idVoo);
 		String ocupa = request.getParameter("ocupa");
@@ -29,12 +28,12 @@ public class AssentoOcupa implements Acao {
 		Assento assentoVolta = new Assento();
 		Integer idOcupante = Integer.valueOf(ocupante);
 		Integer idVolta = null;
-		if (idVooVolta != null) {
+		if (idVooVolta != null && idVooVolta != "" && idVooVolta != "null") {
 			idVolta = Integer.valueOf(idVooVolta);
 		}
 
 		Integer id = null;
-		if (idVoo != null) {
+		if (idVoo != null && idVoo != "" && idVoo != "null") {
 			id = Integer.valueOf(idVoo);
 		}
 		if (idVoo != null) {
@@ -107,7 +106,7 @@ public class AssentoOcupa implements Acao {
 			}
 
 			// List<String> listaAssentosOcupados = new ArrayList<String>();
-			if (numeroAssentoOcupado != null) {
+			if (numeroAssentoOcupadoVolta != null) {
 				for (String assentoNumVolta : numeroAssentoOcupadoVolta) {
 					System.out.println("Assento numero: " + assentoNumVolta);
 					System.out.println("Voo id: " + idVooVolta);
@@ -130,15 +129,6 @@ public class AssentoOcupa implements Acao {
 			}
 			return "redirect:entrada?acao=ListaAssento&vooId=" + idVoo + "&voltaId=" + idVooVolta;
 		}
-		// QUANDO O USUÁRIO CLICAR EM COMPRAR SERÁ REDIRECIONADO PARA TELA DE COMPRA
-		/*
-		 * if (comprar != null) { for (String string : listaAssentosOcupados) {
-		 * System.out.println("ASSENTO" + string); }
-		 * 
-		 * request.setAttribute("numeroAssentoOcupado", listaAssentosOcupados); return
-		 * "forward:entrada?acao=FormNovaCompraVoo&compradorId="+idOcupante+"&idvoo="+
-		 * id; }
-		 */
 
 		return "redirect:entrada?acao=ListaAssento&vooId=" + assentoIda.getIdVoo();
 	}

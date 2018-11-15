@@ -74,6 +74,7 @@
 		</div>
 		<input type="hidden" name="ocupante" value="${usuarioLogado.id}" /> <input
 			type="hidden" name="vooId" value="${vooId}"> <input
+			type="hidden" name="idVooVolta" value="${vooIdVolta}"> <input
 			type="hidden" name="acao" value="AssentoOcupa"> <br> <input
 			type="submit" value="Ocupar/Desocupar Assento" />
 	</form>
@@ -138,8 +139,8 @@
 			<div id="desocupa" style="display: none">
 				<input type="hidden" name="desocupa" value="true">
 			</div>
-			<input type="hidden" name="ocupante" value="${usuarioLogado.id}" />
-			<input type="hidden" name="vooId" value="${vooId}"> <input
+			<input type="hidden" name="ocupante" value="${usuarioLogado.id}" /> <input
+				type="hidden" name="vooId" value="${vooId}"> <input
 				type="hidden" name="idVooVolta" value="${vooIdVolta}"> <input
 				type="hidden" name="acao" value="AssentoOcupa"> <br> <input
 				type="submit" value="Ocupar/Desocupar Assento" />
@@ -147,14 +148,10 @@
 		<br>
 	</c:if>
 
-
-
-
-
-
 	<form action="${linkEntradaServlet }" method="post">
 		<input type="hidden" name="compradorId" value="${usuarioLogado.id}" />
 		<input type="hidden" name="idvoo" value="${vooId}"> <input
+			type="hidden" name="idvooVolta" value="${vooIdVolta}"> <input
 			type="hidden" name="acao" value="FormNovoCompraVoo"> <input
 			type="submit" value="Comprar Assentos(s)" />
 	</form>

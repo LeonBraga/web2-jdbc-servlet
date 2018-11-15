@@ -26,11 +26,9 @@ public class FormNovoCompraVoo implements Acao {
 		String compradorId = request.getParameter("compradorId");
 		Integer id = Integer.valueOf(compradorId);
 		String voo_idvoo = request.getParameter("idvoo");
+		String voo_idvooVolta = request.getParameter("idvooVolta");
 
 		System.out.println("PARAMETROS RECEBIDOS: " + compradorId + " - " + voo_idvoo);
-
-		// COMPRAR VOO VOLTA===>>>>IMPLEMENTAR
-		//String voo_idvooVolta = request.getParameter("vooVolta");
 
 		// usuario
 		Usuario user = new Usuario();
@@ -50,7 +48,8 @@ public class FormNovoCompraVoo implements Acao {
 		}
 		request.setAttribute("cartoes", listaCartao);
 		
-		//encontra voo
+		// encontra voo
+		boolean idaVolta = false;
 		Integer idVoo = Integer.valueOf(voo_idvoo);
 		Voo vooIda = null;
 		try {
@@ -60,11 +59,10 @@ public class FormNovoCompraVoo implements Acao {
 		}
 		request.setAttribute("idvoo", vooIda);
 
-		// ==========>>>>>LÓGICA TRANSFERIDA PARA OCUPA ASSENTO
+		// Voo ida
 		// LISTARÁ TODOS ===> FILTAR SOMENTE SO ESCOLHIDOS NAQUELE INSTANTE
 		List<Assento> listaNumeroAssento = new ArrayList<Assento>();
 		List<Assento> listaNumeroAssentoTratada = new ArrayList<Assento>();
-		
 		try {
 			listaNumeroAssento = AssentoService.listarAssentosPorUsuarioIdVooId(id, idVoo);
 			for (Assento numeroAssento : listaNumeroAssento) {
@@ -79,16 +77,41 @@ public class FormNovoCompraVoo implements Acao {
 			e.printStackTrace();
 		}
 
-		
-		/*if(voo_idvooVolta != null) {
-			request.setAttribute("assentosTratados", listaNumeroAssentoTratada);
-			return "forward:entrada?acao=MostraVoo&id="+voo_idvooVolta;
-		}*/
-		
-		boolean somenteIda = true;
+		// Voo Volta
+		// LISTARÁ TODOS ===> FILTAR SOMENTE SO ESCOLHIDOS NAQUELE INSTANTE
+		List<Assento> listaNumeroAssentoVolta = new ArrayList<Assento>();
+		List<Assento> listaNumeroAssentoTratadaVolta = new ArrayList<Assento>();
+		if (voo_idvooVolta != null && voo_idvooVolta != "" && voo_idvooVolta != "null") {
+			idaVolta = true;
+			// encontra voo
+			Integer idVooVolta = Integer.valueOf(voo_idvooVolta);
+			Voo vooIdaVolta = null;
+			try {
+				vooIdaVolta = VooService.buscaVooPelaId(idVooVolta);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			request.setAttribute("idvooVolta", vooIdaVolta);
 			
-		request.setAttribute("somenteIda", somenteIda);
+			try {
+				listaNumeroAssentoVolta = AssentoService.listarAssentosPorUsuarioIdVooId(id, idVooVolta);
+				for (Assento numeroAssento : listaNumeroAssentoVolta) {
+					if (numeroAssento.isComfirmaPagamento()) {
+						System.out.println("ASSENTO JÁ COMPRADO: " + numeroAssento.getNumeroAssento());
+						continue;
+					} else {
+						listaNumeroAssentoTratadaVolta.add(numeroAssento);
+					}
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+
+		request.setAttribute("idaVolta", idaVolta);
 		request.setAttribute("assentos", listaNumeroAssentoTratada);
+		request.setAttribute("assentosVolta", listaNumeroAssentoTratadaVolta);
 		return "forward:formNovoCompraVoo.jsp";
 	}
 

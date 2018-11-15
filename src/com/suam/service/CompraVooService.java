@@ -19,31 +19,17 @@ public class CompraVooService {
 	public static void inserir(CompraVoo compra) throws SQLException {
 		Connection conexao = ConnectionFactory.getConnection();
 
-		String sql = "INSERT INTO compravoo (" + "voo_idvoo, " + "voo_idvooVolta, " + "valorTotalCompra, "
-				+ "usuario_idusuario, " + "cartaodecredito_numerocartao," + "horaDaCompra) " + "VALUES(?,?,?,?,?,?)";
-
+		String sql;
+		if (compra.getIdVoo().size() > 1) {
+			sql = "INSERT INTO compravoo (" + "voo_idvoo, " + "voo_idvooVolta, " + "valorTotalCompra, "
+					+ "usuario_idusuario, " + "cartaodecredito_numerocartao," + "horaDaCompra) "
+					+ "VALUES(?,?,?,?,?,?)";
+		} else {
+			sql = "INSERT INTO compravoo (" + "voo_idvoo, " + "valorTotalCompra, " + "usuario_idusuario, "
+					+ "cartaodecredito_numerocartao," + "horaDaCompra) " + "VALUES(?,?,?,?,?)";
+		}
 		System.out.println("Dados da Compra:: " + compra.getIdCartao() + " - " + compra.getIdVoo().toString() + " - "
 				+ compra.getIdUser() + " - " + compra.getValorTotalCompra());
-
-		// // PEGANDO A DATA ATUAL:::
-		// String agora = null;
-		// Statement statement = conexao.createStatement();
-		// try {
-		// statement.execute("SELECT DATE_FORMAT(now(), '%y-%m-%d %H:%i:%s')as
-		// 'agora'");
-		// } catch (SQLException e) {
-		// e.printStackTrace();
-		// }
-		//
-		// ResultSet rs = statement.getResultSet();
-		// try {
-		// while (rs.next()) {
-		// agora = rs.getString("agora");
-		// System.out.println("Hora da Compra: " + rs.getString("agora"));
-		// }
-		// } catch (SQLException e) {
-		// e.printStackTrace();
-		// }
 
 		String agora = DataUtils.gravarDataEHoraAtualBD();
 		System.out.println("HORA====>>> " + agora);
@@ -52,11 +38,17 @@ public class CompraVooService {
 			PreparedStatement ps = conexao.prepareStatement(sql);
 			System.out.println("ID-Voo " + compra.getIdVoo().get(0));
 			ps.setInt(1, compra.getIdVoo().get(0));
-			ps.setInt(2, compra.getIdVoo().get(0));
-			ps.setInt(3, compra.getValorTotalCompra());
-			ps.setInt(4, compra.getIdUser());
-			ps.setString(5, compra.getIdCartao());
-			ps.setString(6, agora);
+			if (compra.getIdVoo().size() > 1) {
+				ps.setInt(2, compra.getIdVoo().get(1));
+				ps.setInt(3, compra.getValorTotalCompra());
+				ps.setInt(4, compra.getIdUser());
+				ps.setString(5, compra.getIdCartao());
+				ps.setString(6, agora);
+			}
+			ps.setInt(2, compra.getValorTotalCompra());
+			ps.setInt(3, compra.getIdUser());
+			ps.setString(4, compra.getIdCartao());
+			ps.setString(5, agora);
 
 			ps.execute();
 			conexao.commit();
@@ -132,13 +124,13 @@ public class CompraVooService {
 			compraVoo.setIdVoo(listaNumeroVoo);
 			compraVoo.setValorTotalCompra(rs.getInt("valorTotalCompra"));
 			compraVoo.setIdCompra(rs.getString("idcompraVoo"));
-			
+
 			String dataRecebida = rs.getString("horaDaCompra");
 			compraVoo.setHoraCompra(dataRecebida);
-			
+
 			listaCompras.add(compraVoo);
 		}
-		
+
 		for (CompraVoo compraVoo : listaCompras) {
 			System.out.println(compraVoo.getHoraCompra());
 		}

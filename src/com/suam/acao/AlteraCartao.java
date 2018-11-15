@@ -3,14 +3,12 @@ package com.suam.acao;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import com.suam.bean.CartaoDeCredito;
 import com.suam.service.CartaoDeCreditoService;
+import com.suam.util.DataUtils;
 
 public class AlteraCartao implements Acao {
 
@@ -25,22 +23,15 @@ public class AlteraCartao implements Acao {
 		String idUser = request.getParameter("idUser");
 
 		CartaoDeCredito cartao = new CartaoDeCredito();
-		
-		// convertendo data para string
-		SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
-		// Date data = formato.parse("23/11/2015");
-		// Date data = formato.format("23/11/2015");
 
 		cartao.setTitular(nome);
-		// cartao.setNumeroCartao(numero);
+
 		try {
-			cartao.setDataVencimento(formato.parse(data));
+			cartao.setDataVencimento(DataUtils.formatarData().parse(data));
 		} catch (ParseException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-		System.out.println("Id do usuario titular: "+idUser);
-		
+
 		cartao.setNumeroCartao(numero);
 		cartao.setIdUser(Integer.parseInt(idUser));
 
@@ -57,6 +48,5 @@ public class AlteraCartao implements Acao {
 			e.printStackTrace();
 		}
 		return "redirect:entrada?acao=MostraUsuario&id=" + idUser;
-
 	}
 }

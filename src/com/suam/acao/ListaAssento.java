@@ -17,15 +17,15 @@ public class ListaAssento implements Acao {
 			throws ServletException, IOException {
 		System.out.println("AÇÃO = LISTANDO Assentos");
 		String vooIdParam = request.getParameter("vooId");
-		System.out.println("voo ida"+vooIdParam);
+		System.out.println("voo ida" + vooIdParam);
 		Integer vooId = null;
-		if (vooIdParam != null) {
+		if (vooIdParam != null && vooIdParam != "" && vooIdParam != "null") {
 			vooId = Integer.valueOf(vooIdParam);
 		}
 		String vooVolta = request.getParameter("voltaId");
-		System.out.println("voo volta"+vooVolta);
+		System.out.println("voo volta" + vooVolta);
 		Integer vooIdVolta = null;
-		if (vooVolta != null) {
+		if (vooVolta != null && vooVolta != "" && vooVolta != "null") {
 			vooIdVolta = Integer.valueOf(vooVolta);
 		}
 

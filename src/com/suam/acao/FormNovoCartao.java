@@ -26,7 +26,6 @@ public class FormNovoCartao implements Acao {
 			e.printStackTrace();
 		}
 		request.setAttribute("usuario", user);
-		System.out.println("FORM NOVO CARTAO 2 ==>");
 		return "forward:formNovoCartao.jsp";
 	}
 

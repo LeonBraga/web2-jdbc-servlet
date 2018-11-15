@@ -3,20 +3,17 @@ package com.suam.acao;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import com.suam.bean.Usuario;
 import com.suam.service.UsuarioService;
+import com.suam.util.DataUtils;
 
 public class AlteraUsuario implements Acao {
 
 	public String executa(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
 		System.out.println("AÇÃO = ALTERANDO USUARIO");
 
 		String nome = request.getParameter("nome");
@@ -38,20 +35,18 @@ public class AlteraUsuario implements Acao {
 			e.printStackTrace();
 		}
 
-		SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
-
 		usuario.setNome(nome);
 		usuario.setSobrenome(sobrenome);
 		usuario.setEndereco(endereco);
 		usuario.setSenha(senha);
 		usuario.setLogin(login);
 		try {
-			usuario.setDataNascimento(formato.parse(data));
+			usuario.setDataNascimento(DataUtils.formatarData().parse(data));
 		} catch (ParseException e1) {
 			e1.printStackTrace();
 		}
 		if (ehAdm != null) {
-			System.out.println("NOVO USUARIO E ADM: " + ehAdm);
+			System.out.println("NOVO USUARIO, LOGIN: "+usuario.getLogin()+ " É ADM: " + ehAdm);
 			if (ehAdm.equals("true") || ehAdm.equals("administrador") || ehAdm.equals("1")) {
 				usuario.setIsAdm(true);
 			} else if (ehAdm.equals("cliente") || ehAdm.equals("") || ehAdm.equals("0")) {
@@ -62,7 +57,6 @@ public class AlteraUsuario implements Acao {
 		}
 
 		Boolean validaInsere;
-
 		try {
 			validaInsere = UsuarioService.update(usuario);
 			if (validaInsere) {

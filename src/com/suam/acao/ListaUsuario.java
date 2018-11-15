@@ -15,17 +15,15 @@ public class ListaUsuario implements Acao {
 
 	public String executa(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
 		System.out.println("AÇÃO = LISTANDO USUÁRIOS");
-		
+
 		List<Usuario> listaUsuario = null;
 		try {
-		 listaUsuario = UsuarioService.ListaUsuarios();
+			listaUsuario = UsuarioService.ListaUsuarios();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 		request.setAttribute("usuarios", listaUsuario);
 		return "forward:listaUsuario.jsp";
 	}
