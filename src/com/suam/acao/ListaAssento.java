@@ -7,9 +7,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import com.suam.bean.Assento;
-import com.suam.bean.Voo;
 import com.suam.service.AssentoService;
-import com.suam.service.VooService;
 
 public class ListaAssento implements Acao {
 
