@@ -1,4 +1,4 @@
-$(function() {
+/*$(function() {
 
     $('#login-form-link').click(function(e) {
 		$("#login-form").delay(100).fadeIn(100);
@@ -15,4 +15,6 @@ $(function() {
 		e.preventDefault();
 	});
 
-});
+});*/
+
+

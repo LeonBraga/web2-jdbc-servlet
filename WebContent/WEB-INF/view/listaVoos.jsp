@@ -10,10 +10,13 @@
 <meta charset="UTF-8">
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-<!-- Inclusão do js -->
+<!-- Inclusão do js-->
+<script src="javascript/js.js" type="text/javascript"></script>
+<!-- Inclusão do js Filtro -->
 <script src="javascript/filtro.js" type="text/javascript"></script>
 <!-- Inclusão da folha de estilo-->
 <link rel="stylesheet" type="text/css" href="css/filtro.css">
+
 
 <title>Lista de Voos</title>
 </head>
@@ -70,15 +73,17 @@
 			</ul>
 
 
+
+
 			Deseja comprar passagem de volta: ===>>> AINDA SENDO IMPLEMENTADO <br>
-			<input type="radio" name="volta" value="" checked="checked">
-			Somente Ida <br> <input type="radio" name="volta" value="1">Volta
-			<br> ESTE TRECHO SO DEVE APARECER QUANDO VOLTA FOR SELECIONADO
-			SERÁ RESOLVIDO COM JQUERY
+			<input type="radio" name="volta" id="soIda" checked="checked">
+			Somente Ida <br> <input type="radio" name="volta" id="volta"
+				value="1">Volta <br> ESTE TRECHO SO DEVE APARECER
+			QUANDO VOLTA FOR SELECIONADO SERÁ RESOLVIDO COM JQUERY
 			<ul id="ulItens">
 				<%-- <c:if test="${usuarioLogado.isAdm ==  'TRUE'}"> --%>
 				<c:forEach items="${voos}" var="voo">
-					<li><input type="radio" name="voltaId" value="${voo.idVoo}">
+					<li><input type="radio" name="voltaId" id="vooDeVolta" value="${voo.idVoo}">
 						Origem: ${voo.origem} - Destino: ${voo.destino} - Ida: <fmt:formatDate
 							value="${voo.ida}" pattern="dd/MM/yyyy" /> - Confirmação:
 						${voo.confirmacao} - Valor por assento: ${voo.valorVoo}</li>
@@ -103,6 +108,33 @@
 
 	<br>
 	<c:import url="menuLinks.jsp" />
+
+
+
+
+	<!-- TESTES -->
+
+	<script>
+function check() {
+    document.getElementById("soIda").checked = true;
+    uncheckVooVolta();
+}
+function uncheck() {
+    document.getElementById("soIda").checked = false;
+    uncheckVooVolta();
+}
+
+function uncheckVooVolta() {
+	 document.getElementById("vooDeVolta").checked = false	
+}
+
+
+</script>
+
+<button onclick="check()">Check "so ida"</button>
+<button onclick="uncheck()">Uncheck "so ida"</button>
+<button onclick="uncheckVooVolta()">Uncheck "vooVolta Uncheck"</button>
+
 </body>
 </html>
 

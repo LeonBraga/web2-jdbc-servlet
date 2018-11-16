@@ -15,7 +15,7 @@
 	src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 <!-- Inclusão do js de validação-->
-<script src="javascript/loginJS.js" type="text/javascript"></script>
+<script src="javascript/js.js" type="text/javascript"></script>
 <!-- Inclusão da folha de estilo-->
 <link rel="stylesheet" type="text/css" href="css/estiloLogin.css">
 </head>
