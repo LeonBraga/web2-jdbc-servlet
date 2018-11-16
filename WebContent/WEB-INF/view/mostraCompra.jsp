@@ -19,7 +19,7 @@
 <body>
 	<c:import url="logout-parcial.jsp" />
 	<br>
-	<c:if test="${usuarioLogado.isAdm ==  'TRUE'}">
+	<%-- <c:if test="${usuarioLogado.isAdm ==  'TRUE'}"> --%>
 		Número da Compra: ${compra.idCompra}
 		<br>
 		Assentos comprados no voo id ${compra.idVoo} pelo usuário:<br>
@@ -31,7 +31,7 @@
 			</c:forEach>
 		</ul>
 		<br>
-		<c:if test="${compra.idVooVolta != 0}">
+		<c:if test="${compra.idVooVolta != '0'}">
 			Assentos comprados no voo id ${compra.idVooVolta} pelo usuário:<br>
 			<ul >
 				<c:forEach items="${compra.listaNumeroAssentosVolta}" var="assento">
@@ -46,8 +46,8 @@
 		Número do Cartão utilizado: ${compra.idCartao}
 		<br>
 		Valor total desta compra: ${compra.valorTotalCompra}  
-	</c:if>
-	
+	<%-- </c:if>
+	 --%>
 
 </body>
 </html>
