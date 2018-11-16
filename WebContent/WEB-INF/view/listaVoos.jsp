@@ -12,10 +12,8 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <!-- Inclusão do js-->
 <script src="javascript/js.js" type="text/javascript"></script>
-<!-- Inclusão do js Filtro -->
-<script src="javascript/filtro.js" type="text/javascript"></script>
 <!-- Inclusão da folha de estilo-->
-<link rel="stylesheet" type="text/css" href="css/filtro.css">
+<link rel="stylesheet" type="text/css" href="css/estilo.css">
 
 
 <title>Lista de Voos</title>
@@ -80,7 +78,7 @@
 			Somente Ida <br> <input type="radio" name="volta" id="volta"
 				value="1">Volta <br> ESTE TRECHO SO DEVE APARECER
 			QUANDO VOLTA FOR SELECIONADO SERÁ RESOLVIDO COM JQUERY
-			<ul id="ulItens">
+			<ul class="ulVolta" id="ulItens">
 				<%-- <c:if test="${usuarioLogado.isAdm ==  'TRUE'}"> --%>
 				<c:forEach items="${voos}" var="voo">
 					<li><input type="radio" name="voltaId" id="vooDeVolta"
@@ -131,7 +129,7 @@
 			var x = document.getElementsByName("voltaId");
 			//console.log(document.getElementById("vooDeVolta"))
 			//console.log(document.getElementsByName("voltaId"))
-			
+
 			var i;
 			for (i = 0; i < x.length; i++) {
 				if (x[i].type == "radio") {
@@ -148,8 +146,16 @@
 				console.log(this.value)
 				if (this.value == 'on') {
 					uncheckVooVolta();
+					//CRIAR O HIDE ==>
+					$("input[type=radio]").click(function() {
+						$("#ulVolta").hide();
+					});
 				}
-				;
+				/* if (this.value == '1') {
+					$("input[type=radio]").click(function() {
+						$("#ulVolta").show();
+					});
+				} */
 			});
 		});
 	</script>

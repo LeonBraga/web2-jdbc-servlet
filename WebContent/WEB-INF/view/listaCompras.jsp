@@ -10,10 +10,11 @@
 <meta charset="UTF-8">
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-<!-- Inclusão do js -->
-<script src="javascript/filtro.js" type="text/javascript"></script>
+<!-- Inclusão do js-->
+<script src="javascript/js.js" type="text/javascript"></script>
 <!-- Inclusão da folha de estilo-->
-<link rel="stylesheet" type="text/css" href="css/filtro.css">
+<link rel="stylesheet" type="text/css" href="css/estilo.css">
+
 <title>Listar Compras Realizadas</title>
 </head>
 <body>

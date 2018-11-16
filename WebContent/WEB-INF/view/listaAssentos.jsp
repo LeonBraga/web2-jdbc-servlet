@@ -13,7 +13,7 @@
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <!-- Inclusão do js -->
-<script src="javascript/validacaoAssentos.js" type="text/javascript"></script>
+<script src="javascript/js.js" type="text/javascript"></script>
 <title>Assentos</title>
 </head>
 <body>
