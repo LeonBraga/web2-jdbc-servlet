@@ -26,25 +26,6 @@
 		placeholder="Digite aqui um valor para filtrar..." />
 	<br>
 	<br>
-	
-<!-- LISTANDO UM MAP EXEMPLO-->
-<%-- Write all your code inside form tag.
-
-Use this code :
-
-<c:forEach var="configParams" items="${configParamsMap}" varStatus="itemsRow">
-   <tr>
-        <td>
-        <c:out value="${configParams.key}" />
-        </td>
-        <td><input type="text" name="" value="${configParams.value}" /></td>
-  </tr>
-</c:forEach>
-Use a hidden field that will contain ${configParams.key} value. Use loop iterator ${itemsRow.index} to make distinguished parameter names like
-
-<input type="text"name="configParam.${itemsRow.index}"value="${configParams.value}" />
-
-When form will be submitted then you can access all these values from request by giving names in getParameter('') method. --%>
 	<c:if test="${usuarioLogado.isAdm ==  'TRUE'}">
 		<ul>
 			<c:forEach items="${compras}" var="compra">
@@ -63,11 +44,14 @@ When form will be submitted then you can access all these values from request by
 			</c:forEach>
 		</ul>
 	</c:if>
+
 	<c:if test="${usuarioLogado.isAdm ==  'FALSE'}">
-	<c:if test="${usuarioLogado.isAdm ==  compra.idUser}">
+	
 		<ul id="ulItens">
 			<c:forEach items="${compras}" var="compra">
+			<c:if test="${usuarioLogado.id ==  compra.idUser}">
 					<li>
+					<br>
 						Número da Compra: ${compra.idCompra}
 						<br>
 						Nome do Comprador: ${compra.nomeUsuario}
@@ -79,10 +63,10 @@ When form will be submitted then you can access all these values from request by
 						 </a>
 						<br>
 					</li>
+				</c:if>
 			</c:forEach>
 		</ul>
 	</c:if>	
-	</c:if>
 	<br>
 	<br>
 	<c:import url="menuLinks.jsp" />

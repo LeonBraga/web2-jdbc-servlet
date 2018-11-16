@@ -203,7 +203,8 @@ public class CompraVooService {
 		}
 
 		for (CompraVoo compraVoo : listaCompras) {
-			System.out.println(compraVoo.getHoraCompra());
+			System.out.println("HORA: "+compraVoo.getHoraCompra());
+			System.out.println("ID USER "+ compraVoo.getIdUser());
 		}
 
 		rs.close();
