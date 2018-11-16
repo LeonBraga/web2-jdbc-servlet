@@ -31,7 +31,7 @@
 
 	<br>
 	<c:if test="${usuarioLogado.isAdm ==  'TRUE'}">
-		<form action="${linkEntradaServlet }" method="post">
+		<form name="formulario" action="${linkEntradaServlet }" method="post">
 			<ul id="ulItens">
 				<c:forEach items="${voos}" var="voo">
 					<li><input type="radio" name="vooId" value="${voo.idVoo}">
@@ -83,10 +83,11 @@
 			<ul id="ulItens">
 				<%-- <c:if test="${usuarioLogado.isAdm ==  'TRUE'}"> --%>
 				<c:forEach items="${voos}" var="voo">
-					<li><input type="radio" name="voltaId" id="vooDeVolta" value="${voo.idVoo}">
-						Origem: ${voo.origem} - Destino: ${voo.destino} - Ida: <fmt:formatDate
-							value="${voo.ida}" pattern="dd/MM/yyyy" /> - Confirmação:
-						${voo.confirmacao} - Valor por assento: ${voo.valorVoo}</li>
+					<li><input type="radio" name="voltaId" id="vooDeVolta"
+						value="${voo.idVoo}"> Origem: ${voo.origem} - Destino:
+						${voo.destino} - Ida: <fmt:formatDate value="${voo.ida}"
+							pattern="dd/MM/yyyy" /> - Confirmação: ${voo.confirmacao} -
+						Valor por assento: ${voo.valorVoo}</li>
 					<br>
 				</c:forEach>
 				<%-- </c:if> --%>
@@ -115,25 +116,47 @@
 	<!-- TESTES -->
 
 	<script>
-function check() {
-    document.getElementById("soIda").checked = true;
-    uncheckVooVolta();
-}
-function uncheck() {
-    document.getElementById("soIda").checked = false;
-    uncheckVooVolta();
-}
+		function check() {
+			document.getElementById("soIda").checked = true;
+			uncheckVooVolta();
+		}
+		function uncheck() {
+			document.getElementById("soIda").checked = false;
+			uncheckVooVolta();
+		}
 
-function uncheckVooVolta() {
-	 document.getElementById("vooDeVolta").checked = false	
-}
+		function uncheckVooVolta() {
+			document.getElementById("vooDeVolta").checked = false
+			//document.getElementsByName("voltaId").checked = false
+			var x = document.getElementsByName("voltaId");
+			//console.log(document.getElementById("vooDeVolta"))
+			//console.log(document.getElementsByName("voltaId"))
+			
+			var i;
+			for (i = 0; i < x.length; i++) {
+				if (x[i].type == "radio") {
+					console.log(x[i])
+					x[i].checked = false;
+				}
+			}
 
+		}
 
-</script>
+		$(document).ready(function() {
+			$('input[type=radio]').click(function() {
+				//alert(this.value)
+				console.log(this.value)
+				if (this.value == 'on') {
+					uncheckVooVolta();
+				}
+				;
+			});
+		});
+	</script>
 
-<button onclick="check()">Check "so ida"</button>
-<button onclick="uncheck()">Uncheck "so ida"</button>
-<button onclick="uncheckVooVolta()">Uncheck "vooVolta Uncheck"</button>
+	<button onclick="check()">Check "so ida"</button>
+	<button onclick="uncheck()">Uncheck "so ida"</button>
+	<button onclick="uncheckVooVolta()">Uncheck "vooVolta Uncheck"</button>
 
 </body>
 </html>
