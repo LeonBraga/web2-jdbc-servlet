@@ -78,18 +78,20 @@
 			Somente Ida <br> <input type="radio" name="volta" id="volta"
 				value="1">Volta <br> ESTE TRECHO SO DEVE APARECER
 			QUANDO VOLTA FOR SELECIONADO SERÁ RESOLVIDO COM JQUERY
-			<ul class="ulVolta" id="ulItens">
-				<%-- <c:if test="${usuarioLogado.isAdm ==  'TRUE'}"> --%>
-				<c:forEach items="${voos}" var="voo">
-					<li><input type="radio" name="voltaId" id="vooDeVolta"
-						value="${voo.idVoo}"> Origem: ${voo.origem} - Destino:
-						${voo.destino} - Ida: <fmt:formatDate value="${voo.ida}"
-							pattern="dd/MM/yyyy" /> - Confirmação: ${voo.confirmacao} -
-						Valor por assento: ${voo.valorVoo}</li>
-					<br>
-				</c:forEach>
-				<%-- </c:if> --%>
-			</ul>
+			<div id="ulVolta">
+				<ul id="ulItens">
+					<%-- <c:if test="${usuarioLogado.isAdm ==  'TRUE'}"> --%>
+					<c:forEach items="${voos}" var="voo">
+						<li><input type="radio" name="voltaId" id="vooDeVolta"
+							value="${voo.idVoo}"> Origem: ${voo.origem} - Destino:
+							${voo.destino} - Ida: <fmt:formatDate value="${voo.ida}"
+								pattern="dd/MM/yyyy" /> - Confirmação: ${voo.confirmacao} -
+							Valor por assento: ${voo.valorVoo}</li>
+						<br>
+					</c:forEach>
+					<%-- </c:if> --%>
+				</ul>
+			</div>
 
 
 			<br> <input type="hidden" name="acao" value="ListaAssento">
@@ -147,15 +149,15 @@
 				if (this.value == 'on') {
 					uncheckVooVolta();
 					//CRIAR O HIDE ==>
-					$("input[type=radio]").click(function() {
-						$("#ulVolta").hide();
-					});
+					//$("input[type=radio]").click(function() {
+					$("#ulVolta").hide();
+					//});
 				}
-				/* if (this.value == '1') {
-					$("input[type=radio]").click(function() {
-						$("#ulVolta").show();
-					});
-				} */
+				if (this.value == '1') {
+					//$("input[type=radio]").click(function() {
+					$("#ulVolta").show();
+					//});
+				}
 			});
 		});
 	</script>
