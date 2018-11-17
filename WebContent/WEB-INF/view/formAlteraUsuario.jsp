@@ -59,6 +59,7 @@
 
 	<ul>
 		<c:if test="${usuario.isAdm ==  'FALSE'}">
+		${erro}
 			<c:if test="${cartoes!=null}">
 				<h3>Lista de cartões de ${usuario.nome}</h3>
 				<c:forEach items="${cartoes}" var="cartao">

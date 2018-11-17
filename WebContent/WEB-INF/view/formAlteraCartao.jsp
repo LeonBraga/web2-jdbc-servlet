@@ -13,15 +13,15 @@
 <body>
 	<c:import url="logout-parcial.jsp" />
 	<br>
-
+<br>
 	<form action="${linkEntradaServlet }" method="post">
 
-		<c:if test="${usuarioLogado.isAdm ==  'TRUE'}">
+		<c:if test="${usuarioLogado.isAdm ==  'FALSE'}">
 				Nome titular do cartão: <input type="text" name="nome"
-				value="${cartao.titular}" readonly="true" />
+				value="${cartao.titular}" readonly="readonly" />
 			<br>
 				Numero do cartao: <input type="text" name="numero"
-				value="${cartao.numeroCartao}" />
+				value="${cartao.numeroCartao}" readonly="readonly" />
 			<br>
 				Data de Vencimento:<input type="text" name="dataVencimento"
 				value="<fmt:formatDate value="${cartao.dataVencimento}" pattern="dd/MM/yyyy"/>" />

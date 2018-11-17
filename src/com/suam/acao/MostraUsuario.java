@@ -21,6 +21,7 @@ public class MostraUsuario implements Acao {
 
 		String paramId = request.getParameter("id");
 		Integer id = Integer.valueOf(paramId);
+		String erro = null;
 
 		Usuario usuario = null;
 		try {
@@ -44,28 +45,38 @@ public class MostraUsuario implements Acao {
 
 		List<CartaoDeCredito> listaCartao = null;
 		try {
-			listaCartao = CartaoDeCreditoService.ListaCartoes();
+			listaCartao = CartaoDeCreditoService.buscaCartoesPeloIdUsuario(paramId);
 		} catch (SQLException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
-		for (CartaoDeCredito cartaoDeCredito : listaCartao) {
-			if (cartaoDeCredito != null) {
-				try {
-
-					if (cartaoDeCredito.getIdUser() == usuario.getId()) {
-						usuario = UsuarioService.buscaUsuarioPelaId(cartaoDeCredito.getIdUser());
-						cartaoDeCredito.setTitular(usuario.getNome());
-					}
-				} catch (SQLException e) {
-					e.printStackTrace();
-					listaCartao.remove(cartaoDeCredito);
-				}
-			}
-		}
+		//		try {
+//			listaCartao = CartaoDeCreditoService.ListaCartoes();
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//		}
+//
+//		for (CartaoDeCredito cartaoDeCredito : listaCartao) {
+//			if (cartaoDeCredito != null) {
+//				try {
+//
+//					if (cartaoDeCredito.getIdUser() == usuario.getId()) {
+//						usuario = UsuarioService.buscaUsuarioPelaId(cartaoDeCredito.getIdUser());
+//						cartaoDeCredito.setTitular(usuario.getNome());
+//					}
+//				} catch (SQLException e) {
+//					e.printStackTrace();
+//					listaCartao.remove(cartaoDeCredito);
+//				}
+//			}
+//		}
 
 		if (!listaCartao.isEmpty()) {
 			request.setAttribute("cartoes", listaCartao);
+		}else {
+			erro = "Usuário sem cartão cadastrado  " ;
+			request.setAttribute("erro", erro);
+			//return "forward:erro.jsp";
 		}
 
 		request.setAttribute("usuario", usuario);

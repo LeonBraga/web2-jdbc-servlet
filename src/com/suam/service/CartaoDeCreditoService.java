@@ -146,7 +146,7 @@ public class CartaoDeCreditoService {
 		List<CartaoDeCredito> listaCartoes = new ArrayList<CartaoDeCredito>();
 		Connection conexao = ConnectionFactory.getConnection();
 
-		String sql = ("select * from cartaodecredito where usuario_idusuario=?");
+		String sql = ("select * from cartaodecredito where usuario_idusuario=? and exclusaoLogica ='1'");
 
 		try {
 			PreparedStatement ps = conexao.prepareStatement(sql);

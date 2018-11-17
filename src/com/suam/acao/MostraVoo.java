@@ -15,12 +15,7 @@ public class MostraVoo implements Acao {
 		System.out.println("AÇÃO = MOSTRANDO VOO");
 
 		String idVoo = request.getParameter("id");
-		// String ida = request.getParameter("ida");
-		// String volta = request.getParameter("volta");
-		// String destino = request.getParameter("destino");
-		// String origem = request.getParameter("origem");
-		// String confirmacao = request.getParameter("confirmacao");
-
+	
 		Integer id = Integer.valueOf(idVoo);
 		Voo voo = null;
 		try {

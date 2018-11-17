@@ -15,60 +15,74 @@ public class ListaAssento implements Acao {
 			throws ServletException, IOException {
 		System.out.println("AÇÃO = LISTANDO Assentos");
 		String vooIdParam = request.getParameter("vooId");
-		System.out.println("voo ida" + vooIdParam);
 		Integer vooId = null;
-		if (vooIdParam != null && vooIdParam != "" && vooIdParam != "null") {
-			vooId = Integer.valueOf(vooIdParam);
-		}
 		String vooVolta = request.getParameter("voltaId");
-		System.out.println("voo volta" + vooVolta);
 		Integer vooIdVolta = null;
-		if (vooVolta != null && vooVolta != "" && vooVolta != "null") {
-			vooIdVolta = Integer.valueOf(vooVolta);
-		}
+		String erro = null;
 
-		List<Assento> listaAssentos = null;
-		List<Assento> listaAssentosDesocupados = null;
+		if (!(vooIdParam == null || vooIdParam == "" || vooIdParam == "null")) {
+			if (vooIdParam != null && vooIdParam != "" && vooIdParam != "null") {
+				vooId = Integer.valueOf(vooIdParam);
+			}
+			if (vooVolta != null && vooVolta != "" && vooVolta != "null") {
+				vooIdVolta = Integer.valueOf(vooVolta);
+			}
 
-		try {
-			listaAssentos = AssentoService.ListaAssentos(vooId);
-			listaAssentosDesocupados = AssentoService.ListaAssentosDesocupados(vooId);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+			List<Assento> listaAssentos = null;
+			List<Assento> listaAssentosDesocupados = null;
 
-		boolean vVolta = false;
-		if (vooVolta != null) {
-			List<Assento> listaAssentosVolta = null;
-			List<Assento> listaAssentosDesocupadosVolta = null;
-			// List<AssentoComprados>listaDeAssentosPagos = null;
 			try {
-				listaAssentosVolta = AssentoService.ListaAssentos(vooIdVolta);
-				listaAssentosDesocupadosVolta = AssentoService.ListaAssentosDesocupados(vooIdVolta);
+				listaAssentos = AssentoService.ListaAssentos(vooId);
+				listaAssentosDesocupados = AssentoService.ListaAssentosDesocupados(vooId);
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
-			vVolta = true;
-			request.setAttribute("volta", vVolta);
-			// voo ida
-			request.setAttribute("vooId", vooId);
-			request.setAttribute("assentosDesocupados", listaAssentosDesocupados);
-			request.setAttribute("assentos", listaAssentos);
 
-			// voo volta
-			request.setAttribute("vooIdVolta", vooIdVolta);
-			request.setAttribute("assentosDesocupadosVolta", listaAssentosDesocupadosVolta);
-			request.setAttribute("assentosVolta", listaAssentosVolta);
+			boolean vVolta = false;
+			if (vooVolta != null) {
+				List<Assento> listaAssentosVolta = null;
+				List<Assento> listaAssentosDesocupadosVolta = null;
+				// List<AssentoComprados>listaDeAssentosPagos = null;
+				try {
+					listaAssentosVolta = AssentoService.ListaAssentos(vooIdVolta);
+					listaAssentosDesocupadosVolta = AssentoService.ListaAssentosDesocupados(vooIdVolta);
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+				vVolta = true;
+				request.setAttribute("volta", vVolta);
+				// voo ida
+				request.setAttribute("vooId", vooId);
+				request.setAttribute("assentosDesocupados", listaAssentosDesocupados);
+				request.setAttribute("assentos", listaAssentos);
 
-			return "forward:listaAssentos.jsp";
+				// voo volta
+				request.setAttribute("vooIdVolta", vooIdVolta);
+				request.setAttribute("assentosDesocupadosVolta", listaAssentosDesocupadosVolta);
+				request.setAttribute("assentosVolta", listaAssentosVolta);
+
+				return "forward:listaAssentos.jsp";
+			} else {
+
+				vVolta = false;
+				request.setAttribute("volta", vVolta);
+				request.setAttribute("vooId", vooId);
+				request.setAttribute("assentosDesocupados", listaAssentosDesocupados);
+				request.setAttribute("assentos", listaAssentos);
+				return "forward:listaAssentos.jsp";
+			}
 		} else {
 
-			vVolta = false;
-			request.setAttribute("volta", vVolta);
-			request.setAttribute("vooId", vooId);
-			request.setAttribute("assentosDesocupados", listaAssentosDesocupados);
-			request.setAttribute("assentos", listaAssentos);
-			return "forward:listaAssentos.jsp";
+			if (vooVolta != null) {
+				erro = "Selecione primero o voo de ida! <a href=\"entrada?acao=ListaVoo\"><button>Tela\r\n" + 
+						"Vôos</button></a>";
+				request.setAttribute("erro", erro);
+				return "forward:erro.jsp";
+			}
+
+			erro = "Selecione o voo!";
+			request.setAttribute("erro", erro);
+			return "forward:erro.jsp";
 		}
 	}
 }
