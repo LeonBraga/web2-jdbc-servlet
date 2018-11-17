@@ -3,7 +3,7 @@
 CHECkAR STOP-- Tela de escolha de assento TESTANDO \ 
 Modificar logica de compra voo
 
-==>>criar "tela" de cadastro de usuário não cadastrado
+==>>criar OBRIGAR USUARIO A CADASTRAR PELO MENOS UM CARTAO
 ==>>
 
 ============================================================================
