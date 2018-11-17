@@ -35,7 +35,8 @@ public class CartaoDeCreditoService {
 		} catch (SQLException e) {
 			conexao.rollback();
 			e.printStackTrace();
-			throw new SQLException();
+			conexao.close();
+			return false;
 		} finally {
 			conexao.close();
 		}

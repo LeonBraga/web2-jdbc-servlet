@@ -29,7 +29,7 @@
 	<br>
 	<br>
 	<p>Olá ${usuarioLogado.login}, insira os dados de seu cartão aqui:</p>
-	<br>
+	<br> ${erro}
 	<form action="${linkEntradaServlet}" method="post">
 		Nome: <input type="text" name="nome" value="${usuario.nome}- "
 			readonly="true" /> <br> Numero:<input type="text" name="numero"

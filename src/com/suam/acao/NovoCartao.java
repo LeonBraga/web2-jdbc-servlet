@@ -10,7 +10,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.suam.bean.CartaoDeCredito;
+import com.suam.bean.Usuario;
 import com.suam.service.CartaoDeCreditoService;
+import com.suam.service.UsuarioService;
 
 public class NovoCartao implements Acao {
 
@@ -23,6 +25,8 @@ public class NovoCartao implements Acao {
 		String numero = request.getParameter("numero");
 		String data = request.getParameter("dataVencimento");
 		String idUser = request.getParameter("idUser");
+		String erro = null;
+		String info = null;
 		
 		CartaoDeCredito cartao = new CartaoDeCredito();
 	
@@ -36,16 +40,28 @@ public class NovoCartao implements Acao {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-		System.out.println(idUser);
 		
 		cartao.setIdUser(Integer.parseInt(idUser.trim()));
 
+		Usuario usuario =  new Usuario();
+		try {
+			usuario = UsuarioService.buscaUsuarioPelaId(Integer.parseInt(idUser.trim()));
+		} catch (NumberFormatException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		
 		Boolean validaInsere;
 			try {
 				validaInsere = CartaoDeCreditoService.inserirCartao(cartao);
 				if (validaInsere) {
 				} else {
+					erro = "Cartão inválido, favor verificar";
+					request.setAttribute("erro", erro);
+					request.setAttribute("usuario", usuario);
 					request.setAttribute("cartao", cartao);
 					return "forward:formNovoCartao.jsp";
 				}
