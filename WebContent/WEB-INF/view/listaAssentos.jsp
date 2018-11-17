@@ -12,8 +12,9 @@
 <meta charset="UTF-8">
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-<!-- Inclusão do js -->
-<script src="javascript/js.js" type="text/javascript"></script>
+
+
+<c:import url="script_estilos.jsp" />
 <title>Assentos</title>
 </head>
 <body>
@@ -28,7 +29,7 @@
 		<c:forEach items="${assentos}" var="assento">
 			<c:if test="${assento.ocupante == usuarioLogado.id}">
 				<c:if test="${assento.comfirmaPagamento != true}">
-					<c:out value="${assento.numeroAssento}" /> - NÃO	Confirmado
+					<c:out value="${assento.numeroAssento}" /> - PRÉ COMPRA
 					<input type="checkbox" name="numeroAssentoOcupado"
 						id="numeroAssentoOcupado" value="${assento.numeroAssento}">
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -97,7 +98,7 @@
 			<c:forEach items="${assentosVolta}" var="assento">
 				<c:if test="${assento.ocupante == usuarioLogado.id}">
 					<c:if test="${assento.comfirmaPagamento != true}">
-						<c:out value="${assento.numeroAssento}" /> - NÃO	Confirmado
+						<c:out value="${assento.numeroAssento}" /> - PRÉ COMPRA
 					<input type="checkbox" name="numeroAssentoOcupadoVolta"
 							id="numeroAssentoOcupadoVolta" value="${assento.numeroAssento}">
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -139,8 +140,8 @@
 			<div id="desocupa" style="display: none">
 				<input type="hidden" name="desocupa" value="true">
 			</div>
-			<input type="hidden" name="ocupante" value="${usuarioLogado.id}" /> <input
-				type="hidden" name="vooId" value="${vooId}"> <input
+			<input type="hidden" name="ocupante" value="${usuarioLogado.id}" />
+			<input type="hidden" name="vooId" value="${vooId}"> <input
 				type="hidden" name="idVooVolta" value="${vooIdVolta}"> <input
 				type="hidden" name="acao" value="AssentoOcupa"> <br> <input
 				type="submit" value="Ocupar/Desocupar Assento" />
@@ -148,14 +149,15 @@
 		<br>
 	</c:if>
 
-	<form action="${linkEntradaServlet }" method="post">
-		<input type="hidden" name="compradorId" value="${usuarioLogado.id}" />
-		<input type="hidden" name="idvoo" value="${vooId}"> <input
-			type="hidden" name="idvooVolta" value="${vooIdVolta}"> <input
-			type="hidden" name="acao" value="FormNovoCompraVoo"> <input
-			type="submit" value="Comprar Assentos(s)" />
-	</form>
-
+	<c:if test="${usuarioLogado.isAdm == 'FALSE'}">
+		<form action="${linkEntradaServlet }" method="post">
+			<input type="hidden" name="compradorId" value="${usuarioLogado.id}" />
+			<input type="hidden" name="idvoo" value="${vooId}"> <input
+				type="hidden" name="idvooVolta" value="${vooIdVolta}"> <input
+				type="hidden" name="acao" value="FormNovoCompraVoo"> <input
+				type="submit" value="Comprar Assentos(s) selecionados (PRÉ COMPRA)" />
+		</form>
+	</c:if>
 
 	<br>
 	<c:import url="menuLinks.jsp" />

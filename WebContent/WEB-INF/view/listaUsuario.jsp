@@ -8,12 +8,22 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-<!-- Inclusão do js-->
-<script src="javascript/js.js" type="text/javascript"></script>
+<!-- Inclusão do jQuery via link local -->
+<!-- <script src="javascript/jquery.min.js" type="text/javascript"></script>
+<script src="javascript/jquery.validate.js" type="text/javascript"></script>
+ -->
+
+<!-- Inclusão do bootstrap via link local -->
+<!--  <link rel="stylesheet" href="css/bootstrap-4.1.3/css/bootstrap.min.css">
+<script src="css/bootstrap-4.1.3/js/bootstrap.min.js"></script> -->
+
+<!-- Inclusão do JS  -->
+<!-- <script src="javascript/js.js" type="text/javascript"></script> -->
+
 <!-- Inclusão da folha de estilo-->
-<link rel="stylesheet" type="text/css" href="css/estilo.css">
+<!-- <link rel="stylesheet" type="text/css" href="css/estilo.css"> -->
+
+<c:import url="script_estilos.jsp" />
 <title>Lista de Usuários</title>
 </head>
 <body>
@@ -27,7 +37,7 @@
 	<br>
 	<br>
 	<ul id="ulItens">
-		<c:if test="${usuarioLogado.isAdm ==  'TRUE'}">
+		<c:if test="${usuarioLogado.isAdm == 'TRUE'}">
 			<h3>Usuários administradores do sistema:</h3>
 			<c:forEach items="${usuarios}" var="usuario">
 				<c:if test="${usuario.isAdm ==  'TRUE'}">

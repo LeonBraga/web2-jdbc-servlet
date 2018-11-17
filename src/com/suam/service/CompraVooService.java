@@ -7,8 +7,10 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+
 import com.suam.bean.Assento;
 import com.suam.bean.CompraVoo;
+import com.suam.bean.Usuario;
 import com.suam.factory.ConnectionFactory;
 import com.suam.util.DataUtils;
 
@@ -194,7 +196,9 @@ public class CompraVooService {
 			compraVoo.setIdVooVolta(rs.getInt("voo_idvooVolta"));
 			compraVoo.setValorTotalCompra(rs.getInt("valorTotalCompra"));
 			compraVoo.setIdCompra(rs.getString("idcompraVoo"));
-			compraVoo.setNomeUsuario(UsuarioService.buscaUsuarioPelaId(compraVoo.getIdUser()).getNome());
+			Usuario usuario = new Usuario();
+			usuario = UsuarioService.buscaUsuarioPelaIdHistoricoDeCompras(compraVoo.getIdUser());
+			compraVoo.setNomeUsuario(usuario.getNome() + " " + usuario.getSobrenome());
 
 			String dataRecebida = rs.getString("horaDaCompra");
 			compraVoo.setHoraCompra(dataRecebida);

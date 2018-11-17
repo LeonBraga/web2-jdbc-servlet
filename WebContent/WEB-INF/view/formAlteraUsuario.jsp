@@ -8,12 +8,28 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<!-- Inclusão do jQuery via link local -->
+<!-- <script src="javascript/jquery.min.js" type="text/javascript"></script>
+<script src="javascript/jquery.validate.js" type="text/javascript"></script>
+ -->
+
+<!-- Inclusão do bootstrap via link local -->
+<!--  <link rel="stylesheet" href="css/bootstrap-4.1.3/css/bootstrap.min.css">
+<script src="css/bootstrap-4.1.3/js/bootstrap.min.js"></script> -->
+
+<!-- Inclusão do JS  -->
+<!-- <script src="javascript/js.js" type="text/javascript"></script> -->
+
+<!-- Inclusão da folha de estilo-->
+<!-- <link rel="stylesheet" type="text/css" href="css/estilo.css"> -->
+
+<c:import url="script_estilos.jsp" />
 <title>Alterar dados do usuário</title>
 </head>
 <body>
 	<c:import url="logout-parcial.jsp" />
 	<br>
-
+	${erro} 
 	<form action="${linkEntradaServlet }" method="post">
 
 		Nome: <input type="text" name="nome" value="${usuario.nome}" /> <br>
@@ -64,15 +80,14 @@
 				<h3>Lista de cartões de ${usuario.nome}</h3>
 				<c:forEach items="${cartoes}" var="cartao">
 					<c:if test="${usuario.id ==  cartao.idUser}">
-						<li>Nome do titular: ${cartao.titular}</li>
-						<li>Numero do cartao: ${cartao.numeroCartao}</li>
-						<li>Data de Vencimento: <fmt:formatDate
-								value="${cartao.dataVencimento}" pattern="dd/MM/yyyy" />
-						</li>
-						<li><a href="entrada?acao=MostraCartao&id=${cartao.idUser}"><button>Editar
+						<li>Nome do titular: ${cartao.titular} <br>Numero do
+							cartao: ${cartao.numeroCartao}<br> Data de Vencimento: <fmt:formatDate
+								value="${cartao.dataVencimento}" pattern="dd/MM/yyyy" /><br> <a
+							href="entrada?acao=MostraCartao&id=${cartao.idUser}"><button>Editar
 									Cartão</button></a> <a
 							href="entrada?acao=RemoveCartao&numero=${cartao.numeroCartao}"><button>Remover
-									Cartão</button></a></li>
+									Cartão</button></a>
+						</li>
 						<br>
 					</c:if>
 				</c:forEach>

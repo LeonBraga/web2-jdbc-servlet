@@ -15,7 +15,7 @@
 		de Vôos</button></a>
 
 <a href="entrada?acao=ListaCompras"><button>Tela de
-		acompanhamento dos pedidos de vôos</button></a>
+		acompanhamento dos pedidos de voos</button></a>
 
 <a href="entrada?acao=TelaInicial"><button>Tela Inicial</button></a>
 

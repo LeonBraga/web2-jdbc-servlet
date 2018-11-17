@@ -1,7 +1,4 @@
-<!-- <a href="entrada?acao=TelaInicial">Tela inicial</a>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<a href="entrada?acao=Logout">Sair</a>
-<br> -->
+
 <form>
 	<input type="button" value="Voltar" onClick="history.go(-1)"> <input
 		type="button" value="Avançar" onCLick="history.forward()"> <input

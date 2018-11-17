@@ -39,7 +39,8 @@ public class AssentoOcupa implements Acao {
 			id = Integer.valueOf(idVoo);
 		}
 
-		if (numeroAssento != null) {
+		if (numeroAssento != null || numeroAssentoOcupado != null
+				|| (numeroAssentoVolta != null || numeroAssentoOcupadoVolta != null)) {
 			if (idVoo != null) {
 				if (numeroAssento != null) {
 					for (String assentoNum : numeroAssento) {
@@ -87,6 +88,7 @@ public class AssentoOcupa implements Acao {
 				}
 			}
 			if (idVolta != null) {
+
 				if (numeroAssentoVolta != null) {
 					for (String assentoNumVolta : numeroAssentoVolta) {
 						System.out.println("Assento numero: " + assentoNumVolta);

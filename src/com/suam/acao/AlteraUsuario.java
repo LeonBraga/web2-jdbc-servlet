@@ -25,8 +25,10 @@ public class AlteraUsuario implements Acao {
 		String paramId = request.getParameter("id");
 		String ehAdm = request.getParameter("ehAdm");
 		Integer id = Integer.valueOf(paramId);
-
-		System.out.println("acao altera usuario " + id);
+		String info = null;
+		String erro = null;
+		info = "ATUALIZADO COM SUCESSO";
+		erro = "ERRO";
 
 		Usuario usuario = null;
 		try {
@@ -46,7 +48,7 @@ public class AlteraUsuario implements Acao {
 			e1.printStackTrace();
 		}
 		if (ehAdm != null) {
-			System.out.println("NOVO USUARIO, LOGIN: "+usuario.getLogin()+ " É ADM: " + ehAdm);
+			System.out.println("NOVO USUARIO, LOGIN: " + usuario.getLogin() + " É ADM: " + ehAdm);
 			if (ehAdm.equals("true") || ehAdm.equals("administrador") || ehAdm.equals("1")) {
 				usuario.setIsAdm(true);
 			} else if (ehAdm.equals("cliente") || ehAdm.equals("") || ehAdm.equals("0")) {
@@ -60,9 +62,10 @@ public class AlteraUsuario implements Acao {
 		try {
 			validaInsere = UsuarioService.update(usuario);
 			if (validaInsere) {
-				System.out.println("ATUALIZADO com sucesso");
+
 			} else {
 				request.setAttribute("usuario", usuario);
+				request.setAttribute("erro", erro);
 				return "forward:formAlteraUsuario.jsp";
 			}
 

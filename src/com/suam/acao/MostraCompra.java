@@ -28,7 +28,7 @@ public class MostraCompra implements Acao {
 			e.printStackTrace();
 		}
 		try {
-			usuario = UsuarioService.buscaUsuarioPelaId(compraVoo.getIdUser());
+			usuario = UsuarioService.buscaUsuarioPelaIdHistoricoDeCompras(compraVoo.getIdUser());
 		} catch (SQLException e1) {
 			e1.printStackTrace();
 		}
@@ -48,8 +48,8 @@ public class MostraCompra implements Acao {
 				e.printStackTrace();
 			}
 		}
-
-		compraVoo.setNomeUsuario(usuario.getNome());
+	
+		compraVoo.setNomeUsuario(usuario.getNome()+" "+usuario.getSobrenome());
 
 		/*
 		 * try { listaAssentoPagamentoConfirmado =

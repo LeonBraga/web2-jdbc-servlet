@@ -37,6 +37,8 @@ public class MostraCartao  implements Acao{
 			e.printStackTrace();
 		}
 		
+		cartao.setTitular(usuario.getNome() +" "+ usuario.getSobrenome());
+		
 		request.setAttribute("cartao",cartao);
 		
 		return "forward:formAlteraCartao.jsp";

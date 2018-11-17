@@ -251,5 +251,39 @@ public class UsuarioService {
 		}
 		return usuario;
 	}
+	
+	public static Usuario buscaUsuarioPelaIdHistoricoDeCompras(Integer id) throws SQLException {
+		Connection conexao = ConnectionFactory.getConnection();
+		String sql = "SELECT * FROM usuario where idusuario = ? ";
+		Usuario usuario = new Usuario();
+
+		try {
+			PreparedStatement ps = conexao.prepareStatement(sql);
+			ps.setInt(1, id);
+			ResultSet rs = ps.executeQuery();
+
+			while (rs.next()) {
+				usuario.setId(rs.getInt("idusuario"));
+				usuario.setNome(rs.getString("nome"));
+				usuario.setSobrenome(rs.getString("sobrenome"));
+				usuario.setEndereco(rs.getString("endereco"));
+				usuario.setSenha(rs.getString("senha"));
+				usuario.setLogin(rs.getString("login"));
+				try {
+					usuario.setDataNascimento(DataUtils.formatarData().parse(rs.getString("datanascimento")));
+				} catch (ParseException e) {
+					e.printStackTrace();
+					System.out.println("A data não pode ser convertida");
+				}
+				usuario.setIsAdm(rs.getBoolean("isAdm"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			// conexao.rollback();
+		} finally {
+			conexao.close();
+		}
+		return usuario;
+	}
 
 }

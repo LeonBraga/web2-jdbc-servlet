@@ -156,6 +156,9 @@ public class CartaoDeCreditoService {
 				CartaoDeCredito cartao = new CartaoDeCredito();
 				cartao.setIdUser(rs.getInt("usuario_idusuario"));
 				cartao.setNumeroCartao(rs.getString("numeroCartao"));
+				Usuario usuario = new Usuario();
+				usuario = UsuarioService.buscaUsuarioPelaId(cartao.getIdUser());
+				cartao.setTitular(usuario.getNome()+" "+usuario.getSobrenome());
 				try {
 					cartao.setDataVencimento(DataUtils.formatarData().parse(rs.getString("dataVencimento")));
 				} catch (ParseException e) {

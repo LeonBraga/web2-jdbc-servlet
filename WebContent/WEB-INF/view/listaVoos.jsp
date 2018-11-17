@@ -8,13 +8,22 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-<!-- Inclusão do js-->
-<script src="javascript/js.js" type="text/javascript"></script>
-<!-- Inclusão da folha de estilo-->
-<link rel="stylesheet" type="text/css" href="css/estilo.css">
+<!-- Inclusão do jQuery via link local -->
+<!-- <script src="javascript/jquery.min.js" type="text/javascript"></script>
+<script src="javascript/jquery.validate.js" type="text/javascript"></script>
+ -->
 
+<!-- Inclusão do bootstrap via link local -->
+<!--  <link rel="stylesheet" href="css/bootstrap-4.1.3/css/bootstrap.min.css">
+<script src="css/bootstrap-4.1.3/js/bootstrap.min.js"></script> -->
+
+<!-- Inclusão do JS  -->
+<!-- <script src="javascript/js.js" type="text/javascript"></script> -->
+
+<!-- Inclusão da folha de estilo-->
+<!-- <link rel="stylesheet" type="text/css" href="css/estilo.css"> -->
+
+<c:import url="script_estilos.jsp" />
 
 <title>Lista de Voos</title>
 </head>
@@ -27,6 +36,7 @@
 	<input type="text" id="txtBusca"
 		placeholder="Digite aqui um valor para filtrar..." />
 
+	<br>
 	<br>
 	<c:if test="${usuarioLogado.isAdm ==  'TRUE'}">
 		<form name="formulario" action="${linkEntradaServlet }" method="post">
@@ -69,15 +79,10 @@
 				</c:forEach>
 				<%-- </c:if> --%>
 			</ul>
-
-
-
-
-			Deseja comprar passagem de volta: ===>>> AINDA SENDO IMPLEMENTADO <br>
-			<input type="radio" name="volta" id="soIda" checked="checked">
+			<br> Deseja comprar passagem de volta:<br> <input
+				type="radio" name="volta" id="soIda" checked="checked">
 			Somente Ida <br> <input type="radio" name="volta" id="volta"
-				value="1">Volta <br> ESTE TRECHO SO DEVE APARECER
-			QUANDO VOLTA FOR SELECIONADO SERÁ RESOLVIDO COM JQUERY
+				value="1">Volta <br>
 			<div id="ulVolta">
 				<ul id="ulItens">
 					<%-- <c:if test="${usuarioLogado.isAdm ==  'TRUE'}"> --%>
@@ -110,61 +115,6 @@
 	<br>
 	<c:import url="menuLinks.jsp" />
 
-
-
-
-	<!-- TESTES -->
-
-	<script>
-		function check() {
-			document.getElementById("soIda").checked = true;
-			uncheckVooVolta();
-		}
-		function uncheck() {
-			document.getElementById("soIda").checked = false;
-			uncheckVooVolta();
-		}
-
-		function uncheckVooVolta() {
-			document.getElementById("vooDeVolta").checked = false
-			//document.getElementsByName("voltaId").checked = false
-			var x = document.getElementsByName("voltaId");
-			//console.log(document.getElementById("vooDeVolta"))
-			//console.log(document.getElementsByName("voltaId"))
-
-			var i;
-			for (i = 0; i < x.length; i++) {
-				if (x[i].type == "radio") {
-					console.log(x[i])
-					x[i].checked = false;
-				}
-			}
-
-		}
-
-		$(document).ready(function() {
-			$('input[type=radio]').click(function() {
-				//alert(this.value)
-				console.log(this.value)
-				if (this.value == 'on') {
-					uncheckVooVolta();
-					//CRIAR O HIDE ==>
-					//$("input[type=radio]").click(function() {
-					$("#ulVolta").hide();
-					//});
-				}
-				if (this.value == '1') {
-					//$("input[type=radio]").click(function() {
-					$("#ulVolta").show();
-					//});
-				}
-			});
-		});
-	</script>
-
-	<button onclick="check()">Check "so ida"</button>
-	<button onclick="uncheck()">Uncheck "so ida"</button>
-	<button onclick="uncheckVooVolta()">Uncheck "vooVolta Uncheck"</button>
 
 </body>
 </html>

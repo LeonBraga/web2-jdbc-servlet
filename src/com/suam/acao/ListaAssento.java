@@ -74,13 +74,12 @@ public class ListaAssento implements Acao {
 		} else {
 
 			if (vooVolta != null) {
-				erro = "Selecione primero o voo de ida! <a href=\"entrada?acao=ListaVoo\"><button>Tela\r\n" + 
-						"Vôos</button></a>";
+				erro = "Selecione primero o voo de ida! <a href=\"entrada?acao=ListaVoo\"><button>Voltar a Tela de Voos</button></a>";
 				request.setAttribute("erro", erro);
 				return "forward:erro.jsp";
 			}
 
-			erro = "Selecione o voo!";
+			erro = "Selecione o Voo que deseja utililizar!<a href=\"entrada?acao=ListaVoo\"><button>Voltar a Tela de Voos</button></a>";
 			request.setAttribute("erro", erro);
 			return "forward:erro.jsp";
 		}
