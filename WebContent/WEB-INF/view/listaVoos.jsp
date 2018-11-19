@@ -47,9 +47,9 @@
 							value="${voo.ida}" pattern="dd/MM/yyyy" /> - Confirmação:
 						${voo.confirmacao} - Valor por assento: ${voo.valorVoo} <br>
 						<c:if test="${usuarioLogado.isAdm ==  'TRUE'}">
-							<a href="entrada?acao=MostraVoo&id=${voo.idVoo}"><button>Editar
+							<a href="entrada?acao=MostraVoo&id=${voo.idVoo}"><button type="button">Editar
 									este Voo</button></a>
-							<a href="entrada?acao=RemoveVoo&id=${voo.idVoo}"><button>Remover
+							<a href="entrada?acao=RemoveVoo&id=${voo.idVoo}"><button type="button">Remover
 									este Voo</button></a>
 						</c:if></li>
 					<br>
@@ -70,9 +70,9 @@
 							value="${voo.ida}" pattern="dd/MM/yyyy" /> - Confirmação:
 						${voo.confirmacao} - Valor por assento: ${voo.valorVoo} <br>
 						<c:if test="${usuarioLogado.isAdm ==  'TRUE'}">
-							<a href="entrada?acao=MostraVoo&id=${voo.idVoo}"><button>Editar
+							<a href="entrada?acao=MostraVoo&id=${voo.idVoo}"><button type="button">Editar
 									este Voo</button></a>
-							<a href="entrada?acao=RemoveVoo&id=${voo.idVoo}"><button>Remover
+							<a href="entrada?acao=RemoveVoo&id=${voo.idVoo}"><button type="button">Remover
 									este Voo</button></a>
 						</c:if></li>
 					<br>
@@ -108,7 +108,7 @@
 	<br>
 	<br>
 	<c:if test="${usuarioLogado.isAdm ==  'TRUE'}">
-		<a href="entrada?acao=FormNovoVoo"><button>Cadastrar Novo
+		<a href="entrada?acao=FormNovoVoo"><button type="button">Cadastrar Novo
 				Voo</button></a>
 	</c:if>
 
