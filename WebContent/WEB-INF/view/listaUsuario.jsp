@@ -8,30 +8,14 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<!-- Inclusão do jQuery via link local -->
-<!-- <script src="javascript/jquery.min.js" type="text/javascript"></script>
-<script src="javascript/jquery.validate.js" type="text/javascript"></script>
- -->
-
-<!-- Inclusão do bootstrap via link local -->
-<!--  <link rel="stylesheet" href="css/bootstrap-4.1.3/css/bootstrap.min.css">
-<script src="css/bootstrap-4.1.3/js/bootstrap.min.js"></script> -->
-
-<!-- Inclusão do JS  -->
-<!-- <script src="javascript/js.js" type="text/javascript"></script> -->
-
-<!-- Inclusão da folha de estilo-->
-<!-- <link rel="stylesheet" type="text/css" href="css/estilo.css"> -->
-
 <c:import url="script_estilos.jsp" />
 <title>Lista de Usuários</title>
 </head>
 <body>
 	<c:import url="logout-parcial.jsp" />
-	<br>
-	<br>
 	<br> Lista de usuarios:
 	<br> Pesquisar:
+	<br>
 	<input type="text" id="txtBusca"
 		placeholder="Digite aqui um valor para filtrar..." />
 	<br>
@@ -42,8 +26,8 @@
 			<c:forEach items="${usuarios}" var="usuario">
 				<c:if test="${usuario.isAdm ==  'TRUE'}">
 					<li>ID:${usuario.id} -NOME: ${usuario.nome} - <a
-						href="entrada?acao=MostraUsuario&id=${usuario.id}"><button>Editar
-								Usuário</button></a> <a href="entrada?acao=RemoveUsuario&id=${usuario.id}"><button>Remover
+						href="entrada?acao=MostraUsuario&id=${usuario.id}"><button type="button">Editar
+								Usuário</button></a> <a href="entrada?acao=RemoveUsuario&id=${usuario.id}"><button type="button">Remover
 								Usuário</button></a>
 					</li>
 				</c:if>
@@ -54,8 +38,8 @@
 		<c:forEach items="${usuarios}" var="usuario">
 			<c:if test="${usuario.isAdm ==  'FALSE'}">
 				<li>ID:${usuario.id} -NOME: ${usuario.nome} - <a
-					href="entrada?acao=MostraUsuario&id=${usuario.id}"><button>Editar
-							Usuário</button></a> <a href="entrada?acao=RemoveUsuario&id=${usuario.id}"><button>Remover
+					href="entrada?acao=MostraUsuario&id=${usuario.id}"><button type="button">Editar
+							Usuário</button></a> <a href="entrada?acao=RemoveUsuario&id=${usuario.id}"><button type="button">Remover
 							Usuário</button></a>
 				</li>
 			</c:if>

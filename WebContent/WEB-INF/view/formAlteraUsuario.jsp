@@ -8,28 +8,12 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<!-- Inclusão do jQuery via link local -->
-<!-- <script src="javascript/jquery.min.js" type="text/javascript"></script>
-<script src="javascript/jquery.validate.js" type="text/javascript"></script>
- -->
-
-<!-- Inclusão do bootstrap via link local -->
-<!--  <link rel="stylesheet" href="css/bootstrap-4.1.3/css/bootstrap.min.css">
-<script src="css/bootstrap-4.1.3/js/bootstrap.min.js"></script> -->
-
-<!-- Inclusão do JS  -->
-<!-- <script src="javascript/js.js" type="text/javascript"></script> -->
-
-<!-- Inclusão da folha de estilo-->
-<!-- <link rel="stylesheet" type="text/css" href="css/estilo.css"> -->
-
 <c:import url="script_estilos.jsp" />
 <title>Alterar dados do usuário</title>
 </head>
 <body>
 	<c:import url="logout-parcial.jsp" />
-	<br>
-	${erro} 
+	<br> ${erro}
 	<form action="${linkEntradaServlet }" method="post">
 
 		Nome: <input type="text" name="nome" value="${usuario.nome}" /> <br>
@@ -46,27 +30,17 @@
 			 Usuario possui perfil administrador:
 			 <br>
 			<c:if test="${usuario.isAdm=='TRUE'}">
-				<%-- <input type="checkbox" name="ehAdm" value="${usuario.isAdm}"
-					checked="checked" /> --%>
 				<input type="radio" name="ehAdm" value="1" checked="checked"> Administrador<br>
 				<input type="radio" name="ehAdm" value="0"> Cliente<br>
-				<%--<input type="text" name="ehAdm" value="${usuario.isAdm}"> --%>
 				<br>
 			</c:if>
 			<c:if test="${usuario.isAdm=='FALSE'}">
 				<input type="radio" name="ehAdm" value="1"> Administrador<br>
 				<input type="radio" name="ehAdm" value="0" checked="checked"> Cliente<br>
-				<%-- <input type="checkbox" name="ehAdm" value="${usuario.isAdm}" /> --%>
-				<%--<input type="text" name="ehAdm" value="${usuario.isAdm}"> --%>
 				<br>
 			</c:if>
 		</c:if>
-		<%-- <c:if test="${usuarioLogado.isAdm=='FALSE'}">
-			Usuario possui perfil administrador:
-			<input type="checkbox"  name="ehAdm" value="${usuario.isAdm}" disabled="disabled"/>
-			<input type="text" name="ehAdm" value="${usuario.isAdm}" readonly="readonly">
-			<br>
-		</c:if> --%>
+
 		<br> <br> <input type="hidden" name="id"
 			value="${usuario.id}"> <input type="hidden" name="acao"
 			value="AlteraUsuario"> <input type="submit"
@@ -82,11 +56,11 @@
 					<c:if test="${usuario.id ==  cartao.idUser}">
 						<li>Nome do titular: ${cartao.titular} <br>Numero do
 							cartao: ${cartao.numeroCartao}<br> Data de Vencimento: <fmt:formatDate
-								value="${cartao.dataVencimento}" pattern="dd/MM/yyyy" /><br> <a
-							href="entrada?acao=MostraCartao&id=${cartao.idUser}"><button>Editar
-									Cartão</button></a> <a
-							href="entrada?acao=RemoveCartao&numero=${cartao.numeroCartao}"><button>Remover
-									Cartão</button></a>
+								value="${cartao.dataVencimento}" pattern="dd/MM/yyyy" /><br>
+							<a href="entrada?acao=MostraCartao&id=${cartao.idUser}"><button
+									type="button">Editar Cartão</button></a> <a
+							href="entrada?acao=RemoveCartao&numero=${cartao.numeroCartao}"><button
+									type="button">Remover Cartão</button></a>
 						</li>
 						<br>
 					</c:if>

@@ -7,21 +7,6 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<!-- Inclusão do jQuery via link local -->
-<!-- <script src="javascript/jquery.min.js" type="text/javascript"></script>
-<script src="javascript/jquery.validate.js" type="text/javascript"></script>
- -->
-
-<!-- Inclusão do bootstrap via link local -->
-<!--  <link rel="stylesheet" href="css/bootstrap-4.1.3/css/bootstrap.min.css">
-<script src="css/bootstrap-4.1.3/js/bootstrap.min.js"></script> -->
-
-<!-- Inclusão do JS  -->
-<!-- <script src="javascript/js.js" type="text/javascript"></script> -->
-
-<!-- Inclusão da folha de estilo-->
-<!-- <link rel="stylesheet" type="text/css" href="css/estilo.css"> -->
-
 <c:import url="script_estilos.jsp" />
 <title>Comprar passagem</title>
 </head>
@@ -62,7 +47,6 @@
 	</c:if>
 
 	<form action="${linkEntradaServlet }" method="post">
-		<%-- <input type="text" name="idVooVolta" value="${vooVolta.idVoo}" readonly="readonly"/> --%>
 		<c:if test="${cartoes!=null}">
 			<h3>Selecione o cartão que deseja usar nesta compra
 				${usuario.nome}</h3>
@@ -70,10 +54,6 @@
 				<c:forEach items="${cartoes}" var="cartao">
 					<c:if test="${usuario.id ==  cartao.idUser}">
 						<option value="${cartao.numeroCartao}">${cartao.numeroCartao}</option>
-						<%-- <li>Numero do cartao: ${cartao.numeroCartao} <input
-						type="checkbox" name="numerocartao"
-						value="${cartao.numeroCartao}" checked="checked">
-					</li> --%>
 						<br>
 					</c:if>
 				</c:forEach>
@@ -96,7 +76,6 @@
 			<br>
 			<br> Assentos selecionados no voo de VOLTA, identificador ${idvooVolta.idVoo}:
 			<c:forEach items="${assentosVolta}" var="assento">
-				<%-- <c:out value="${assento.numeroAssento}" /> --%>
 				${assento.numeroAssento}<input type="checkbox" name="assentoVolta"
 					id="numeroAssentoOcupado" value="${assento.numeroAssento}"
 					checked="checked" readonly="true">
@@ -111,9 +90,9 @@
 
 
 		<input type="hidden" name="idUser" value="${usuarioLogado.id}">
-		<input type="hidden" name="idVoo" value="${idvoo.idVoo}">
-		<input type="hidden" name="idVooVolta" value="${idvooVolta.idVoo}"> <input
-			type="hidden" name="acao" value="NovoCompraVoo"> <input
+		<input type="hidden" name="idVoo" value="${idvoo.idVoo}"> <input
+			type="hidden" name="idVooVolta" value="${idvooVolta.idVoo}">
+		<input type="hidden" name="acao" value="NovoCompraVoo"> <input
 			type="submit" value="Confirmar Compra" />
 	</form>
 

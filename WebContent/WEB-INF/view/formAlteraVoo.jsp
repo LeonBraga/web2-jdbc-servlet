@@ -8,28 +8,12 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<!-- Inclusão do jQuery via link local -->
-<!-- <script src="javascript/jquery.min.js" type="text/javascript"></script>
-<script src="javascript/jquery.validate.js" type="text/javascript"></script>
- -->
-
-<!-- Inclusão do bootstrap via link local -->
-<!--  <link rel="stylesheet" href="css/bootstrap-4.1.3/css/bootstrap.min.css">
-<script src="css/bootstrap-4.1.3/js/bootstrap.min.js"></script> -->
-
-<!-- Inclusão do JS  -->
-<!-- <script src="javascript/js.js" type="text/javascript"></script> -->
-
-<!-- Inclusão da folha de estilo-->
-<!-- <link rel="stylesheet" type="text/css" href="css/estilo.css"> -->
-
 <c:import url="script_estilos.jsp" />
 <title>Altera cadastro do voo: ID - ${voo.idVoo}</title>
 </head>
 <body>
 	<c:import url="logout-parcial.jsp" />
-	<br>
-	Alterar cadastro do voo: ID - ${voo.idVoo}
+	<br> Alterar cadastro do voo: ID - ${voo.idVoo}
 	<br>
 	<form action="${linkEntradaServlet }" method="post">
 		<c:if test="${usuarioLogado.isAdm ==  'TRUE'}">
@@ -40,7 +24,8 @@
 				readonly="readonly" />
 			<br>
 			Ida: <input type="text" pattern="\d{1,2}-\d{1,2}-\d{4}"
-				class="datepicker" name="ida" value="<fmt:formatDate value="${voo.ida}" pattern="dd-MM-yyyy"/>" />
+				class="datepicker" name="ida"
+				value="<fmt:formatDate value="${voo.ida}" pattern="dd-MM-yyyy"/>" />
 			<input class="datepicker" type="text" name="ida" value="XX-XX-XXXX"
 				readonly />
 			<br>
@@ -66,7 +51,6 @@
 			value="${voo.idVoo}"> <input type="hidden" name="acao"
 			value="AlteraVoo"> <input type="submit" value="Alterar Dados" />
 	</form>
-
 
 	<br>
 	<c:import url="menuLinks.jsp" />

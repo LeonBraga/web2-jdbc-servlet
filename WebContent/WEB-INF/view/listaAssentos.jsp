@@ -12,20 +12,15 @@
 <meta charset="UTF-8">
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-
-
 <c:import url="script_estilos.jsp" />
 <title>Assentos</title>
 </head>
 <body>
 	<c:import url="logout-parcial.jsp" />
-	<br>
 	<br> Listagem dos assentos do Voo - Indentificador: ${vooId}.
 	<br>
-	<!-- SOMENTE O CLIENTE QUE OCUPOU O ASSENTO PODERÁ DESOCUPAR O MESMO -->
 	<form action="${linkEntradaServlet }" method="post">
 		Assentos já ocupados: Clique para desocupar: <br>
-
 		<c:forEach items="${assentos}" var="assento">
 			<c:if test="${assento.ocupante == usuarioLogado.id}">
 				<c:if test="${assento.comfirmaPagamento != true}">

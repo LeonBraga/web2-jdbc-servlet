@@ -6,27 +6,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<!-- Inclusão do jQuery via link local -->
-<!-- <script src="javascript/jquery.min.js" type="text/javascript"></script>
-<script src="javascript/jquery.validate.js" type="text/javascript"></script>
- -->
-
-<!-- Inclusão do bootstrap via link local -->
-<!--  <link rel="stylesheet" href="css/bootstrap-4.1.3/css/bootstrap.min.css">
-<script src="css/bootstrap-4.1.3/js/bootstrap.min.js"></script> -->
-
-<!-- Inclusão do JS  -->
-<!-- <script src="javascript/js.js" type="text/javascript"></script> -->
-
-<!-- Inclusão da folha de estilo-->
-<!-- <link rel="stylesheet" type="text/css" href="css/estilo.css"> -->
-
 <c:import url="script_estilos.jsp" />
 <title>Cadastrar Cartao de Credito para ${usuarioLogado.login}</title>
 </head>
 <body>
 	<c:import url="logout-parcial.jsp" />
-	<br>
 	<br>
 	<p>Olá ${usuarioLogado.login}, insira os dados de seu cartão aqui:</p>
 	<br> ${erro}
