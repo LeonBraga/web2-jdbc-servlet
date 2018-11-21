@@ -28,7 +28,7 @@ public class AlteraUsuario implements Acao {
 		String info = null;
 
 		if (nome == null  ||nome.equals("")) {
-			info = "Nome não prennchido";
+			info = "Nome não preenchido";
 			request.setAttribute("erro", info);
 			return "forward:erro.jsp";
 		} else if (sobrenome == null  ||sobrenome.equals("")) {

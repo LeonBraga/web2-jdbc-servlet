@@ -29,11 +29,11 @@ public class NovoVoo implements Acao {
 		String info = null;
 
 		if (origem == null ||origem.equals("")) {
-			info = "Origem não prennchido";
+			info = "Origem não preenchido";
 			request.setAttribute("erro", info);
 			return "forward:erro.jsp";
 		} else if (destino == null ||destino.equals("")) {
-			info = "Destino não prennchido";
+			info = "Destino não prenchido";
 			request.setAttribute("erro", info);
 			return "forward:erro.jsp";
 		} else if (ida == null ||ida.equals("")) {

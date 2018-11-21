@@ -30,11 +30,11 @@ public class NovoCartao implements Acao {
 		CartaoDeCredito cartao = new CartaoDeCredito();
 
 		if(nome == null ||nome.equals("")) {
-			info = "Nome não prennchido";
+			info = "Nome não preenchido";
 			request.setAttribute("erro", info);
 			return "forward:erro.jsp";
 		}else if(numero == null ||numero.equals("")) {
-			info = "Cartão não prennchido";
+			info = "Cartão não preenchido";
 			request.setAttribute("erro", info);
 			return "forward:erro.jsp";
 		}else if(data == null  || data.equals("")) {
