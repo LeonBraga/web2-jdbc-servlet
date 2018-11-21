@@ -20,9 +20,15 @@ public class MostraUsuario implements Acao {
 		System.out.println("AÇÃO = MOSTRANDO DADOS DO USUARIO");
 
 		String paramId = request.getParameter("id");
-		Integer id = Integer.valueOf(paramId);
-		String erro = null;
+		String info = null;
 
+		if (paramId == null || paramId.equals("")) {
+			info = "Alguma coisa não funcionou!!";
+			request.setAttribute("erro", info);
+			return "forward:erro.jsp";
+		}
+
+		Integer id = Integer.valueOf(paramId);
 		Usuario usuario = null;
 		try {
 			usuario = UsuarioService.buscaUsuarioPelaId(id);
@@ -30,53 +36,19 @@ public class MostraUsuario implements Acao {
 			e.printStackTrace();
 		}
 
-		// EXIBINDO APENAS UM CARTÃO DO USUÁRIO
-		// CartaoDeCredito cartao = null;
-		// try {
-		// cartao = CartaoDeCreditoService.buscaUsuarioPelaId(usuario.getId());
-		// if (cartao != null) {
-		// cartao.setTitular(usuario.getNome());
-		// request.setAttribute("cartao", cartao);
-		// }
-		// } catch (
-		// SQLException e) {
-		// e.printStackTrace();
-		// }
-
 		List<CartaoDeCredito> listaCartao = null;
 		try {
 			listaCartao = CartaoDeCreditoService.buscaCartoesPeloIdUsuario(paramId);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		//		try {
-//			listaCartao = CartaoDeCreditoService.ListaCartoes();
-//		} catch (SQLException e) {
-//			e.printStackTrace();
-//		}
-//
-//		for (CartaoDeCredito cartaoDeCredito : listaCartao) {
-//			if (cartaoDeCredito != null) {
-//				try {
-//
-//					if (cartaoDeCredito.getIdUser() == usuario.getId()) {
-//						usuario = UsuarioService.buscaUsuarioPelaId(cartaoDeCredito.getIdUser());
-//						cartaoDeCredito.setTitular(usuario.getNome());
-//					}
-//				} catch (SQLException e) {
-//					e.printStackTrace();
-//					listaCartao.remove(cartaoDeCredito);
-//				}
-//			}
-//		}
 
 		if (!listaCartao.isEmpty()) {
 			request.setAttribute("cartoes", listaCartao);
-		}else {
-			erro = "Usuário sem cartão cadastrado  " ;
-			request.setAttribute("erro", erro);
-			//return "forward:erro.jsp";
+		} else {
+			info = "Usuário sem cartão cadastrado  ";
+			request.setAttribute("erro", info);
+			// return "forward:erro.jsp";
 		}
 
 		request.setAttribute("usuario", usuario);

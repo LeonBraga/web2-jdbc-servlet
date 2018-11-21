@@ -12,23 +12,29 @@ import com.suam.bean.Usuario;
 import com.suam.service.CartaoDeCreditoService;
 import com.suam.service.UsuarioService;
 
+public class MostraCartao implements Acao {
 
-
-public class MostraCartao  implements Acao{
-
-	public String executa(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public String executa(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		System.out.println("AÇÃO = MOSTRANDO DADOS DO CARTAO");
-		
+
 		String paramId = request.getParameter("id");
 		Integer id = Integer.valueOf(paramId);
-		
+
+		String info = null;
+		if (id == null || id.equals("")) {
+			info = "Alguma coisa não funcionou!!";
+			request.setAttribute("erro", info);
+			return "forward:erro.jsp";
+		}
+
 		Usuario usuario = null;
 		try {
 			usuario = UsuarioService.buscaUsuarioPelaId(id);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
+
 		CartaoDeCredito cartao = null;
 		try {
 			cartao = CartaoDeCreditoService.buscaCartaoPelaId(usuario.getId());
@@ -36,11 +42,11 @@ public class MostraCartao  implements Acao{
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
-		cartao.setTitular(usuario.getNome() +" "+ usuario.getSobrenome());
-		
-		request.setAttribute("cartao",cartao);
-		
+
+		cartao.setTitular(usuario.getNome() + " " + usuario.getSobrenome());
+
+		request.setAttribute("cartao", cartao);
+
 		return "forward:formAlteraCartao.jsp";
 	}
 }

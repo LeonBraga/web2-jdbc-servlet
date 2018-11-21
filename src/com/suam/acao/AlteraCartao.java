@@ -21,9 +21,28 @@ public class AlteraCartao implements Acao {
 		String numero = request.getParameter("numero");
 		String data = request.getParameter("dataVencimento");
 		String idUser = request.getParameter("idUser");
-
+		String info = null;
 		CartaoDeCredito cartao = new CartaoDeCredito();
 
+		if(nome == null ||nome.equals("")) {
+			info = "Nome não prennchido";
+			request.setAttribute("erro", info);
+			return "forward:erro.jsp";
+		}else if(numero == null ||numero.equals("")) {
+			info = "Cartão não prennchido";
+			request.setAttribute("erro", info);
+			return "forward:erro.jsp";
+		}else if(data == null  || data.equals("")) {
+			info = "Data de vencimento não informada!";
+			request.setAttribute("erro", info);
+			return "forward:erro.jsp";
+		}else if(idUser == null  ||idUser.equals("")) {
+			info = "Alguma coisa não funcionou!!";
+			request.setAttribute("erro", info);
+			return "forward:erro.jsp";
+		}
+		
+		
 		cartao.setTitular(nome);
 
 		try {

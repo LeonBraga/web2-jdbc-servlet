@@ -26,9 +26,36 @@ public class AlteraUsuario implements Acao {
 		String ehAdm = request.getParameter("ehAdm");
 		Integer id = Integer.valueOf(paramId);
 		String info = null;
-		String erro = null;
-		info = "ATUALIZADO COM SUCESSO";
-		erro = "ERRO";
+
+		if (nome == null  ||nome.equals("")) {
+			info = "Nome não prennchido";
+			request.setAttribute("erro", info);
+			return "forward:erro.jsp";
+		} else if (sobrenome == null  ||sobrenome.equals("")) {
+			info = "Sobrenome não prennchido";
+			request.setAttribute("erro", info);
+			return "forward:erro.jsp";
+		} else if (endereco == null ||endereco.equals("")) {
+			info = "Endereço não informado!";
+			request.setAttribute("erro", info);
+			return "forward:erro.jsp";
+		} else if (senha == null  ||senha.equals("")) {
+			info = "Senha não informada!";
+			request.setAttribute("erro", info);
+			return "forward:erro.jsp";
+		} else if (login == null ||login.equals("")) {
+			info = "Login não informado!";
+			request.setAttribute("erro", info);
+			return "forward:erro.jsp";
+		} else if (data == null ||data.equals("")) {
+			info = "Data não informada!";
+			request.setAttribute("erro", info);
+			return "forward:erro.jsp";
+		} else if (id == null ||id.equals("")) {
+			info = "Alguma coisa não funcionou!!";
+			request.setAttribute("erro", info);
+			return "forward:erro.jsp";
+		}
 
 		Usuario usuario = null;
 		try {
@@ -64,8 +91,9 @@ public class AlteraUsuario implements Acao {
 			if (validaInsere) {
 
 			} else {
+				info = "ERRO,  Alguma coisa não funcionou como deveria!";
 				request.setAttribute("usuario", usuario);
-				request.setAttribute("erro", erro);
+				request.setAttribute("erro", info);
 				return "forward:formAlteraUsuario.jsp";
 			}
 

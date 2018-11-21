@@ -27,7 +27,7 @@
 		  <p><a href="#">Link</a></p> -->
 			</div>
 			<div class="col-sm-8 text-left">
-				<h1>Ops algo deu errado: ${erro}</h1>
+				<h1>Ops algo deu errado:<br> ${erro} ${info}</h1>
 			</div>
 			<div class="col-sm-2 sidenav">
 				<!--  <div class="well">

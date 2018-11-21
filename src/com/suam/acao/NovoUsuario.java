@@ -28,6 +28,34 @@ public class NovoUsuario implements Acao {
 		String data = request.getParameter("data");
 		String ehAdm = request.getParameter("ehAdm");
 
+		String info = null;
+
+		if (nome == null || nome.equals("")) {
+			info = "Nome não prennchido";
+			request.setAttribute("erro", info);
+			return "forward:erro.jsp";
+		} else if (sobrenome == null || sobrenome.equals("")) {
+			info = "Sobrenome não prennchido";
+			request.setAttribute("erro", info);
+			return "forward:erro.jsp";
+		} else if (endereco == null || endereco.equals("")) {
+			info = "Endereço não informado!";
+			request.setAttribute("erro", info);
+			return "forward:erro.jsp";
+		} else if (senha == null || senha.equals("")) {
+			info = "Senha não informada!";
+			request.setAttribute("erro", info);
+			return "forward:erro.jsp";
+		} else if (login == null || login.equals("")) {
+			info = "Login não informado!";
+			request.setAttribute("erro", info);
+			return "forward:erro.jsp";
+		} else if (data == null || data.equals("")) {
+			info = "Data não informada!";
+			request.setAttribute("erro", info);
+			return "forward:erro.jsp";
+		}
+
 		Usuario usuario = new Usuario();
 		SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
 
@@ -42,10 +70,10 @@ public class NovoUsuario implements Acao {
 			e1.printStackTrace();
 		}
 		if (ehAdm != null) {
-		System.out.println("NOVO USUARIO E ADM: "+ehAdm);
+			System.out.println("NOVO USUARIO E ADM: " + ehAdm);
 			if (ehAdm.equals("true") || ehAdm.equals("administrador") || ehAdm.equals("1")) {
 				usuario.setIsAdm(true);
-			} else if(ehAdm.equals("cliente") || ehAdm.equals("") || ehAdm.equals("0")) {
+			} else if (ehAdm.equals("cliente") || ehAdm.equals("") || ehAdm.equals("0")) {
 				usuario.setIsAdm(false);
 			}
 		} else {

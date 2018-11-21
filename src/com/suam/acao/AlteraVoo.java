@@ -23,6 +23,34 @@ public class AlteraVoo implements Acao {
 
 		System.out.println("acao altera voo: " + idVoo);
 
+		String info = null;
+
+		if (origem == null ||origem.equals("")) {
+			info = "Origem não prennchido";
+			request.setAttribute("erro", info);
+			return "forward:erro.jsp";
+		} else if (destino == null ||destino.equals("")) {
+			info = "Destino não prennchido";
+			request.setAttribute("erro", info);
+			return "forward:erro.jsp";
+		} else if (ida == null ||ida.equals("")) {
+			info = "Data de ida não informado!";
+			request.setAttribute("erro", info);
+			return "forward:erro.jsp";
+		} else if (confirmacao == null ||confirmacao.equals("")){
+			info = "Confirmacao não informada!";
+			request.setAttribute("erro", info);
+			return "forward:erro.jsp";
+		} else if (valorVoo == null ||valorVoo.equals("")) {
+			info = "Preço não informado!";
+			request.setAttribute("erro", info);
+			return "forward:erro.jsp";
+		} else if (idVoo == null ||idVoo.equals("")) {
+			info = "Alguma coisa não funcionou!!";
+			request.setAttribute("erro", info);
+			return "forward:erro.jsp";
+		}
+
 		Voo voo = null;
 		try {
 			voo = VooService.buscaVooPelaId(Integer.valueOf(idVoo));
@@ -30,7 +58,6 @@ public class AlteraVoo implements Acao {
 			e.printStackTrace();
 		}
 
-		
 		if (confirmacao != null) {
 			if (confirmacao.equals("true") || confirmacao.equals("administrador") || confirmacao.equals("1")) {
 				voo.setConfirmacao(true);

@@ -26,6 +26,30 @@ public class NovoVoo implements Acao {
 		String confirmacao = request.getParameter("confirmacao");
 		String valorVoo = request.getParameter("valorVoo");
 
+		String info = null;
+
+		if (origem == null ||origem.equals("")) {
+			info = "Origem não prennchido";
+			request.setAttribute("erro", info);
+			return "forward:erro.jsp";
+		} else if (destino == null ||destino.equals("")) {
+			info = "Destino não prennchido";
+			request.setAttribute("erro", info);
+			return "forward:erro.jsp";
+		} else if (ida == null ||ida.equals("")) {
+			info = "Data de ida não informado!";
+			request.setAttribute("erro", info);
+			return "forward:erro.jsp";
+		} else if (confirmacao == null ||confirmacao.equals("")){
+			info = "Confirmacao não informada!";
+			request.setAttribute("erro", info);
+			return "forward:erro.jsp";
+		} else if (valorVoo == null ||valorVoo.equals("")) {
+			info = "Preço não informado!";
+			request.setAttribute("erro", info);
+			return "forward:erro.jsp";
+		} 
+		
 		Voo voo = new Voo();
 
 		SimpleDateFormat formato = new SimpleDateFormat("dd-MM-yyyy");

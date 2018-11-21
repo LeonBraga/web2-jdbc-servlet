@@ -18,7 +18,13 @@ public class MostraCompra implements Acao {
 
 		String idCompra = request.getParameter("idCompra");
 		Integer idCompraInt = Integer.valueOf(idCompra);
-
+		
+		String info = null;
+		if (idCompra == null || idCompra.equals("")) {
+			info = "Alguma coisa não funcionou!!";
+			request.setAttribute("erro", info);
+			return "forward:erro.jsp";
+		}
 		CompraVoo compraVoo = new CompraVoo();
 		Usuario usuario = new Usuario();
 

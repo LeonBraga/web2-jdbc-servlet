@@ -28,6 +28,16 @@ public class FormNovoCompraVoo implements Acao {
 		String voo_idvoo = request.getParameter("idvoo");
 		String voo_idvooVolta = request.getParameter("idvooVolta");
 
+		String info = null;
+
+		 if (compradorId == null ||compradorId.equals("")) {
+			info = "Alguma coisa não funcionou!!";
+			request.setAttribute("erro", info);
+			return "forward:erro.jsp";
+		}
+
+		
+		
 		Usuario user = new Usuario();
 		List<CartaoDeCredito> listaCartao = null;
 		boolean idaVolta = false;

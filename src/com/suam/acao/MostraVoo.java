@@ -15,7 +15,15 @@ public class MostraVoo implements Acao {
 		System.out.println("AÇÃO = MOSTRANDO VOO");
 
 		String idVoo = request.getParameter("id");
-	
+		String info = null;
+
+		if (idVoo == null || idVoo.equals("")) {
+			info = "Alguma coisa não funcionou!!";
+			request.setAttribute("erro", info);
+			return "forward:erro.jsp";
+		}
+		
+		
 		Integer id = Integer.valueOf(idVoo);
 		Voo voo = null;
 		try {

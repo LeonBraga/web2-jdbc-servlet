@@ -18,6 +18,14 @@ public class FormNovoCartao implements Acao {
 		String paramId = request.getParameter("idUser");
 		Integer id = Integer.valueOf(paramId);
 
+		String info = null;
+		
+		if (paramId == null ||paramId.equals("")) {
+			info = "Alguma coisa não funcionou!!";
+			request.setAttribute("erro", info);
+			return "forward:erro.jsp";
+		}
+		
 		Usuario user = null;
 		System.out.println("FORM NOVO CARTAO 1 ==>");
 		try {

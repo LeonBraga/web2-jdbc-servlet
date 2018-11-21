@@ -143,12 +143,20 @@ public class NovoCompraVoo implements Acao {
 		String voo_idvoo = request.getParameter("idVoo");
 		String voo_idvooVolta = request.getParameter("idVooVolta");
 		String cartaodecredito_numerocartao = request.getParameter("numerocartao");
-		String erro = null;
+
+		String info = null;
+		CartaoDeCredito cartao = new CartaoDeCredito();
+
+		if (paramId == null || paramId.equals("")) {
+			info = "Alguma coisa não funcionou!!";
+			request.setAttribute("erro", info);
+			return "forward:erro.jsp";
+		}
 
 		System.out.println(paramId + " - " + Arrays.toString(assento) + " - " + voo_idvoo + " - " + voo_idvooVolta
 				+ " - " + Arrays.toString(assentoVolta) + " - " + valorTotalCompra + " - "
 				+ cartaodecredito_numerocartao);
-		
+
 		Usuario usuario = new Usuario();
 		CartaoDeCredito cartaoDeCredito = new CartaoDeCredito();
 		Voo voo = new Voo();
@@ -170,102 +178,103 @@ public class NovoCompraVoo implements Acao {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
 
-		if(assento == null) {
-			erro = "Você não selecionou nenhum assento";
-			request.setAttribute("erro", erro);
+		if (assento == null) {
+			info = "Você não selecionou nenhum assento";
+			request.setAttribute("erro", info);
 			return "forward:erro.jsp";
 		}
-		
-		if (cartaodecredito_numerocartao != null) {
-			try {
-				cartaoDeCredito = CartaoDeCreditoService.buscaCartaoPeloNumero(cartaodecredito_numerocartao);
-			} catch (SQLException e1) {
-				e1.printStackTrace();
-			}
 
-			try {
-				if (voo_idvoo != null && voo_idvoo != "" && voo_idvoo != "null") {
-					listaNumeroAssentoIda = AssentoService.listarAssentosPorUsuarioIdVooIdPagamentoNaoConfirmado(
-							usuario.getId(), Integer.valueOf(voo_idvoo));
-					for (Assento assento2 : listaNumeroAssentoIda) {
-						AssentoService.PagamentoAssentoPorUsuarioId(usuario.getId(), assento2.getNumeroAssento(),
-								Integer.valueOf(voo_idvoo));
-					}
-					voo = VooService.buscaVooPelaId(Integer.valueOf(voo_idvoo));
-					totalCompraVoo1 += (voo.getValorVoo() * listaNumeroAssentoIda.size());
-					System.out.println("VALOR TOTAL (voo1 ):  " + valorTotalCompra);
+		if (cartaodecredito_numerocartao == null) {
+
+			info = "Usuário sem cartão cadastrado\n  <a href=\"entrada?acao=FormNovoCartao&idUser=" + paramId
+					+ "\"><button>Cadastrar\r\n" + "				Novo Cartão</button></a>";
+			request.setAttribute("erro", info);
+			return "forward:erro.jsp";
+		}
+
+		try {
+			cartaoDeCredito = CartaoDeCreditoService.buscaCartaoPeloNumero(cartaodecredito_numerocartao);
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+		}
+
+		try {
+			if (voo_idvoo != null && voo_idvoo != "" && voo_idvoo != "null") {
+				listaNumeroAssentoIda = AssentoService.listarAssentosPorUsuarioIdVooIdPagamentoNaoConfirmado(
+						usuario.getId(), Integer.valueOf(voo_idvoo));
+				for (Assento assento2 : listaNumeroAssentoIda) {
+					AssentoService.PagamentoAssentoPorUsuarioId(usuario.getId(), assento2.getNumeroAssento(),
+							Integer.valueOf(voo_idvoo));
 				}
-			} catch (NumberFormatException | SQLException e) {
+				voo = VooService.buscaVooPelaId(Integer.valueOf(voo_idvoo));
+				totalCompraVoo1 += (voo.getValorVoo() * listaNumeroAssentoIda.size());
+				System.out.println("VALOR TOTAL (voo1 ):  " + valorTotalCompra);
+			}
+		} catch (NumberFormatException | SQLException e) {
+			e.printStackTrace();
+		}
+
+		try {
+			if (voo_idvooVolta != null && voo_idvooVolta != "" && voo_idvooVolta != "null") {
+				listaNumeroAssentoVolta = AssentoService.listarAssentosPorUsuarioIdVooIdPagamentoNaoConfirmado(
+						usuario.getId(), Integer.valueOf(voo_idvooVolta));
+				for (Assento assento2 : listaNumeroAssentoVolta) {
+					AssentoService.PagamentoAssentoPorUsuarioId(usuario.getId(), assento2.getNumeroAssento(),
+							Integer.valueOf(voo_idvooVolta));
+				}
+				voo = VooService.buscaVooPelaId(Integer.valueOf(voo_idvooVolta));
+				totalCompraVoo2 += (voo.getValorVoo() * listaNumeroAssentoVolta.size());
+				System.out.println("VALOR TOTAL (voo2 ):  " + valorTotalCompra);
+			}
+		} catch (NumberFormatException | SQLException e) {
+			e.printStackTrace();
+		}
+
+		// pagamento por assento
+		for (String assent : assento) {
+			try {
+				AssentoService.PagamentoAssentoPorUsuarioId(usuario.getId(), Integer.valueOf(assent),
+						Integer.valueOf(voo_idvoo));
+			} catch (SQLException e) {
 				e.printStackTrace();
 			}
+		}
 
-			try {
-				if (voo_idvooVolta != null && voo_idvooVolta != "" && voo_idvooVolta != "null") {
-					listaNumeroAssentoVolta = AssentoService.listarAssentosPorUsuarioIdVooIdPagamentoNaoConfirmado(
-							usuario.getId(), Integer.valueOf(voo_idvooVolta));
-					for (Assento assento2 : listaNumeroAssentoVolta) {
-						AssentoService.PagamentoAssentoPorUsuarioId(usuario.getId(), assento2.getNumeroAssento(),
-								Integer.valueOf(voo_idvooVolta));
-					}
-					voo = VooService.buscaVooPelaId(Integer.valueOf(voo_idvooVolta));
-					totalCompraVoo2 += (voo.getValorVoo() * listaNumeroAssentoVolta.size());
-					System.out.println("VALOR TOTAL (voo2 ):  " + valorTotalCompra);
-				}
-			} catch (NumberFormatException | SQLException e) {
-				e.printStackTrace();
-			}
-
-			// pagamento por assento
-			for (String assent : assento) {
+		// pagamento por assento
+		if (voo_idvooVolta != null && voo_idvooVolta != "" && voo_idvooVolta != "null") {
+			for (String assent : assentoVolta) {
 				try {
 					AssentoService.PagamentoAssentoPorUsuarioId(usuario.getId(), Integer.valueOf(assent),
-							Integer.valueOf(voo_idvoo));
+							Integer.valueOf(voo_idvooVolta));
 				} catch (SQLException e) {
 					e.printStackTrace();
 				}
 			}
-
-			// pagamento por assento
-			if (voo_idvooVolta != null && voo_idvooVolta != "" && voo_idvooVolta != "null") {
-				for (String assent : assentoVolta) {
-					try {
-						AssentoService.PagamentoAssentoPorUsuarioId(usuario.getId(), Integer.valueOf(assent),
-								Integer.valueOf(voo_idvooVolta));
-					} catch (SQLException e) {
-						e.printStackTrace();
-					}
-				}
-			}
-
-			// Criando a compra
-			compra.setIdCartao(cartaodecredito_numerocartao);
-			compra.setIdUser(usuario.getId());
-			compra.setIdVoo(idVoo);
-			if (idVooVolta != null) {
-				compra.setIdVooVolta(idVooVolta);
-				compra.setListaAssentosVolta(listaNumeroAssentoVolta);
-			}
-			compra.setListaAssentosIda(listaNumeroAssentoIda);
-			compra.setValorTotalCompra(totalCompraVoo1 + totalCompraVoo2);
-
-			try {
-				CompraVooService.inserir(compra);
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-
-			request.setAttribute("compradorId", paramId);
-			request.setAttribute("idParam", paramId);
-
-			return "forward:compraRealizadaComSucesso.jsp";
 		}
 
-		erro = "Usuário sem cartão cadastrado\n  <a href=\"entrada?acao=FormNovoCartao&idUser="+paramId+"\"><button>Cadastrar\r\n"
-				+ "				Novo Cartão</button></a>";
-		request.setAttribute("erro", erro);
-		return "forward:erro.jsp";
+		// Criando a compra
+		compra.setIdCartao(cartaodecredito_numerocartao);
+		compra.setIdUser(usuario.getId());
+		compra.setIdVoo(idVoo);
+		if (idVooVolta != null) {
+			compra.setIdVooVolta(idVooVolta);
+			compra.setListaAssentosVolta(listaNumeroAssentoVolta);
+		}
+		compra.setListaAssentosIda(listaNumeroAssentoIda);
+		compra.setValorTotalCompra(totalCompraVoo1 + totalCompraVoo2);
+
+		try {
+			CompraVooService.inserir(compra);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		request.setAttribute("compradorId", paramId);
+		request.setAttribute("idParam", paramId);
+
+		return "forward:compraRealizadaComSucesso.jsp";
+
 	}
 
 }
