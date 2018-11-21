@@ -93,3 +93,20 @@ $(document).ready(function() {
 		}
 	});
 });
+
+
+$(document).ready(function() {
+	$('input[type=radio]').click(function() {
+		console.log("TESTE"+this.value)
+		$("li").css("background","");
+		if (this.value > 0) {
+			// muda a cor do fudo quando for marcado
+			console.log("TESTE >>"+this.value)
+			/* a função muda o background da div com id="box" */	
+			$("#liSelect"+this.value).val(this.value).css("background","#BDB76B");
+			
+		}
+		
+	});
+});
+

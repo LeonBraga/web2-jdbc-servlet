@@ -14,7 +14,7 @@
 
 <!-- Inclusão do bootstrap via link local --> 
 <!-- <link rel="stylesheet" href="css/bootstrap-4.1.3/css/bootstrap.min.css">
-<script src="css/bootstrap-4.1.3/js/bootstrap.min.js"></script> --> -->
+<script src="css/bootstrap-4.1.3/js/bootstrap.min.js"></script> --> 
 
 
 <script src="javascript/js.js" type="text/javascript"></script>
