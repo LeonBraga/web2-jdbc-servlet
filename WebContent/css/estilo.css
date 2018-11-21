@@ -111,6 +111,6 @@ button {
 
 ul li.separador {
     width: 100%; /* coloque aqui a largura da linha */
-    border-top: 1px solid #000;
+    border-top: 2px solid #000;
     list-style-type: none;
 }

@@ -36,9 +36,11 @@
 						method="post">
 						<ul id="ulItens">
 							<c:forEach items="${voos}" var="voo">
-								<li class="liIda" id="liSelect${voo.idVoo}"><input class="liIdaImput${voo.idVoo}" type="radio" name="vooId" value="${voo.idVoo}">
-									Origem: ${voo.origem} - Destino: ${voo.destino} - Ida: <fmt:formatDate
-										value="${voo.ida}" pattern="dd/MM/yyyy" /> - Confirmação: <c:if
+								<li class="liIda" id="liSelect${voo.idVoo}"><input
+									class="liIdaImput${voo.idVoo}" type="radio" name="vooId"
+									value="${voo.idVoo}"> Origem: ${voo.origem} - Destino:
+									${voo.destino} - Ida: <fmt:formatDate value="${voo.ida}"
+										pattern="dd/MM/yyyy" /> - Confirmação: <c:if
 										test="${voo.confirmacao == true}">
 								Confirmado
 							</c:if> <c:if test="${voo.confirmacao == false}">
@@ -62,11 +64,13 @@
 					<form action="${linkEntradaServlet }" method="post">
 						<ul id="ulItens">
 							<c:forEach items="${voos}" var="voo">
-								<li class="liIda" id="liSelect${voo.idVoo}"><input  class="liIdaImput${voo.idVoo}" type="radio" name="vooId" value="${voo.idVoo}">
-									Origem: ${voo.origem} - Destino: ${voo.destino} - Ida: <fmt:formatDate
-										value="${voo.ida}" pattern="dd/MM/yyyy" /> - Confirmação:
-									${voo.confirmacao} - Valor por assento: ${voo.valorVoo} <br>
-									<c:if test="${usuarioLogado.isAdm ==  'TRUE'}">
+								<li class="liIda" id="liSelect${voo.idVoo}"><input
+									class="liIdaImput${voo.idVoo}" type="radio" name="vooId"
+									value="${voo.idVoo}"> Origem: ${voo.origem} - Destino:
+									${voo.destino} - Ida: <fmt:formatDate value="${voo.ida}"
+										pattern="dd/MM/yyyy" /> - Confirmação: ${voo.confirmacao} -
+									Valor por assento: ${voo.valorVoo} <br> <c:if
+										test="${usuarioLogado.isAdm ==  'TRUE'}">
 										<a href="entrada?acao=MostraVoo&id=${voo.idVoo}"><button
 												type="button">Editar este Voo</button></a>
 										<a href="entrada?acao=RemoveVoo&id=${voo.idVoo}"><button
@@ -82,11 +86,12 @@
 						<div id="ulVolta">
 							<ul id="ulItens">
 								<c:forEach items="${voos}" var="voo">
-									<li class="liVolta" id="liSelect${voo.idVoo}Volta"><input  class="liVoltaImput${voo.idVoo}" type="radio" name="voltaId" id="vooDeVolta"
-										value="${voo.idVoo}"> Origem: ${voo.origem} - Destino:
-										${voo.destino} - Ida: <fmt:formatDate value="${voo.ida}"
-											pattern="dd/MM/yyyy" /> - Confirmação: ${voo.confirmacao} -
-										Valor por assento: ${voo.valorVoo}</li>
+									<li class="liVolta" id="liSelect${voo.idVoo}Volta"><input
+										class="liVoltaImput${voo.idVoo}" type="radio" name="voltaId"
+										id="vooDeVolta" value="${voo.idVoo}"> Origem:
+										${voo.origem} - Destino: ${voo.destino} - Ida: <fmt:formatDate
+											value="${voo.ida}" pattern="dd/MM/yyyy" /> - Confirmação:
+										${voo.confirmacao} - Valor por assento: ${voo.valorVoo}</li>
 									<br>
 								</c:forEach>
 							</ul>
@@ -98,7 +103,7 @@
 
 				<br>
 				<c:if test="${usuarioLogado.isAdm ==  'TRUE'}">
-					<a href="entrada?acao=FormNovoVoo"><button>Cadastrar
+					<a href="entrada?acao=FormNovoVoo"><button type="button">Cadastrar
 							Novo Voo</button></a>
 				</c:if>
 				<br>

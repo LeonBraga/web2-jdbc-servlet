@@ -31,9 +31,9 @@ $(function() {
 	});
 });
 
-//***************************************************************
+// ***************************************************************
 
-//Quando um checkbox da tela de listagem de assentos for selecionado
+// Quando um checkbox da tela de listagem de assentos for selecionado
 window.onload = function() {
 	if (document.getElementById('numeroAssento').checked) {
 		$("#ocupa").show();
@@ -47,24 +47,24 @@ window.onload = function() {
 		$("#desocupa").hide();
 	}
 }
-//$('#numeroAssentoOcupado').click(function() {
-//    $("#ocupa").toggle(this.checked);
-//});
+// $('#numeroAssentoOcupado').click(function() {
+// $("#ocupa").toggle(this.checked);
+// });
 
-//*****************************************************************
+// *****************************************************************
 
-//Escondendo voo de volta ao carregar a página
+// Escondendo voo de volta ao carregar a página
 window.onload = function() {
 	$("#ulVolta").hide();
 }
 
-//Lista de voo de volta
+// Lista de voo de volta
 function uncheckVooVolta() {
 	document.getElementById("vooDeVolta").checked = false
-	//document.getElementsByName("voltaId").checked = false
+	// document.getElementsByName("voltaId").checked = false
 	var x = document.getElementsByName("voltaId");
-	//console.log(document.getElementById("vooDeVolta"))
-	//console.log(document.getElementsByName("voltaId"))
+	// console.log(document.getElementById("vooDeVolta"))
+	// console.log(document.getElementsByName("voltaId"))
 
 	var i;
 	for (i = 0; i < x.length; i++) {
@@ -78,51 +78,52 @@ function uncheckVooVolta() {
 
 $(document).ready(function() {
 	$('input[type=radio]').click(function() {
-		//alert(this.value)
+		// alert(this.value)
 		console.log(this.value)
 		if (this.value == 'on') {
 			uncheckVooVolta();
-			//CRIAR O HIDE ==>
-			//$("input[type=radio]").click(function() {
+			// CRIAR O HIDE ==>
+			// $("input[type=radio]").click(function() {
 			$("#ulVolta").hide();
-			//});
+			// });
 		}
 		if (this.value == '1') {
-			//$("input[type=radio]").click(function() {
+			// $("input[type=radio]").click(function() {
 			$("#ulVolta").show();
-			//});
+			// });
 		}
 	});
 });
 
-
-//Marcando linha selecionada
+// Marcando linha selecionada
 $(document).ready(function() {
-	$('input[type=radio]').click(function() {
-		var id = $(".liIdaImput"+this.value).val();
-		console.log("Ida***"+id);
-		$(".liIda").css("background","");
+	// $('input[type=radio]').click(function() {
+	$('#ulItens').find('input[type=radio]').click(function() {
+		var id = $(".liIdaImput" + this.value).val();
+		console.log("Ida***" + id);
+		$(".liIda").css("background", "");
 		if (this.value > 0 && id == this.value) {
 			// muda a cor do fudo quando for marcado
-			/* a função muda o background da div com id="box" */	
-			$("#liSelect"+this.value).css("background","#BDB76B");
-			
+			/* a função muda o background da div com id="box" */
+			$("#liSelect" + this.value).css("background", "#BDB76B");
+
 		}
-		
+
 	});
 });
 
 $(document).ready(function() {
-	$('input[type=radio]').click(function() {
-		var id = $(".liVoltaImput"+this.value).val();
-		console.log("Volta***"+id);
-		$(".liVolta").css("background","");
-		if (this.value >0  && id == this.value) {
+	// $('input[type=radio]').click(function() {
+	$('#ulVolta').find('input[type=radio]').click(function() {
+		var id = $(".liVoltaImput" + this.value).val();
+		console.log("Volta***" + id);
+		$(".liVolta").css("background", "");
+		if (this.value > 0 && id == this.value) {
 			// muda a cor do fudo quando for marcado
-			/* a função muda o background da div com id="box" */	
-			$("#liSelect"+this.value+"Volta").css("background","#BDB76B");
-			
+			/* a função muda o background da div com id="box" */
+			$("#liSelect" + this.value + "Volta").css("background", "#BDB76B");
+
 		}
-		
+
 	});
 });
