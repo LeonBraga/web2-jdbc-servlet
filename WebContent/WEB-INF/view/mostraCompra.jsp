@@ -62,7 +62,11 @@
 			</div>
 		</div>
 	</div>
-<c:import url="footerBar.jsp" />
+	<br>
+	<br>
+	<br>
+	<br>
+	<c:import url="footerBar.jsp" />
 
 </body>
 </html>

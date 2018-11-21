@@ -62,7 +62,7 @@
 				</c:if>
 				<br> <br>
 
-			
+
 			</div>
 			<div class="col-sm-2 sidenav">
 				<!--  <div class="well">
@@ -75,7 +75,10 @@
 		</div>
 	</div>
 
-
+	<br>
+	<br>
+	<br>
+	<br>
 	<c:import url="footerBar.jsp" />
 
 

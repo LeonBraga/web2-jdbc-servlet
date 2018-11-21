@@ -105,8 +105,7 @@
 					<input type="hidden" name="idVoo" value="${idvoo.idVoo}"> <input
 						type="hidden" name="idVooVolta" value="${idvooVolta.idVoo}">
 					<input type="hidden" name="acao" value="NovoCompraVoo"> <br>
-					<br>
-					<input type="submit" value="Confirmar Compra" />
+					<br> <input type="submit" value="Confirmar Compra" />
 				</form>
 			</div>
 			<div class="col-sm-2 sidenav">
@@ -123,6 +122,9 @@
 
 
 
+	<br>
+	<br>
+	<br>
 	<br>
 	<c:import url="footerBar.jsp" />
 </body>
