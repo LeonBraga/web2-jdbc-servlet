@@ -1,4 +1,4 @@
-package com.suam.VO;
+/*package com.suam.VO;
 
 import java.util.List;
 
@@ -73,3 +73,4 @@ public class CompraVooVO {
 	}
 	
 }
+*/

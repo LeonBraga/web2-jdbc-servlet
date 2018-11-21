@@ -12,13 +12,40 @@
 <title>Compra Realizada Com Sucesso</title>
 </head>
 <body>
-	<c:import url="logout-parcial.jsp" />
+
+	<c:if test="${usuarioLogado.isAdm ==  'TRUE'}">
+		<c:import url="navBar.jsp" />
+	</c:if>
+	<c:if test="${usuarioLogado.isAdm ==  'FALSE'}">
+		<c:import url="navBarCli.jsp" />
+	</c:if>
+
+
+	<div class="container-fluid text-center">
+		<div class="row content">
+			<div class="col-sm-2 sidenav">
+				<!--  <p><a href="#">Link</a></p>
+		  <p><a href="#">Link</a></p>
+		  <p><a href="#">Link</a></p> -->
+			</div>
+			<div class="col-sm-8 text-left">
+				<h1>Compra Realizada com Sucesso!</h1>
+			</div>
+			<div class="col-sm-2 sidenav">
+				<!--  <div class="well">
+			<p>ADS</p>
+		  </div>
+		  <div class="well">
+			<p>ADS</p>
+		  </div> -->
+			</div>
+		</div>
+	</div>
 	<br>
-	<br>
-	<h3>Compra Realizada com Sucesso!</h3>
+
 
 	<br>
-	<c:import url="menuLinks.jsp" />
+	<c:import url="footerBar.jsp" />
 </body>
 </html>
 

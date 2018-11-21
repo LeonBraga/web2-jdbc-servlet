@@ -10,20 +10,46 @@
 <title>Cadastrar Cartao de Credito para ${usuarioLogado.login}</title>
 </head>
 <body>
-	<c:import url="logout-parcial.jsp" />
-	<br>
-	<p>Olá ${usuarioLogado.login}, insira os dados de seu cartão aqui:</p>
-	<br> ${erro}
-	<form action="${linkEntradaServlet}" method="post">
-		Nome: <input type="text" name="nome" value="${usuario.nome}- "
-			readonly="true" /> <br> Numero:<input type="text" name="numero"
-			value="" /> <br> Data Vencimento:<input type="text"
-			name="dataVencimento" value="" /> <br> <input type="hidden"
-			name="idUser" value="${usuario.id}" /> <input type="hidden"
-			name="acao" value="NovoCartao"> <input type="submit"
-			value="Cadastrar Cartão" />
-	</form>
-	<br>
-	<c:import url="menuLinks.jsp" />
+	<c:if test="${usuarioLogado.isAdm ==  'TRUE'}">
+		<c:import url="navBar.jsp" />
+	</c:if>
+	<c:if test="${usuarioLogado.isAdm ==  'FALSE'}">
+		<c:import url="navBarCli.jsp" />
+	</c:if>
+	<div class="container-fluid text-center">
+		<div class="row content">
+			<div class="col-sm-2 sidenav">
+				<!--  <p><a href="#">Link</a></p>
+      <p><a href="#">Link</a></p>
+      <p><a href="#">Link</a></p> -->
+			</div>
+			<div class="col-sm-8 text-left">
+				<h1>Tela de Cadastro de Novo Cartão de Crédito</h1>
+				<p>Olá ${usuarioLogado.login}, insira os dados de seu cartão
+					aqui:</p>
+				<br> ${erro}
+				<form action="${linkEntradaServlet}" method="post">
+					Nome: <input type="text" name="nome" value="${usuario.nome}- "
+						readonly="true" /> <br> Numero:<input type="text"
+						name="numero" value="" /> <br> Data Vencimento:<input
+						type="text" name="dataVencimento" value="" placeholder="DD/MM/YYYY"/> <br> <input
+						type="hidden" name="idUser" value="${usuario.id}" /> <input
+						type="hidden" name="acao" value="NovoCartao"><br> <input
+						type="submit" value="Cadastrar Novo Cartão" />
+				</form>
+				<br>
+			</div>
+			<div class="col-sm-2 sidenav">
+				<!--  <div class="well">
+        <p>ADS</p>
+      </div>
+      <div class="well">
+        <p>ADS</p>
+      </div> -->
+			</div>
+		</div>
+	</div>
+
+	<c:import url="footerBar.jsp" />
 </body>
 </html>

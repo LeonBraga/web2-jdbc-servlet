@@ -12,6 +12,13 @@
 <title>Cadastrar Novo Usuário</title>
 </head>
 <body>
+	<c:if test="${usuarioLogado.isAdm ==  'TRUE'}">
+		<c:import url="navBar.jsp" />
+	</c:if>
+	<c:if test="${usuarioLogado.isAdm ==  'FALSE'}">
+		<c:import url="navBarCli.jsp" />
+	</c:if>
+	
 	<a href="formLogin.jsp">Tela de Login</a>
 	<br> Seja bem vindo, insira seus dados!
 
@@ -29,7 +36,7 @@
 
 
 	<br>
-	<c:import url="menuLinks.jsp" />
+	<c:import url="footerBar.jsp" />
 
 </body>
 </html>

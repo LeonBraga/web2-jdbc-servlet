@@ -7,7 +7,9 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import com.suam.bean.Assento;
+import com.suam.bean.Voo;
 import com.suam.service.AssentoService;
+import com.suam.service.VooService;
 
 public class ListaAssento implements Acao {
 
@@ -32,6 +34,12 @@ public class ListaAssento implements Acao {
 			List<Assento> listaAssentosDesocupados = null;
 
 			try {
+				if (!VooService.buscaVooPelaId(vooId).getConfirmacao()) {
+					System.out.println("============" + VooService.buscaVooPelaId(vooId).getConfirmacao());
+					erro = "Você selecionaou um voo ainda não confirmado!";
+					request.setAttribute("erro", erro);
+					return "forward:erro.jsp";
+				}
 				listaAssentos = AssentoService.ListaAssentos(vooId);
 				listaAssentosDesocupados = AssentoService.ListaAssentosDesocupados(vooId);
 			} catch (SQLException e) {
@@ -44,6 +52,19 @@ public class ListaAssento implements Acao {
 				List<Assento> listaAssentosDesocupadosVolta = null;
 				// List<AssentoComprados>listaDeAssentosPagos = null;
 				try {
+					if (!VooService.buscaVooPelaId(vooIdVolta).getConfirmacao()) {
+						System.out.println("============" + VooService.buscaVooPelaId(vooId).getConfirmacao());
+						erro = "Você selecionaou um voo ainda não confirmado!";
+						request.setAttribute("erro", erro);
+						return "forward:erro.jsp";
+					}
+					if (VooService.buscaVooPelaId(vooId).getIdVoo()
+							.equals(VooService.buscaVooPelaId(vooIdVolta).getIdVoo())) {
+						System.out.println("VOO IGUAL SELECIONADO");
+						erro = "Você selecionaou o mesmo voo para ida e para a volta!";
+						request.setAttribute("erro", erro);
+						return "forward:erro.jsp";
+					}
 					listaAssentosVolta = AssentoService.ListaAssentos(vooIdVolta);
 					listaAssentosDesocupadosVolta = AssentoService.ListaAssentosDesocupados(vooIdVolta);
 				} catch (SQLException e) {

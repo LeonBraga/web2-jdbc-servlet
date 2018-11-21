@@ -148,7 +148,7 @@ public class NovoCompraVoo implements Acao {
 		System.out.println(paramId + " - " + Arrays.toString(assento) + " - " + voo_idvoo + " - " + voo_idvooVolta
 				+ " - " + Arrays.toString(assentoVolta) + " - " + valorTotalCompra + " - "
 				+ cartaodecredito_numerocartao);
-
+		
 		Usuario usuario = new Usuario();
 		CartaoDeCredito cartaoDeCredito = new CartaoDeCredito();
 		Voo voo = new Voo();
@@ -170,7 +170,14 @@ public class NovoCompraVoo implements Acao {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		
 
+		if(assento == null) {
+			erro = "Você não selecionou nenhum assento";
+			request.setAttribute("erro", erro);
+			return "forward:erro.jsp";
+		}
+		
 		if (cartaodecredito_numerocartao != null) {
 			try {
 				cartaoDeCredito = CartaoDeCreditoService.buscaCartaoPeloNumero(cartaodecredito_numerocartao);
