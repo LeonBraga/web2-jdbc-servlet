@@ -21,6 +21,7 @@
 $(function() {
 	$("#txtBusca").keyup(function() {
 		var texto = $(this).val();
+		console.log(texto)
 		$("#ulItens li").css("display", "block");
 		$("#ulItens li").each(function() {
 			// Modificação no filtro para torná-lo case insensitivo
@@ -95,18 +96,33 @@ $(document).ready(function() {
 });
 
 
+//Marcando linha selecionada
 $(document).ready(function() {
 	$('input[type=radio]').click(function() {
-		console.log("TESTE"+this.value)
-		$("li").css("background","");
-		if (this.value > 0) {
+		var id = $(".liIdaImput"+this.value).val();
+		console.log("Ida***"+id);
+		$(".liIda").css("background","");
+		if (this.value > 0 && id == this.value) {
 			// muda a cor do fudo quando for marcado
-			console.log("TESTE >>"+this.value)
 			/* a função muda o background da div com id="box" */	
-			$("#liSelect"+this.value).val(this.value).css("background","#BDB76B");
+			$("#liSelect"+this.value).css("background","#BDB76B");
 			
 		}
 		
 	});
 });
 
+$(document).ready(function() {
+	$('input[type=radio]').click(function() {
+		var id = $(".liVoltaImput"+this.value).val();
+		console.log("Volta***"+id);
+		$(".liVolta").css("background","");
+		if (this.value >0  && id == this.value) {
+			// muda a cor do fudo quando for marcado
+			/* a função muda o background da div com id="box" */	
+			$("#liSelect"+this.value+"Volta").css("background","#BDB76B");
+			
+		}
+		
+	});
+});

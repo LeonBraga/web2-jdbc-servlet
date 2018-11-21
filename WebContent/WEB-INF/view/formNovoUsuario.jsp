@@ -41,10 +41,13 @@
 						<br> Perfil do Usuário: <br> <input type="radio"
 							name="ehAdm" value="1"> Administrador<br> <input
 							type="radio" name="ehAdm" value="0"> Cliente<br>
-						 Data Nascimento: <input type="text" name="data"
-							placeholder="DD/MM/YYYY" value="<fmt:formatDate value="${usuario.dataNascimento}" pattern="dd/MM/yyyy"/>" />
+						Data Nascimento: <input type="text" name="data"
+							placeholder="DD/MM/YYYY"
+							value="<fmt:formatDate value="${usuario.dataNascimento}" pattern="dd/MM/yyyy"/>" />
 						<br> <br> <input type="hidden" name="acao"
-							value="NovoUsuario"> <input type="submit" value="Cadastrar novo Usuário" />
+							value="NovoUsuario"> <input type="submit"
+							value="Cadastrar novo Usuário" /> <input name="Reset"
+							type="reset" class="formobjects" value="Redefinir">
 					</form>
 					<c:import url="footerBar.jsp" />
 				</c:if>

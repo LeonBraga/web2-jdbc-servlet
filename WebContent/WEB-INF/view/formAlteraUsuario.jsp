@@ -10,6 +10,25 @@
 <meta charset="UTF-8">
 <c:import url="script_estilos.jsp" />
 <title>Alterar dados do usuário</title>
+
+
+
+<script language="JavaScript">
+	function enviarDadosAlteraUsuario() {
+
+		/* if (document.dados.nome.value == ""
+				|| document.dados.nome.value.length < 8) {
+			alert("Preencha campo NOME corretamente!");
+			document.dados.tx_nome.focus();
+			return false;
+		}
+		return true; */
+	}
+</script>
+
+
+
+
 </head>
 <body>
 	<c:if test="${usuarioLogado.isAdm ==  'TRUE'}">
@@ -29,20 +48,22 @@
 			<div class="col-sm-8 text-left">
 				<h1>Editar cadastro de usuário</h1>
 				<br> ${erro}
-				<form action="${linkEntradaServlet }" method="post">
+				<form action="${linkEntradaServlet }" method="post" name="dados"
+					onSubmit="return enviarDadosAlteraUsuario();">
 
-					Nome: <input type="text" name="nome" value="${usuario.nome}" /> <br>
-					Sobrenome:<input type="text" name="sobrenome"
-						value="${usuario.sobrenome}"> <br> Endereço:<input
-						type="text" name="endereco" value="${usuario.endereco}"> <br>
-					Login:<input type="text" name="login" value="${usuario.login}">
-					<br> Senha:<input type="text" name="senha"
-						value="${usuario.senha}"> <br> Data Nascimento: <input
-						type="text" name="data"
-						value="<fmt:formatDate value="${usuario.dataNascimento }" pattern="dd/MM/yyyy"/>" />
+					<label for="nome">Nome: </label> <input type="text" name="nome"
+						value="${usuario.nome}" required name=nome /><label for="sobrenome">Sobrenome:</label><input
+						type="text" name="sobrenome" value="${usuario.sobrenome}" required="required">
+					<label for="endereco"> Endereço:</label><input type="text" name="endereco"
+						value="${usuario.endereco}" required="required"> <label for="login">Login:</label><input
+						type="text" name="login" value="${usuario.login}" required="required"> 
+						<label for="senha">Senha:</label><input type="text" name="senha" value="${usuario.senha}" required="required">
+					
+					<label for="data">Data Nascimento:</label> <input  type="text" name="data"
+						value="<fmt:formatDate value="${usuario.dataNascimento }" pattern="dd/MM/yyyy"/>" required="required" />
 					<br>
 					<c:if test="${usuarioLogado.isAdm=='TRUE'}">
-			 Usuario possui perfil administrador:
+			 <label for="ehAdm">Usuario possui perfil administrador:</label>
 			 <br>
 						<c:if test="${usuario.isAdm=='TRUE'}">
 							<input type="radio" name="ehAdm" value="1" checked="checked"> Administrador<br>
@@ -84,10 +105,7 @@
 									type="button">Cadastrar Novo Cartão</button></a></li>
 					</c:if>
 				</ul>
-				<br>
-				<br>
-				<br>
-				<br>
+				<br> <br> <br> <br>
 
 			</div>
 			<div class="col-sm-2 sidenav">

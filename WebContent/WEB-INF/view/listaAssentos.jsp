@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+	pageEncoding="UTF-8"%>
 <%@ page import="java.util.List, com.suam.bean.Usuario"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
@@ -13,6 +13,7 @@
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <c:import url="script_estilos.jsp" />
+
 <title>Assentos</title>
 </head>
 <body>
@@ -34,11 +35,11 @@
 				<br>
 
 				<form action="${linkEntradaServlet }" method="post">
-					Assentos j· ocupados: Clique para desocupar: <br>
+					Assentos j√° ocupados: Clique para desocupar: <br>
 					<c:forEach items="${assentos}" var="assento">
 						<c:if test="${assento.ocupante == usuarioLogado.id}">
 							<c:if test="${assento.comfirmaPagamento != true}">
-								<c:out value="${assento.numeroAssento}" /> - PR… COMPRA
+								<c:out value="${assento.numeroAssento}" /> - PR√â COMPRA
 					<input type="checkbox" name="numeroAssentoOcupado"
 									id="numeroAssentoOcupado" value="${assento.numeroAssento}">
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -92,14 +93,14 @@
 				<c:if test="${volta == true }">
 					<br> Listagem dos assentosVolta do Voo de VOLTA - Indentificador: ${vooIdVolta}.
 		<br>
-					<!-- SOMENTE O CLIENTE QUE OCUPOU O ASSENTO PODER¡ DESOCUPAR O MESMO -->
+					<!-- SOMENTE O CLIENTE QUE OCUPOU O ASSENTO PODER√Å DESOCUPAR O MESMO -->
 					<form action="${linkEntradaServlet }" method="post">
-						Assentos do voo de Volta j· ocupados: Clique para desocupar: <br>
+						Assentos do voo de Volta j√° ocupados: Clique para desocupar: <br>
 
 						<c:forEach items="${assentosVolta}" var="assento">
 							<c:if test="${assento.ocupante == usuarioLogado.id}">
 								<c:if test="${assento.comfirmaPagamento != true}">
-									<c:out value="${assento.numeroAssento}" /> - PR… COMPRA
+									<c:out value="${assento.numeroAssento}" /> - PR√â COMPRA
 					<input type="checkbox" name="numeroAssentoOcupadoVolta"
 										id="numeroAssentoOcupadoVolta"
 										value="${assento.numeroAssento}">
@@ -158,7 +159,7 @@
 							value="${vooId}"> <input type="hidden" name="idvooVolta"
 							value="${vooIdVolta}"> <input type="hidden" name="acao"
 							value="FormNovoCompraVoo"> <input type="submit"
-							value="Comprar Assentos(s) selecionados (PR… COMPRA)" />
+							value="Comprar Assentos(s) selecionados (PR√â COMPRA)" />
 					</form>
 				</c:if>
 
