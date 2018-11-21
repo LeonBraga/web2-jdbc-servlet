@@ -50,7 +50,47 @@ public class FormEntradaCadastro extends HttpServlet {
 		String login = request.getParameter("login");
 		String data = request.getParameter("data");
 		String ehAdm = request.getParameter("ehAdm");
+		
+		String info = null;
 
+		if (nome == null || nome.equals("")) {
+			info = "Nome não preenchido";
+			request.setAttribute("erro", info);
+			request.getRequestDispatcher("WEB-INF/view/erro.jsp").forward(request, response);
+			return;
+			//return "forward:erro.jsp";
+		} else if (sobrenome == null || sobrenome.equals("")) {
+			info = "Sobrenome não preenchido";
+			request.setAttribute("erro", info);
+			request.getRequestDispatcher("WEB-INF/view/erro.jsp").forward(request, response);
+			return;
+			//return "forward:erro.jsp";
+		} else if (endereco == null || endereco.equals("")) {
+			info = "Endereço não informado!";
+			request.setAttribute("erro", info);
+			request.getRequestDispatcher("WEB-INF/view/erro.jsp").forward(request, response);
+			return;
+			//return "forward:erro.jsp";
+		} else if (senha == null || senha.equals("")) {
+			info = "Senha não informada!";
+			request.setAttribute("erro", info);
+			request.getRequestDispatcher("WEB-INF/view/erro.jsp").forward(request, response);
+			return;
+			//return "forward:erro.jsp";
+		} else if (login == null || login.equals("")) {
+			info = "Login não informado!";
+			request.setAttribute("erro", info);
+			request.getRequestDispatcher("WEB-INF/view/erro.jsp").forward(request, response);
+			return;
+			//return "forward:erro.jsp";
+		} else if (data == null || data.equals("")) {
+			info = "Data não informada!";
+			request.setAttribute("erro", info);
+			request.getRequestDispatcher("WEB-INF/view/erro.jsp").forward(request, response);
+			return;
+			//return "forward:erro.jsp";
+		}
+		
 		Usuario usuario = new Usuario();
 		SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
 
