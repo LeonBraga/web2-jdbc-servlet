@@ -28,6 +28,7 @@
 			</div>
 			<div class="col-sm-8 text-left">
 				<h1>Cadastrar novo usuário</h1>
+				${erro}
 				<c:if test="${usuarioLogado.isAdm ==  'TRUE'}">
 					<form action="${linkEntradaServlet}" method="post">
 						Nome: <input type="text" name="nome" value="${usuario.nome}" /> <br>
@@ -62,9 +63,6 @@
 			</div>
 		</div>
 	</div>
-
-
-
 
 
 </body>

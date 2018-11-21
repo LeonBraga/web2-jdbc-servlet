@@ -35,7 +35,7 @@ public class NovoUsuario implements Acao {
 			request.setAttribute("erro", info);
 			return "forward:erro.jsp";
 		} else if (sobrenome == null || sobrenome.equals("")) {
-			info = "Sobrenome não prennchido";
+			info = "Sobrenome não preenchido";
 			request.setAttribute("erro", info);
 			return "forward:erro.jsp";
 		} else if (endereco == null || endereco.equals("")) {
@@ -87,7 +87,8 @@ public class NovoUsuario implements Acao {
 				if (validaInsere) {
 					System.out.println("Inserido com sucesso");
 				} else {
-					System.out.println("CORRIGIR LOGIN!!");
+					info = "Login não informado!";
+					request.setAttribute("erro", info);
 					request.setAttribute("usuario", usuario);
 					return "forward:formNovoUsuario.jsp";
 				}

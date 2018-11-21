@@ -32,7 +32,7 @@ public class AlteraUsuario implements Acao {
 			request.setAttribute("erro", info);
 			return "forward:erro.jsp";
 		} else if (sobrenome == null  ||sobrenome.equals("")) {
-			info = "Sobrenome não prennchido";
+			info = "Sobrenome não preenchido";
 			request.setAttribute("erro", info);
 			return "forward:erro.jsp";
 		} else if (endereco == null ||endereco.equals("")) {
