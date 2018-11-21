@@ -31,7 +31,7 @@
 
 				Lista de usuarios: <br> Pesquisar: <br> <input type="text"
 					id="txtBusca" placeholder="Digite aqui um valor para filtrar..." />
-				<br><br>
+				<br> <br>
 				<c:if test="${usuarioLogado.isAdm ==  'TRUE'}">
 					<a href="entrada?acao=FormNovoUsuario"><button>Novo
 							usuário</button></a>
@@ -54,6 +54,7 @@
 										</div>
 									</li>
 								</div>
+								<li class="separador"></li>
 							</c:if>
 						</c:forEach>
 					</c:if>
@@ -74,17 +75,13 @@
 									</div>
 								</li>
 							</div>
-
+							<li class="separador"></li>
 						</c:if>
 					</c:forEach>
 				</ul>
 
 
-				<br>
-				<br>
-				<br>
-				<br>
-				<br>
+				<br> <br> <br> <br> <br>
 			</div>
 			<div class="col-sm-2 sidenav">
 				<!--  <div class="well">
