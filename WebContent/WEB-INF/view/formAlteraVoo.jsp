@@ -40,6 +40,7 @@
 						<br>
 			Ida: <input type="text" pattern="\d{1,2}-\d{1,2}-\d{4}"
 							class="datepicker" name="ida" placeholder="DD-MM-YYYY"
+							required="required"
 							value="<fmt:formatDate value="${voo.ida}" pattern="dd-MM-yyyy"/>" />
 						<!-- <input class="datepicker" type="text" name="ida"
 							value="XX-XX-XXXX" readonly /> -->
@@ -65,9 +66,9 @@
 			Valor: <input type="text" name="valorVoo" value="${voo.valorVoo}" />
 					</c:if>
 					<br> <br> <input type="hidden" name="idVooIda"
-						value="${voo.idVoo}"> <input type="hidden" name="acao"
-						value="AlteraVoo"> <input type="submit"
-						value="Alterar Dados" />
+						value="${voo.idVoo}" required="required"> <input
+						type="hidden" name="acao" value="AlteraVoo"> <input
+						type="submit" value="Alterar Dados" />
 				</form>
 
 				<br>

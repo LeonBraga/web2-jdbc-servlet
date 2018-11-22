@@ -31,7 +31,7 @@
       <p><a href="#">Link</a></p> -->
 			</div>
 			<div class="col-sm-8 text-left">
-				<h1>Listagem dos assentos do Voo - Indentificador: ${vooId}.</h1>
+				<h3>Listagem dos assentos do Voo - Indentificador: ${vooId}.</h3>
 				<br>
 
 				<form action="${linkEntradaServlet }" method="post">

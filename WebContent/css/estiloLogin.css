@@ -39,6 +39,31 @@ footer {
 
 
 
+.login--fundo { 
+	background-image: url(../imagens/login.png);
+    padding-top: 90px;
+    opacity: 0.7;
+    display: inline-block;
+    height: -webkit-fill-available;
+    width: -webkit-fill-available;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.row.login--card{
+	opacity: .9;
+}
+
+.reset-pad{
+	padding: 0;
+}
+
+.nome-empresa{
+	    font-weight: bold;
+		font-family: Monospace, Fantasy, Arial;
+}
+
 
 
 

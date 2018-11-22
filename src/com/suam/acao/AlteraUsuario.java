@@ -101,6 +101,7 @@ public class AlteraUsuario implements Acao {
 			e.printStackTrace();
 		}
 
-		return "redirect:entrada?acao=MostraUsuario&id=" + usuario.getId();
+		//return "redirect:entrada?acao=MostraUsuario&id=" + usuario.getId();
+		return "redirect:entrada?acao=ListaUsuario";
 	}
 }

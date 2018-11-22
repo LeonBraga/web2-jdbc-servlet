@@ -31,19 +31,21 @@
 				${erro}
 				<c:if test="${usuarioLogado.isAdm ==  'TRUE'}">
 					<form action="${linkEntradaServlet}" method="post">
-						Nome: <input type="text" name="nome" value="${usuario.nome}" /> <br>
-						Sobrenome:<input type="text" name="sobrenome"
-							value="${usuario.sobrenome}"> <br> Endereço:<input
-							type="text" name="endereco" value="${usuario.endereco}">
-						<br> Login:<input type="text" name="login"
-							value="${usuario.login}"> <br> Senha:<input
-							type="text" name="senha" value="${usuario.senha}"> <br>
-						Confirma Senha:<input type="text" name="confirmaSenha" value="">
-						<br> Perfil do Usuário: <br> <input type="radio"
-							name="ehAdm" value="1"> Administrador<br> <input
+						Nome: <input type="text" name="nome" value="${usuario.nome}"
+							required="required" /> <br> Sobrenome:<input type="text"
+							name="sobrenome" value="${usuario.sobrenome}" required="required">
+						<br> Endereço:<input type="text" name="endereco"
+							value="${usuario.endereco}" required="required"> <br>
+						Login:<input type="text" name="login" value="${usuario.login}"
+							required="required"> <br> Senha:<input type="text"
+							name="senha" value="${usuario.senha}" required="required">
+						<br> Confirma Senha:<input type="text" name="confirmaSenha"
+							value="" required="required"> <br> Perfil do
+						Usuário: <br> <input type="radio" name="ehAdm" value="1"
+							required="required"> Administrador<br> <input
 							type="radio" name="ehAdm" value="0"> Cliente<br>
 						Data Nascimento: <input type="text" name="data"
-							placeholder="DD/MM/YYYY"
+							placeholder="DD/MM/YYYY" required="required"
 							value="<fmt:formatDate value="${usuario.dataNascimento}" pattern="dd/MM/yyyy"/>" />
 						<br> <br> <input type="hidden" name="acao"
 							value="NovoUsuario"> <input type="submit"

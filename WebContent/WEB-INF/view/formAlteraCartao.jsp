@@ -39,7 +39,7 @@
 							value="${cartao.numeroCartao}" readonly="readonly" />
 						<br>
 				Data de Vencimento:<input type="text" name="dataVencimento"
-							placeholder="DD/MM/YYYY"
+							placeholder="DD/MM/YYYY" required="required"
 							value="<fmt:formatDate value="${cartao.dataVencimento}" pattern="dd/MM/yyyy"/>" />
 						<br>
 					</c:if>

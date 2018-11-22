@@ -29,11 +29,11 @@
 				<h1>Tela de Cadastro de novo Voo</h1>
 				<form action="${linkEntradaServlet }" method="post">
 					<c:if test="${usuarioLogado.isAdm ==  'TRUE'}">
-			Origem:<input type="text" name="origem" value="" />
+			Origem:<input type="text" name="origem" value="" required="required" />
 						<br>	
-			Destino:<input type="text" name="destino" value="" />
+			Destino:<input type="text" name="destino" value="" required="required"/>
 						<br>
-			Ida: <input type="text" pattern="\d{1,2}-\d{1,2}-\d{4}"
+			Ida: <input type="text" pattern="\d{1,2}-\d{1,2}-\d{4}" required="required"
 							class="datepicker" name="ida" value="" placeholder="DD-MM-YYYY" />
 						<!-- <input class="datepicker" type="text" name="ida"
 							value="XX-XX-XXXX" readonly /> -->
@@ -42,7 +42,7 @@
 						<br>
 						<input type="radio" name="confirmacao" value="1"> Confirmado<br>
 						<input type="radio" name="confirmacao" value="0">Não Confirmado<br>
-			Valor:<input type="text" name="valorVoo" value="" />
+			Valor:<input type="text" name="valorVoo" value="" required="required"/>
 					</c:if>
 					<br> <br> <input type="hidden" name="acao"
 						value="NovoVoo"> <input type="submit"

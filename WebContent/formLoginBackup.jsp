@@ -22,9 +22,9 @@
 			<a class="navbar-brand" href="#">Trabalho Web2</a>
 		</div>
 		<div class="collapse navbar-collapse" id="myNavbar">
-			<!-- <ul class="nav navbar-nav">
+			<ul class="nav navbar-nav">
 				<li class="active"><a href="#">Home</a></li>
-			</ul> -->
+			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				<li><a href="formEntradaCadastro?cadastrarNovo=true"><span
 						class="glyphicon glyphicon-log-in"></span>Registrar-se</a></li>
@@ -38,14 +38,14 @@
 
 
 
-<div class="container-fluid text-center login--fundo">
-	<div class="row login--card">
+<div class="container-fluid text-center">
+	<div class="row">
 		<div class="col-md-6 col-md-offset-3">
 			<div class="panel panel-login">
 				<div class="panel-heading">
 					<div class="row">
 						<div class="col-xs-12">
-							<h2 class="active nome-empresa">Login</h2>
+							<h2 class="active">Login</h2>
 						</div>
 					</div>
 					<hr>

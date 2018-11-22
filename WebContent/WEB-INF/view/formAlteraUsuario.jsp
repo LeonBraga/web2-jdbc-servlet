@@ -52,19 +52,21 @@
 					onSubmit="return enviarDadosAlteraUsuario();">
 
 					<label for="nome">Nome: </label> <input type="text" name="nome"
-						value="${usuario.nome}" required name=nome /><label for="sobrenome">Sobrenome:</label><input
-						type="text" name="sobrenome" value="${usuario.sobrenome}" required="required">
-					<label for="endereco"> Endereço:</label><input type="text" name="endereco"
-						value="${usuario.endereco}" required="required"> <label for="login">Login:</label><input
-						type="text" name="login" value="${usuario.login}" required="required"> 
-						<label for="senha">Senha:</label><input type="text" name="senha" value="${usuario.senha}" required="required">
-					
-					<label for="data">Data Nascimento:</label> <input  type="text" name="data"
-						value="<fmt:formatDate value="${usuario.dataNascimento }" pattern="dd/MM/yyyy"/>" required="required" />
-					<br>
+						value="${usuario.nome}" name=nome required="required" /><label
+						for="sobrenome">Sobrenome:</label><input type="text"
+						name="sobrenome" value="${usuario.sobrenome}" required="required">
+					<label for="endereco"> Endereço:</label><input type="text"
+						name="endereco" value="${usuario.endereco}" required="required">
+					<label for="login">Login:</label><input type="text" name="login"
+						value="${usuario.login}" required="required"> <label
+						for="senha">Senha:</label><input type="text" name="senha"
+						value="${usuario.senha}" required="required"> <label
+						for="data">Data Nascimento:</label> <input type="text" name="data"
+						value="<fmt:formatDate value="${usuario.dataNascimento }" pattern="dd/MM/yyyy"/>"
+						required="required" /> <br>
 					<c:if test="${usuarioLogado.isAdm=='TRUE'}">
-			 <label for="ehAdm">Usuario possui perfil administrador:</label>
-			 <br>
+						<label for="ehAdm">Usuario possui perfil administrador:</label>
+						<br>
 						<c:if test="${usuario.isAdm=='TRUE'}">
 							<input type="radio" name="ehAdm" value="1" checked="checked"> Administrador<br>
 							<input type="radio" name="ehAdm" value="0"> Cliente
