@@ -1,17 +1,26 @@
-# Projeto   A2 ==>>
-======>OK
-*******>>>NOK
+#INTRUÇÕES PARA EXECUÇÃO
+
+1. Clonar projeto diretamente no Eclipse IDE atravé do menu Import => GIT => Project from Git => Copiar a URL 
+2. Instalar servidor MySql.
+3. Instalar preferencialmente o tomcat 9.
+4. Criar Banco com nome "dbweb2".
+5. Executar a classe createDB como Java Aplication(essa classe executará todo o script de banco de dados).
+6. Executar o projeto como Web Aplication no Server 
+
+
+
+# Projeto desenvolvido para trabalho academico
+
 
 # Telas obrigatórias do Sistema:
- ====>>>OK - a)	Tela de Login, serão 2 perfis, o perfil de cliente e o perfil de administrador do sistema. (cliente e adm) 
- ====>>>OK - b)	Telas de CRUD Cliente (nome, sobrenome, data de nascimento, Endereço, Cadastro do cartão de crédito, login, senha e confirma senha). (acesso à tela: cliente)
- ====>>>OK - c)	Tela de CRUD Administrador do Sistema (Acesso à funcionalidade: adm geral do sistema)
- ====>>>OK - d)	Tela de CRUD de Vôos (Acesso à tela: adm)
-*******>>>PENDENCIA VOO - VOLTA - e)	Tela de Compra de passagem Aérea (ida, data da ida, volta, data da volta, opção de marcar só ida) (Acesso à tela: cliente) 
-*******>>> - f)	Tela da Lista de resultados e escolha do vôo do cliente com destaque da linha após ser escolhido e botão de enviar. (acesso à tela: cliente)
-====>>>OK - g)	Tela de escolha de assento e Cálculo do valor final (acesso à tela: cliente)
-====>>>OK - h)	Tela de finalização da compra (acesso à tela: cliente)
-*******>>> - i)	Tela de acompanhamento dos pedidos de vôos (acesso à tela: cliente e adm)
+- a)	Tela de Login, serão 2 perfis, o perfil de cliente e o perfil de administrador do sistema. (cliente e adm) 
+- b)	Telas de CRUD Cliente (nome, sobrenome, data de nascimento, Endereço, Cadastro do cartão de crédito, login, senha e confirma senha). (acesso à tela: cliente)
+- c)	Tela de CRUD Administrador do Sistema (Acesso à funcionalidade: adm geral do sistema)
+- d)	Tela de CRUD de Vôos (Acesso à tela: adm)
+- e)	Tela de Compra de passagem Aérea (ida, data da ida, volta, data da volta, opção de marcar só ida) (Acesso à tela: cliente) 
+- f)	Tela da Lista de resultados e escolha do vôo do cliente com destaque da linha após ser escolhido e botão de enviar. (acesso à tela: cliente)- g)	Tela de escolha de assento e Cálculo do valor final (acesso à tela: cliente)
+- h)	Tela de finalização da compra (acesso à tela: cliente)
+- i)	Tela de acompanhamento dos pedidos de vôos (acesso à tela: cliente e adm)
 
 
 (Obs: O administrador geral do sistema é cadastrado no próprio banco de dados, somente ele pode cadastrar administradores do sistema)
