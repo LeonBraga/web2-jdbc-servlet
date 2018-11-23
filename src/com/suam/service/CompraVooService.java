@@ -8,8 +8,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.suam.VO.CompraVooVO;
 import com.suam.bean.Assento;
-import com.suam.bean.CompraVoo;
 import com.suam.bean.Usuario;
 import com.suam.factory.ConnectionFactory;
 import com.suam.util.DataUtils;
@@ -40,7 +40,7 @@ public class CompraVooService {
 		return idCompra;
 	}
 
-	public static void inserir(CompraVoo compra) throws SQLException {
+	public static void inserir(CompraVooVO compra) throws SQLException {
 		Connection conexao = ConnectionFactory.getConnection();
 
 		String sql;
@@ -178,10 +178,10 @@ public class CompraVooService {
 	}
 
 	// Listando Todas as Compras
-	public static List<CompraVoo> ListaCompras() throws SQLException {
+	public static List<CompraVooVO> ListaCompras() throws SQLException {
 
 		Connection connection = ConnectionFactory.getConnection();
-		List<CompraVoo> listaCompras = new ArrayList<CompraVoo>();
+		List<CompraVooVO> listaCompras = new ArrayList<CompraVooVO>();
 
 		Statement statement = connection.createStatement();
 		statement.execute("select * from compravoo ");
@@ -189,26 +189,26 @@ public class CompraVooService {
 		ResultSet rs = statement.getResultSet();
 
 		while (rs.next()) {
-			CompraVoo compraVoo = new CompraVoo();
-			compraVoo.setIdUser(rs.getInt("usuario_IDUSUARIO"));
-			compraVoo.setIdCartao(rs.getString("cartaodecredito_NUMEROCARTAO"));
-			compraVoo.setIdVoo(rs.getInt("voo_idvoo"));
-			compraVoo.setIdVooVolta(rs.getInt("voo_idvooVolta"));
-			compraVoo.setValorTotalCompra(rs.getInt("valorTotalCompra"));
-			compraVoo.setIdCompra(rs.getString("idcompraVoo"));
+			CompraVooVO compraVooVO = new CompraVooVO();
+			compraVooVO.setIdUser(rs.getInt("usuario_IDUSUARIO"));
+			compraVooVO.setIdCartao(rs.getString("cartaodecredito_NUMEROCARTAO"));
+			compraVooVO.setIdVoo(rs.getInt("voo_idvoo"));
+			compraVooVO.setIdVooVolta(rs.getInt("voo_idvooVolta"));
+			compraVooVO.setValorTotalCompra(rs.getInt("valorTotalCompra"));
+			compraVooVO.setIdCompra(rs.getString("idcompraVoo"));
 			Usuario usuario = new Usuario();
-			usuario = UsuarioService.buscaUsuarioPelaIdHistoricoDeCompras(compraVoo.getIdUser());
-			compraVoo.setNomeUsuario(usuario.getNome() + " " + usuario.getSobrenome());
+			usuario = UsuarioService.buscaUsuarioPelaIdHistoricoDeCompras(compraVooVO.getIdUser());
+			compraVooVO.setNomeUsuario(usuario.getNome() + " " + usuario.getSobrenome());
 
 			String dataRecebida = rs.getString("horaDaCompra");
-			compraVoo.setHoraCompra(dataRecebida);
+			compraVooVO.setHoraCompra(dataRecebida);
 
-			listaCompras.add(compraVoo);
+			listaCompras.add(compraVooVO);
 		}
 
-		for (CompraVoo compraVoo : listaCompras) {
-			System.out.println("HORA: "+compraVoo.getHoraCompra());
-			System.out.println("ID USER "+ compraVoo.getIdUser());
+		for (CompraVooVO compraVooVO : listaCompras) {
+			System.out.println("HORA: "+compraVooVO.getHoraCompra());
+			System.out.println("ID USER "+ compraVooVO.getIdUser());
 		}
 
 		rs.close();
@@ -218,11 +218,11 @@ public class CompraVooService {
 	}
 
 	// Listando Todas as Compras
-	public static CompraVoo comprasPorId(Integer idcompraVoo) throws SQLException {
+	public static CompraVooVO comprasPorId(Integer idcompraVoo) throws SQLException {
 		Connection conexao = ConnectionFactory.getConnection();
 		String sql = "select * from compravoo where idcompraVoo = ?  ";
 
-		CompraVoo compraVoo = new CompraVoo();
+		CompraVooVO compraVooVO = new CompraVooVO();
 		try {
 			PreparedStatement ps = conexao.prepareStatement(sql);
 			ps.setInt(1, idcompraVoo);
@@ -230,15 +230,15 @@ public class CompraVooService {
 			System.out.println("CONSULTAR SELECT: " + ps);
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
-				compraVoo.setIdUser(rs.getInt("usuario_IDUSUARIO"));
-				compraVoo.setIdCartao(rs.getString("cartaodecredito_NUMEROCARTAO"));
-				compraVoo.setIdVoo(rs.getInt("voo_idvoo"));
-				compraVoo.setIdVooVolta(rs.getInt("voo_idvooVolta"));
-				compraVoo.setValorTotalCompra(rs.getInt("valorTotalCompra"));
-				compraVoo.setIdCompra(rs.getString("idcompraVoo"));
+				compraVooVO.setIdUser(rs.getInt("usuario_IDUSUARIO"));
+				compraVooVO.setIdCartao(rs.getString("cartaodecredito_NUMEROCARTAO"));
+				compraVooVO.setIdVoo(rs.getInt("voo_idvoo"));
+				compraVooVO.setIdVooVolta(rs.getInt("voo_idvooVolta"));
+				compraVooVO.setValorTotalCompra(rs.getInt("valorTotalCompra"));
+				compraVooVO.setIdCompra(rs.getString("idcompraVoo"));
 
 				String dataRecebida = rs.getString("horaDaCompra");
-				compraVoo.setHoraCompra(dataRecebida);
+				compraVooVO.setHoraCompra(dataRecebida);
 			}
 			conexao.commit();
 		} catch (SQLException e) {
@@ -249,7 +249,7 @@ public class CompraVooService {
 			conexao.close();
 		}
 
-		return compraVoo;
+		return compraVooVO;
 	}
 
 	public static List<Integer> comprasAssentosVooIda(Integer idcompraVoo, Integer idVoo) throws SQLException {

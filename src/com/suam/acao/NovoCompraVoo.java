@@ -119,9 +119,10 @@ import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.suam.VO.CompraVooVO;
 import com.suam.bean.Assento;
 import com.suam.bean.CartaoDeCredito;
-import com.suam.bean.CompraVoo;
 import com.suam.bean.Usuario;
 import com.suam.bean.Voo;
 import com.suam.constantes.Info.InfoCampos;
@@ -168,7 +169,7 @@ public class NovoCompraVoo implements Acao {
 		if (voo_idvooVolta != null && voo_idvooVolta != "" && voo_idvooVolta != "null") {
 			idVooVolta = Integer.valueOf(voo_idvooVolta);
 		}
-		CompraVoo compra = new CompraVoo();
+		CompraVooVO compra = new CompraVooVO();
 		List<Assento> listaNumeroAssentoIda = new ArrayList<Assento>();
 		List<Assento> listaNumeroAssentoVolta = new ArrayList<Assento>();
 

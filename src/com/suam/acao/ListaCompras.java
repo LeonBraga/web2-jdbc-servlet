@@ -7,7 +7,8 @@ import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import com.suam.bean.CompraVoo;
+
+import com.suam.VO.CompraVooVO;
 import com.suam.service.CompraVooService;
 
 
@@ -18,7 +19,7 @@ public class ListaCompras implements Acao {
 
 		System.out.println("AÇÃO = LISTANDO COMPRAS");
 
-		List<CompraVoo> listaCompras = new ArrayList<CompraVoo>();
+		List<CompraVooVO> listaCompras = new ArrayList<CompraVooVO>();
 		// HashMap<Integer, CompraVoo> mapCompras = new HashMap<Integer, CompraVoo>();
 
 		try {

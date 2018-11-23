@@ -5,7 +5,7 @@ import java.util.List;
 
 import com.suam.bean.Assento;
 
-public class CompraVooVO {
+public class CompraVoo {
 
 	// protected Integer idCompra;
 	protected Integer idVoo;

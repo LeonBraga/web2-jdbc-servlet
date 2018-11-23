@@ -5,7 +5,8 @@ import java.sql.SQLException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import com.suam.bean.CompraVoo;
+
+import com.suam.VO.CompraVooVO;
 import com.suam.bean.Usuario;
 import com.suam.constantes.Info.InfoCampos;
 import com.suam.service.CompraVooService;
@@ -26,37 +27,37 @@ public class MostraCompra implements Acao {
 			request.setAttribute("erro", info);
 			return "forward:erro.jsp";
 		}
-		CompraVoo compraVoo = new CompraVoo();
+		CompraVooVO compraVooVO = new CompraVooVO();
 		Usuario usuario = new Usuario();
 
 		try {
-			compraVoo = CompraVooService.comprasPorId(idCompraInt);
+			compraVooVO = CompraVooService.comprasPorId(idCompraInt);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		try {
-			usuario = UsuarioService.buscaUsuarioPelaIdHistoricoDeCompras(compraVoo.getIdUser());
+			usuario = UsuarioService.buscaUsuarioPelaIdHistoricoDeCompras(compraVooVO.getIdUser());
 		} catch (SQLException e1) {
 			e1.printStackTrace();
 		}
 
 		try {
-			compraVoo.setListaNumeroAssentosIda(
-					CompraVooService.comprasAssentosVooIda(idCompraInt, compraVoo.getIdVoo()));
+			compraVooVO.setListaNumeroAssentosIda(
+					CompraVooService.comprasAssentosVooIda(idCompraInt, compraVooVO.getIdVoo()));
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 
-		if (compraVoo.getIdVooVolta() != null) {
+		if (compraVooVO.getIdVooVolta() != null) {
 			try {
-				compraVoo.setListaNumeroAssentosVolta(
-						CompraVooService.comprasAssentosVooVolta(idCompraInt, compraVoo.getIdVooVolta()));
+				compraVooVO.setListaNumeroAssentosVolta(
+						CompraVooService.comprasAssentosVooVolta(idCompraInt, compraVooVO.getIdVooVolta()));
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
 		}
 	
-		compraVoo.setNomeUsuario(usuario.getNome()+" "+usuario.getSobrenome());
+		compraVooVO.setNomeUsuario(usuario.getNome()+" "+usuario.getSobrenome());
 
 		/*
 		 * try { listaAssentoPagamentoConfirmado =
@@ -66,7 +67,7 @@ public class MostraCompra implements Acao {
 		// Integer valorTotal = (listaAssentoPagamentoConfirmado.size() *
 		// voo.getValorVoo())+valorTotal;
 
-		request.setAttribute("compra", compraVoo);
+		request.setAttribute("compra", compraVooVO);
 		return "forward:mostraCompra.jsp";
 	}
 }

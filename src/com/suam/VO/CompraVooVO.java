@@ -1,10 +1,10 @@
-/*package com.suam.bean;
+package com.suam.VO;
 
 import java.util.List;
 
 import com.suam.bean.Assento;
 
-public class CompraVoo {
+public class CompraVooVO {
 
 	// protected Integer idCompra;
 	protected String idCompra;
@@ -120,4 +120,3 @@ public class CompraVoo {
 	
 	
 }
-*/
