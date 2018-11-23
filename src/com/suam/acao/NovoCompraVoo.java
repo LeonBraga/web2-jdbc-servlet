@@ -124,6 +124,7 @@ import com.suam.bean.CartaoDeCredito;
 import com.suam.bean.CompraVoo;
 import com.suam.bean.Usuario;
 import com.suam.bean.Voo;
+import com.suam.constantes.Info.InfoCampos;
 import com.suam.service.AssentoService;
 import com.suam.service.CartaoDeCreditoService;
 import com.suam.service.CompraVooService;
@@ -148,7 +149,7 @@ public class NovoCompraVoo implements Acao {
 		CartaoDeCredito cartao = new CartaoDeCredito();
 
 		if (paramId == null || paramId.equals("")) {
-			info = "Alguma coisa não funcionou!!";
+			info = InfoCampos.GENERICO;
 			request.setAttribute("erro", info);
 			return "forward:erro.jsp";
 		}
@@ -180,7 +181,7 @@ public class NovoCompraVoo implements Acao {
 		}
 
 		if (assento == null) {
-			info = "Você não selecionou nenhum assento";
+			info = InfoCampos.ASSENTO_NAO_SELECIONADO;
 			request.setAttribute("erro", info);
 			return "forward:erro.jsp";
 		}
@@ -273,6 +274,7 @@ public class NovoCompraVoo implements Acao {
 		request.setAttribute("compradorId", paramId);
 		request.setAttribute("idParam", paramId);
 
+		request.setAttribute("info", InfoCampos.SUCESSO);
 		return "forward:compraRealizadaComSucesso.jsp";
 
 	}

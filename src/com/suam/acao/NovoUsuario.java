@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.suam.bean.Usuario;
+import com.suam.constantes.Info.InfoCampos;
 import com.suam.service.UsuarioService;
 
 public class NovoUsuario implements Acao {
@@ -30,31 +31,31 @@ public class NovoUsuario implements Acao {
 
 		String info = null;
 
-		if (nome == null || nome.equals("")) {
-			info = "Nome não preenchido";
+		if (nome == null  ||nome.equals("")) {
+			info = InfoCampos.NOME_PROBLEMA;
 			request.setAttribute("erro", info);
 			return "forward:erro.jsp";
-		} else if (sobrenome == null || sobrenome.equals("")) {
-			info = "Sobrenome não preenchido";
+		} else if (sobrenome == null  ||sobrenome.equals("")) {
+			info = InfoCampos.SOBRENOME_PROBLEMA;
 			request.setAttribute("erro", info);
 			return "forward:erro.jsp";
-		} else if (endereco == null || endereco.equals("")) {
-			info = "Endereço não informado!";
+		} else if (endereco == null ||endereco.equals("")) {
+			info = InfoCampos.ENDERECO_PROBLEMA;
 			request.setAttribute("erro", info);
 			return "forward:erro.jsp";
-		} else if (senha == null || senha.equals("")) {
-			info = "Senha não informada!";
+		} else if (senha == null  ||senha.equals("")) {
+			info = InfoCampos.SENHA_PROBLEMA;
 			request.setAttribute("erro", info);
 			return "forward:erro.jsp";
-		} else if (login == null || login.equals("")) {
-			info = "Login não informado!";
+		} else if (login == null ||login.equals("")) {
+			info = InfoCampos.LOGIN_PROBLEMA;
 			request.setAttribute("erro", info);
 			return "forward:erro.jsp";
-		} else if (data == null || data.equals("")) {
-			info = "Data não informada!";
+		} else if (data == null ||data.equals("")) {
+			info = InfoCampos.DATA_PROBLEMA;
 			request.setAttribute("erro", info);
 			return "forward:erro.jsp";
-		}
+		} 
 
 		Usuario usuario = new Usuario();
 		SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");

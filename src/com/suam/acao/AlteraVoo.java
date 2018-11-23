@@ -6,6 +6,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import com.suam.bean.Voo;
+import com.suam.constantes.Info.InfoCampos;
 import com.suam.service.VooService;
 
 public class AlteraVoo implements Acao {
@@ -26,27 +27,27 @@ public class AlteraVoo implements Acao {
 		String info = null;
 
 		if (origem == null ||origem.equals("")) {
-			info = "Origem não preenchido";
+			info = InfoCampos.ORIGEM_PROBLEMA;
 			request.setAttribute("erro", info);
 			return "forward:erro.jsp";
 		} else if (destino == null ||destino.equals("")) {
-			info = "Destino não prennchido";
+			info = InfoCampos.DESTINO_PROBLEMA;
 			request.setAttribute("erro", info);
 			return "forward:erro.jsp";
 		} else if (ida == null ||ida.equals("")) {
-			info = "Data de ida não informado!";
+			info = InfoCampos.IDA_PROBLEMA;
 			request.setAttribute("erro", info);
 			return "forward:erro.jsp";
 		} else if (confirmacao == null ||confirmacao.equals("")){
-			info = "Confirmacao não informada!";
+			info = InfoCampos.CONFIRMACAO_PROBLEMA;
 			request.setAttribute("erro", info);
 			return "forward:erro.jsp";
 		} else if (valorVoo == null ||valorVoo.equals("")) {
-			info = "Preço não informado!";
+			info = InfoCampos.VALOR_PROBLEMA;
 			request.setAttribute("erro", info);
 			return "forward:erro.jsp";
 		} else if (idVoo == null ||idVoo.equals("")) {
-			info = "Alguma coisa não funcionou!!";
+			info = InfoCampos.GENERICO;
 			request.setAttribute("erro", info);
 			return "forward:erro.jsp";
 		}

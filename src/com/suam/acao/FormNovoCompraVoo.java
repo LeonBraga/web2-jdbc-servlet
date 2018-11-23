@@ -11,6 +11,7 @@ import com.suam.bean.Assento;
 import com.suam.bean.CartaoDeCredito;
 import com.suam.bean.Usuario;
 import com.suam.bean.Voo;
+import com.suam.constantes.Info.InfoCampos;
 import com.suam.service.AssentoService;
 import com.suam.service.CartaoDeCreditoService;
 import com.suam.service.UsuarioService;
@@ -31,7 +32,7 @@ public class FormNovoCompraVoo implements Acao {
 		String info = null;
 
 		 if (compradorId == null ||compradorId.equals("")) {
-			info = "Alguma coisa não funcionou!!";
+			info = InfoCampos.GENERICO;
 			request.setAttribute("erro", info);
 			return "forward:erro.jsp";
 		}

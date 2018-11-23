@@ -1,4 +1,5 @@
-/*package com.suam.VO;
+package br.com.suam.TESTE.VO;
+/*package br.com.suam.TESTE.VO;
 
 import java.util.List;
 

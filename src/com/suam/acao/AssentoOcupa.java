@@ -6,6 +6,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import com.suam.bean.Assento;
+import com.suam.constantes.Info.InfoCampos;
 import com.suam.service.AssentoService;
 
 public class AssentoOcupa implements Acao {
@@ -42,7 +43,7 @@ public class AssentoOcupa implements Acao {
 		if (numeroAssento != null || numeroAssentoOcupado != null
 				|| (numeroAssentoVolta != null || numeroAssentoOcupadoVolta != null)) {
 		} else {
-			info = "Você não escolheu nenhum assento";
+			info = InfoCampos.ASSENTO_NAO_SELECIONADO;
 			request.setAttribute("erro", info);
 			return "forward:erro.jsp";
 		}

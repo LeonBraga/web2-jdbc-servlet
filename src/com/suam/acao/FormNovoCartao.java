@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.suam.bean.Usuario;
+import com.suam.constantes.Info.InfoCampos;
 import com.suam.service.UsuarioService;
 
 public class FormNovoCartao implements Acao {
@@ -21,13 +22,12 @@ public class FormNovoCartao implements Acao {
 		String info = null;
 		
 		if (paramId == null ||paramId.equals("")) {
-			info = "Alguma coisa não funcionou!!";
+			info = InfoCampos.GENERICO;
 			request.setAttribute("erro", info);
 			return "forward:erro.jsp";
 		}
 		
 		Usuario user = null;
-		System.out.println("FORM NOVO CARTAO 1 ==>");
 		try {
 			user = UsuarioService.buscaUsuarioPelaId(id);
 		} catch (SQLException e) {

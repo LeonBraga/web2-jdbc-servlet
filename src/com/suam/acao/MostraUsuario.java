@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.suam.bean.CartaoDeCredito;
 import com.suam.bean.Usuario;
+import com.suam.constantes.Info.InfoCampos;
 import com.suam.service.CartaoDeCreditoService;
 import com.suam.service.UsuarioService;
 
@@ -23,7 +24,7 @@ public class MostraUsuario implements Acao {
 		String info = null;
 
 		if (paramId == null || paramId.equals("")) {
-			info = "Alguma coisa não funcionou!!";
+			info = InfoCampos.GENERICO;
 			request.setAttribute("erro", info);
 			return "forward:erro.jsp";
 		}

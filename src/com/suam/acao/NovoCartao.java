@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.suam.bean.CartaoDeCredito;
 import com.suam.bean.Usuario;
+import com.suam.constantes.Info.InfoCampos;
 import com.suam.service.CartaoDeCreditoService;
 import com.suam.service.UsuarioService;
 
@@ -30,19 +31,19 @@ public class NovoCartao implements Acao {
 		CartaoDeCredito cartao = new CartaoDeCredito();
 
 		if(nome == null ||nome.equals("")) {
-			info = "Nome não preenchido";
+			info = InfoCampos.NOME_PROBLEMA;
 			request.setAttribute("erro", info);
 			return "forward:erro.jsp";
 		}else if(numero == null ||numero.equals("")) {
-			info = "Cartão não preenchido";
+			info = InfoCampos.NUMERO_CARTAO;
 			request.setAttribute("erro", info);
 			return "forward:erro.jsp";
 		}else if(data == null  || data.equals("")) {
-			info = "Data de vencimento não informada!";
+			info = InfoCampos.DATA_PROBLEMA;
 			request.setAttribute("erro", info);
 			return "forward:erro.jsp";
 		}else if(idUser == null  ||idUser.equals("")) {
-			info = "Alguma coisa não funcionou!!";
+			info = InfoCampos.GENERICO;
 			request.setAttribute("erro", info);
 			return "forward:erro.jsp";
 		}
