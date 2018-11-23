@@ -17,7 +17,7 @@
 
 });*/
 
-//Filtro
+//Filtro de Busca
 $(function() {
 	$("#txtBusca").keyup(function() {
 		var texto = $(this).val();
@@ -30,8 +30,6 @@ $(function() {
 		});
 	});
 });
-
-// ***************************************************************
 
 // Quando um checkbox da tela de listagem de assentos for selecionado
 window.onload = function() {
@@ -51,8 +49,6 @@ window.onload = function() {
 // $("#ocupa").toggle(this.checked);
 // });
 
-// *****************************************************************
-
 // Escondendo voo de volta ao carregar a página
 window.onload = function() {
 	$("#ulVolta").hide();
@@ -65,7 +61,6 @@ function uncheckVooVolta() {
 	var x = document.getElementsByName("voltaId");
 	// console.log(document.getElementById("vooDeVolta"))
 	// console.log(document.getElementsByName("voltaId"))
-
 	var i;
 	for (i = 0; i < x.length; i++) {
 		if (x[i].type == "radio") {
@@ -73,7 +68,6 @@ function uncheckVooVolta() {
 			x[i].checked = false;
 		}
 	}
-
 }
 
 $(document).ready(function() {
@@ -82,12 +76,13 @@ $(document).ready(function() {
 		console.log(this.value)
 		if (this.value == 'on') {
 			uncheckVooVolta();
-			// CRIAR O HIDE ==>
+			// Esconde
 			// $("input[type=radio]").click(function() {
 			$("#ulVolta").hide();
 			// });
 		}
 		if (this.value == '1') {
+			// Mostra
 			// $("input[type=radio]").click(function() {
 			$("#ulVolta").show();
 			// });
@@ -102,13 +97,15 @@ $(document).ready(function() {
 		var id = $(".liIdaImput" + this.value).val();
 		console.log("Ida***" + id);
 		$(".liIda").css("background", "");
+		$(".liVolta").show();
 		if (this.value > 0 && id == this.value) {
-			// muda a cor do fudo quando for marcado
-			/* a função muda o background da div com id="box" */
+			// Muda a cor do fudo quando for marcado
+			// A função muda o background da div com id="#liSelect"
 			$("#liSelect" + this.value).css("background", "#BDB76B");
-
+			$("#liSelect" + this.value + "Volta").css("background", "");
+			$(".liVoltaImput" + this.value).checked = false;
+			$("#liSelect" + this.value + "Volta").hide();
 		}
-
 	});
 });
 
@@ -119,11 +116,22 @@ $(document).ready(function() {
 		console.log("Volta***" + id);
 		$(".liVolta").css("background", "");
 		if (this.value > 0 && id == this.value) {
-			// muda a cor do fudo quando for marcado
-			/* a função muda o background da div com id="box" */
+			// Muda a cor do fudo quando for marcado
+			// A função muda o background da div com id="#liSelect"
 			$("#liSelect" + this.value + "Volta").css("background", "#BDB76B");
-
 		}
-
 	});
 });
+
+//Escondendo voo de ida SELECIONADO na lista dos voos de volta
+/*$(document).ready(function() {
+	// $('input[type=radio]').click(function() {
+	$('#ulItens').find('input[type=radio]').click(function() {
+		var id = $(".liIdaImput" + this.value).val();
+		$(".liIda").css("background", "");
+		if (this.value > 0 && id == this.value) {
+			console.log("Voo Ida selecionado: " + id);
+			$("#liSelect" + this.value + "Volta").hide();
+		}
+	});
+});*/
