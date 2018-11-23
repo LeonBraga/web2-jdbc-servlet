@@ -9,7 +9,7 @@
 
 
 
-# Projeto desenvolvido para trabalho academico
+# Projeto desenvolvido no Disciplina de desenvolvimento WEB II.
 
 
 # Telas obrigatórias do Sistema:
