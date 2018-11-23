@@ -1,10 +1,10 @@
 #INTRUÇÕES PARA EXECUÇÃO
 
-1. Clonar projeto diretamente no Eclipse IDE atravé do menu Import => GIT => Project from Git => Copiar a URL 
+1. Clonar projeto diretamente no Eclipse IDE através do menu Import => GIT => Project from Git => Copiar a URL 
 2. Instalar servidor MySql.
 3. Instalar preferencialmente o tomcat 9.
 4. Criar Banco com nome "dbweb2".
-5. Executar a classe createDB como Java Aplication(essa classe executará todo o script de banco de dados).
+5. Executar a classe com.suam.a.CreateDB.createDB como Java Aplication(essa classe executará todo o script de banco de dados).
 6. Executar o projeto como Web Aplication no Server 
 
 
