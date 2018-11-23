@@ -1,0 +1,119 @@
+DROP TABLE IF EXISTS usuario;
+CREATE TABLE usuario (
+  IDUSUARIO int(11) NOT NULL AUTO_INCREMENT,
+  NOME varchar(25) NOT NULL,
+  SOBRENOME varchar(50) NOT NULL,
+  ENDERECO varchar(255) NOT NULL,
+  SENHA varchar(12) NOT NULL,
+  LOGIN varchar(20) NOT NULL,
+  DATANASCIMENTO varchar(12) NOT NULL,
+  isadm tinyint(1) DEFAULT NULL,
+  exclusaoLogica tinyint(1) DEFAULT '1',
+  PRIMARY KEY (IDUSUARIO)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+
+LOCK TABLES usuario WRITE;
+INSERT INTO usuario VALUES (0,'padraoAssento','','','','','',1,1),(1,'Anderson','Ferreira Canel','Rua Sev','adm','adm','15/04/1988',1,1);
+UNLOCK TABLES;
+
+
+
+
+
+
+
+DROP TABLE IF EXISTS cartaodecredito;
+CREATE TABLE cartaodecredito (
+  NUMEROCARTAO varchar(19) NOT NULL,
+  DATAVENCIMENTO varchar(12) NOT NULL,
+  USUARIO_IDUSUARIO int(11) NOT NULL,
+  exclusaoLogica tinyint(1) DEFAULT '1',
+  PRIMARY KEY (NUMEROCARTAO),
+  KEY USUARIO_IDUSUARIO (USUARIO_IDUSUARIO),
+  CONSTRAINT  FOREIGN KEY (USUARIO_IDUSUARIO) REFERENCES usuario (IDUSUARIO)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+
+
+
+
+DROP TABLE IF EXISTS voo;
+CREATE TABLE voo (
+  idvoo int(11) NOT NULL AUTO_INCREMENT,
+  ida datetime NOT NULL,
+  origem varchar(100) NOT NULL,
+  destino varchar(100) NOT NULL,
+  confirmacao tinyint(1) NOT NULL DEFAULT '0',
+  valorVoo int(11) NOT NULL DEFAULT '0',
+  exclusaoLogica tinyint(1) DEFAULT '1',
+  PRIMARY KEY (idvoo)
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8;
+
+
+
+
+
+
+DROP TABLE IF EXISTS assento;
+CREATE TABLE assento (
+  idassento int(11) NOT NULL,
+  ocupado tinyint(1) NOT NULL DEFAULT '0',
+  voo_idvoo int(11) NOT NULL,
+  USUARIO_IDUSUARIO int(11) NOT NULL DEFAULT '0',
+  exclusaoLogica tinyint(1) DEFAULT '1',
+  comfirmaPagamento tinyint(1) DEFAULT '0',
+  KEY fk_assento_voo1_idx (voo_idvoo),
+  KEY fk_assento_USUARIO1_idx (USUARIO_IDUSUARIO),
+  CONSTRAINT fk_assento_USUARIO1 FOREIGN KEY (USUARIO_IDUSUARIO) REFERENCES usuario (IDUSUARIO) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT fk_assento_voo1 FOREIGN KEY (voo_idvoo) REFERENCES voo (idvoo) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+
+
+
+
+
+DROP TABLE IF EXISTS compravoo;
+CREATE TABLE compravoo (
+  idcompraVoo int(11) NOT NULL AUTO_INCREMENT,
+  voo_idvoo int(11) NOT NULL,
+  voo_idvooVolta int(11) DEFAULT NULL,
+  usuario_IDUSUARIO int(11) NOT NULL,
+  cartaodecredito_NUMEROCARTAO varchar(19) NOT NULL,
+  valorTotalCompra int(11) NOT NULL DEFAULT '0',
+  horaDaCompra datetime NOT NULL,
+  exclusaoLogica tinyint(1) DEFAULT '1',
+  PRIMARY KEY (idcompraVoo),
+  KEY fk_compravoo_voo1_idx (voo_idvoo),
+  KEY fk_compravoo_usuario1_idx (usuario_IDUSUARIO),
+  KEY fk_compravoo_cartaodecredito1_idx (cartaodecredito_NUMEROCARTAO),
+  KEY fk_compravoo_voo2_idx (voo_idvooVolta),
+  CONSTRAINT fk_compravoo_cartaodecredito1 FOREIGN KEY (cartaodecredito_NUMEROCARTAO) REFERENCES cartaodecredito (NUMEROCARTAO) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT fk_compravoo_usuario1 FOREIGN KEY (usuario_IDUSUARIO) REFERENCES usuario (IDUSUARIO) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT fk_compravoo_voo1 FOREIGN KEY (voo_idvoo) REFERENCES voo (idvoo) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT fk_compravoo_voo2 FOREIGN KEY (voo_idvooVolta) REFERENCES voo (idvoo) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+
+
+
+
+
+
+
+
+
+DROP TABLE IF EXISTS assentoscompradosporvoo;
+CREATE TABLE assentoscompradosporvoo (
+  assenNumero int(11) NOT NULL,
+  vooId int(11) DEFAULT NULL,
+  vooIdVolta int(11) DEFAULT NULL,
+  compravoo_idcompraVoo int(11) NOT NULL,
+  KEY fk_assentoSCompradosPorVoo_compravoo1_idx (compravoo_idcompraVoo),
+  CONSTRAINT fk_assentoSCompradosPorVoo_compravoo1 FOREIGN KEY (compravoo_idcompraVoo) REFERENCES compravoo (idcompraVoo) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+
