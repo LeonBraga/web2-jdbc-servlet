@@ -23,7 +23,7 @@
 
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
-				<li><a href="entrada?acao=Logout"><span
+				<li><a href="entrada?acao=Logout&idUsuario=${usuarioLogado.id}"><span
 						class="glyphicon glyphicon-log-in"></span>Sair</a></li>
 			</ul>
 		</div>

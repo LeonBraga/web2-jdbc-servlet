@@ -166,7 +166,7 @@ public class AssentoService {
 			PreparedStatement ps = conexao.prepareStatement(sql);
 			ps.setInt(1, usuarioId);
 			ps.setInt(2, vooId);
-			
+
 			ResultSet rs = ps.executeQuery();
 
 			while (rs.next()) {
@@ -182,14 +182,14 @@ public class AssentoService {
 					assento.setOcupado(false);
 					listaAssentos.remove(assento);
 				}
-				
+
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return listaAssentos;
 	}
-	
+
 	public static List<Assento> listarAssentosPorUsuarioId(Integer usuarioId) throws SQLException {
 		Connection conexao = ConnectionFactory.getConnection();
 		List<Assento> listaAssentos = new ArrayList<Assento>();
@@ -199,7 +199,7 @@ public class AssentoService {
 			PreparedStatement ps = conexao.prepareStatement(sql);
 			ps.setInt(1, usuarioId);
 			ResultSet rs = ps.executeQuery();
-			
+
 			while (rs.next()) {
 				Assento assento = new Assento();
 				assento.setNumeroAssento(rs.getInt("idassento"));
@@ -213,15 +213,15 @@ public class AssentoService {
 					assento.setOcupado(false);
 					listaAssentos.remove(assento);
 				}
-				
+
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return listaAssentos;
 	}
-	
-	//Ao excluir um usuario, desocupar seus assentos
+
+	// Ao excluir um usuario, desocupar seus assentos
 	public static Boolean desocuparAssentoPorUsuarioId(Integer usuarioId) throws SQLException {
 		Connection conexao = ConnectionFactory.getConnection();
 
@@ -242,99 +242,124 @@ public class AssentoService {
 		}
 		return true;
 	}
-	
-	
-	//Ao excluir um usuario desocupar seus assentos
-		public static Boolean PagamentoAssentoPorUsuarioId(Integer usuarioId, Integer numeroAssento, Integer vooId) throws SQLException {
-			Connection conexao = ConnectionFactory.getConnection();
 
-			String sql = "UPDATE assento SET comfirmaPagamento ='1',  USUARIO_IDUSUARIO = ? WHERE idassento = ? and voo_idvoo = ?";
+	// Ao excluir um usuario desocupar seus assentos
+	public static Boolean PagamentoAssentoPorUsuarioId(Integer usuarioId, Integer numeroAssento, Integer vooId)
+			throws SQLException {
+		Connection conexao = ConnectionFactory.getConnection();
 
-			try {
-				System.out.println("GRAVANDO CONFIRMA플O DE PAGAMENTO");
-				PreparedStatement ps = conexao.prepareStatement(sql);
-				ps.setInt(1, usuarioId);
-				ps.setInt(2, numeroAssento);
-				ps.setInt(3, vooId);
+		String sql = "UPDATE assento SET comfirmaPagamento ='1',  USUARIO_IDUSUARIO = ? WHERE idassento = ? and voo_idvoo = ?";
 
-				ps.execute();
-				conexao.commit();
-			} catch (SQLException e) {
-				System.out.println("ERRO AO GRAVAR CONFIRMA플O DE PAGAMENTO");
-				conexao.rollback();
-				e.printStackTrace();
-				throw new SQLException();
-			} finally {
-				conexao.close();
-			}
-			return true;
+		try {
+			System.out.println("GRAVANDO CONFIRMA플O DE PAGAMENTO");
+			PreparedStatement ps = conexao.prepareStatement(sql);
+			ps.setInt(1, usuarioId);
+			ps.setInt(2, numeroAssento);
+			ps.setInt(3, vooId);
+
+			ps.execute();
+			conexao.commit();
+		} catch (SQLException e) {
+			System.out.println("ERRO AO GRAVAR CONFIRMA플O DE PAGAMENTO");
+			conexao.rollback();
+			e.printStackTrace();
+			throw new SQLException();
+		} finally {
+			conexao.close();
 		}
-		
-		public static List<Assento> listarAssentosPagosPorUsuarioIdVooId(Integer usuarioId, Integer vooId) throws SQLException {
-			Connection conexao = ConnectionFactory.getConnection();
-			List<Assento> listaAssentos = new ArrayList<Assento>();
+		return true;
+	}
 
-			String sql = "SELECT * FROM assento WHERE USUARIO_IDUSUARIO = ? and voo_idvoo =? and comfirmaPagamento ='1'";
-			try {
-				PreparedStatement ps = conexao.prepareStatement(sql);
-				ps.setInt(1, usuarioId);
-				ps.setInt(2, vooId);
-				
-				ResultSet rs = ps.executeQuery();
+	public static List<Assento> listarAssentosPagosPorUsuarioIdVooId(Integer usuarioId, Integer vooId)
+			throws SQLException {
+		Connection conexao = ConnectionFactory.getConnection();
+		List<Assento> listaAssentos = new ArrayList<Assento>();
 
-				while (rs.next()) {
-					Assento assento = new Assento();
-					assento.setNumeroAssento(rs.getInt("idassento"));
-					assento.setIdVoo(rs.getInt("voo_idvoo"));
-					assento.setOcupado(rs.getBoolean("ocupado"));
-					assento.setComfirmaPagamento(rs.getBoolean("comfirmaPagamento"));
-					if (assento.isOcupado()) {
-						assento.setOcupado(true);
-						listaAssentos.add(assento);
-					} else {
-						assento.setOcupado(false);
-						listaAssentos.remove(assento);
-					}
-					
+		String sql = "SELECT * FROM assento WHERE USUARIO_IDUSUARIO = ? and voo_idvoo =? and comfirmaPagamento ='1'";
+		try {
+			PreparedStatement ps = conexao.prepareStatement(sql);
+			ps.setInt(1, usuarioId);
+			ps.setInt(2, vooId);
+
+			ResultSet rs = ps.executeQuery();
+
+			while (rs.next()) {
+				Assento assento = new Assento();
+				assento.setNumeroAssento(rs.getInt("idassento"));
+				assento.setIdVoo(rs.getInt("voo_idvoo"));
+				assento.setOcupado(rs.getBoolean("ocupado"));
+				assento.setComfirmaPagamento(rs.getBoolean("comfirmaPagamento"));
+				if (assento.isOcupado()) {
+					assento.setOcupado(true);
+					listaAssentos.add(assento);
+				} else {
+					assento.setOcupado(false);
+					listaAssentos.remove(assento);
 				}
-			} catch (SQLException e) {
-				e.printStackTrace();
+
 			}
-			return listaAssentos;
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
-		
-		
-		public static List<Assento> listarAssentosPorUsuarioIdVooIdPagamentoNaoConfirmado(Integer usuarioId, Integer vooId) throws SQLException {
-			Connection conexao = ConnectionFactory.getConnection();
-			List<Assento> listaAssentos = new ArrayList<Assento>();
+		return listaAssentos;
+	}
 
-			String sql = "SELECT * FROM assento WHERE USUARIO_IDUSUARIO = ? and voo_idvoo =? and comfirmaPagamento = '0'";
-			try {
-				PreparedStatement ps = conexao.prepareStatement(sql);
-				ps.setInt(1, usuarioId);
-				ps.setInt(2, vooId);
-				
-				ResultSet rs = ps.executeQuery();
+	public static List<Assento> listarAssentosPorUsuarioIdVooIdPagamentoNaoConfirmado(Integer usuarioId, Integer vooId)
+			throws SQLException {
+		Connection conexao = ConnectionFactory.getConnection();
+		List<Assento> listaAssentos = new ArrayList<Assento>();
 
-				while (rs.next()) {
-					Assento assento = new Assento();
-					assento.setNumeroAssento(rs.getInt("idassento"));
-					assento.setIdVoo(rs.getInt("voo_idvoo"));
-					assento.setOcupado(rs.getBoolean("ocupado"));
-					assento.setComfirmaPagamento(rs.getBoolean("comfirmaPagamento"));
-					if (assento.isOcupado()) {
-						assento.setOcupado(true);
-						listaAssentos.add(assento);
-					} else {
-						assento.setOcupado(false);
-						listaAssentos.remove(assento);
-					}
-					
+		String sql = "SELECT * FROM assento WHERE USUARIO_IDUSUARIO = ? and voo_idvoo =? and comfirmaPagamento = '0'";
+		try {
+			PreparedStatement ps = conexao.prepareStatement(sql);
+			ps.setInt(1, usuarioId);
+			ps.setInt(2, vooId);
+
+			ResultSet rs = ps.executeQuery();
+
+			while (rs.next()) {
+				Assento assento = new Assento();
+				assento.setNumeroAssento(rs.getInt("idassento"));
+				assento.setIdVoo(rs.getInt("voo_idvoo"));
+				assento.setOcupado(rs.getBoolean("ocupado"));
+				assento.setComfirmaPagamento(rs.getBoolean("comfirmaPagamento"));
+				if (assento.isOcupado()) {
+					assento.setOcupado(true);
+					listaAssentos.add(assento);
+				} else {
+					assento.setOcupado(false);
+					listaAssentos.remove(assento);
 				}
-			} catch (SQLException e) {
-				e.printStackTrace();
+
 			}
-			return listaAssentos;
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
+		return listaAssentos;
+	}
+
+	public static void desocupaLogofAssentoPagamentoNaoConfirmado(Integer usuarioId) throws SQLException {
+		Connection conexao = ConnectionFactory.getConnection();
 		
+		// String sql = "SELECT * FROM assento WHERE USUARIO_IDUSUARIO = ?
+		// comfirmaPagamento = '0'";
+		String sql = "UPDATE assento SET  ocupado = 0  WHERE  usuario_idusuario = ? and comfirmaPagamento = '0' ";
+
+		try {
+			PreparedStatement ps = conexao.prepareStatement(sql);
+			ps.setInt(1, usuarioId);
+
+			ps.execute();
+			conexao.commit();
+		} catch (SQLException e) {
+			System.out.println("ERRO AO GRAVAR CONFIRMA플O DE PAGAMENTO");
+			conexao.rollback();
+			e.printStackTrace();
+			throw new SQLException();
+		} finally {
+			conexao.close();
+		}
+
+	}
+
 }

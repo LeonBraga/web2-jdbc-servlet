@@ -31,11 +31,10 @@
       <p><a href="#">Link</a></p> -->
 			</div>
 			<div class="col-sm-8 text-left">
-				<h3>Listagem dos assentos do Voo - Indentificador: ${vooId}.</h3>
-				<br>
-
+				<h3>Tela de escolha de assentos</h3>
+				<br> Listagem dos assentos do Voo Indentificador: ${vooId}.
 				<form action="${linkEntradaServlet }" method="post">
-					Assentos já ocupados: Clique para desocupar: <br>
+					<br> Assentos já ocupados: Clique para desocupar: <br>
 					<c:forEach items="${assentos}" var="assento">
 						<c:if test="${assento.ocupante == usuarioLogado.id}">
 							<c:if test="${assento.comfirmaPagamento != true}">
@@ -91,12 +90,12 @@
 				</form>
 				<br> <br> <br>
 				<c:if test="${volta == true }">
-					<br> Listagem dos assentosVolta do Voo de VOLTA - Indentificador: ${vooIdVolta}.
-		<br>
+					<br> Listagem dos assentos do Voo de VOLTA - Indentificador: ${vooIdVolta}.
+					<br>
 					<!-- SOMENTE O CLIENTE QUE OCUPOU O ASSENTO PODERÁ DESOCUPAR O MESMO -->
 					<form action="${linkEntradaServlet }" method="post">
-						Assentos do voo de Volta já ocupados: Clique para desocupar: <br>
-
+						<br> Assentos do voo de Volta já ocupados: Clique para
+						desocupar: <br>
 						<c:forEach items="${assentosVolta}" var="assento">
 							<c:if test="${assento.ocupante == usuarioLogado.id}">
 								<c:if test="${assento.comfirmaPagamento != true}">
@@ -127,7 +126,8 @@
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			 </c:if>
 						</c:forEach>
-						<br> <br> assentosVolta Livres: Clique para ocupar: <br>
+						<br> <br> Assentos do voo de volta livres: Clique para
+						ocupar: <br>
 						<c:forEach items="${assentosDesocupadosVolta}" var="assento">
 							<%--  <c:if test="${assento.ocupado == 'false'}">  --%>
 							<c:out value="${assento.numeroAssento}" />
@@ -175,7 +175,10 @@
 			</div>
 		</div>
 	</div>
-<br><br><br><br>
+	<br>
+	<br>
+	<br>
+	<br>
 
 	<c:import url="footerBar.jsp" />
 </body>
