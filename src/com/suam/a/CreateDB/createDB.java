@@ -1,6 +1,5 @@
 package com.suam.a.CreateDB;
 
-
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -13,7 +12,7 @@ import com.suam.factory.ConnectionFactory;
 
 public class createDB {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws SQLException {
 
 		// Scanner ler = new Scanner(System.in);
 
@@ -36,7 +35,7 @@ public class createDB {
 			while (linha != null) {
 				// System.out.printf("%s\n", linha);
 				linha = lerArq.readLine(); // lê da segunda até a última linha
-				if (linha !=null) {
+				if (linha != null) {
 					script = script + linha;
 				}
 			}
@@ -75,13 +74,20 @@ public class createDB {
 			// String[] insertDBaux = insertDB.split(";");
 
 			for (int i = 0; i < createDBaux.length; i++) {
-				System.out.println("COMANDO EXECUTADO: " + createDBaux[i] + ";");
-				st.executeUpdate(createDBaux[i] + ";  ");
+				
+				if (createDBaux[i].contains("DROP")) {
+					System.out.println("COMANDO EXECUTADO: execute " + createDBaux[i] + ";");
+					//st.execute(createDBaux[i] + ";  ");
+				} else {
+					System.out.println("COMANDO EXECUTADO: executeUpdate " + createDBaux[i] + ";");
+					st.executeUpdate(createDBaux[i] + ";  ");
+				}
 				// st.executeUpdate(insertDBaux[i] + "; ");
 				conexao.commit();
 			}
 
 		} catch (SQLException e) {
+			conexao.rollback();
 			System.out.println(e);
 		} finally {
 			try {
