@@ -16,11 +16,12 @@ CREATE TABLE usuario (
   isadm tinyint(1) DEFAULT NULL,
   exclusaoLogica tinyint(1) DEFAULT '1',
   PRIMARY KEY (IDUSUARIO)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8;
 
 
 LOCK TABLES usuario WRITE;
-INSERT INTO usuario VALUES (0,'padraoAssento','','','','','',1,1),(1,'Anderson','Ferreira Canel','Rua Sev','adm','adm','15/04/1988',1,1);
+INSERT INTO usuario (IDUSUARIO, NOME, SOBRENOME, ENDERECO, SENHA, LOGIN, DATANASCIMENTO, ISADM, EXCLUSAOLOGICA) VALUES (0,'padraoAssento','','','','','',1,1),(2,'Anderson','Ferreira Canel','Rua Sev','adm','adm','15/04/1988',1,1);
+UPDATE `dbweb2`.`usuario` SET `IDUSUARIO`='0' WHERE  `IDUSUARIO`=1;
 UNLOCK TABLES;
 
 
