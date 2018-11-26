@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.suam.bean.CartaoDeCredito;
+import com.suam.constantes.Parametros.ParametroTela;
 import com.suam.service.CartaoDeCreditoService;
 
 public class RemoveCartao  implements Acao{
@@ -15,7 +16,7 @@ public class RemoveCartao  implements Acao{
 	public String executa(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("AÇÃO = REMOVENDO CARTÃO");
 		
-		String numero = request.getParameter("numero");
+		String numero = request.getParameter(ParametroTela.NUMERO);
 		//String paramId = request.getParameter("id");
 		//Integer id = Integer.valueOf(paramId);
 		

@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.suam.bean.Usuario;
+import com.suam.constantes.Parametros.ParametroTela;
 import com.suam.service.UsuarioService;
 
 public class ListaUsuario implements Acao {
@@ -24,7 +25,7 @@ public class ListaUsuario implements Acao {
 			e.printStackTrace();
 		}
 
-		request.setAttribute("usuarios", listaUsuario);
+		request.setAttribute(ParametroTela.OBJETO_LISTA_USUARIO, listaUsuario);
 		return "forward:listaUsuario.jsp";
 	}
 

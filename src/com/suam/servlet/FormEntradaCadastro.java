@@ -4,11 +4,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -16,6 +12,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.suam.bean.Usuario;
+import com.suam.constantes.Diretorios;
+import com.suam.constantes.Diretorios.Local;
+import com.suam.constantes.Info.InfoCampos;
+import com.suam.constantes.Parametros.ParametroTela;
 import com.suam.service.UsuarioService;
 
 @WebServlet("/formEntradaCadastro")
@@ -54,39 +54,45 @@ public class FormEntradaCadastro extends HttpServlet {
 		String info = null;
 
 		if (nome == null || nome.equals("")) {
-			info = "Nome não preenchido";
-			request.setAttribute("erro", info);
-			request.getRequestDispatcher("WEB-INF/view/erro.jsp").forward(request, response);
+			info = InfoCampos.NOME_PROBLEMA;
+			request.setAttribute(ParametroTela.ERRO, info);
+			request.getRequestDispatcher(Local.ERRO_WEB_INF_VIEW).forward(request, response);
 			return;
 			//return "forward:erro.jsp";
 		} else if (sobrenome == null || sobrenome.equals("")) {
-			info = "Sobrenome não preenchido";
-			request.setAttribute("erro", info);
-			request.getRequestDispatcher("WEB-INF/view/erro.jsp").forward(request, response);
+			info = InfoCampos.SOBRENOME_PROBLEMA;
+			request.setAttribute(ParametroTela.ERRO, info);
+			request.getRequestDispatcher(Local.ERRO_WEB_INF_VIEW).forward(request, response);
 			return;
 			//return "forward:erro.jsp";
 		} else if (endereco == null || endereco.equals("")) {
-			info = "Endereço não informado!";
-			request.setAttribute("erro", info);
-			request.getRequestDispatcher("WEB-INF/view/erro.jsp").forward(request, response);
+			info = InfoCampos.ENDERECO_PROBLEMA;
+			request.setAttribute(ParametroTela.ERRO, info);
+			request.getRequestDispatcher(Local.ERRO_WEB_INF_VIEW).forward(request, response);
 			return;
 			//return "forward:erro.jsp";
 		} else if (senha == null || senha.equals("")) {
-			info = "Senha não informada!";
-			request.setAttribute("erro", info);
-			request.getRequestDispatcher("WEB-INF/view/erro.jsp").forward(request, response);
+			info = InfoCampos.SENHA_PROBLEMA;
+			request.setAttribute(ParametroTela.ERRO, info);
+			request.getRequestDispatcher(Local.ERRO_WEB_INF_VIEW).forward(request, response);
 			return;
 			//return "forward:erro.jsp";
 		} else if (login == null || login.equals("")) {
-			info = "Login não informado!";
-			request.setAttribute("erro", info);
-			request.getRequestDispatcher("WEB-INF/view/erro.jsp").forward(request, response);
+			info = InfoCampos.LOGIN_PROBLEMA;
+			request.setAttribute(ParametroTela.ERRO, info);
+			request.getRequestDispatcher(Local.ERRO_WEB_INF_VIEW).forward(request, response);
 			return;
 			//return "forward:erro.jsp";
 		} else if (data == null || data.equals("")) {
-			info = "Data não informada!";
-			request.setAttribute("erro", info);
-			request.getRequestDispatcher("WEB-INF/view/erro.jsp").forward(request, response);
+			info = InfoCampos.DATA_PROBLEMA;
+			request.setAttribute(ParametroTela.ERRO, info);
+			request.getRequestDispatcher(Local.ERRO_WEB_INF_VIEW).forward(request, response);
+			return;
+			//return "forward:erro.jsp";
+		}else if (!senha.equals(confirmaSenha)) {
+			info = "Senhas e confirmação de senha iincompatíveis!";
+			request.setAttribute(ParametroTela.ERRO, info);
+			request.getRequestDispatcher(Local.ERRO_WEB_INF_VIEW).forward(request, response);
 			return;
 			//return "forward:erro.jsp";
 		}
@@ -119,9 +125,7 @@ public class FormEntradaCadastro extends HttpServlet {
 				if (validaInsere) {
 					System.out.println("Inserido com sucesso");
 				} else {
-					System.out.println("CORRIGIR LOGIN!!");
-					// request.setAttribute("usuario", usuario);
-					System.out.println("ERRO NO LOGIN =====>>>>>");
+					info = InfoCampos.LOGIN_JA_EXISTE;
 
 				}
 				request.getRequestDispatcher("formLogin.jsp").forward(request,
@@ -132,7 +136,8 @@ public class FormEntradaCadastro extends HttpServlet {
 
 		} else {
 			System.out.println("AS SENHAS NÃO CONFEREM");
-			// request.setAttribute("usuario", usuario);
+			request.setAttribute(ParametroTela.ERRO, info);
+			request.getRequestDispatcher(Local.ERRO_WEB_INF_VIEW).forward(request, response);
 		}
 
 	}

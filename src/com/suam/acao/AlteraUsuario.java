@@ -7,7 +7,9 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import com.suam.bean.Usuario;
+import com.suam.constantes.Diretorios.Local;
 import com.suam.constantes.Info.InfoCampos;
+import com.suam.constantes.Parametros.ParametroTela;
 import com.suam.service.UsuarioService;
 import com.suam.util.DataUtils;
 
@@ -17,45 +19,45 @@ public class AlteraUsuario implements Acao {
 			throws ServletException, IOException {
 		System.out.println("AÇÃO = ALTERANDO USUARIO");
 
-		String nome = request.getParameter("nome");
-		String sobrenome = request.getParameter("sobrenome");
-		String endereco = request.getParameter("endereco");
-		String senha = request.getParameter("senha");
-		String login = request.getParameter("login");
-		String data = request.getParameter("data");
-		String paramId = request.getParameter("id");
-		String ehAdm = request.getParameter("ehAdm");
-		Integer id = Integer.valueOf(paramId);
+		String nome = request.getParameter(ParametroTela.NOME);
+		String sobrenome = request.getParameter(ParametroTela.SOBRENOME);
+		String endereco = request.getParameter(ParametroTela.ENDERECO);
+		String senha = request.getParameter(ParametroTela.SENHA);
+		String login = request.getParameter(ParametroTela.LOGIN);
+		String data = request.getParameter(ParametroTela.DATA);
+		String usuarioId = request.getParameter(ParametroTela.ID_USER);
+		String ehAdm = request.getParameter(ParametroTela.EH_ADM);
+		Integer id = Integer.valueOf(usuarioId);
 		String info = null;
 
 		if (nome == null  ||nome.equals("")) {
 			info = InfoCampos.NOME_PROBLEMA;
-			request.setAttribute("erro", info);
-			return "forward:erro.jsp";
+			request.setAttribute(ParametroTela.ERRO, info);
+			return "forward:"+Local.ERRO_VIEW;
 		} else if (sobrenome == null  ||sobrenome.equals("")) {
 			info = InfoCampos.SOBRENOME_PROBLEMA;
-			request.setAttribute("erro", info);
-			return "forward:erro.jsp";
+			request.setAttribute(ParametroTela.ERRO, info);
+			return "forward:"+Local.ERRO_VIEW;
 		} else if (endereco == null ||endereco.equals("")) {
 			info = InfoCampos.ENDERECO_PROBLEMA;
-			request.setAttribute("erro", info);
-			return "forward:erro.jsp";
+			request.setAttribute(ParametroTela.ERRO, info);
+			return "forward:"+Local.ERRO_VIEW;
 		} else if (senha == null  ||senha.equals("")) {
 			info = InfoCampos.SENHA_PROBLEMA;
-			request.setAttribute("erro", info);
-			return "forward:erro.jsp";
+			request.setAttribute(ParametroTela.ERRO, info);
+			return "forward:"+Local.ERRO_VIEW;
 		} else if (login == null ||login.equals("")) {
 			info = InfoCampos.LOGIN_PROBLEMA;
-			request.setAttribute("erro", info);
-			return "forward:erro.jsp";
+			request.setAttribute(ParametroTela.ERRO, info);
+			return "forward:"+Local.ERRO_VIEW;
 		} else if (data == null ||data.equals("")) {
 			info = InfoCampos.DATA_PROBLEMA;
-			request.setAttribute("erro", info);
-			return "forward:erro.jsp";
+			request.setAttribute(ParametroTela.ERRO, info);
+			return "forward:"+Local.ERRO_VIEW;
 		} else if (id == null ||id.equals("")) {
 			info = InfoCampos.GENERICO;
-			request.setAttribute("erro", info);
-			return "forward:erro.jsp";
+			request.setAttribute(ParametroTela.ERRO, info);
+			return "forward:"+Local.ERRO_VIEW;
 		}
 
 		Usuario usuario = null;
@@ -93,9 +95,9 @@ public class AlteraUsuario implements Acao {
 
 			} else {
 				info = "ERRO,  Alguma coisa não funcionou como deveria!";
-				request.setAttribute("usuario", usuario);
-				request.setAttribute("erro", info);
-				return "forward:formAlteraUsuario.jsp";
+				request.setAttribute(ParametroTela.OBJETO_USUARIO, usuario);
+				request.setAttribute(ParametroTela.ERRO, info);
+				return Local.FORM_ALTERA_USUARIO;
 			}
 
 		} catch (SQLException e) {

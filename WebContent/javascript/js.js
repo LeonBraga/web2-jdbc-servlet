@@ -135,3 +135,7 @@ $(document).ready(function() {
 		}
 	});
 });*/
+
+
+
+//Validação de campos em formulários

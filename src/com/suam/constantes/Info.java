@@ -20,7 +20,7 @@ public class Info {
 		 public static final String VALOR_PROBLEMA = "Verifique o valor informado no campo valor!";
 		 public static final String ASSENTO_NAO_SELECIONADO = "Você não selecionou nenhum assento";
 		 public static final String SUCESSO = "Que bom!\nTudo ocorreu conforme o esperado!";
-		 
+		 public static final String LOGIN_JA_EXISTE = "Login já existente!\n Use outro login por favor!";
 		 
 	 }
 }

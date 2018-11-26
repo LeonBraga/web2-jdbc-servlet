@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.suam.bean.Usuario;
+import com.suam.constantes.Parametros.ParametroTela;
 import com.suam.service.AssentoService;
 import com.suam.service.CartaoDeCreditoService;
 import com.suam.service.CompraVooService;
@@ -19,8 +20,8 @@ public class RemoveUsuario implements Acao {
 			throws ServletException, IOException {
 		System.out.println("AÇÃO = REMOVENDO USUARIO");
 
-		String paramId = request.getParameter("id");
-		Integer id = Integer.valueOf(paramId);
+		String usuarioId = request.getParameter(ParametroTela.ID_USER);
+		Integer id = Integer.valueOf(usuarioId);
 
 		Usuario usuario = null;
 		try {
@@ -46,7 +47,6 @@ public class RemoveUsuario implements Acao {
 		try {
 			CompraVooService.deleteCompraPorUsuario(usuario.getId());
 		} catch (SQLException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 
