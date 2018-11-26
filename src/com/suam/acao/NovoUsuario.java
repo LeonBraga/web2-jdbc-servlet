@@ -22,14 +22,14 @@ public class NovoUsuario implements Acao {
 
 		System.out.println("AÇÃO = INSERINDO USUARIO");
 
-		String nome = request.getParameter(ParametroTela.NOME);
-		String sobrenome = request.getParameter(ParametroTela.SOBRENOME);
-		String endereco = request.getParameter(ParametroTela.ENDERECO);
-		String senha = request.getParameter(ParametroTela.SENHA);
-		String login = request.getParameter(ParametroTela.LOGIN);
-		String data = request.getParameter(ParametroTela.DATA);
-		String ehAdm = request.getParameter(ParametroTela.EH_ADM);
-		String confirmaSenha = request.getParameter(ParametroTela.CONFIRMA_SENHA);
+		String nome = request.getParameter(ParametroTela.USUARIO_NOME);
+		String sobrenome = request.getParameter(ParametroTela.USUARIO_SOBRENOME);
+		String endereco = request.getParameter(ParametroTela.USUARIO_ENDERECO);
+		String senha = request.getParameter(ParametroTela.USUARIO_SENHA);
+		String login = request.getParameter(ParametroTela.USUARIO_LOGIN);
+		String data = request.getParameter(ParametroTela.USUARIO_DATA);
+		String ehAdm = request.getParameter(ParametroTela.USUARIO_EH_ADM);
+		String confirmaSenha = request.getParameter(ParametroTela.USUARIO_CONFIRMA_SENHA);
 		
 		String info = null;
 

@@ -19,14 +19,14 @@ public class AlteraUsuario implements Acao {
 			throws ServletException, IOException {
 		System.out.println("AÇÃO = ALTERANDO USUARIO");
 
-		String nome = request.getParameter(ParametroTela.NOME);
-		String sobrenome = request.getParameter(ParametroTela.SOBRENOME);
-		String endereco = request.getParameter(ParametroTela.ENDERECO);
-		String senha = request.getParameter(ParametroTela.SENHA);
-		String login = request.getParameter(ParametroTela.LOGIN);
-		String data = request.getParameter(ParametroTela.DATA);
-		String usuarioId = request.getParameter(ParametroTela.ID_USER);
-		String ehAdm = request.getParameter(ParametroTela.EH_ADM);
+		String nome = request.getParameter(ParametroTela.USUARIO_NOME);
+		String sobrenome = request.getParameter(ParametroTela.USUARIO_SOBRENOME);
+		String endereco = request.getParameter(ParametroTela.USUARIO_ENDERECO);
+		String senha = request.getParameter(ParametroTela.USUARIO_SENHA);
+		String login = request.getParameter(ParametroTela.USUARIO_LOGIN);
+		String data = request.getParameter(ParametroTela.USUARIO_DATA);
+		String usuarioId = request.getParameter(ParametroTela.USUARIO_ID_USER);
+		String ehAdm = request.getParameter(ParametroTela.USUARIO_EH_ADM);
 		Integer id = Integer.valueOf(usuarioId);
 		String info = null;
 
@@ -78,7 +78,7 @@ public class AlteraUsuario implements Acao {
 			e1.printStackTrace();
 		}
 		if (ehAdm != null) {
-			System.out.println("NOVO USUARIO, LOGIN: " + usuario.getLogin() + " É ADM: " + ehAdm);
+			System.out.println("NOVO USUARIO, USUARIO_LOGIN: " + usuario.getLogin() + " É ADM: " + ehAdm);
 			if (ehAdm.equals("true") || ehAdm.equals("administrador") || ehAdm.equals("1")) {
 				usuario.setIsAdm(true);
 			} else if (ehAdm.equals("cliente") || ehAdm.equals("") || ehAdm.equals("0")) {

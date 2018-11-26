@@ -6,7 +6,9 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import com.suam.bean.Voo;
+import com.suam.constantes.Diretorios.Local;
 import com.suam.constantes.Info.InfoCampos;
+import com.suam.constantes.Parametros.ParametroTela;
 import com.suam.service.VooService;
 
 public class MostraVoo implements Acao {
@@ -20,8 +22,8 @@ public class MostraVoo implements Acao {
 
 		if (idVoo == null || idVoo.equals("")) {
 			info = InfoCampos.GENERICO;
-			request.setAttribute("erro", info);
-			return "forward:erro.jsp";
+			request.setAttribute(ParametroTela.ERRO, info);
+			return "forward:"+Local.ERRO_VIEW;
 		}
 		
 		
@@ -33,8 +35,8 @@ public class MostraVoo implements Acao {
 			e.printStackTrace();
 		}
 
-		request.setAttribute("voo", voo);
+		request.setAttribute(ParametroTela.OBJETO_VOO, voo);
 
-		return "forward:formAlteraVoo.jsp";
+		return "forward:"+Local.FORM_ALTERA_VOO;
 	}
 }

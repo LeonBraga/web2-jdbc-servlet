@@ -11,7 +11,9 @@ import com.suam.bean.Assento;
 import com.suam.bean.CartaoDeCredito;
 import com.suam.bean.Usuario;
 import com.suam.bean.Voo;
+import com.suam.constantes.Diretorios.Local;
 import com.suam.constantes.Info.InfoCampos;
+import com.suam.constantes.Parametros.ParametroTela;
 import com.suam.service.AssentoService;
 import com.suam.service.CartaoDeCreditoService;
 import com.suam.service.UsuarioService;
@@ -24,17 +26,17 @@ public class FormNovoCompraVoo implements Acao {
 			throws ServletException, IOException {
 		System.out.println("FORM NOVO COMPRA");
 
-		String compradorId = request.getParameter("compradorId");
+		String compradorId = request.getParameter(ParametroTela.COMPRA_COMPRADOR_ID);
 		Integer id = Integer.valueOf(compradorId);
-		String voo_idvoo = request.getParameter("idvoo");
-		String voo_idvooVolta = request.getParameter("idvooVolta");
+		String voo_idvoo = request.getParameter(ParametroTela.COMPRA_VOO_IDVOO);
+		String voo_idvooVolta = request.getParameter(ParametroTela.COMPRA_VOO_IDVOOVOLTA);
 
 		String info = null;
 
 		 if (compradorId == null ||compradorId.equals("")) {
 			info = InfoCampos.GENERICO;
-			request.setAttribute("erro", info);
-			return "forward:erro.jsp";
+			request.setAttribute(ParametroTela.ERRO, info);
+			return "forward:"+Local.ERRO_VIEW;
 		}
 
 		
@@ -55,7 +57,7 @@ public class FormNovoCompraVoo implements Acao {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		request.setAttribute("usuario", user);
+		request.setAttribute(ParametroTela.OBJETO_USUARIO, user);
 
 		// lista de cartões do usuario
 		try {
@@ -63,7 +65,7 @@ public class FormNovoCompraVoo implements Acao {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		request.setAttribute("cartoes", listaCartao);
+		request.setAttribute(ParametroTela.OBJETO_LISTA_CARTOES, listaCartao);
 
 		// encontra voo
 		try {
@@ -71,7 +73,7 @@ public class FormNovoCompraVoo implements Acao {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		request.setAttribute("idvoo", vooIda);
+		request.setAttribute(ParametroTela.COMPRA_VOO_IDVOO, vooIda);
 
 		// Voo ida
 		// LISTARÁ TODOS ===> FILTAR SOMENTE SO ESCOLHIDOS NAQUELE INSTANTE
@@ -101,7 +103,7 @@ public class FormNovoCompraVoo implements Acao {
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
-			request.setAttribute("idvooVolta", vooIdaVolta);
+			request.setAttribute(ParametroTela.COMPRA_VOO_IDVOOVOLTA, vooIdaVolta);
 
 			try {
 				listaNumeroAssentoVolta = AssentoService.listarAssentosPorUsuarioIdVooId(id, idVooVolta);
@@ -121,7 +123,7 @@ public class FormNovoCompraVoo implements Acao {
 		request.setAttribute("idaVolta", idaVolta);
 		request.setAttribute("assentos", listaNumeroAssentoTratada);
 		request.setAttribute("assentosVolta", listaNumeroAssentoTratadaVolta);
-		return "forward:formNovoCompraVoo.jsp";
+		return "forward:"+Local.FORM_NOVO_COMPRA_VOO;
 	}
 
 }

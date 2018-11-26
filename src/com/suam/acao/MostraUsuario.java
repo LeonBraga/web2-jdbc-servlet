@@ -22,7 +22,7 @@ public class MostraUsuario implements Acao {
 			throws ServletException, IOException {
 		System.out.println("AÇÃO = MOSTRANDO DADOS DO USUARIO");
 
-		String usuarioId = request.getParameter(ParametroTela.ID_USER);
+		String usuarioId = request.getParameter(ParametroTela.USUARIO_ID_USER);
 		String info = null;
 
 		if (usuarioId == null || usuarioId.equals("")) {

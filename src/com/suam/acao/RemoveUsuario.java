@@ -20,7 +20,7 @@ public class RemoveUsuario implements Acao {
 			throws ServletException, IOException {
 		System.out.println("AÇÃO = REMOVENDO USUARIO");
 
-		String usuarioId = request.getParameter(ParametroTela.ID_USER);
+		String usuarioId = request.getParameter(ParametroTela.USUARIO_ID_USER);
 		Integer id = Integer.valueOf(usuarioId);
 
 		Usuario usuario = null;

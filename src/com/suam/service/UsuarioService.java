@@ -70,7 +70,7 @@ public class UsuarioService {
 			if (!u.getId().equals(usuario.getId())) {
 				if (u.getLogin().equals(usuario.getLogin())) {
 					System.out.println("Usuario com login já cadastrado!");
-					System.out.println("CORRIGIR LOGIN!!");
+					System.out.println("CORRIGIR USUARIO_LOGIN!!");
 					return false;
 				}
 			}
@@ -167,7 +167,7 @@ public class UsuarioService {
 	}
 
 	public static List<Usuario> consultar(String login, String senha) throws SQLException {
-		System.out.println("CONSULTAR ==> LOGIN: " + login + " SENHA: " + senha);
+		System.out.println("CONSULTAR ==> USUARIO_LOGIN: " + login + " USUARIO_SENHA: " + senha);
 		Connection conexao = ConnectionFactory.getConnection();
 		List<Usuario> listaUsuario = new ArrayList<Usuario>();
 

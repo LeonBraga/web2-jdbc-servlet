@@ -10,7 +10,9 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import com.suam.bean.Voo;
+import com.suam.constantes.Diretorios.Local;
 import com.suam.constantes.Info.InfoCampos;
+import com.suam.constantes.Parametros.ParametroTela;
 import com.suam.service.AssentoService;
 import com.suam.service.VooService;
 
@@ -21,34 +23,35 @@ public class NovoVoo implements Acao {
 
 		System.out.println("AÇÃO = ALTERANDO VOO");
 
-		String origem = request.getParameter("origem");
-		String destino = request.getParameter("destino");
-		String ida = request.getParameter("ida");
-		String confirmacao = request.getParameter("confirmacao");
-		String valorVoo = request.getParameter("valorVoo");
-
+		
+		String origem = request.getParameter(ParametroTela.VOO_ORIGEM);
+		String destino = request.getParameter(ParametroTela.VOO_DESTINO);
+		String ida = request.getParameter(ParametroTela.VOO_DATA);
+		String confirmacao = request.getParameter(ParametroTela.VOO_CONFIRMACAO);
+		String valorVoo = request.getParameter(ParametroTela.VOO_VALOR);
+		
 		String info = null;
 
 		if (origem == null ||origem.equals("")) {
 			info = InfoCampos.ORIGEM_PROBLEMA;
-			request.setAttribute("erro", info);
-			return "forward:erro.jsp";
+			request.setAttribute(ParametroTela.ERRO, info);
+			return "forward:"+Local.ERRO_VIEW;
 		} else if (destino == null ||destino.equals("")) {
 			info = InfoCampos.DESTINO_PROBLEMA;
-			request.setAttribute("erro", info);
-			return "forward:erro.jsp";
+			request.setAttribute(ParametroTela.ERRO, info);
+			return "forward:"+Local.ERRO_VIEW;
 		} else if (ida == null ||ida.equals("")) {
 			info = InfoCampos.IDA_PROBLEMA;
-			request.setAttribute("erro", info);
-			return "forward:erro.jsp";
+			request.setAttribute(ParametroTela.ERRO, info);
+			return "forward:"+Local.ERRO_VIEW;
 		} else if (confirmacao == null ||confirmacao.equals("")){
 			info = InfoCampos.CONFIRMACAO_PROBLEMA;
-			request.setAttribute("erro", info);
-			return "forward:erro.jsp";
+			request.setAttribute(ParametroTela.ERRO, info);
+			return "forward:"+Local.ERRO_VIEW;
 		} else if (valorVoo == null ||valorVoo.equals("")) {
 			info = InfoCampos.VALOR_PROBLEMA;
-			request.setAttribute("erro", info);
-			return "forward:erro.jsp";
+			request.setAttribute(ParametroTela.ERRO, info);
+			return "forward:"+Local.ERRO_VIEW;
 		} 
 		
 		Voo voo = new Voo();
@@ -85,7 +88,7 @@ public class NovoVoo implements Acao {
 			if (validaInsere) {
 				System.out.println("Inserido com sucesso");
 			} else {
-				request.setAttribute("voo", voo);
+				request.setAttribute(ParametroTela.OBJETO_VOO, voo);
 				return "forward:NovoVoo.jsp";
 			}
 		} catch (SQLException e) {

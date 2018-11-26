@@ -16,7 +16,7 @@ public class RemoveCartao  implements Acao{
 	public String executa(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("AÇÃO = REMOVENDO CARTÃO");
 		
-		String numero = request.getParameter(ParametroTela.NUMERO);
+		String numero = request.getParameter(ParametroTela.CARTAO_NUMERO);
 		//String paramId = request.getParameter("id");
 		//Integer id = Integer.valueOf(paramId);
 		

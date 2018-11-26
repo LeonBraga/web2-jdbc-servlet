@@ -21,9 +21,9 @@ public class AlteraCartao implements Acao {
 
 		System.out.println("AÇÃO = ALTERANDO CARTAO");
 
-		String nome = request.getParameter(ParametroTela.NOME);
-		String numero = request.getParameter(ParametroTela.NUMERO);
-		String data = request.getParameter(ParametroTela.DATA_VENCIMENTO_CARTAO);
+		String nome = request.getParameter(ParametroTela.USUARIO_NOME);
+		String numero = request.getParameter(ParametroTela.CARTAO_NUMERO);
+		String data = request.getParameter(ParametroTela.CARTAO_DATA_VENCIMENTO_CARTAO);
 		String idUser = request.getParameter("idUser");
 		String info = null;
 		CartaoDeCredito cartao = new CartaoDeCredito();

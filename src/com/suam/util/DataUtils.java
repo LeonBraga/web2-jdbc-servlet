@@ -27,7 +27,7 @@ public class DataUtils {
 
 	public static String gravarDataEHoraAtualBD() throws SQLException {
 		Connection conexao = ConnectionFactory.getConnection();
-		// PEGANDO A DATA ATUAL NO SERVER DB:::
+		// PEGANDO A USUARIO_DATA ATUAL NO SERVER DB:::
 		String agora = null;
 		Statement statement = conexao.createStatement();
 		try {
