@@ -65,12 +65,9 @@ public class UsuarioService {
 
 		// Código para Validar se existe usuário com mesmo login no banco.
 		List<Usuario> listaUsuarios = ListaUsuarios();
-
 		for (Usuario u : listaUsuarios) {
 			if (!u.getId().equals(usuario.getId())) {
 				if (u.getLogin().equals(usuario.getLogin())) {
-					System.out.println("Usuario com login já cadastrado!");
-					System.out.println("CORRIGIR USUARIO_LOGIN!!");
 					return false;
 				}
 			}

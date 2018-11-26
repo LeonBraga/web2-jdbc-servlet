@@ -34,7 +34,6 @@ public class CartaoDeCreditoService {
 			conexao.commit();
 		} catch (SQLException e) {
 			conexao.rollback();
-			e.printStackTrace();
 			conexao.close();
 			return false;
 		} finally {
@@ -130,7 +129,6 @@ public class CartaoDeCreditoService {
 
 			//String id = usuario.getId().toString();
 			ps.setInt(1, usuario.getId());
-
 			ps.execute();
 			conexao.commit();
 		} catch (SQLException e) {
@@ -169,6 +167,8 @@ public class CartaoDeCreditoService {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+		}finally {
+			conexao.close();
 		}
 		return listaCartoes;
 	}

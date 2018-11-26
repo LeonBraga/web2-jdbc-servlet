@@ -28,30 +28,30 @@ public class AlteraVoo implements Acao {
 
 		String info = null;
 
-		if (origem == null ||origem.equals("")) {
+		if (origem == null || origem.equals("")) {
 			info = InfoCampos.ORIGEM_PROBLEMA;
 			request.setAttribute(ParametroTela.ERRO, info);
-			return "forward:"+Local.ERRO_VIEW;
-		} else if (destino == null ||destino.equals("")) {
+			return "forward:" + Local.ERRO_VIEW;
+		} else if (destino == null || destino.equals("")) {
 			info = InfoCampos.DESTINO_PROBLEMA;
 			request.setAttribute(ParametroTela.ERRO, info);
-			return "forward:"+Local.ERRO_VIEW;
-		} else if (ida == null ||ida.equals("")) {
+			return "forward:" + Local.ERRO_VIEW;
+		} else if (ida == null || ida.equals("")) {
 			info = InfoCampos.IDA_PROBLEMA;
 			request.setAttribute(ParametroTela.ERRO, info);
-			return "forward:"+Local.ERRO_VIEW;
-		} else if (confirmacao == null ||confirmacao.equals("")){
+			return "forward:" + Local.ERRO_VIEW;
+		} else if (confirmacao == null || confirmacao.equals("")) {
 			info = InfoCampos.CONFIRMACAO_PROBLEMA;
 			request.setAttribute(ParametroTela.ERRO, info);
-			return "forward:"+Local.ERRO_VIEW;
-		} else if (valorVoo == null ||valorVoo.equals("")) {
+			return "forward:" + Local.ERRO_VIEW;
+		} else if (valorVoo == null || valorVoo.equals("")) {
 			info = InfoCampos.VALOR_PROBLEMA;
 			request.setAttribute(ParametroTela.ERRO, info);
-			return "forward:"+Local.ERRO_VIEW;
-		} else if (idVoo == null ||idVoo.equals("")) {
+			return "forward:" + Local.ERRO_VIEW;
+		} else if (idVoo == null || idVoo.equals("")) {
 			info = InfoCampos.GENERICO;
 			request.setAttribute(ParametroTela.ERRO, info);
-			return "forward:"+Local.ERRO_VIEW;
+			return "forward:" + Local.ERRO_VIEW;
 		}
 
 		Voo voo = null;
@@ -74,14 +74,11 @@ public class AlteraVoo implements Acao {
 		voo.setDestino(destino);
 		voo.setValorVoo(Integer.valueOf(valorVoo));
 
-		Boolean validaInsere;
-
 		try {
-			validaInsere = VooService.update(voo);
-			if (validaInsere) {
+			if (VooService.update(voo)) {
 			} else {
 				request.setAttribute(ParametroTela.OBJETO_VOO, voo);
-				return "forward:formAlteraVoo.jsp";
+				return "forward:" + Local.FORM_ALTERA_VOO;
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

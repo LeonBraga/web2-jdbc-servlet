@@ -88,13 +88,11 @@ public class AlteraUsuario implements Acao {
 			usuario.setIsAdm(false);
 		}
 
-		Boolean validaInsere;
 		try {
-			validaInsere = UsuarioService.update(usuario);
-			if (validaInsere) {
+			if (UsuarioService.update(usuario)) {
 
 			} else {
-				info = "ERRO,  Alguma coisa não funcionou como deveria!";
+				info = "Esse login já esta em uso, já foi cadastrado por outro usuário!";
 				request.setAttribute(ParametroTela.OBJETO_USUARIO, usuario);
 				request.setAttribute(ParametroTela.ERRO, info);
 				return Local.FORM_ALTERA_USUARIO;

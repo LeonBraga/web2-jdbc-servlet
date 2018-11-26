@@ -52,12 +52,12 @@ public class VooService {
 			ps.setDate(1, voo.getIda());
 			ps.setString(2, voo.getOrigem());
 			ps.setString(3, voo.getDestino());
-			if(voo.getConfirmacao()) {
+			if (voo.getConfirmacao()) {
 				ps.setString(4, "1");
-			}else {
+			} else {
 				ps.setString(4, "0");
 			}
-			
+
 			ps.setInt(5, voo.getValorVoo());
 			ps.setString(6, voo.getIdVoo().toString());
 
@@ -66,7 +66,7 @@ public class VooService {
 		} catch (SQLException e) {
 			conexao.rollback();
 			e.printStackTrace();
-			throw new SQLException();
+			return false;
 		} finally {
 			conexao.close();
 		}
@@ -111,11 +111,11 @@ public class VooService {
 
 	public static void delete(Voo voo) throws SQLException {
 		Connection conexao = ConnectionFactory.getConnection();
-		//String sql = "DELETE FROM voo WHERE idVoo = ?";
+		// String sql = "DELETE FROM voo WHERE idVoo = ?";
 		String sql = "UPDATE voo SET exclusaoLogica = '0' WHERE idVoo = ?";
-		//String sql1 = "DELETE FROM ASSENTO WHERE voo_idVoo =?";
+		// String sql1 = "DELETE FROM ASSENTO WHERE voo_idVoo =?";
 		String sql1 = "UPDATE assento SET exclusaoLogica = '0' WHERE voo_idvoo = ?";
-		
+
 		try {
 			PreparedStatement ps1 = conexao.prepareStatement(sql1);
 			ps1.setInt(1, voo.getIdVoo());
@@ -130,7 +130,7 @@ public class VooService {
 
 		try {
 			PreparedStatement ps = conexao.prepareStatement(sql);
-			ps.setInt(1,voo.getIdVoo());
+			ps.setInt(1, voo.getIdVoo());
 			ps.execute();
 			conexao.commit();
 		} catch (SQLException e) {

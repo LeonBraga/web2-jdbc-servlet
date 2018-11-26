@@ -28,25 +28,24 @@ public class AlteraCartao implements Acao {
 		String info = null;
 		CartaoDeCredito cartao = new CartaoDeCredito();
 
-		if(nome == null ||nome.equals("")) {
+		if (nome == null || nome.equals("")) {
 			info = InfoCampos.NOME_PROBLEMA;
 			request.setAttribute(ParametroTela.ERRO, info);
-			return "forward:"+Local.ERRO_VIEW;
-		}else if(numero == null ||numero.equals("")) {
+			return "forward:" + Local.ERRO_VIEW;
+		} else if (numero == null || numero.equals("") || numero.length() < 15 || numero.length() > 15) {
 			info = InfoCampos.NUMERO_CARTAO;
 			request.setAttribute(ParametroTela.ERRO, info);
-			return "forward:"+Local.ERRO_VIEW;
-		}else if(data == null  || data.equals("")) {
+			return "forward:" + Local.ERRO_VIEW;
+		} else if (data == null || data.equals("")) {
 			info = InfoCampos.DATA_PROBLEMA;
 			request.setAttribute(ParametroTela.ERRO, info);
-			return "forward:"+Local.ERRO_VIEW;
-		}else if(idUser == null  ||idUser.equals("")) {
+			return "forward:" + Local.ERRO_VIEW;
+		} else if (idUser == null || idUser.equals("")) {
 			info = InfoCampos.GENERICO;
 			request.setAttribute(ParametroTela.ERRO, info);
-			return "forward:"+Local.ERRO_VIEW;
+			return "forward:" + Local.ERRO_VIEW;
 		}
-		
-		
+
 		cartao.setTitular(nome);
 
 		try {
@@ -58,10 +57,8 @@ public class AlteraCartao implements Acao {
 		cartao.setNumeroCartao(numero);
 		cartao.setIdUser(Integer.parseInt(idUser));
 
-		Boolean validaInsere;
 		try {
-			validaInsere = CartaoDeCreditoService.update(cartao);
-			if (validaInsere) {
+			if (CartaoDeCreditoService.update(cartao)) {
 				System.out.println("Atualizado com sucesso!");
 			} else {
 				request.setAttribute("cartao", cartao);
