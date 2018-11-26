@@ -1,6 +1,3 @@
-
-DROP DATABASE IF EXISTS dbweb2;
-
 CREATE DATABASE IF NOT EXISTS dbweb2;
 USE dbweb2;
 
@@ -23,7 +20,6 @@ LOCK TABLES usuario WRITE;
 INSERT INTO usuario (IDUSUARIO, NOME, SOBRENOME, ENDERECO, SENHA, LOGIN, DATANASCIMENTO, ISADM, EXCLUSAOLOGICA) VALUES (0,'padraoAssento','','','','','',1,1),(2,'Anderson','Ferreira Canel','Rua Sev','adm','adm','15/04/1988',1,1);
 UPDATE `dbweb2`.`usuario` SET `IDUSUARIO`='0' WHERE  `IDUSUARIO`=1;
 UNLOCK TABLES;
-
 
 
 

@@ -14,35 +14,6 @@ import com.suam.factory.ConnectionFactory;
 public class createDB {
 
 	public static void main(String[] args) throws SQLException {
-		// ********LEITURA DO SCRIPT
-		// Scanner ler = new Scanner(System.in);
-		// System.out.printf("Informe o nome de arquivo texto:\n");
-		// String nome = ler.nextLine();
-
-		String nome = "arquivos/dbweb2.txt";
-		String script = "";
-
-		// System.out.printf("\nConteúdo do arquivo texto:\n");
-		try {
-			FileReader arq = new FileReader(nome);
-			BufferedReader lerArq = new BufferedReader(arq);
-
-			String linha = lerArq.readLine();
-
-			// lê a primeira linha
-			// a variável "linha" recebe o valor "null" quando o processo
-			// de repetição atingir o final do arquivo texto
-			while (linha != null) {
-				// System.out.printf("%s\n", linha);
-				linha = lerArq.readLine(); // lê da segunda até a última linha
-				if (linha != null) {
-					script = script + linha;
-				}
-			}
-			arq.close();
-		} catch (IOException e) {
-			System.err.printf("Erro na abertura do arquivo: %s.\n", e.getMessage());
-		}
 
 		// **************************************
 		// **************************************
@@ -57,13 +28,13 @@ public class createDB {
 		String USERNAME = "root";
 		String PASSWORD = "root";
 		String STRINGCONEXAO = URL + USERNAME + PASSWORD;
-		// STEP 2: Register JDBC driver
-		// Class.forName("com.mysql.jdbc.Driver");
-		// STEP 3: Open a connection
-		// System.out.println("Connecting to database...");
 
 		try {
+			// STEP 2: Register JDBC driver
 			Class.forName("com.mysql.cj.jdbc.Driver");
+			
+			// STEP 3: Open a connection
+			// System.out.println("Connecting to database...");
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
@@ -80,7 +51,7 @@ public class createDB {
 			stmt0 = conexao.createStatement();
 			stmt = conexao.createStatement();
 
-			String sql0 = "Drop DATABASE dbweb2";
+			String sql0 = "Drop DATABASE IF EXISTS dbweb2";
 			String sql = "CREATE DATABASE dbweb2";
 			stmt0.executeUpdate(sql0);
 			stmt.executeUpdate(sql);
@@ -108,6 +79,35 @@ public class createDB {
 		} // end try
 		System.out.println("Goodbye!");
 		// end main
+
+		// ********LEITURA DO SCRIPT
+		// Scanner ler = new Scanner(System.in);
+		// System.out.printf("Informe o nome de arquivo texto:\n");
+		// String nome = ler.nextLine();
+
+		String nome = "arquivos/dbweb2.txt";
+		String script = "";
+
+		// System.out.printf("\nConteúdo do arquivo texto:\n");
+		try {
+			FileReader arq = new FileReader(nome);
+			BufferedReader lerArq = new BufferedReader(arq);
+			String linha = lerArq.readLine();
+
+			// lê a primeira linha
+			// a variável "linha" recebe o valor "null" quando o processo
+			// de repetição atingir o final do arquivo texto
+			while (linha != null) {
+				// System.out.printf("%s\n", linha);
+				linha = lerArq.readLine(); // lê da segunda até a última linha
+				if (linha != null) {
+					script = script + linha;
+				}
+			}
+			arq.close();
+		} catch (IOException e) {
+			System.err.printf("Erro na abertura do arquivo: %s.\n", e.getMessage());
+		}
 
 		// **************************************
 		// **************************************
