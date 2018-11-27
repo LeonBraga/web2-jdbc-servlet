@@ -6,7 +6,9 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import com.suam.bean.Assento;
-import com.suam.constantes.Info.InfoCampos;
+import com.suam.constantes.Constantes.InfoCampos;
+import com.suam.constantes.Constantes.Local;
+import com.suam.constantes.Constantes.ParametroTela;
 import com.suam.service.AssentoService;
 
 public class AssentoOcupa implements Acao {
@@ -15,16 +17,16 @@ public class AssentoOcupa implements Acao {
 			throws ServletException, IOException {
 
 		System.out.println("AÇÃO => OCUPANDO ASSENTOS");
-		String idVoo = request.getParameter("vooId");
+		String idVoo = request.getParameter(ParametroTela.VOO_ID);
 		System.out.println("idvoo" + idVoo);
-		String ocupa = request.getParameter("ocupa");
-		String desocupa = request.getParameter("desocupa");
-		String ocupante = request.getParameter("ocupante");
-		String[] numeroAssento = request.getParameterValues("numeroAssento");
-		String[] numeroAssentoOcupado = request.getParameterValues("numeroAssentoOcupado");
-		String[] numeroAssentoVolta = request.getParameterValues("numeroAssentoVolta");
-		String[] numeroAssentoOcupadoVolta = request.getParameterValues("numeroAssentoOcupadoVolta");
-		String idVooVolta = request.getParameter("idVooVolta");
+		String ocupa = request.getParameter(ParametroTela.ASSENTO_OCUPA);
+		String desocupa = request.getParameter(ParametroTela.ASSENTO_DESOCUPA);
+		String ocupante = request.getParameter(ParametroTela.ASSENTO_OCUPANTE);
+		String[] numeroAssento = request.getParameterValues(ParametroTela.ASSENTO_NUMERO);
+		String[] numeroAssentoOcupado = request.getParameterValues(ParametroTela.ASSENTO_NUMERO_OCUPADO);
+		String[] numeroAssentoVolta = request.getParameterValues(ParametroTela.ASSENTO_NUMERO_VOLTA);
+		String[] numeroAssentoOcupadoVolta = request.getParameterValues(ParametroTela.ASSENTO_NUMEROA_OCUPADO_VOLTA);
+		String idVooVolta = request.getParameter(ParametroTela.ASSENTO_ID_VOO_VOLTA);
 		Assento assentoIda = new Assento();
 		Assento assentoVolta = new Assento();
 		Integer idOcupante = Integer.valueOf(ocupante);
@@ -44,8 +46,8 @@ public class AssentoOcupa implements Acao {
 				|| (numeroAssentoVolta != null || numeroAssentoOcupadoVolta != null)) {
 		} else {
 			info = InfoCampos.ASSENTO_NAO_SELECIONADO;
-			request.setAttribute("erro", info);
-			return "forward:erro.jsp";
+			request.setAttribute(ParametroTela.ERRO, info);
+			return "forward:"+Local.ERRO_VIEW;
 		}
 
 		if (idVoo != null) {

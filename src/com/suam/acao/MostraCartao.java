@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.suam.bean.CartaoDeCredito;
 import com.suam.bean.Usuario;
-import com.suam.constantes.Info.InfoCampos;
+import com.suam.constantes.Constantes.InfoCampos;
 import com.suam.service.CartaoDeCreditoService;
 import com.suam.service.UsuarioService;
 

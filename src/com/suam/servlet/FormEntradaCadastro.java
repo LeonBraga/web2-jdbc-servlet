@@ -12,10 +12,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.suam.bean.Usuario;
-import com.suam.constantes.Diretorios;
-import com.suam.constantes.Diretorios.Local;
-import com.suam.constantes.Info.InfoCampos;
-import com.suam.constantes.Parametros.ParametroTela;
+import com.suam.constantes.Constantes.InfoCampos;
+import com.suam.constantes.Constantes.Local;
+import com.suam.constantes.Constantes.ParametroTela;
 import com.suam.service.UsuarioService;
 
 @WebServlet("/formEntradaCadastro")

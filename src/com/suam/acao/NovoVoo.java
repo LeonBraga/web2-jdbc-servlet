@@ -1,7 +1,6 @@
 package com.suam.acao;
 
 import java.io.IOException;
-import java.sql.Date;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -9,10 +8,11 @@ import java.text.SimpleDateFormat;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import com.suam.bean.Voo;
-import com.suam.constantes.Diretorios.Local;
-import com.suam.constantes.Info.InfoCampos;
-import com.suam.constantes.Parametros.ParametroTela;
+import com.suam.constantes.Constantes.InfoCampos;
+import com.suam.constantes.Constantes.Local;
+import com.suam.constantes.Constantes.ParametroTela;
 import com.suam.service.AssentoService;
 import com.suam.service.VooService;
 

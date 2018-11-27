@@ -3,14 +3,15 @@ package com.suam.acao;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.text.ParseException;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import com.suam.bean.CartaoDeCredito;
-import com.suam.constantes.Diretorios;
-import com.suam.constantes.Diretorios.Local;
-import com.suam.constantes.Info.InfoCampos;
-import com.suam.constantes.Parametros.ParametroTela;
+import com.suam.constantes.Constantes.InfoCampos;
+import com.suam.constantes.Constantes.Local;
+import com.suam.constantes.Constantes.ParametroTela;
 import com.suam.service.CartaoDeCreditoService;
 import com.suam.util.DataUtils;
 
@@ -24,7 +25,7 @@ public class AlteraCartao implements Acao {
 		String nome = request.getParameter(ParametroTela.USUARIO_NOME);
 		String numero = request.getParameter(ParametroTela.CARTAO_NUMERO);
 		String data = request.getParameter(ParametroTela.CARTAO_DATA_VENCIMENTO_CARTAO);
-		String idUser = request.getParameter("idUser");
+		String idUser = request.getParameter(ParametroTela.USUARIO_ID_USER);
 		String info = null;
 		CartaoDeCredito cartao = new CartaoDeCredito();
 
@@ -59,7 +60,9 @@ public class AlteraCartao implements Acao {
 
 		try {
 			if (CartaoDeCreditoService.update(cartao)) {
-				System.out.println("Atualizado com sucesso!");
+				info = InfoCampos.SUCESSO;
+				request.setAttribute(ParametroTela.ERRO, info);
+				return "forward:" + Local.ERRO_VIEW;
 			} else {
 				request.setAttribute("cartao", cartao);
 				return "forward:formNovoCartao.jsp";

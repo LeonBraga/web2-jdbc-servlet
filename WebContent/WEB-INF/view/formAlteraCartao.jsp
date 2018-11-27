@@ -44,7 +44,7 @@
 						<br>
 					</c:if>
 
-					<br> <br> <input type="hidden" name="idUser"
+					<br> <br> <input type="hidden" name="id"
 						value="${cartao.idUser }"> <input type="hidden"
 						name="acao" value="AlteraCartao"> <input type="submit"
 						value="Alterar Dados" />

@@ -4,16 +4,18 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import com.suam.bean.Assento;
 import com.suam.bean.CartaoDeCredito;
 import com.suam.bean.Usuario;
 import com.suam.bean.Voo;
-import com.suam.constantes.Diretorios.Local;
-import com.suam.constantes.Info.InfoCampos;
-import com.suam.constantes.Parametros.ParametroTela;
+import com.suam.constantes.Constantes.InfoCampos;
+import com.suam.constantes.Constantes.Local;
+import com.suam.constantes.Constantes.ParametroTela;
 import com.suam.service.AssentoService;
 import com.suam.service.CartaoDeCreditoService;
 import com.suam.service.UsuarioService;

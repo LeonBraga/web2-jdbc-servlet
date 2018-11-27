@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.suam.VO.CompraVooVO;
 import com.suam.bean.Usuario;
-import com.suam.constantes.Info.InfoCampos;
+import com.suam.constantes.Constantes.InfoCampos;
 import com.suam.service.CompraVooService;
 import com.suam.service.UsuarioService;
 

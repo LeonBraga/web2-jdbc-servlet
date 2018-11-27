@@ -6,7 +6,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.suam.constantes.Diretorios.Local;
+import com.suam.constantes.Constantes.Local;
 
 public class FormNovoUsuario implements Acao {
 

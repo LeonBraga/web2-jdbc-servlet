@@ -8,9 +8,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.suam.bean.Usuario;
-import com.suam.constantes.Diretorios.Local;
-import com.suam.constantes.Info.InfoCampos;
-import com.suam.constantes.Parametros.ParametroTela;
+import com.suam.constantes.Constantes.InfoCampos;
+import com.suam.constantes.Constantes.Local;
+import com.suam.constantes.Constantes.ParametroTela;
 import com.suam.service.UsuarioService;
 
 public class FormNovoCartao implements Acao {
@@ -18,7 +18,7 @@ public class FormNovoCartao implements Acao {
 	@Override
 	public String executa(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		String paramId = request.getParameter("idUser");
+		String paramId = request.getParameter(ParametroTela.USUARIO_ID_USER);
 		Integer id = Integer.valueOf(paramId);
 
 		String info = null;

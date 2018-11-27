@@ -125,7 +125,7 @@ import com.suam.bean.Assento;
 import com.suam.bean.CartaoDeCredito;
 import com.suam.bean.Usuario;
 import com.suam.bean.Voo;
-import com.suam.constantes.Info.InfoCampos;
+import com.suam.constantes.Constantes.InfoCampos;
 import com.suam.service.AssentoService;
 import com.suam.service.CartaoDeCreditoService;
 import com.suam.service.CompraVooService;

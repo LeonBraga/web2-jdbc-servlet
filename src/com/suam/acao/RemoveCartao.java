@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.suam.bean.CartaoDeCredito;
-import com.suam.constantes.Parametros.ParametroTela;
+import com.suam.constantes.Constantes.ParametroTela;
 import com.suam.service.CartaoDeCreditoService;
 
 public class RemoveCartao  implements Acao{
