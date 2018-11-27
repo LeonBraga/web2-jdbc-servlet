@@ -21,7 +21,7 @@ public class ListaUsuario implements Acao {
 
 		List<Usuario> listaUsuario = null;
 		try {
-			listaUsuario = UsuarioService.ListaUsuarios();
+			listaUsuario = UsuarioService.ListaUsuarios();//MELHORAR - IMPLEMENTAR A ENTREGA DE PARCIAIS
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

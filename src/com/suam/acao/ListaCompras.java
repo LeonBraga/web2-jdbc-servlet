@@ -25,7 +25,7 @@ public class ListaCompras implements Acao {
 		// HashMap<Integer, CompraVoo> mapCompras = new HashMap<Integer, CompraVoo>();
 
 		try {
-			listaCompras = CompraVooService.ListaCompras();
+			listaCompras = CompraVooService.ListaCompras();//MELHORAR - IMPLEMENTAR A ENTREGA DE PARCIAIS
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

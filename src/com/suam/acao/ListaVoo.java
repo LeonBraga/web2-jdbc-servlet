@@ -19,7 +19,7 @@ public class ListaVoo implements Acao {
 
 		List<Voo> listaVoos = null;
 		try {
-			listaVoos = VooService.ListaVoo();
+			listaVoos = VooService.ListaVoo(); //MELHORAR - IMPLEMENTAR A ENTREGA DE PARCIAIS
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
