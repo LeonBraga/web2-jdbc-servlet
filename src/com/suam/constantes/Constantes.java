@@ -33,9 +33,11 @@ public class Constantes {
 		public static final String FORM_NOVO_COMPRA_VOO = "formNovoCompraVoo.jsp";
 		public static final String FORM_ALTERA_USUARIO = "forward:formAlteraUsuario.jsp";
 		public static final String FORM_ALTERA_VOO = "formAlteraVoo.jsp";
+		public static final String FORM_ALTERA_CARTAO = "formAlteraCartao.jsp";
 		public static final String LISTA_COMPRAS = "listaCompras.jsp";
 		public static final String LISTA_USUARIO = "listaUsuario.jsp";
 		public static final String LISTA_VOOS = "listaVoos.jsp";
+		public static final String MOSTRA_COMPRA = "mostraCompra.jsp";
 	}
 
 	public static class NomeAcao {
@@ -79,6 +81,8 @@ public class Constantes {
 		public static final String COMPRA_VOO_IDVOO = "idvoo";
 		public static final String COMPRA_VOO_IDVOOVOLTA = "idvooVolta";
 		public static final String OBJETO_LISTA_COMPRAS = "compras";
+		public static final String OBJETO_COMPRA = "compra";
+		public static final String ID_COMPRA = "idCompra";
 
 		public static final String ASSENTO_OCUPA = "ocupa";
 		public static final String ASSENTO_DESOCUPA = ("desocupa");

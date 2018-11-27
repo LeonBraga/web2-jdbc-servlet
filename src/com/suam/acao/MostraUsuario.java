@@ -56,6 +56,6 @@ public class MostraUsuario implements Acao {
 
 		request.setAttribute(ParametroTela.OBJETO_USUARIO, usuario);
 
-		return "forward:formAlteraUsuario.jsp";
+		return "forward:"+NomeView.FORM_ALTERA_USUARIO;
 	}
 }

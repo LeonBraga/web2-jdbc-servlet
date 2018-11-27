@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.suam.bean.CartaoDeCredito;
 import com.suam.bean.Usuario;
 import com.suam.constantes.Constantes.InfoCampos;
+import com.suam.constantes.Constantes.NomeAcao;
 import com.suam.constantes.Constantes.NomeView;
 import com.suam.constantes.Constantes.ParametroTela;
 import com.suam.service.CartaoDeCreditoService;
@@ -88,7 +89,7 @@ public class NovoCartao implements Acao {
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
-			return "redirect:entrada?acao=MostraUsuario&id="+idUser;
+			return "redirect:entrada?acao="+NomeAcao.MOSTRA_USUARIO+"&id="+idUser;
 
 	}
 }

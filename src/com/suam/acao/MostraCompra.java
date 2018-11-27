@@ -9,8 +9,11 @@ import javax.servlet.http.HttpServletResponse;
 import com.suam.VO.CompraVooVO;
 import com.suam.bean.Usuario;
 import com.suam.constantes.Constantes.InfoCampos;
+import com.suam.constantes.Constantes.NomeView;
+import com.suam.constantes.Constantes.ParametroTela;
 import com.suam.service.CompraVooService;
 import com.suam.service.UsuarioService;
+import com.suam.util.ConverteValores;
 
 public class MostraCompra implements Acao {
 
@@ -18,14 +21,14 @@ public class MostraCompra implements Acao {
 			throws ServletException, IOException {
 		System.out.println("AÇÃO = MOSTRANDO COMPRA");
 
-		String idCompra = request.getParameter("idCompra");
-		Integer idCompraInt = Integer.valueOf(idCompra);
+		String idCompra = request.getParameter(ParametroTela.ID_COMPRA);
+		Integer idCompraInt = ConverteValores.StringParaInteger(idCompra);
 		
 		String info = null;
 		if (idCompra == null || idCompra.equals("")) {
 			info = InfoCampos.GENERICO;
-			request.setAttribute("erro", info);
-			return "forward:erro.jsp";
+			request.setAttribute(ParametroTela.ERRO, info);
+			return "forward:"+NomeView.ERRO_VIEW;
 		}
 		CompraVooVO compraVooVO = new CompraVooVO();
 		Usuario usuario = new Usuario();
@@ -67,7 +70,7 @@ public class MostraCompra implements Acao {
 		// Integer valorTotal = (listaAssentoPagamentoConfirmado.size() *
 		// voo.getValorVoo())+valorTotal;
 
-		request.setAttribute("compra", compraVooVO);
-		return "forward:mostraCompra.jsp";
+		request.setAttribute(ParametroTela.OBJETO_COMPRA, compraVooVO);
+		return "forward:"+NomeView.MOSTRA_COMPRA;
 	}
 }
