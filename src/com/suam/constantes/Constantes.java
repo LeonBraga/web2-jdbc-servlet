@@ -29,9 +29,9 @@ public class Constantes {
 		public static final String ERRO_VIEW = "erro.jsp";
 		public static final String FORM_NOVO_USUARIO = "formNovoUsuario.jsp";
 		public static final String FORM_NOVO_VOO = "formNovoVoo.jsp";
-		public static final String FORM_NOVO_CARTAO = "forward:formNovoCartao.jsp";
+		public static final String FORM_NOVO_CARTAO = "formNovoCartao.jsp";
 		public static final String FORM_NOVO_COMPRA_VOO = "formNovoCompraVoo.jsp";
-		public static final String FORM_ALTERA_USUARIO = "forward:formAlteraUsuario.jsp";
+		public static final String FORM_ALTERA_USUARIO = "formAlteraUsuario.jsp";
 		public static final String FORM_ALTERA_VOO = "formAlteraVoo.jsp";
 		public static final String FORM_ALTERA_CARTAO = "formAlteraCartao.jsp";
 		public static final String LISTA_COMPRAS = "listaCompras.jsp";
