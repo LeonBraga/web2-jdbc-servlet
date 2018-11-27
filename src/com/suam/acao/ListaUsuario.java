@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.suam.bean.Usuario;
+import com.suam.constantes.Constantes.NomeView;
 import com.suam.constantes.Constantes.ParametroTela;
 import com.suam.service.UsuarioService;
 
@@ -26,7 +27,7 @@ public class ListaUsuario implements Acao {
 		}
 
 		request.setAttribute(ParametroTela.OBJETO_LISTA_USUARIO, listaUsuario);
-		return "forward:listaUsuario.jsp";
+		return "forward:"+NomeView.LISTA_USUARIO;
 	}
 
 }

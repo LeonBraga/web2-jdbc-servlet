@@ -10,9 +10,11 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.suam.bean.Usuario;
 import com.suam.constantes.Constantes.InfoCampos;
-import com.suam.constantes.Constantes.Local;
+import com.suam.constantes.Constantes.NomeAcao;
+import com.suam.constantes.Constantes.NomeView;
 import com.suam.constantes.Constantes.ParametroTela;
 import com.suam.service.UsuarioService;
+import com.suam.util.ConverteValores;
 import com.suam.util.DataUtils;
 
 public class AlteraUsuario implements Acao {
@@ -29,42 +31,42 @@ public class AlteraUsuario implements Acao {
 		String data = request.getParameter(ParametroTela.USUARIO_DATA);
 		String usuarioId = request.getParameter(ParametroTela.USUARIO_ID_USER);
 		String ehAdm = request.getParameter(ParametroTela.USUARIO_EH_ADM);
-		Integer id = Integer.valueOf(usuarioId);
+		
 		String info = null;
 
 		if (nome == null  ||nome.equals("")) {
 			info = InfoCampos.NOME_PROBLEMA;
 			request.setAttribute(ParametroTela.ERRO, info);
-			return "forward:"+Local.ERRO_VIEW;
+			return "forward:"+NomeView.ERRO_VIEW;
 		} else if (sobrenome == null  ||sobrenome.equals("")) {
 			info = InfoCampos.SOBRENOME_PROBLEMA;
 			request.setAttribute(ParametroTela.ERRO, info);
-			return "forward:"+Local.ERRO_VIEW;
+			return "forward:"+NomeView.ERRO_VIEW;
 		} else if (endereco == null ||endereco.equals("")) {
 			info = InfoCampos.ENDERECO_PROBLEMA;
 			request.setAttribute(ParametroTela.ERRO, info);
-			return "forward:"+Local.ERRO_VIEW;
+			return "forward:"+NomeView.ERRO_VIEW;
 		} else if (senha == null  ||senha.equals("")) {
 			info = InfoCampos.SENHA_PROBLEMA;
 			request.setAttribute(ParametroTela.ERRO, info);
-			return "forward:"+Local.ERRO_VIEW;
+			return "forward:"+NomeView.ERRO_VIEW;
 		} else if (login == null ||login.equals("")) {
 			info = InfoCampos.LOGIN_PROBLEMA;
 			request.setAttribute(ParametroTela.ERRO, info);
-			return "forward:"+Local.ERRO_VIEW;
+			return "forward:"+NomeView.ERRO_VIEW;
 		} else if (data == null ||data.equals("")) {
 			info = InfoCampos.DATA_PROBLEMA;
 			request.setAttribute(ParametroTela.ERRO, info);
-			return "forward:"+Local.ERRO_VIEW;
-		} else if (id == null ||id.equals("")) {
+			return "forward:"+NomeView.ERRO_VIEW;
+		} else if (ConverteValores.StringParaInteger(usuarioId) == null ||ConverteValores.StringParaInteger(usuarioId).equals("")) {
 			info = InfoCampos.GENERICO;
 			request.setAttribute(ParametroTela.ERRO, info);
-			return "forward:"+Local.ERRO_VIEW;
+			return "forward:"+NomeView.ERRO_VIEW;
 		}
 
 		Usuario usuario = null;
 		try {
-			usuario = UsuarioService.buscaUsuarioPelaId(id);
+			usuario = UsuarioService.buscaUsuarioPelaId(ConverteValores.StringParaInteger(usuarioId));
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -97,7 +99,7 @@ public class AlteraUsuario implements Acao {
 				info = "Esse login já esta em uso, já foi cadastrado por outro usuário!";
 				request.setAttribute(ParametroTela.OBJETO_USUARIO, usuario);
 				request.setAttribute(ParametroTela.ERRO, info);
-				return Local.FORM_ALTERA_USUARIO;
+				return NomeView.FORM_ALTERA_USUARIO;
 			}
 
 		} catch (SQLException e) {
@@ -105,6 +107,6 @@ public class AlteraUsuario implements Acao {
 		}
 
 		//return "redirect:entrada?acao=MostraUsuario&id=" + usuario.getId();
-		return "redirect:entrada?acao=ListaUsuario";
+		return "redirect:entrada?acao="+NomeAcao.LISTA_USUARIO;
 	}
 }

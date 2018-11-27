@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.suam.bean.CartaoDeCredito;
 import com.suam.bean.Usuario;
 import com.suam.constantes.Constantes.InfoCampos;
-import com.suam.constantes.Constantes.Local;
+import com.suam.constantes.Constantes.NomeView;
 import com.suam.constantes.Constantes.ParametroTela;
 import com.suam.service.CartaoDeCreditoService;
 import com.suam.service.UsuarioService;
@@ -28,7 +28,7 @@ public class MostraUsuario implements Acao {
 		if (usuarioId == null || usuarioId.equals("")) {
 			info = InfoCampos.GENERICO;
 			request.setAttribute(ParametroTela.ERRO, info);
-			return "forward:"+Local.ERRO_VIEW;
+			return "forward:"+NomeView.ERRO_VIEW;
 		}
 
 		Integer id = Integer.valueOf(usuarioId);
@@ -47,11 +47,11 @@ public class MostraUsuario implements Acao {
 		}
 
 		if (!listaCartao.isEmpty()) {
-			request.setAttribute(ParametroTela.OBJETO_CARTAO, listaCartao);
+			request.setAttribute(ParametroTela.OBJETO_CARTOES, listaCartao);
 		} else {
 			info = "Usuário sem cartão cadastrado  ";
 			request.setAttribute(ParametroTela.ERRO, info);
-			// return "forward:"+Local.ERRO_VIEW;
+			// return "forward:"+NomeView.ERRO_VIEW;
 		}
 
 		request.setAttribute(ParametroTela.OBJETO_USUARIO, usuario);

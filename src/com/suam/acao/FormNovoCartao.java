@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.suam.bean.Usuario;
 import com.suam.constantes.Constantes.InfoCampos;
-import com.suam.constantes.Constantes.Local;
+import com.suam.constantes.Constantes.NomeView;
 import com.suam.constantes.Constantes.ParametroTela;
 import com.suam.service.UsuarioService;
 
@@ -26,7 +26,7 @@ public class FormNovoCartao implements Acao {
 		if (paramId == null ||paramId.equals("")) {
 			info = InfoCampos.GENERICO;
 			request.setAttribute(ParametroTela.ERRO, info);
-			return "forward:"+Local.ERRO_VIEW;
+			return "forward:"+NomeView.ERRO_VIEW;
 		}
 		
 		Usuario user = null;
@@ -37,7 +37,7 @@ public class FormNovoCartao implements Acao {
 		}
 		request.setAttribute(ParametroTela.OBJETO_USUARIO, user);
 		
-		return Local.FORM_NOVO_CARTAO;
+		return NomeView.FORM_NOVO_CARTAO;
 	}
 
 }

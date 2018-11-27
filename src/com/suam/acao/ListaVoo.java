@@ -3,12 +3,11 @@ package com.suam.acao;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
-
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import com.suam.bean.Voo;
+import com.suam.constantes.Constantes.NomeView;
 import com.suam.service.VooService;
 
 public class ListaVoo implements Acao {
@@ -26,7 +25,7 @@ public class ListaVoo implements Acao {
 		}
 		
 		request.setAttribute("voos", listaVoos);
-		return "forward:listaVoos.jsp";
+		return "forward:"+NomeView.LISTA_VOOS;
 	}
 
 }

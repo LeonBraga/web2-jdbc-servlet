@@ -47,9 +47,9 @@
 								Não confirmado
 							</c:if> - Valor por assento: ${voo.valorVoo} <br> <c:if
 										test="${usuarioLogado.isAdm ==  'TRUE'}">
-										<a href="entrada?acao=MostraVoo&id=${voo.idVoo}"><button
+										<a href="entrada?acao=MostraVoo&idvoo=${voo.idVoo}"><button
 												type="button">Editar este Voo</button></a>
-										<a href="entrada?acao=RemoveVoo&id=${voo.idVoo}"><button
+										<a href="entrada?acao=RemoveVoo&idvoo=${voo.idVoo}"><button
 												type="button">Remover este Voo</button></a>
 									</c:if></li>
 								<br>
@@ -71,9 +71,9 @@
 										pattern="dd/MM/yyyy" /> - Confirmação: ${voo.confirmacao} -
 									Valor por assento: ${voo.valorVoo} <br> <c:if
 										test="${usuarioLogado.isAdm ==  'TRUE'}">
-										<a href="entrada?acao=MostraVoo&id=${voo.idVoo}"><button
+										<a href="entrada?acao=MostraVoo&idvoo=${voo.idVoo}"><button
 												type="button">Editar este Voo</button></a>
-										<a href="entrada?acao=RemoveVoo&id=${voo.idVoo}"><button
+										<a href="entrada?acao=RemoveVoo&idvoo=${voo.idVoo}"><button
 												type="button">Remover este Voo</button></a>
 									</c:if></li>
 								<br>

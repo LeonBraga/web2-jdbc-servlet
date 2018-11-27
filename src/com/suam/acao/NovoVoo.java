@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.suam.bean.Voo;
 import com.suam.constantes.Constantes.InfoCampos;
-import com.suam.constantes.Constantes.Local;
+import com.suam.constantes.Constantes.NomeView;
 import com.suam.constantes.Constantes.ParametroTela;
 import com.suam.service.AssentoService;
 import com.suam.service.VooService;
@@ -35,23 +35,23 @@ public class NovoVoo implements Acao {
 		if (origem == null ||origem.equals("")) {
 			info = InfoCampos.ORIGEM_PROBLEMA;
 			request.setAttribute(ParametroTela.ERRO, info);
-			return "forward:"+Local.ERRO_VIEW;
+			return "forward:"+NomeView.ERRO_VIEW;
 		} else if (destino == null ||destino.equals("")) {
 			info = InfoCampos.DESTINO_PROBLEMA;
 			request.setAttribute(ParametroTela.ERRO, info);
-			return "forward:"+Local.ERRO_VIEW;
+			return "forward:"+NomeView.ERRO_VIEW;
 		} else if (ida == null ||ida.equals("")) {
 			info = InfoCampos.IDA_PROBLEMA;
 			request.setAttribute(ParametroTela.ERRO, info);
-			return "forward:"+Local.ERRO_VIEW;
+			return "forward:"+NomeView.ERRO_VIEW;
 		} else if (confirmacao == null ||confirmacao.equals("")){
 			info = InfoCampos.CONFIRMACAO_PROBLEMA;
 			request.setAttribute(ParametroTela.ERRO, info);
-			return "forward:"+Local.ERRO_VIEW;
+			return "forward:"+NomeView.ERRO_VIEW;
 		} else if (valorVoo == null ||valorVoo.equals("")) {
 			info = InfoCampos.VALOR_PROBLEMA;
 			request.setAttribute(ParametroTela.ERRO, info);
-			return "forward:"+Local.ERRO_VIEW;
+			return "forward:"+NomeView.ERRO_VIEW;
 		} 
 		
 		Voo voo = new Voo();

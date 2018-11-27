@@ -14,7 +14,7 @@ import com.suam.bean.CartaoDeCredito;
 import com.suam.bean.Usuario;
 import com.suam.bean.Voo;
 import com.suam.constantes.Constantes.InfoCampos;
-import com.suam.constantes.Constantes.Local;
+import com.suam.constantes.Constantes.NomeView;
 import com.suam.constantes.Constantes.ParametroTela;
 import com.suam.service.AssentoService;
 import com.suam.service.CartaoDeCreditoService;
@@ -35,14 +35,12 @@ public class FormNovoCompraVoo implements Acao {
 
 		String info = null;
 
-		 if (compradorId == null ||compradorId.equals("")) {
+		if (compradorId == null || compradorId.equals("")) {
 			info = InfoCampos.GENERICO;
 			request.setAttribute(ParametroTela.ERRO, info);
-			return "forward:"+Local.ERRO_VIEW;
+			return "forward:" + NomeView.ERRO_VIEW;
 		}
 
-		
-		
 		Usuario user = new Usuario();
 		List<CartaoDeCredito> listaCartao = null;
 		boolean idaVolta = false;
@@ -125,7 +123,7 @@ public class FormNovoCompraVoo implements Acao {
 		request.setAttribute("idaVolta", idaVolta);
 		request.setAttribute("assentos", listaNumeroAssentoTratada);
 		request.setAttribute("assentosVolta", listaNumeroAssentoTratadaVolta);
-		return "forward:"+Local.FORM_NOVO_COMPRA_VOO;
+		return "forward:" + NomeView.FORM_NOVO_COMPRA_VOO;
 	}
 
 }

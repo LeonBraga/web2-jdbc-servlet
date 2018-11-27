@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.suam.bean.CartaoDeCredito;
 import com.suam.bean.Usuario;
 import com.suam.constantes.Constantes.InfoCampos;
-import com.suam.constantes.Constantes.Local;
+import com.suam.constantes.Constantes.NomeView;
 import com.suam.constantes.Constantes.ParametroTela;
 import com.suam.service.CartaoDeCreditoService;
 import com.suam.service.UsuarioService;
@@ -35,19 +35,19 @@ public class NovoCartao implements Acao {
 		if(nome == null ||nome.equals("")) {
 			info = InfoCampos.NOME_PROBLEMA;
 			request.setAttribute(ParametroTela.ERRO, info);
-			return "forward:"+Local.ERRO_VIEW;
+			return "forward:"+NomeView.ERRO_VIEW;
 		}else if(numero == null ||numero.equals("")) {
 			info = InfoCampos.NUMERO_CARTAO;
 			request.setAttribute(ParametroTela.ERRO, info);
-			return "forward:"+Local.ERRO_VIEW;
+			return "forward:"+NomeView.ERRO_VIEW;
 		}else if(data == null  || data.equals("")) {
 			info = InfoCampos.DATA_PROBLEMA;
 			request.setAttribute(ParametroTela.ERRO, info);
-			return "forward:"+Local.ERRO_VIEW;
+			return "forward:"+NomeView.ERRO_VIEW;
 		}else if(idUser == null  ||idUser.equals("")) {
 			info = InfoCampos.GENERICO;
 			request.setAttribute(ParametroTela.ERRO, info);
-			return "forward:"+Local.ERRO_VIEW;
+			return "forward:"+NomeView.ERRO_VIEW;
 		}
 	
 		SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
@@ -83,7 +83,7 @@ public class NovoCartao implements Acao {
 					request.setAttribute(ParametroTela.ERRO, info);
 					request.setAttribute(ParametroTela.OBJETO_USUARIO, usuario);
 					request.setAttribute("cartao", cartao);
-					return "forward:"+Local.FORM_NOVO_CARTAO;
+					return "forward:"+NomeView.FORM_NOVO_CARTAO;
 				}
 			} catch (SQLException e) {
 				e.printStackTrace();

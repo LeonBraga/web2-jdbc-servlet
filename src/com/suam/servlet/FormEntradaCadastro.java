@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.suam.bean.Usuario;
 import com.suam.constantes.Constantes.InfoCampos;
-import com.suam.constantes.Constantes.Local;
+import com.suam.constantes.Constantes.NomeView;
 import com.suam.constantes.Constantes.ParametroTela;
 import com.suam.service.UsuarioService;
 
@@ -55,43 +55,43 @@ public class FormEntradaCadastro extends HttpServlet {
 		if (nome == null || nome.equals("")) {
 			info = InfoCampos.NOME_PROBLEMA;
 			request.setAttribute(ParametroTela.ERRO, info);
-			request.getRequestDispatcher(Local.ERRO_WEB_INF_VIEW).forward(request, response);
+			request.getRequestDispatcher(NomeView.ERRO_WEB_INF_VIEW).forward(request, response);
 			return;
 			//return "forward:erro.jsp";
 		} else if (sobrenome == null || sobrenome.equals("")) {
 			info = InfoCampos.SOBRENOME_PROBLEMA;
 			request.setAttribute(ParametroTela.ERRO, info);
-			request.getRequestDispatcher(Local.ERRO_WEB_INF_VIEW).forward(request, response);
+			request.getRequestDispatcher(NomeView.ERRO_WEB_INF_VIEW).forward(request, response);
 			return;
 			//return "forward:erro.jsp";
 		} else if (endereco == null || endereco.equals("")) {
 			info = InfoCampos.ENDERECO_PROBLEMA;
 			request.setAttribute(ParametroTela.ERRO, info);
-			request.getRequestDispatcher(Local.ERRO_WEB_INF_VIEW).forward(request, response);
+			request.getRequestDispatcher(NomeView.ERRO_WEB_INF_VIEW).forward(request, response);
 			return;
 			//return "forward:erro.jsp";
 		} else if (senha == null || senha.equals("")) {
 			info = InfoCampos.SENHA_PROBLEMA;
 			request.setAttribute(ParametroTela.ERRO, info);
-			request.getRequestDispatcher(Local.ERRO_WEB_INF_VIEW).forward(request, response);
+			request.getRequestDispatcher(NomeView.ERRO_WEB_INF_VIEW).forward(request, response);
 			return;
 			//return "forward:erro.jsp";
 		} else if (login == null || login.equals("")) {
 			info = InfoCampos.LOGIN_PROBLEMA;
 			request.setAttribute(ParametroTela.ERRO, info);
-			request.getRequestDispatcher(Local.ERRO_WEB_INF_VIEW).forward(request, response);
+			request.getRequestDispatcher(NomeView.ERRO_WEB_INF_VIEW).forward(request, response);
 			return;
 			//return "forward:erro.jsp";
 		} else if (data == null || data.equals("")) {
 			info = InfoCampos.DATA_PROBLEMA;
 			request.setAttribute(ParametroTela.ERRO, info);
-			request.getRequestDispatcher(Local.ERRO_WEB_INF_VIEW).forward(request, response);
+			request.getRequestDispatcher(NomeView.ERRO_WEB_INF_VIEW).forward(request, response);
 			return;
 			//return "forward:erro.jsp";
 		}else if (!senha.equals(confirmaSenha)) {
 			info = "Senhas e confirmação de senha iincompatíveis!";
 			request.setAttribute(ParametroTela.ERRO, info);
-			request.getRequestDispatcher(Local.ERRO_WEB_INF_VIEW).forward(request, response);
+			request.getRequestDispatcher(NomeView.ERRO_WEB_INF_VIEW).forward(request, response);
 			return;
 			//return "forward:erro.jsp";
 		}
@@ -136,7 +136,7 @@ public class FormEntradaCadastro extends HttpServlet {
 		} else {
 			System.out.println("AS SENHAS NÃO CONFEREM");
 			request.setAttribute(ParametroTela.ERRO, info);
-			request.getRequestDispatcher(Local.ERRO_WEB_INF_VIEW).forward(request, response);
+			request.getRequestDispatcher(NomeView.ERRO_WEB_INF_VIEW).forward(request, response);
 		}
 
 	}

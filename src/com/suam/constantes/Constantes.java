@@ -24,7 +24,7 @@ public class Constantes {
 
 	}
 
-	public static class Local {
+	public static class NomeView {
 		public static final String ERRO_WEB_INF_VIEW = "WEB-INF/view/erro.jsp";
 		public static final String ERRO_VIEW = "erro.jsp";
 		public static final String FORM_NOVO_USUARIO = "formNovoUsuario.jsp";
@@ -33,6 +33,16 @@ public class Constantes {
 		public static final String FORM_NOVO_COMPRA_VOO = "formNovoCompraVoo.jsp";
 		public static final String FORM_ALTERA_USUARIO = "forward:formAlteraUsuario.jsp";
 		public static final String FORM_ALTERA_VOO = "formAlteraVoo.jsp";
+		public static final String LISTA_COMPRAS = "listaCompras.jsp";
+		public static final String LISTA_USUARIO = "listaUsuario.jsp";
+		public static final String LISTA_VOOS = "listaVoos.jsp";
+	}
+
+	public static class NomeAcao {
+		public static final String MOSTRA_USUARIO = "MostraUsuario";
+		public static final String LISTA_USUARIO = "ListaUsuario";
+		public static final String MOSTRA_VOO = "MostraVoo";
+		public static final String LISTA_ASSENTO = "ListaAssento";
 	}
 
 	public static class ParametroTela {
@@ -48,12 +58,14 @@ public class Constantes {
 		public static final String USUARIO_ID_USER = "id";
 		public static final String USUARIO_EH_ADM = "ehAdm";
 		public static final String OBJETO_USUARIO = "usuario";
-		public static final String OBJETO_CARTAO = "cartoes";
-		public static final String OBJETO_VOO = "VOO";
 		public static final String OBJETO_LISTA_USUARIO = "usuarios";
+
+		public static final String OBJETO_CARTOES = "cartoes";
 		public static final String OBJETO_LISTA_CARTOES = "cartoes";
+		public static final String OBJETO_CARTAO = "cartao";
 		public static final String CARTAO_NUMERO = "numero";
 		public static final String CARTAO_DATA_VENCIMENTO_CARTAO = "dataVencimento";
+
 		public static final String VOO_ORIGEM = "origem";
 		public static final String VOO_DESTINO = "destino";
 		public static final String VOO_DATA = "ida";
@@ -61,9 +73,13 @@ public class Constantes {
 		public static final String VOO_ID_IDA = "idVooIda";
 		public static final String VOO_ID = "idvoo";
 		public static final String VOO_VALOR = "valorVoo";
+		public static final String OBJETO_VOO = "VOO";
+
 		public static final String COMPRA_COMPRADOR_ID = "compradorId";
 		public static final String COMPRA_VOO_IDVOO = "idvoo";
 		public static final String COMPRA_VOO_IDVOOVOLTA = "idvooVolta";
+		public static final String OBJETO_LISTA_COMPRAS = "compras";
+
 		public static final String ASSENTO_OCUPA = "ocupa";
 		public static final String ASSENTO_DESOCUPA = ("desocupa");
 		public static final String ASSENTO_OCUPANTE = ("ocupante");

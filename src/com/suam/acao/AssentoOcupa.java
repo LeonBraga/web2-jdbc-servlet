@@ -7,9 +7,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import com.suam.bean.Assento;
 import com.suam.constantes.Constantes.InfoCampos;
-import com.suam.constantes.Constantes.Local;
+import com.suam.constantes.Constantes.NomeAcao;
+import com.suam.constantes.Constantes.NomeView;
 import com.suam.constantes.Constantes.ParametroTela;
 import com.suam.service.AssentoService;
+import com.suam.util.ConverteValores;
 
 public class AssentoOcupa implements Acao {
 
@@ -27,9 +29,10 @@ public class AssentoOcupa implements Acao {
 		String[] numeroAssentoVolta = request.getParameterValues(ParametroTela.ASSENTO_NUMERO_VOLTA);
 		String[] numeroAssentoOcupadoVolta = request.getParameterValues(ParametroTela.ASSENTO_NUMEROA_OCUPADO_VOLTA);
 		String idVooVolta = request.getParameter(ParametroTela.ASSENTO_ID_VOO_VOLTA);
+
 		Assento assentoIda = new Assento();
 		Assento assentoVolta = new Assento();
-		Integer idOcupante = Integer.valueOf(ocupante);
+		Integer idOcupante = ConverteValores.StringParaInteger(ocupante);
 		Integer idVolta = null;
 		String info = null;
 
@@ -47,7 +50,7 @@ public class AssentoOcupa implements Acao {
 		} else {
 			info = InfoCampos.ASSENTO_NAO_SELECIONADO;
 			request.setAttribute(ParametroTela.ERRO, info);
-			return "forward:"+Local.ERRO_VIEW;
+			return "forward:" + NomeView.ERRO_VIEW;
 		}
 
 		if (idVoo != null) {
@@ -55,9 +58,8 @@ public class AssentoOcupa implements Acao {
 				for (String assentoNum : numeroAssento) {
 					System.out.println("Assento numero: " + assentoNum);
 					System.out.println("Voo id: " + id);
-					Integer numAssento = Integer.valueOf(assentoNum);
 					assentoIda.setIdVoo(id);
-					assentoIda.setNumeroAssento(numAssento);
+					assentoIda.setNumeroAssento(ConverteValores.StringParaInteger(assentoNum));
 					assentoIda.setOcupante(idOcupante);
 					if (ocupa != null) {
 						assentoIda.setOcupado(true);
@@ -78,9 +80,9 @@ public class AssentoOcupa implements Acao {
 				for (String assentoNum : numeroAssentoOcupado) {
 					System.out.println("Assento numero: " + assentoNum);
 					System.out.println("Voo id: " + id);
-					Integer numAssento = Integer.valueOf(assentoNum);
+
 					assentoIda.setIdVoo(id);
-					assentoIda.setNumeroAssento(numAssento);
+					assentoIda.setNumeroAssento(ConverteValores.StringParaInteger(assentoNum));
 					assentoIda.setOcupante(idOcupante);
 					if (desocupa != null) {
 						assentoIda.setOcupado(false);
@@ -102,9 +104,9 @@ public class AssentoOcupa implements Acao {
 				for (String assentoNumVolta : numeroAssentoVolta) {
 					System.out.println("Assento numero: " + assentoNumVolta);
 					System.out.println("Voo id: " + idVooVolta);
-					Integer numAssento = Integer.valueOf(assentoNumVolta);
+
 					assentoVolta.setIdVoo(idVolta);
-					assentoVolta.setNumeroAssento(numAssento);
+					assentoVolta.setNumeroAssento(ConverteValores.StringParaInteger(assentoNumVolta));
 					assentoVolta.setOcupante(idOcupante);
 					if (ocupa != null) {
 						assentoVolta.setOcupado(true);
@@ -125,9 +127,9 @@ public class AssentoOcupa implements Acao {
 				for (String assentoNumVolta : numeroAssentoOcupadoVolta) {
 					System.out.println("Assento numero: " + assentoNumVolta);
 					System.out.println("Voo id: " + idVooVolta);
-					Integer numAssento = Integer.valueOf(assentoNumVolta);
+
 					assentoVolta.setIdVoo(idVolta);
-					assentoVolta.setNumeroAssento(numAssento);
+					assentoVolta.setNumeroAssento(ConverteValores.StringParaInteger(assentoNumVolta));
 					assentoVolta.setOcupante(idOcupante);
 					if (desocupa != null) {
 						assentoVolta.setOcupado(false);
@@ -142,10 +144,10 @@ public class AssentoOcupa implements Acao {
 					}
 				}
 			}
-			return "redirect:entrada?acao=ListaAssento&vooId=" + idVoo + "&voltaId=" + idVooVolta;
+			return "redirect:entrada?acao=" + NomeAcao.LISTA_ASSENTO + "&vooId=" + idVoo + "&voltaId=" + idVooVolta;
 		}
 
-		return "redirect:entrada?acao=ListaAssento&vooId=" + assentoIda.getIdVoo();
+		return "redirect:entrada?acao=" + NomeAcao.LISTA_ASSENTO + "&vooId=" + assentoIda.getIdVoo();
 
 	}
 }

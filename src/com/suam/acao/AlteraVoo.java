@@ -9,7 +9,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.suam.bean.Voo;
 import com.suam.constantes.Constantes.InfoCampos;
-import com.suam.constantes.Constantes.Local;
+import com.suam.constantes.Constantes.NomeAcao;
+import com.suam.constantes.Constantes.NomeView;
 import com.suam.constantes.Constantes.ParametroTela;
 import com.suam.service.VooService;
 
@@ -30,30 +31,30 @@ public class AlteraVoo implements Acao {
 
 		String info = null;
 
-		if (origem == null || origem.equals("")) {
+		if (origem == null || origem.equals("") || origem.length()<2) {
 			info = InfoCampos.ORIGEM_PROBLEMA;
 			request.setAttribute(ParametroTela.ERRO, info);
-			return "forward:" + Local.ERRO_VIEW;
-		} else if (destino == null || destino.equals("")) {
+			return "forward:" + NomeView.ERRO_VIEW;
+		} else if (destino == null || destino.equals("") || destino.length() < 2) {
 			info = InfoCampos.DESTINO_PROBLEMA;
 			request.setAttribute(ParametroTela.ERRO, info);
-			return "forward:" + Local.ERRO_VIEW;
+			return "forward:" + NomeView.ERRO_VIEW;
 		} else if (ida == null || ida.equals("")) {
 			info = InfoCampos.IDA_PROBLEMA;
 			request.setAttribute(ParametroTela.ERRO, info);
-			return "forward:" + Local.ERRO_VIEW;
+			return "forward:" + NomeView.ERRO_VIEW;
 		} else if (confirmacao == null || confirmacao.equals("")) {
 			info = InfoCampos.CONFIRMACAO_PROBLEMA;
 			request.setAttribute(ParametroTela.ERRO, info);
-			return "forward:" + Local.ERRO_VIEW;
+			return "forward:" + NomeView.ERRO_VIEW;
 		} else if (valorVoo == null || valorVoo.equals("")) {
 			info = InfoCampos.VALOR_PROBLEMA;
 			request.setAttribute(ParametroTela.ERRO, info);
-			return "forward:" + Local.ERRO_VIEW;
+			return "forward:" + NomeView.ERRO_VIEW;
 		} else if (idVoo == null || idVoo.equals("")) {
 			info = InfoCampos.GENERICO;
 			request.setAttribute(ParametroTela.ERRO, info);
-			return "forward:" + Local.ERRO_VIEW;
+			return "forward:" + NomeView.ERRO_VIEW;
 		}
 
 		Voo voo = null;
@@ -72,6 +73,7 @@ public class AlteraVoo implements Acao {
 		} else {
 			voo.setConfirmacao(false);
 		}
+		
 		voo.setOrigem(origem);
 		voo.setDestino(destino);
 		voo.setValorVoo(Integer.valueOf(valorVoo));
@@ -80,11 +82,11 @@ public class AlteraVoo implements Acao {
 			if (VooService.update(voo)) {
 			} else {
 				request.setAttribute(ParametroTela.OBJETO_VOO, voo);
-				return "forward:" + Local.FORM_ALTERA_VOO;
+				return "forward:" + NomeView.FORM_ALTERA_VOO;
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return "redirect:entrada?acao=MostraVoo&id=" + idVoo;
+		return "redirect:entrada?acao="+NomeAcao.MOSTRA_VOO+"&"+ParametroTela.VOO_ID+"=" + idVoo;
 	}
 }

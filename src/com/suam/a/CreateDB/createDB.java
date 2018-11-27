@@ -5,7 +5,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.ResultSet;
+//import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
@@ -27,7 +27,6 @@ public class createDB {
 		String URL = "jdbc:mysql://localhost?useTimezone=true&serverTimezone=UTC";
 		String USERNAME = "root";
 		String PASSWORD = "root";
-		String STRINGCONEXAO = URL + USERNAME + PASSWORD;
 
 		try {
 			// STEP 2: Register JDBC driver
@@ -125,7 +124,7 @@ public class createDB {
 			e1.printStackTrace();
 		}
 		Statement st = null;
-		ResultSet rs = null;
+		//ResultSet rs = null;
 		try {
 			st = conexao.createStatement();
 			// rs = st.executeQuery("show databases");

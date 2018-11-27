@@ -7,7 +7,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import com.suam.bean.Assento;
-import com.suam.bean.Voo;
+import com.suam.constantes.Constantes.NomeView;
+import com.suam.constantes.Constantes.ParametroTela;
 import com.suam.service.AssentoService;
 import com.suam.service.VooService;
 
@@ -37,8 +38,8 @@ public class ListaAssento implements Acao {
 				if (!VooService.buscaVooPelaId(vooId).getConfirmacao()) {
 					System.out.println("============" + VooService.buscaVooPelaId(vooId).getConfirmacao());
 					erro = "Você selecionaou um voo ainda não confirmado!";
-					request.setAttribute("erro", erro);
-					return "forward:erro.jsp";
+					request.setAttribute(ParametroTela.ERRO, erro);
+					return "forward:"+NomeView.ERRO_VIEW;
 				}
 				listaAssentos = AssentoService.ListaAssentos(vooId);
 				listaAssentosDesocupados = AssentoService.ListaAssentosDesocupados(vooId);
