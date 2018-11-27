@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.suam.bean.Usuario;
+import com.suam.constantes.Constantes.NomeAcao;
 import com.suam.constantes.Constantes.ParametroTela;
 import com.suam.service.AssentoService;
 import com.suam.service.CartaoDeCreditoService;
@@ -57,6 +58,6 @@ public class RemoveUsuario implements Acao {
 		}
 
 		// request.setAttribute("usuario",usuario);
-		return "redirect:entrada?acao=ListaUsuario";
+		return "redirect:entrada?acao="+NomeAcao.LISTA_USUARIO;
 	}
 }

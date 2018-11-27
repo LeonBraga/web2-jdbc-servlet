@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.suam.bean.Voo;
 import com.suam.constantes.Constantes.InfoCampos;
+import com.suam.constantes.Constantes.NomeAcao;
 import com.suam.constantes.Constantes.NomeView;
 import com.suam.constantes.Constantes.ParametroTela;
 import com.suam.service.AssentoService;
@@ -89,7 +90,7 @@ public class NovoVoo implements Acao {
 				System.out.println("Inserido com sucesso");
 			} else {
 				request.setAttribute(ParametroTela.OBJETO_VOO, voo);
-				return "forward:NovoVoo.jsp";
+				return "forward:"+NomeView.NOVO_VOO;
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -102,6 +103,6 @@ public class NovoVoo implements Acao {
 		}
 
 		// request.setAttribute("voo", voo);
-		return "redirect:entrada?acao=ListaVoo";
+		return "redirect:entrada?acao="+NomeAcao.LISTA_VOO;
 	}
 }

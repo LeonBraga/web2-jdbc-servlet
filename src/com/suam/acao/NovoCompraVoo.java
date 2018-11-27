@@ -126,6 +126,9 @@ import com.suam.bean.CartaoDeCredito;
 import com.suam.bean.Usuario;
 import com.suam.bean.Voo;
 import com.suam.constantes.Constantes.InfoCampos;
+import com.suam.constantes.Constantes.NomeAcao;
+import com.suam.constantes.Constantes.NomeView;
+import com.suam.constantes.Constantes.ParametroTela;
 import com.suam.service.AssentoService;
 import com.suam.service.CartaoDeCreditoService;
 import com.suam.service.CompraVooService;
@@ -151,13 +154,15 @@ public class NovoCompraVoo implements Acao {
 
 		if (paramId == null || paramId.equals("")) {
 			info = InfoCampos.GENERICO;
-			request.setAttribute("erro", info);
-			return "forward:erro.jsp";
+			request.setAttribute(ParametroTela.ERRO, info);
+			return "forward:" + NomeView.ERRO_VIEW;
 		}
 
-		System.out.println(paramId + " - " + Arrays.toString(assento) + " - " + voo_idvoo + " - " + voo_idvooVolta
-				+ " - " + Arrays.toString(assentoVolta) + " - " + valorTotalCompra + " - "
-				+ cartaodecredito_numerocartao);
+		/*
+		 * System.out.println(paramId + " - " + Arrays.toString(assento) + " - " +
+		 * voo_idvoo + " - " + voo_idvooVolta + " - " + Arrays.toString(assentoVolta) +
+		 * " - " + valorTotalCompra + " - " + cartaodecredito_numerocartao);
+		 */
 
 		Usuario usuario = new Usuario();
 		CartaoDeCredito cartaoDeCredito = new CartaoDeCredito();

@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.suam.bean.CartaoDeCredito;
+import com.suam.constantes.Constantes.NomeAcao;
 import com.suam.constantes.Constantes.ParametroTela;
 import com.suam.service.CartaoDeCreditoService;
 
@@ -34,6 +35,6 @@ public class RemoveCartao  implements Acao{
 		}
 		
 		//request.setAttribute("usuario",usuario);
-		return "redirect:entrada?acao=MostraUsuario&id="+cartao.getIdUser();
+		return "redirect:entrada?acao="+NomeAcao.MOSTRA_USUARIO+"&id="+cartao.getIdUser();
 	}
 }

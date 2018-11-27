@@ -93,16 +93,17 @@ public class NovoUsuario implements Acao {
 					info = "Login não informado!";
 					request.setAttribute(ParametroTela.ERRO, info);
 					request.setAttribute(ParametroTela.OBJETO_USUARIO, usuario);
-					return "forward:formNovoUsuario.jsp";
+					return "forward:"+NomeView.FORM_NOVO_USUARIO;
 				}
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
 			return "redirect:entrada?acao=ListaUsuario";
 		} else {
-			System.out.println("AS SENHAS NÃO CONFEREM");
+			info = "AS SENHAS NÃO CONFEREM";
+			request.setAttribute(ParametroTela.ERRO, info);
 			request.setAttribute(ParametroTela.OBJETO_USUARIO, usuario);
-			return "forward:formNovoUsuario.jsp";
+			return "forward:"+NomeView.FORM_NOVO_USUARIO;
 		}
 
 	}

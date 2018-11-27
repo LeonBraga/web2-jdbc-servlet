@@ -38,6 +38,7 @@ public class Constantes {
 		public static final String LISTA_USUARIO = "listaUsuario.jsp";
 		public static final String LISTA_VOOS = "listaVoos.jsp";
 		public static final String MOSTRA_COMPRA = "mostraCompra.jsp";
+		public static final String NOVO_VOO = "NovoVoo.jsp";
 	}
 
 	public static class NomeAcao {
@@ -45,6 +46,7 @@ public class Constantes {
 		public static final String LISTA_USUARIO = "ListaUsuario";
 		public static final String MOSTRA_VOO = "MostraVoo";
 		public static final String LISTA_ASSENTO = "ListaAssento";
+		public static final String LISTA_VOO = "ListaVoo";
 	}
 
 	public static class ParametroTela {

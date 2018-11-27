@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.suam.bean.Voo;
+import com.suam.constantes.Constantes.NomeAcao;
 import com.suam.service.CompraVooService;
 import com.suam.service.VooService;
 
@@ -36,6 +37,6 @@ public class RemoveVoo implements Acao {
 			e.printStackTrace();
 		}
 
-		return "redirect:entrada?acao=ListaVoo";
+		return "redirect:entrada?acao="+NomeAcao.LISTA_VOO;
 	}
 }
