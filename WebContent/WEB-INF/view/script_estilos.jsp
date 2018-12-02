@@ -20,3 +20,6 @@
 <script src="javascript/js.js" type="text/javascript"></script>
 <!-- Inclusão da folha de estilo-->
 <link rel="stylesheet" type="text/css" href="css/estilo.css">
+<link rel="stylesheet" type="text/css" href="css/alteraUsuario.css">
+
+

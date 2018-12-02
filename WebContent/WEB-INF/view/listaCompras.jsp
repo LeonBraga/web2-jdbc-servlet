@@ -27,9 +27,10 @@
       <p><a href="#">Link</a></p> -->
 			</div>
 			<div class="col-sm-8 text-left">
-				<h1>Lista de Compras Confirmadas:</h1>
-				<br> Pesquisar: <br> <input type="text" id="txtBusca"
-					placeholder="Digite aqui um valor para filtrar..." /> <br> <br>
+				<h1 class="menu-cliente--intro">Lista de Compras Confirmadas:</h1>
+				<br> 
+				<label class="descricao">Pesquisar</label>
+			 	<br> <input type="text" id="txtBusca" class="dados-cadastro" placeholder="Digite aqui um valor para filtrar..." /> <br> <br>
 				<c:if test="${usuarioLogado.isAdm ==  'TRUE'}">
 					<ul id="ulItens">
 						<c:forEach items="${compras}" var="compra">

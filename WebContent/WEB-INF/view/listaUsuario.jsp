@@ -27,13 +27,15 @@
       <p><a href="#">Link</a></p> -->
 			</div>
 			<div class="col-sm-8 text-left">
-				<h1>Lista de usuários cadastrados no sistema</h1>
+				<h1 classe="menu-cliente--intro">Lista de usuários cadastrados no sistema</h1>
 
-				Lista de usuarios: <br> Pesquisar: <br> <input type="text"
-					id="txtBusca" placeholder="Digite aqui um valor para filtrar..." />
+				Lista de usuarios: <br> 
+				<label class="descricao">Pesquisar</label>
+				<br> <input type="text"
+					id="txtBusca" class="dados-cadastro" placeholder="Digite aqui um valor para filtrar..." />
 				<br> <br>
 				<c:if test="${usuarioLogado.isAdm ==  'TRUE'}">
-					<a href="entrada?acao=FormNovoUsuario"><button>Novo
+					<a href="entrada?acao=FormNovoUsuario"><button class="botao-novo">Cadastrar novo
 							usuário</button></a>
 				</c:if>
 				<br>
@@ -48,9 +50,9 @@
 											${usuario.sobrenome}</div>
 										<div class="col-sm-4 text-right">
 											<a href="entrada?acao=MostraUsuario&id=${usuario.id}"><button
-													type="button">Editar Usuário</button></a> <a
+													type="button" class="botao-novo">Editar Usuário</button></a> <a
 												href="entrada?acao=RemoveUsuario&id=${usuario.id}"><button
-													type="button">Remover Usuário</button></a> <br>
+													type="button" class="botao-novo">Remover Usuário</button></a> <br>
 										</div>
 									</li>
 								</div>
@@ -69,9 +71,9 @@
 										${usuario.sobrenome}</div>
 									<div class="col-sm-4 text-right">
 										<a href="entrada?acao=MostraUsuario&id=${usuario.id}"><button
-												type="button">Editar Usuário</button></a> <a
+												type="button" class="botao-novo">Editar Usuário</button></a> <a
 											href="entrada?acao=RemoveUsuario&id=${usuario.id}"><button
-												type="button">Remover Usuário</button></a> <br>
+												type="button" class="botao-novo">Remover Usuário</button></a> <br>
 									</div>
 								</li>
 							</div>

@@ -9,6 +9,7 @@
 <head>
 <meta charset="UTF-8">
 <c:import url="script_estilos.jsp" />
+	<link rel="stylesheet" type="text/css" href="css/alteraUsuario.css">
 <title>Lista de Voos</title>
 </head>
 <body>
@@ -27,10 +28,13 @@
       <p><a href="#">Link</a></p> -->
 			</div>
 			<div class="col-sm-8 text-left">
-				<h1>Lista de voos disponiveis</h1>
+				<h1 class="menu-cliente--intro">Lista de voos disponiveis</h1>
 
-				<br> Pesquisar <input type="text" id="txtBusca"
-					placeholder="Digite aqui um valor para filtrar..." /> <br> <br>
+				<br> 
+				<label class="descricao" for="sobrenome">Pesquisar</label>
+				 
+				<input type="text" id="txtBusca" class="dados-cadastro"	placeholder="Digite aqui um valor para filtrar..." />
+				<br> <br>
 				<c:if test="${usuarioLogado.isAdm ==  'TRUE'}">
 					<form name="formulario" action="${linkEntradaServlet }"
 						method="post">
@@ -48,15 +52,15 @@
 							</c:if> - Valor por assento: ${voo.valorVoo} <br> <c:if
 										test="${usuarioLogado.isAdm ==  'TRUE'}">
 										<a href="entrada?acao=MostraVoo&idvoo=${voo.idVoo}"><button
-												type="button">Editar este Voo</button></a>
+												type="button" class="botao-novo">Editar este Voo</button></a>
 										<a href="entrada?acao=RemoveVoo&idvoo=${voo.idVoo}"><button
-												type="button">Remover este Voo</button></a>
+												type="button" class="botao-novo">Remover este Voo</button></a>
 									</c:if></li>
 								<br>
 							</c:forEach>
 						</ul>
 						<br> <input type="hidden" name="acao" value="ListaAssento">
-						<input type="submit" value="Selecionar Voo" /> <br>
+						<input type="submit" class="botao-confirmar-small" value="Selecionar Voo" /> <br>
 					</form>
 				</c:if>
 
@@ -72,9 +76,9 @@
 									Valor por assento: ${voo.valorVoo} <br> <c:if
 										test="${usuarioLogado.isAdm ==  'TRUE'}">
 										<a href="entrada?acao=MostraVoo&idvoo=${voo.idVoo}"><button
-												type="button">Editar este Voo</button></a>
+												type="button" class="botao-novo">Editar este Voo</button></a>
 										<a href="entrada?acao=RemoveVoo&idvoo=${voo.idVoo}"><button
-												type="button">Remover este Voo</button></a>
+												type="button" class="botao-novo">Remover este Voo</button></a>
 									</c:if></li>
 								<br>
 							</c:forEach>
@@ -97,13 +101,13 @@
 							</ul>
 						</div>
 						<br> <input type="hidden" name="acao" value="ListaAssento">
-						<input type="submit" value="Confirmar escolhas" /> <br>
+						<input type="submit" class="botao-confirmar-small" value="Confirmar escolhas" /> <br>
 					</form>
 				</c:if>
 
 				<br>
 				<c:if test="${usuarioLogado.isAdm ==  'TRUE'}">
-					<a href="entrada?acao=FormNovoVoo"><button type="button">Cadastrar
+					<a href="entrada?acao=FormNovoVoo"><button type="button" class="botao-confirmar-small">Cadastrar
 							Novo Voo</button></a>
 				</c:if>
 				<br>
